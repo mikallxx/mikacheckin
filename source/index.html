@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mika Check-in｜住宿開箱攻略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ===== 品牌配色：全站共用，改這裡就會全部更新 ===== */
+    --c-white:#FFFFFF;  /* 頁面背景、文章卡片底色 */
+    --c-ink:#171717;    /* 正文、一般標題 */
+    --c-blue:#274B9B;   /* 小標、連結、主要按鈕、選中狀態 */
+    --c-blue-50:#EFF4FF;/* 心得字卡底色 */
+    --c-red:#A81919;    /* 分類標籤文字、折扣與優惠序號、正文重點字 */
+    --c-red-50:#FCEDED; /* 分類標籤底色 */
+    --c-lime:#95C11F;   /* 滑過、按下的互動提示 */
+    --ink:var(--c-ink); --sub:#8a8a8e; --line:#ececec; --bg:var(--c-white); --soft:#f6f6f4;
+    --accent:var(--c-blue); --accent-2:var(--c-blue-50);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body{max-width:560px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  /* sticky bar */
+  .bar{position:fixed;top:0;left:50%;transform:translate(-50%,-100%);width:100%;max-width:560px;z-index:30;
+    background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;
+    padding:calc(env(safe-area-inset-top) + 12px) 18px 12px;transition:transform .25s}
+  .bar.show{transform:translate(-50%,0)}
+  .bar .logo{font-weight:900;font-size:20px;letter-spacing:-.5px}
+  .bar .t{flex:1;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* hero */
+  .hero{position:relative;height:640px;color:#fff;overflow:hidden}
+  .hero .scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 50%}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.32) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 45%,rgba(0,0,0,.35) 62%,rgba(0,0,0,.72) 100%)}
+  .hero-top{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;
+    padding:calc(env(safe-area-inset-top) + 18px) 18px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:900;font-size:22px;letter-spacing:-.5px}
+  .brand .dot{width:30px;height:30px;border-radius:50%;background:#fff;color:var(--accent);display:grid;place-items:center;font-size:15px}
+  .hero-body{position:absolute;left:18px;right:18px;bottom:22px;z-index:2}
+  .stats{font-size:13px;opacity:.9;margin-bottom:8px}
+  .hero h1{font-size:30px;line-height:1.3;font-weight:900;letter-spacing:-.5px;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+  .who{display:flex;align-items:center;gap:12px;margin:22px 0 18px}
+  .avatar{width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,.8);overflow:hidden;flex:none}
+  .who b{display:block;font-size:17px}
+  .who span{font-size:13px;opacity:.8}
+  .who .share{margin-left:auto}
+  .actions{display:flex;gap:8px}
+  .follow{flex:1;height:46px;border-radius:8px;background:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;color:#fff}
+  .sq{width:46px;height:46px;border-radius:8px;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);display:grid;place-items:center;color:#fff}
+
+  .sep{height:10px;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+  /* notice */
+  .notice{padding:22px 18px 18px;text-align:center}
+  .notice small{color:var(--accent);font-weight:700;letter-spacing:3px;font-size:12px}
+  .notice-track{position:relative;min-height:56px;margin-top:8px}
+  .notice-item{position:absolute;inset:0;font-size:16px;line-height:1.6;opacity:0;transition:opacity .4s;display:flex;align-items:center;justify-content:center}
+  .notice-item.on{opacity:1;position:relative}
+  .dots{display:flex;gap:6px;justify-content:center;margin-top:10px}
+  .dots i{width:6px;height:6px;border-radius:50%;background:#d6d6d6}
+  .dots i.on{background:var(--ink)}
+
+  /* popular */
+  .sec-h{font-size:18px;font-weight:900;padding:24px 18px 14px}
+  .pop{display:flex;gap:12px;overflow-x:auto;padding:0 18px 22px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .pop::-webkit-scrollbar{display:none}
+  .pop a{flex:0 0 42%;scroll-snap-align:start}
+  .thumb{border-radius:10px;overflow:hidden;aspect-ratio:1;position:relative}
+  .pop h3{font-size:14px;line-height:1.45;margin-top:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .cat{font-size:12px;color:var(--sub);margin-top:6px}
+
+  .ig{display:flex;align-items:center;gap:12px;padding:18px;color:var(--sub);font-size:14px}
+  .ig .g{width:30px;height:30px;border-radius:8px;background:linear-gradient(45deg,#f9a03f,#e1306c,#833ab4);display:grid;place-items:center;flex:none}
+
+  /* tabs */
+  .tabs{transition:top .25s;display:flex;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:5;padding:0 18px}
+  .tabs button{flex:1;padding:16px 0;font-weight:700;color:var(--sub);border-bottom:2px solid transparent}
+  .tabs button.on{color:var(--ink);border-color:var(--ink)}
+  .toolbar{display:flex;align-items:center;padding:18px 18px 6px;position:relative}
+  .filter{font-weight:700;font-size:17px;display:flex;align-items:center;gap:4px}
+  .menu-pop{position:absolute;top:52px;left:18px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:6px;display:none;z-index:6;min-width:150px}
+  .menu-pop.on{display:block}
+  .menu-pop button{display:block;width:100%;text-align:left;padding:10px 12px;border-radius:6px;font-size:15px}
+  .menu-pop button.on{background:var(--accent-2);color:var(--accent);font-weight:700}
+  .views{margin-left:auto;display:flex;gap:14px;color:#cfcfcf}
+  .views button.on{color:var(--ink)}
+
+  /* list modes */
+  #list{padding:0 18px 40px}
+  .card{display:block;padding:16px 0 20px;border-bottom:1px solid var(--line)}
+  .card .date{font-size:13px;color:var(--sub);margin-bottom:10px}
+  .card .thumb{aspect-ratio:16/9}
+  .card h3{font-size:17px;line-height:1.45;margin-top:14px;font-weight:700}
+  .card p{font-size:14px;color:var(--sub);line-height:1.6;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .tag{font-size:12px;padding:4px 10px;border-radius:99px;background:var(--soft);color:#555}
+  .sample{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:3px 8px;border-radius:99px}
+
+  #list.rows .card{display:flex;gap:14px;align-items:flex-start}
+  #list.rows .card .thumb{flex:0 0 104px;aspect-ratio:1;order:2}
+  #list.rows .card .txt{flex:1;order:1}
+  #list.rows .card h3{margin-top:0;font-size:15px}
+  #list.rows .tags,#list.rows .date{display:none}
+  #list.rows .meta{font-size:12px;color:var(--sub);margin-top:8px;display:block}
+  .meta{display:none}
+
+  #list.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:8px 0 40px}
+  #list.grid .card{padding:0;border:0}
+  #list.grid .card .thumb{aspect-ratio:1;border-radius:0}
+  #list.grid .card .txt,#list.grid .date{display:none}
+
+  .reels{padding:40px 18px 60px;text-align:center;color:var(--sub);line-height:1.8}
+  .reels a{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:99px;background:var(--ink);color:#fff;font-weight:700}
+
+  /* drawer */
+  .shade{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.25s;z-index:40}
+  .shade.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;bottom:0;right:0;width:86%;max-width:420px;background:#fff;z-index:41;transform:translateX(100%);transition:.25s;overflow-y:auto;
+    padding:calc(env(safe-area-inset-top) + 20px) 0 30px}
+  .drawer.on{transform:none}
+  .drawer .head{display:flex;justify-content:space-between;align-items:center;padding:0 22px 20px;font-size:18px;font-weight:700;border-bottom:8px solid var(--soft)}
+  .quick{display:grid;grid-template-columns:repeat(4,1fr);padding:20px 10px;border-bottom:8px solid var(--soft)}
+  .quick a{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px}
+  .quick span{width:52px;height:52px;border-radius:50%;background:var(--soft);display:grid;place-items:center}
+  .dlist a{display:flex;align-items:center;gap:14px;padding:15px 24px;font-size:16px}
+  .dlist hr{border:0;border-top:1px solid var(--line);margin:6px 24px}
+
+  /* article */
+  #article{display:none}
+  body.reading #home{display:none}
+  body.reading #article{display:block}
+  .a-top{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 12px) 12px 12px;border-bottom:1px solid var(--line);z-index:10}
+  .a-top .t{flex:1;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .a-cover{aspect-ratio:4/3}
+  .a-body{padding:22px 20px 60px}
+  .a-body .kicker{color:var(--accent);font-weight:700;font-size:13px}
+  .a-body h1{font-size:24px;line-height:1.4;margin:8px 0 6px;font-weight:900}
+  .a-body .d{color:var(--sub);font-size:13px}
+  .a-body h2{font-size:18px;margin:34px 0 12px;padding-left:10px;border-left:4px solid var(--accent)}
+  .a-body p{font-size:16px;line-height:1.85;color:#333}
+  .todo{background:#fff8e6;border:1px dashed #e8c66a;color:#8a6a10;border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.7;margin-top:10px}
+  .info{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .info div{display:flex;padding:13px 16px;font-size:15px;border-bottom:1px solid var(--line)}
+  .info div:last-child{border:0}
+  .info dt{width:80px;color:var(--sub);flex:none}
+  .spots{display:grid;gap:12px}
+  .spot{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px}
+  .spot .thumb{width:72px;flex:none;border-radius:8px}
+  .spot b{font-size:15px}
+  .spot small{display:block;color:var(--sub);font-size:13px;margin-top:3px}
+  .cta{display:flex;gap:10px;margin-top:30px}
+  .cta a{flex:1;text-align:center;padding:14px;border-radius:10px;font-weight:700;font-size:15px}
+  .cta .p{background:var(--accent);color:#fff}
+  .cta .s{background:var(--soft)}
+  /* gallery: photo + its own caption slide together */
+  .gal{position:relative;margin:0 -20px}
+  .gal-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .gal-track::-webkit-scrollbar{display:none}
+  .slide{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always}
+  .slide .ph{aspect-ratio:4/3;position:relative}
+  .slide .cap{padding:14px 20px 0}
+  .slide .cap b{display:block;font-size:16px;margin-bottom:4px}
+  .slide .cap p{font-size:15px;line-height:1.75;color:#444}
+  .gal-count{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:4px 10px;border-radius:99px;z-index:2}
+  .gal-nav{position:absolute;top:calc((100vw * .75) / 2);transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);display:grid;place-items:center;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  @media(min-width:560px){.gal-nav{top:210px}}
+  .gal-nav.prev{left:10px}.gal-nav.next{right:10px}
+  .gal-nav[disabled]{opacity:0;pointer-events:none}
+  .gal-dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
+  .gal-dots i{width:6px;height:6px;border-radius:50%;background:#d6d6d6;transition:.2s}
+  .gal-dots i.on{background:var(--accent);width:16px;border-radius:3px}
+  /* ---------- real-photo posts ---------- */
+  .thumb img,.ph img,.a-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .post p{margin-top:14px}
+  .post h2+p,.post h3+p{margin-top:0}
+  .post h3{font-size:16.5px;margin:26px 0 10px;font-weight:700}
+  .one{margin:22px 0 4px;padding:16px 18px;background:var(--cream,#fbf7f1);border-radius:12px;border-left:3px solid var(--accent);font-size:15.5px;line-height:1.8;color:#4a423b}
+  .one small{display:block;font-size:11.5px;letter-spacing:.14em;color:#9a8f84;margin-bottom:6px}
+  .tbl{width:100%;border-collapse:collapse;font-size:14.5px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tbl th,.tbl td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+  .tbl th{background:var(--soft);font-weight:700;font-size:13px;color:#555;white-space:nowrap}
+  .tbl tr:last-child td{border-bottom:0}
+  .tbl.rooms td:nth-child(2){white-space:nowrap}
+  .tbl td:first-child{white-space:nowrap;color:var(--sub)}
+  .fig{margin:16px -20px 4px}
+  .fig .ph{aspect-ratio:16/9}
+  .fig figcaption{padding:10px 20px 0;font-size:14px;color:var(--sub);line-height:1.7}
+  .who-list{display:grid;gap:10px}
+  .who-list div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .who-list b{display:block;font-size:15.5px;margin-bottom:4px}
+  .who-list span{font-size:14.5px;color:#555;line-height:1.75}
+  .spot-list{display:flex;flex-wrap:wrap;gap:8px}
+  .spot-list span{padding:8px 14px;border-radius:99px;background:var(--soft);font-size:14.5px}
+  .score{display:flex;align-items:baseline;gap:6px;margin-top:16px}
+  .score b{font-size:34px;font-weight:900;color:var(--accent);letter-spacing:-.02em}
+  .score span{color:var(--sub);font-size:14px}
+  .price-note{margin-top:12px;font-size:14.5px;color:#555;background:var(--soft);padding:12px 14px;border-radius:10px}
+  /* ---------- 編號模式（修改用，正式上線前會拿掉） ---------- */
+  .numbtn{font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:99px;border:1px solid var(--ink);white-space:nowrap}
+  .numbtn.on{background:#ff6b3d;border-color:#ff6b3d;color:#fff}
+  .edit-on [data-no]{position:relative}
+  .edit-on [data-no]::before{content:attr(data-no);display:inline-block;background:#ff6b3d;color:#fff;font:700 11.5px/1 ui-monospace,Menlo,monospace;
+    padding:4px 7px;border-radius:6px;margin-right:8px;vertical-align:2px;letter-spacing:.03em}
+  .edit-on .fig[data-no]::before,.edit-on .slide[data-no]::before{position:absolute;top:10px;left:10px;z-index:3;margin:0;font-size:13px;padding:5px 9px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .edit-on .slide[data-no],.edit-on .fig[data-no]{position:relative}
+  .edit-on div[data-no]:not(.slide):not(.tlabel)::before{display:table;margin-bottom:8px}
+  .tlabel{display:none}.edit-on .tlabel{display:block;margin-bottom:8px}
+  .edit-tip{display:none;margin:0 20px;padding:10px 14px;border-radius:10px;background:#fff1eb;color:#a2492a;font-size:13.5px;line-height:1.6}
+  .edit-on .edit-tip{display:block;margin-top:14px}
+  /* ---------- deals ---------- */
+  :root{--live:#ff8f6b;--code:#e9c27a;--soon:#a9c7ff;--ended:#b9b9b9;--cream:#fbf7f1;--sand:#eadfcd;--deep:#2b2622}
+  .badge{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:7px;padding:6px 11px 6px 9px;border-radius:99px;
+    background:rgba(24,22,20,.5);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);
+    color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.08em;line-height:1;border:1px solid rgba(255,255,255,.18);z-index:1}
+  .badge i{width:6px;height:6px;border-radius:50%;background:var(--c);flex:none}
+  .badge.live i{animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,143,107,.7)}70%{box-shadow:0 0 0 7px rgba(255,143,107,0)}100%{box-shadow:0 0 0 0 rgba(255,143,107,0)}}
+  .badge.ended{background:rgba(255,255,255,.72);color:#777;border-color:rgba(0,0,0,.05)}
+  .live{--c:var(--live)}.code{--c:var(--code)}.soon{--c:var(--soon)}.ended{--c:var(--ended)}
+  #list.rows .badge{top:6px;left:6px;padding:4px 7px;font-size:10px;gap:5px}
+  #list.grid .badge{top:8px;left:8px}
+  .deal-line{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#b5603f;margin-top:8px;letter-spacing:.02em}
+  .deal-line.soon{color:#5277b5}.deal-line.code{color:#9a7428}
+  .deal-line::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c)}
+
+  .deal{position:relative;margin:26px 0 6px;background:var(--cream);border:1px solid var(--sand);border-radius:18px;padding:20px 20px 16px;overflow:hidden}
+  .deal::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--c),rgba(255,255,255,0))}
+  .deal-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .deal-chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--deep)}
+  .deal-chip i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+  .deal.live .deal-chip i{animation:pulse 1.8s infinite}
+  .deal-cd{font-size:12.5px;font-weight:700;color:var(--deep);background:#fff;border:1px solid var(--sand);padding:5px 10px;border-radius:99px;font-variant-numeric:tabular-nums}
+  .deal h3{font-size:19px;font-weight:900;margin:14px 0 6px;letter-spacing:-.01em;color:var(--deep)}
+  .deal .perk{font-size:15px;line-height:1.7;color:#5a5048}
+  .deal .period{font-size:12.5px;color:#9a8f84;margin-top:8px;letter-spacing:.03em}
+  .cut{position:relative;height:1px;margin:18px -20px;border-top:1.5px dashed var(--sand)}
+  .cut::before,.cut::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:#fff;border:1px solid var(--sand)}
+  .cut::before{left:-11px}.cut::after{right:-11px}
+  .code-row{display:flex;align-items:center;gap:12px}
+  .code-row small{display:block;font-size:11px;letter-spacing:.14em;color:#9a8f84;margin-bottom:4px}
+  .code-row b{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:20px;letter-spacing:.12em;color:var(--deep)}
+  .copy{margin-left:auto;padding:10px 16px;border-radius:10px;border:1px solid var(--deep);font-size:14px;font-weight:700;transition:.2s;white-space:nowrap}
+  .copy.done{background:var(--deep);color:#fff}
+  .deal-go{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:16px;padding:14px;border-radius:12px;background:var(--deep);color:#fff;font-weight:700;font-size:15px;letter-spacing:.04em}
+  .deal .disc{font-size:11.5px;color:#a69b90;line-height:1.6;margin-top:12px;text-align:center}
+  .deal.ended{background:#f7f7f6;border-color:#e6e6e4}
+  .deal.ended h3,.deal.ended .perk{color:#999}
+  .deal.ended .deal-go{background:#e9e9e7;color:#777}
+  .deal.soon .deal-go{background:#fff;color:var(--deep);border:1px solid var(--deep)}
+  .proto{font-size:12px;color:var(--sub);text-align:center;padding:20px 18px 40px}
+
+  /* =====================================================
+     配色與互動狀態（只改顏色，不動結構、尺寸、間距）
+     ===================================================== */
+  html,body{background:var(--c-white);color:var(--c-ink)}
+  .a-body p,.slide .cap p,.who-list span,.tbl td,.tbl th,.price-note,.deal .perk,.deal .period,.card p{color:var(--c-ink)}
+  .card p,.deal .period{opacity:.72}
+
+  /* 區塊小標 */
+  .sec-h,.a-body h2,.notice small,.a-body .kicker{color:var(--c-blue)}
+  .a-body h2{border-left-color:var(--c-blue)}
+  .card h3,.pop h3,.a-body h1,.a-body h3{color:var(--c-ink)}
+
+  /* 正文重點字與連結 */
+  /* 重點字：深紅＋劃重點底線 */
+  .post strong{color:var(--c-red);font-weight:700;
+    background:linear-gradient(rgba(168,25,25,.2),rgba(168,25,25,.2)) left 100% / 100% .34em no-repeat;
+    padding:0 1px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .ask-row b,.gscore b{background:none}
+  /* 選單線條圖示 */
+  .mi{width:21px;height:21px;stroke-width:1.6;color:var(--c-ink);flex:none}
+  .quick .mi{width:24px;height:24px}
+  .post p a,.post li a,.post td a{color:var(--c-blue);text-decoration:underline;text-underline-offset:3px}
+  strong.off,.deal .perk strong.off{color:var(--c-red);font-weight:700}
+
+  /* 心得字卡 */
+  .one{background:var(--c-blue-50);border-left-color:var(--c-blue);color:var(--c-ink)}
+  .one small{color:var(--c-blue);font-weight:700}
+
+  /* 分頁與分類選中 */
+  .tabs button.on{color:var(--c-blue);border-color:var(--c-blue)}
+  .views button.on{color:var(--c-blue)}
+  .menu-pop button.on{background:var(--c-blue);color:var(--c-white)}
+  .gal-dots i.on,.dots i.on{background:var(--c-blue)}
+  .score b{color:var(--c-blue)}
+
+  /* 橢圓分類標籤：平常淡紅底深紅字 → 滑過萊姆綠 → 選中深藍 */
+  .tag,.spot-list span{background:var(--c-red-50);color:var(--c-red);transition:background-color .15s,color .15s}
+  .tag.on{background:var(--c-blue);color:var(--c-white)}
+
+  /* 主要按鈕：深藍底白字 → 滑過/按下萊姆綠底墨黑字 */
+  .follow,.cta .p,.deal-go,.reels a{background:var(--c-blue);color:var(--c-white);transition:background-color .15s,color .15s}
+  .deal.soon .deal-go{background:var(--c-blue);color:var(--c-white);border-color:var(--c-blue)}
+  .deal.ended .deal-go{background:#e9e9e7;color:#777}
+
+  /* 優惠區 */
+  .deal{background:var(--c-white)}
+  .code-row b{color:var(--c-red)}
+  .deal-line.live,.deal-line.code{color:var(--c-red)}
+  .deal-line.soon{color:var(--c-blue)}
+  .copy{border-color:var(--c-ink);color:var(--c-ink);transition:background-color .15s,color .15s,border-color .15s}
+  .copy.done{background:var(--c-blue);border-color:var(--c-blue);color:var(--c-white)}
+
+  /* 住宿卡片：滑過時照片外一圈細深藍框（用陰影，不改尺寸位置） */
+  .card .thumb,.pop .thumb{transition:box-shadow .15s}
+  .gal-nav{transition:background-color .15s}
+
+  /* 官方 LINE／優惠碼字卡 */
+  .ask{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .ask-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--c-white);display:flex;flex-direction:column;gap:10px}
+  .ask-card small{font-size:12.5px;font-weight:700;color:var(--c-blue);letter-spacing:.04em}
+  .ask-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ask-row b{font-size:17px;font-weight:700;color:var(--c-ink);font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.02em}
+  .ask-row b.code{color:var(--c-red);letter-spacing:.08em}
+  .ask-row .copy{margin-left:auto;padding:6px 12px;font-size:13px;border-radius:8px}
+  .ask-go{display:block;text-align:center;padding:10px;border-radius:10px;background:var(--c-blue);color:var(--c-white);font-weight:700;font-size:14px;transition:background-color .15s,color .15s;margin-top:auto}
+  .ask-note{font-size:12.5px !important;color:var(--sub) !important;margin:auto 0 0 !important;line-height:1.5 !important}
+  .cond{color:var(--c-ink);font-size:13.5px}
+  .who-titles{grid-template-columns:1fr 1fr}
+  .who-titles div{padding:12px 14px}
+  .who-titles b{margin:0;font-size:15px}
+  .gscore{display:flex;align-items:center;gap:12px;margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .gscore>div{display:flex;align-items:center;gap:10px}
+  .gscore b{font-size:30px;font-weight:900;color:var(--c-blue);letter-spacing:-.02em}
+  .gscore span{font-size:14px;font-weight:700;line-height:1.4}
+  .gscore em{font-style:normal;font-weight:400;font-size:12px;color:var(--sub)}
+  .gscore a{margin-left:auto;color:var(--c-blue);text-decoration:underline;text-underline-offset:3px;font-size:14px;font-weight:700;white-space:nowrap}
+  .edit-only{display:none}
+  .edit-on .edit-only{display:block;padding:12px 14px;border:1px dashed #ff6b3d;border-radius:10px;color:#a2492a;font-size:14px}
+  @media (hover:hover){ .ask-go:hover{background:var(--c-lime);color:var(--c-ink)} }
+  .ask-go:active{background:var(--c-lime);color:var(--c-ink)}
+  /* 滑鼠裝置：滑過 */
+  @media (hover:hover){
+    .tag:not(.on):hover,.menu-pop button:not(.on):hover,.spot-list span:hover{background:var(--c-lime);color:var(--c-ink)}
+    .follow:hover,.cta .p:hover,.deal-go:hover,.reels a:hover,.copy:not(.done):hover{background:var(--c-lime);color:var(--c-ink);border-color:var(--c-lime)}
+    .deal.ended .deal-go:hover{background:#e9e9e7;color:#777}
+    .card:hover .thumb,.pop a:hover .thumb{box-shadow:0 0 0 2px var(--c-blue)}
+    .gal-nav:hover{background:var(--c-lime)}
+    .dlist a:hover,.quick a:hover span{background:var(--c-lime)}
+    .tabs button:not(.on):hover,.views button:not(.on):hover{color:var(--c-ink)}
+  }
+  /* 觸控裝置：按下時短暫變色 */
+  .tag:not(.on):active,.menu-pop button:not(.on):active,.spot-list span:active{background:var(--c-lime);color:var(--c-ink)}
+  .follow:active,.cta .p:active,.deal-go:active,.reels a:active,.copy:not(.done):active{background:var(--c-lime);color:var(--c-ink);border-color:var(--c-lime)}
+  .card:active .thumb,.pop a:active .thumb{box-shadow:0 0 0 2px var(--c-blue)}
+  .gal-nav:active,.dlist a:active,.quick a:active span{background:var(--c-lime)}
+  a,button{-webkit-tap-highlight-color:transparent}
+</style>
+</head>
+<body>
+
+<!-- sticky bar after scroll -->
+<div class="bar" id="bar">
+  <span class="logo">mika</span>
+  <span class="t">Mika Check-in｜住進每一個值得的地方</span>
+  <button aria-label="搜尋"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+  <button aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+</div>
+
+<main id="home">
+  <section class="hero">
+    <img class="scene" src="img/site/cover.jpg" alt="Mika 在民宿庭園拍照">
+    <div class="hero-top">
+      <div class="brand"><span class="dot">M</span>mika</div>
+      <div style="display:flex;gap:18px">
+        <button aria-label="搜尋"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+        <button aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
+    </div>
+    <div class="hero-body">
+      <div class="stats">住宿開箱 · 台灣 &amp; 海外</div>
+      <h1>Mika Check-in｜<br>住進每一個值得的地方</h1>
+      <div class="who">
+        <div class="avatar"><svg viewBox="0 0 56 56" width="56" height="56"><rect width="56" height="56" fill="#e9a78a"/><circle cx="28" cy="22" r="10" fill="#fbe3c4"/><path d="M8 56c2-14 12-20 20-20s18 6 20 20z" fill="#274B9B"/></svg></div>
+        <div><b>Mika</b><span>旅宿開箱創作者 · @mika.checkin</span></div>
+        <button class="share" aria-label="分享"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
+      </div>
+      <div class="actions">
+        <a class="follow" href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">＋ 追蹤 IG</a>
+        <a class="sq" href="#list-anchor" aria-label="文章列表"><svg class="i" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg></a>
+        <a class="sq" href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener" aria-label="短影音"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a>
+        <button class="sq" data-open aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section class="notice">
+    <small>NOTICE</small>
+    <div class="notice-track" id="notice"></div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <div class="sep"></div>
+
+  <h2 class="sec-h">人氣文章</h2>
+  <div class="pop" id="pop"></div>
+
+  <div class="sep"></div>
+  <a class="ig" href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">
+    <span class="g"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px;color:#fff"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></span>
+    instagram.com/mika.checkin
+  </a>
+  <div class="sep"></div>
+
+  <div class="tabs" id="list-anchor">
+    <button class="on" data-tab="posts">文章</button>
+    <button data-tab="reels">短影音</button>
+  </div>
+
+  <div id="posts-pane">
+    <div class="toolbar">
+      <button class="filter" id="filterBtn"><span id="filterLabel">全部文章</span>
+        <svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="menu-pop" id="filterMenu"></div>
+      <div class="views">
+        <button data-view="grid" aria-label="格狀"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></button>
+        <button data-view="rows" aria-label="清單"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="4" width="12" height="3" rx="1"/><rect x="17" y="4" width="4" height="3" rx="1"/><rect x="3" y="10.5" width="12" height="3" rx="1"/><rect x="17" y="10.5" width="4" height="3" rx="1"/><rect x="3" y="17" width="12" height="3" rx="1"/><rect x="17" y="17" width="4" height="3" rx="1"/></svg></button>
+        <button data-view="cards" class="on" aria-label="大圖"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/></svg></button>
+      </div>
+    </div>
+    <div id="list"></div>
+  </div>
+
+  <div id="reels-pane" class="reels" hidden>
+    每支住宿開箱短影音都在 IG。<br>看完影片，回來這裡看完整攻略。
+    <br><a href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener">到 IG 看全部短影音</a>
+  </div>
+
+  <p class="proto preview-only">試作版｜網站正式上線前的預覽</p>
+</main>
+
+<article id="article"></article>
+
+<!-- drawer -->
+<div class="shade" id="shade"></div>
+<aside class="drawer" id="drawer">
+  <div class="head">選單 <button id="closeDrawer" aria-label="關閉"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="quick">
+    <a href="#" data-cat="宜蘭"><span><svg class="i mi" viewBox="0 0 24 24"><path d="m2.5 17.5 6-8 4 5 2.5-3 6.5 6"/><path d="M2.5 20.5h19"/><circle cx="16.5" cy="6.5" r="1.8"/></svg></span>宜蘭</a>
+    <a href="#" data-cat="優惠中"><span><svg class="i mi" viewBox="0 0 24 24"><path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1 1 0 0 1 0 1.4l-7.3 7.3a1 1 0 0 1-1.4 0z"/><circle cx="8" cy="8" r="1.4"/></svg></span>優惠中</a>
+    <a href="#" data-cat="民宿"><span><svg class="i mi" viewBox="0 0 24 24"><path d="M3.5 10.5 12 4l8.5 6.5"/><path d="M5.5 9v10.5h13V9"/><path d="M10 19.5v-5h4v5"/></svg></span>民宿</a>
+    <a href="#" data-cat="全部文章"><span><svg class="i mi" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></svg></span>全部</a>
+  </div>
+  <nav class="dlist">
+    <a href="#" data-cat="民宿"><svg class="i mi" viewBox="0 0 24 24"><path d="M3.5 10.5 12 4l8.5 6.5"/><path d="M5.5 9v10.5h13V9"/><path d="M10 19.5v-5h4v5"/></svg>民宿開箱</a>
+    <a href="#" data-cat="飯店"><svg class="i mi" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="1"/><path d="M9 7.5h2M13 7.5h2M9 11h2M13 11h2M9 14.5h2M13 14.5h2"/><path d="M10.5 20.5v-3h3v3"/></svg>飯店開箱</a>
+    <a href="#" data-cat="優惠中"><svg class="i mi" viewBox="0 0 24 24"><path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1 1 0 0 1 0 1.4l-7.3 7.3a1 1 0 0 1-1.4 0z"/><circle cx="8" cy="8" r="1.4"/></svg>優惠中（團購・折扣碼）</a>
+    <a href="#" data-cat="美食景點"><svg class="i mi" viewBox="0 0 24 24"><path d="M3.5 11.5h17a8.5 8.5 0 0 1-17 0z"/><path d="M8 20h8"/><path d="M9 3.5c-.8 1 .8 2-.1 3.2M12.5 3.5c-.8 1 .8 2-.1 3.2M16 3.5c-.8 1 .8 2-.1 3.2"/></svg>周邊美食景點</a>
+    <hr>
+    <a href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener"><svg class="i mi" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3.5"/><path d="m10 9 5 3-5 3z"/></svg>IG 短影音</a>
+    <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener"><svg class="i mi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>合作邀約（IG 私訊）</a>
+  </nav>
+</aside>
+
+<script>
+/* ---------- 網站模式：預覽版用 #post-xxx，正式版每篇是獨立頁面 ---------- */
+const PROD = !!window.SITE_PROD, PAGE_POST = window.PAGE_POST || null;
+const postLink = id => PROD ? `${id}/` : `#post-${id}`;
+const homeLink = PROD ? "./" : "#";
+/* ---------- 插畫縮圖（之後換成真實照片） ---------- */
+let gid=0;
+const scenes = {
+  sea:   (a,b,u=++gid)=>`<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"><defs><linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="100" height="100" fill="url(#g${u})"/><circle cx="68" cy="44" r="10" fill="#fff3dc" opacity=".9"/><rect y="56" width="100" height="44" fill="#4f8790"/><path d="M0 70 C30 60 50 72 100 64 L100 100 L0 100Z" fill="#e8d6b0"/></svg>`,
+  room:  (a,b)=>`<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"><rect width="100" height="100" fill="${a}"/><rect x="14" y="16" width="72" height="44" fill="${b}"/><rect x="48" y="16" width="2" height="44" fill="#4b473d"/><rect y="64" width="100" height="36" fill="#d9d2c3"/><rect x="8" y="60" width="38" height="12" rx="5" fill="#f6f4ef"/></svg>`,
+  snow:  (a,b)=>`<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"><rect width="100" height="100" fill="${a}"/><path d="M0 62 Q50 50 100 60 L100 100 L0 100Z" fill="${b}"/><path d="M50 30 L57 55 L43 55Z" fill="#2c3b2f"/></svg>`,
+  pool:  (a,b)=>`<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"><rect width="100" height="100" fill="${a}"/><rect x="10" y="40" width="80" height="50" rx="6" fill="${b}"/><path d="M10 55 h80 M10 68 h80" stroke="#fff" opacity=".4"/><rect x="20" y="14" width="60" height="18" fill="#efe9dd"/></svg>`,
+  food:  (a,b)=>`<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"><rect width="100" height="100" fill="${a}"/><circle cx="50" cy="54" r="30" fill="#fff"/><circle cx="50" cy="54" r="22" fill="${b}"/></svg>`
+};
+const art = (k,a,b)=>scenes[k](a,b);
+
+/* ---------- 文章資料：之後新增住宿，就在這裡加一筆 ---------- */
+const IMG="img/hangwang/";
+/* 範例文章：SHOW_SAMPLES 改成 true 就會重新顯示 */
+const SHOW_SAMPLES = false;
+const ALL_POSTS = [
+  { id:"hangwang", real:true, date:"2026. 11. 08.", region:"宜蘭", type:"民宿",
+    title:"巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8~22入住，一樓孝親房、二樓檜木房",
+    excerpt:"每間房間都比想像中寬敞，一樓就有兩間雙人房。房間怎麼分、可以玩什麼、適合誰住，一篇整理。",
+    tags:["宜蘭","冬山","包棟民宿","三代同遊"], cover:IMG+"01_s.jpg", render:renderHangwang },
+  { sample:true, id:"yuguang", real:true, date:"2026. 11. 03.", region:"台南", type:"民宿",
+    title:"台南安平住宿｜餘光．漁光島民宿「岩」榻榻米房開箱",
+    excerpt:"住在漁光島上的一晚。房型、價位、交通和我的真實心得，還有附近可以吃、可以逛的地方，一次整理給看完影片的你。",
+    tags:["台南","安平","漁光島","民宿"], img:["sea","#f4c9a0","#8fb3b5"] },
+  { sample:true, id:"s1", date:"2026. 10. 25.", region:"花東", type:"飯店",
+    title:"（範例）花蓮海景飯店開箱｜無邊際泳池＋早餐評比",
+    excerpt:"範例文章：這裡會放這間飯店的簡介和一句重點心得。",
+    tags:["花蓮","飯店"], img:["pool","#bfe0e6","#4fa3b8"] },
+  { sample:true, id:"s2", date:"2026. 10. 12.", region:"海外", type:"飯店",
+    title:"（範例）北海道雪景溫泉旅館｜冬天這樣住最划算",
+    excerpt:"範例文章：海外住宿也能用同一個格式整理。",
+    tags:["日本","北海道","溫泉"], img:["snow","#9cc0e3","#f4f6fa"] },
+  { sample:true, id:"s3", date:"2026. 09. 30.", region:"台南", type:"美食景點",
+    title:"（範例）漁光島周邊吃什麼｜在地人帶路小吃清單",
+    excerpt:"範例文章：周邊美食景點也可以獨立成一篇。",
+    tags:["台南","美食"], img:["food","#f2e2cf","#e19b5b"] },
+  { sample:true, id:"s4", date:"2026. 09. 18.", region:"花東", type:"民宿",
+    title:"（範例）台東池上稻田景觀民宿｜一間只有四房的安靜小宿",
+    excerpt:"範例文章：這裡會放這間民宿的簡介。",
+    tags:["台東","民宿"], img:["room","#a9a48f","#cfe0b8"] },
+];
+const posts = ALL_POSTS.filter(p=>SHOW_SAMPLES||!p.sample);
+
+/* ---------- 優惠活動：只要填開始、結束時間，狀態會自動切換 ----------
+   正式版會從「優惠活動」表讀入固定日期；這裡用「今天前後幾天」做示範 */
+const D=864e5, H=36e5, t0=Date.now();
+const deals = [
+  { post:"hangwang", type:"折扣碼", start:0, end:Infinity, code:"MIKA888", line:"專屬折扣碼 MIKA888 · 包棟定價 75 折" },
+  { post:"yuguang", type:"團購", start:t0-2*D, end:t0+3*D+4*H,
+    title:"餘光 雙人入住專屬團購（示範）", perk:"平日入住享 <strong class='off'>9 折</strong>，加贈早餐一份。這裡寫實際優惠內容。",
+    code:"MIKA-DEMO", link:"#" },
+  { post:"s1", type:"折扣碼", start:t0-10*D, end:t0+20*D,
+    title:"海景飯店官網訂房折扣碼（示範）", perk:"官網訂房輸入折扣碼，房價<strong class='off'>再折 300 元</strong>。", code:"MIKA300", link:"#" },
+  { post:"s2", type:"團購", start:t0+5*D, end:t0+12*D,
+    title:"雪景溫泉旅館冬季團購（示範）", perk:"即將開團，先收藏這篇，開團當天見。", code:"", link:"#" },
+  { post:"s4", type:"團購", start:t0-30*D, end:t0-3*D,
+    title:"池上稻田民宿秋收團（示範）", perk:"這檔已經結束，可以追蹤 IG 等下一檔。", code:"", link:"#" },
+];
+const LABEL={live:"團購中",code:"折扣碼",soon:"即將開團",ended:"已結束"};
+const dealOf=id=>deals.find(d=>d.post===id);
+function status(d,now=Date.now()){ if(now<d.start) return "soon"; if(now>d.end) return "ended"; return d.type==="團購"?"live":"code"; }
+const md=t=>{const x=new Date(t);return `${x.getMonth()+1}/${x.getDate()}`;};
+function countdown(d,now=Date.now()){
+  const st=status(d,now), ms=(st==="soon"?d.start:d.end)-now;
+  if(st==="ended") return "已結束";
+  const dd=Math.floor(ms/D), hh=Math.floor(ms%D/H), mm=Math.floor(ms%H/6e4);
+  const left = dd>0 ? `${dd} 天 ${hh} 小時` : `${hh} 小時 ${mm} 分`;
+  return st==="soon" ? `${left}後開團` : `剩 ${left}`;
+}
+function badge(id){ const d=dealOf(id); if(!d) return ""; const st=status(d);
+  return `<span class="badge ${st}"><i></i>${LABEL[st]}</span>`; }
+function dealLine(id){ const d=dealOf(id); if(!d) return ""; const st=status(d); if(st==="ended") return "";
+  if(!isFinite(d.end)) return `<div class="deal-line ${st}">${d.line||LABEL[st]}</div>`;
+  return `<div class="deal-line ${st}" data-cd="${id}" data-prefix="${st==="soon"?md(d.start)+" 開團 · ":"至 "+md(d.end)+" · "}">${st==="soon"?md(d.start)+" 開團 · ":"至 "+md(d.end)+" · "}${countdown(d)}</div>`; }
+function dealCard(id){ const d=dealOf(id); if(!d) return ""; const st=status(d);
+  const cta = st==="ended" ? "活動已結束 · 追蹤 IG 等下一檔" : st==="soon" ? "開團提醒：追蹤 IG" : "前往訂購 →";
+  const href = st==="live"||st==="code" ? d.link : "https://www.instagram.com/mika.checkin/";
+  return `<section class="deal ${st}">
+    <div class="deal-head"><span class="deal-chip"><i></i>${LABEL[st]}</span><span class="deal-cd" data-cd="${id}" data-prefix="">${countdown(d)}</span></div>
+    <h3>${d.title}</h3><p class="perk">${d.perk}</p>
+    <div class="period">活動期間 ${md(d.start)} – ${md(d.end)}</div>
+    ${d.code && st!=="ended" ? `<div class="cut"></div>
+    <div class="code-row"><div><small>專屬折扣碼</small><b>${d.code}</b></div>
+      <button class="copy" data-code="${d.code}">複製</button></div>` : ""}
+    <a class="deal-go" href="${href}" ${href.startsWith("http")?'target="_blank" rel="noopener"':""}>${cta}</a>
+    <p class="disc">本優惠為合作活動，透過連結訂購我可能獲得分潤，不影響你的價格。</p>
+  </section>`; }
+function tick(){ document.querySelectorAll("[data-cd]").forEach(el=>{ const d=dealOf(el.dataset.cd); if(d) el.textContent=el.dataset.prefix+countdown(d); }); }
+setInterval(tick,30000);
+document.addEventListener("click",async e=>{
+  const b=e.target.closest(".copy"); if(!b) return; e.preventDefault();
+  try{ await navigator.clipboard.writeText(b.dataset.code); }catch(err){
+    const r=document.createRange(); r.selectNodeContents(b.parentElement.querySelector("b"));
+    const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+  b.textContent="已複製 ✓"; b.classList.add("done");
+  setTimeout(()=>{ b.textContent="複製"; b.classList.remove("done"); },2000);
+});
+
+const notices = [
+  "新開箱｜宜蘭冬山「巷往 Villa」包棟民宿攻略上線",
+  "巷往 Villa 專屬折扣碼 MIKA888｜包棟定價 75 折",
+  "看完 IG 影片？房型、價位、周邊美食都整理在這裡",
+  "合作邀約請透過 IG 私訊 @mika.checkin",
+];
+
+const cats = ["全部文章","優惠中","宜蘭","台南","花東","海外","民宿","飯店","美食景點"];
+let currentCat = "全部文章";
+
+/* ---------- render ---------- */
+function thumb(p, extraStyle=""){
+  const pic = p.cover ? `<img src="${p.cover}" alt="${p.title}" loading="lazy">` : art(...p.img);
+  return `<div class="thumb" style="${extraStyle}">${pic}${badge(p.id)}${p.real?"":'<span class="sample">範例</span>'}</div>`;
+}
+function renderPop(){
+  pop.innerHTML = posts.slice(0,4).map(p=>`
+    <a href="${postLink(p.id)}">${thumb(p)}<h3>${p.title}</h3><div class="cat">${p.region} · ${p.type}</div></a>`).join("");
+}
+function renderList(){
+  const active=p=>{const d=dealOf(p.id);return d&&["live","code"].includes(status(d));};
+  const shown = posts.filter(p=>currentCat==="全部文章"||(currentCat==="優惠中"?active(p):(p.region===currentCat||p.type===currentCat)));
+  list.innerHTML = shown.length ? shown.map(p=>`
+    <a class="card" href="${postLink(p.id)}">
+      <div class="date">${p.date}</div>
+      ${thumb(p)}
+      <div class="txt">
+        <h3>${p.title}</h3>
+        ${dealLine(p.id)}
+        <p>${p.excerpt}</p>
+        <span class="meta">${p.date} · ${p.region}</span>
+        <div class="tags">${p.tags.map(t=>`<span class="tag${t===currentCat?' on':''}">#${t}</span>`).join("")}</div>
+      </div>
+    </a>`).join("") : `<p style="padding:40px 0;text-align:center;color:var(--sub)">這個分類還沒有文章</p>`;
+}
+function renderFilter(){
+  filterMenu.innerHTML = cats.map(c=>`<button class="${c===currentCat?'on':''}" data-c="${c}">${c}</button>`).join("");
+  filterLabel.textContent = currentCat;
+}
+function setCat(c){ currentCat=c; renderFilter(); renderList(); }
+
+/* notice carousel */
+notice.innerHTML = notices.map((n,i)=>`<div class="notice-item ${i?'':'on'}">${n}</div>`).join("");
+dots.innerHTML = notices.map((n,i)=>`<i class="${i?'':'on'}"></i>`).join("");
+let ni=0;
+setInterval(()=>{
+  const items=notice.children, ds=dots.children;
+  items[ni].classList.remove("on"); ds[ni].classList.remove("on");
+  ni=(ni+1)%items.length;
+  items[ni].classList.add("on"); ds[ni].classList.add("on");
+},3500);
+
+/* interactions */
+filterBtn.onclick = e=>{ e.stopPropagation(); filterMenu.classList.toggle("on"); };
+filterMenu.onclick = e=>{ const c=e.target.dataset.c; if(c){ setCat(c); filterMenu.classList.remove("on"); } };
+document.addEventListener("click",()=>filterMenu.classList.remove("on"));
+
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("[data-view]").forEach(x=>x.classList.toggle("on",x===b));
+  list.className = b.dataset.view==="cards" ? "" : b.dataset.view;
+});
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("on",x===b));
+  document.getElementById("posts-pane").hidden = b.dataset.tab!=="posts";
+  document.getElementById("reels-pane").hidden = b.dataset.tab!=="reels";
+});
+
+const openD=()=>{drawer.classList.add("on");shade.classList.add("on")};
+const closeD=()=>{drawer.classList.remove("on");shade.classList.remove("on")};
+document.querySelectorAll("[data-open]").forEach(b=>b.onclick=openD);
+shade.onclick=closeD; closeDrawer.onclick=closeD;
+drawer.querySelectorAll("[data-cat]").forEach(a=>a.onclick=e=>{
+  e.preventDefault(); closeD();
+  if(PROD && PAGE_POST){ location.href="/#cat-"+encodeURIComponent(a.dataset.cat); return; }
+  if(!PROD) location.hash=""; setCat(a.dataset.cat);
+  setTimeout(()=>document.getElementById("list-anchor").scrollIntoView({behavior:"smooth"}),50);
+});
+
+window.addEventListener("scroll",()=>{
+  const on=!document.body.classList.contains("reading") && scrollY>560;
+  bar.classList.toggle("show", on);
+  document.querySelector(".tabs").style.top = on ? bar.offsetHeight+"px" : "0px";
+});
+
+/* ---------- 單篇文章頁 ---------- */
+function articleHTML(p){
+  const back = `<div class="a-top"><a href="${homeLink}" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></a><span class="t">${p.title}</span></div>`;
+  if(p.render) return back + p.render(p);
+  if(!p.real){
+    return back + `<div class="a-cover">${art(...p.img)}</div><div class="a-body">
+      <div class="kicker">${p.region} · ${p.type}</div><h1>${p.title}</h1><div class="d">${p.date}</div>${dealCard(p.id)}
+      <div class="todo">這是範例文章，只是用來示範版面。真的開箱文會像「餘光」那篇一樣，有基本資訊、心得、周邊推薦和官網連結。</div>
+      <div class="cta"><a class="s" href="#">回首頁</a><a class="p" href="#post-yuguang">看「餘光」完整範本</a></div></div>`;
+  }
+  return back + `
+  <div class="a-cover">${art(...p.img)}</div>
+  <div class="a-body">
+    <div class="kicker">台南 · 民宿開箱</div>
+    <h1>${p.title}</h1>
+    <div class="d">${p.date} · Mika</div>
+
+    ${dealCard(p.id)}
+    <h2>看完影片的你，先看這裡</h2>
+    <p>這是我住「餘光」的完整非官方攻略：房型、價位、交通、我的心得，還有附近吃什麼、逛什麼，都整理在這一頁。訂房前想知道的，應該都有。</p>
+
+    <h2>基本資訊</h2>
+    <dl class="info">
+      <div><dt>名稱</dt><dd>餘光．台南漁光島民宿</dd></div>
+      <div><dt>地區</dt><dd>台南市安平區 漁光島</dd></div>
+      <div><dt>入住房型</dt><dd>「岩」榻榻米房</dd></div>
+      <div><dt>價位</dt><dd>（待填）</dd></div>
+      <div><dt>入住／退房</dt><dd>（待填）</dd></div>
+      <div><dt>停車</dt><dd>（待填）</dd></div>
+    </dl>
+
+    <h2>房間開箱：「岩」榻榻米房</h2>
+    ${gallery([
+      {img:["sea","#f4c9a0","#8fb3b5"], t:"A｜民宿外觀", c:"✏️（這裡寫外觀照片的文案，例如第一眼的感覺、怎麼找到入口）"},
+      {img:["room","#a69c82","#e9a78a"], t:"B｜「岩」榻榻米房", c:"✏️（這裡寫房間的文案：空間大小、榻榻米睡起來的感覺）"},
+      {img:["room","#cfc6b0","#9cc0c4"], t:"C｜窗外的景色", c:"✏️（這裡寫窗景的文案：看得到海嗎？什麼時候最美？）"},
+      {img:["pool","#e9e4da","#bcd6da"], t:"D｜浴室與備品", c:"✏️（這裡寫浴室的文案：乾濕分離、備品品牌、熱水穩不穩）"},
+      {img:["food","#f2e2cf","#e19b5b"], t:"E｜早餐", c:"✏️（這裡寫早餐的文案：有沒有附、吃了什麼、好不好吃）"},
+    ])}
+    <div class="todo">左右滑動照片，每張照片下面的文字會跟著換。之後把插畫換成你的照片、✏️ 換成你的文案就好。</div>
+
+    <h2>我的真實心得</h2>
+    <div class="todo">✏️ 這裡寫優點、可以注意的地方，還有「適合誰住」。這段就是別人找不到、只有你能寫的內容。</div>
+
+    <h2>附近美食 &amp; 景點</h2>
+    <div class="spots">
+      <a class="spot" href="#"><div class="thumb">${art("food","#f2e2cf","#e19b5b")}</div><div><b>（美食名稱）</b><small>距離民宿 ○ 分鐘 · 一句推薦</small></div></a>
+      <a class="spot" href="#"><div class="thumb">${art("sea","#f4c9a0","#8fb3b5")}</div><div><b>（景點名稱）</b><small>距離民宿 ○ 分鐘 · 一句推薦</small></div></a>
+    </div>
+
+    <div class="cta">
+      <a class="s" href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener">▶ 看開箱影片</a>
+      <a class="p" href="#" onclick="return false">官方網站（待填）</a>
+    </div>
+    <p class="proto" style="padding-bottom:0">本頁為個人非官方攻略，房價與資訊以官方公告為準</p>
+  </div>`;
+}
+
+/* ---------- 巷往 ---------- */
+const BR = t => t.trim().split(/(?<=。)/).map(x=>x.trim()).filter(Boolean).join("<br>");
+const P = t => `<p>${t.trim().split(/(?<=。)/).map(x=>x.trim()).filter(Boolean).join("<br>")}</p>`;
+const fig = (n,cap) => `<figure class="fig"><div class="ph"><img src="${IMG}${n}.jpg" alt="${cap}" loading="lazy"></div><figcaption>${cap}</figcaption></figure>`;
+const gal = list => gallery(list.map(([n,c])=>({src:IMG+n+".jpg", t:"", c})));
+function renderHangwang(p){
+  return `
+  <figure class="fig cover-fig" style="margin:0"><div class="a-cover"><img src="${IMG}01.jpg" alt="巷往 Villa 外觀"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
+  <div class="a-body post">
+    <div class="kicker">宜蘭 · 包棟民宿</div>
+    <h1>${p.title}</h1>
+    <div class="d">${p.date} · Mika</div>
+
+    <p>這次我們入住的是宜蘭冬山鄉的『巷往 Villa』<br>整棟民宿就在田野間，遠遠看過去滿氣派的。<br>原本以為客廳就已經夠大了，但走進去才發現，<br><strong>每間房間都比我想像中還要寬敞！</strong></p>
+    <p><strong>一樓就有兩間雙人房！</strong><br>如果有帶長輩一起來，<br>可以把房間安排在這一層，<br>晚上在客廳聊完天，回房也不用爬樓梯。</p>
+    <p>二樓的房間用了<strong>台灣檜木</strong>，<br>一進房間就聞得到淡淡的檜木香。<br>戶外有草坪步道、雲朵鞦韆和戲水池，<br>想待在室內也能唱 KTV、打麻將或玩街機。<br>就算一整天都待在民宿，也不會無聊。</p>
+    <div class="one"><small>這次住下來</small>我最喜歡的是，這裡連房間都很寬敞，一樓也有兩間雙人房，帶長輩一起住比較好安排。</div>
+
+    <h2>住宿基本資訊</h2>
+    <table class="tbl">
+      <tr><td>名稱</td><td>巷往 Villa</td></tr>
+      <tr><td>地址</td><td>宜蘭縣冬山鄉美和路一段 62 巷 197 號</td></tr>
+      <tr><td>包棟人數</td><td>8～22 人</td></tr>
+      <tr><td>室內空間</td><td>約 120 坪</td></tr>
+      <tr><td>入住／退房</td><td>15:00 入住，11:00 退房</td></tr>
+      <tr><td>停車</td><td>可停車</td></tr>
+      <tr><td>早餐</td><td>有附早餐</td></tr>
+      <tr><td>房價</td><td>包棟價格請直接向民宿詢問</td></tr>
+      <tr><td>Mika 專屬優惠</td><td>符合適用日期，享包棟<strong class="off">定價 75 折</strong><br><span class="cond">※暑假、週六、連假及春節期間不適用</span></td></tr>
+    </table>
+    <div class="ask">
+      <div class="ask-card">
+        <small>官方Line 詢問優惠</small>
+        <div class="ask-row"><b>@hope2795</b><button class="copy" data-code="@hope2795">複製</button></div>
+        <a class="ask-go" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">加入官方 LINE</a>
+      </div>
+      <div class="ask-card">
+        <small>優惠碼</small>
+        <div class="ask-row"><b class="code">MIKA888</b><button class="copy" data-code="MIKA888">複製</button></div>
+        <p class="ask-note">詢問時提供優惠碼</p>
+      </div>
+    </div>
+
+    <h2>房間怎麼分</h2>
+    <p>巷往 Villa 一共三層樓，有六間房，可入住 <strong>8～22 人</strong>，<br>每間都有獨立衛浴。</p>
+    <table class="tbl rooms">
+      <tr><th>樓層</th><th>房型</th><th>適合安排</th></tr>
+      <tr><td>一樓</td><td>2 間雙人房</td><td>長輩、不想爬樓梯的人</td></tr>
+      <tr><td>二樓</td><td>3 間四人房</td><td>一家四口、幾組家庭各住一間</td></tr>
+      <tr><td>三樓</td><td>1 間六人房</td><td>朋友同住、大家庭</td></tr>
+    </table>
+
+    <h3>一樓｜兩間雙人房</h3>
+    ${fig("06","同行有長輩可以安排住這層的雙人房")}
+
+    <h3>二樓｜三間四人房</h3>
+    ${gal([
+      ["07","二樓房間使用了台灣檜木元素，走進去聞得到淡淡的檜木香"],
+      ["08","二樓每間房間皆有陽台"],
+      ["09","房間寬敞光線明亮"],
+    ])}
+
+    <h3>三樓｜一間六人房</h3>
+    ${gal([
+      ["10","三樓六人房，三張床並排在木地台上"],
+      ["11","房內有長桌、電視、掛衣架和除濕機"],
+    ])}
+
+    <h3>衛浴空間</h3>
+    ${fig("14","每間房間都有自己的獨立衛浴")}
+
+    <h2>住在這裡可以玩什麼</h2>
+
+    <h3>室內娛樂</h3>
+    <p><strong>室內空間：</strong>KTV、電動麻將桌、Switch、雙人街機、積木桌<br><strong>室外空間：</strong>戲水池、兒童嚕嚕車、雲朵鞦韆</p>
+    ${gal([
+      ["02","一樓客廳，旁邊就是上樓的樓梯"],
+      ["04","長餐桌旁就是麻將桌和街機，窗外是草坪"],
+      ["05","電動麻將桌和雙人街機"],
+      ["13","給小朋友的積木桌"],
+    ])}
+
+    <h3>懶得下廚，晚餐可以怎麼吃？</h3>
+    <p>如果想在民宿吃晚餐，又懶得自己備料下廚，<br>可以額外加購<strong>海鮮火鍋、烤肉或私廚料理</strong>。</p>
+    ${gal([
+      ["03","開放式廚房可以開火<br>有大型冰箱、微波爐、烤箱、咖啡機和洗碗機<br>餐具也準備得很齊全"],
+      ["12","茶水區有咖啡機，檯面上也擺了泡麵和零食"],
+    ])}
+
+    <h2>適合誰入住</h2>
+    <div class="who-list who-titles">
+      <div><b>三代同遊</b></div>
+      <div><b>幾組家庭相約出遊</b></div>
+      <div><b>朋友聚會</b></div>
+      <div><b>公司團體旅遊</b></div>
+    </div>
+
+    <h3>隔天早餐吃什麼？</h3>
+    <div class="edit-only">待補：早餐照片與說明（這個提示只在「顯示編號」時看得到）</div>
+
+    <h2>附近可以順遊哪裡</h2>
+    <div class="spot-list"><span>冬山火車站</span><span>冬山河生態綠洲</span><span>冬山老街</span><span>梅花湖風景區</span><span>羅東夜市</span></div>
+
+    <h3>入住前想先逛一下</h3>
+    <p>可以把<strong>冬山火車站、冬山老街和冬山河生態綠洲</strong>排在一起。<br>想慢慢走，就挑其中兩站，逛完再去民宿。</p>
+    <h3>晚上想出去覓食</h3>
+    <p>可以去<strong>羅東夜市</strong>，想在外面吃晚餐，或買點宵夜回民宿都方便。</p>
+    <h3>退房後還想走走</h3>
+    <p>可以把<strong>梅花湖</strong>排成隔天第一站。<br>如果這趟主要是想跟朋友在民宿聚一聚，隔天留這一站就夠了。</p>
+
+    <h2>入住心得與訂房</h2>
+    <p>整體來說，巷往最讓我印象深刻的是<br><strong>每間房間都比我想像中寬敞</strong>，<br>還有一樓雙人房帶來的方便。<br>戶外的草坪和步道也打理得滿好的。<br>吃飽後出來散散步，在民宿裡慢慢待著就很悠閒。</p>
+    <p>入住前有個小地方可以先留意。<br>因為民宿就在田野間，戶外偶爾會看到一些搖蚊，<br><strong>進出時可以順手把門帶上。</strong></p>
+    <p>如果你正在找一間適合帶長輩、小朋友，<br>或揪幾個朋友一起住的包棟民宿，我覺得巷往可以放進名單。</p>
+    <div class="gscore">
+      <div><b>5.0</b><span>Google 評分<br><em>307 則評論・2026/11/09 查詢</em></span></div>
+      <a href="https://maps.app.goo.gl/iErNHsiGQupGAaUs6" target="_blank" rel="noopener">在 Google 地圖查看</a>
+    </div>
+    <div class="price-note">包棟價格請直接向民宿詢問。</div>
+    <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" target="_blank" rel="noopener">查看民宿官網</a></div>
+    <p class="proto" style="padding-bottom:0">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
+  </div>`;
+}
+
+/* ---------- 照片輪播：A 照片配 A 文案 ---------- */
+function gallery(items){
+  return `<div class="gal">
+    <span class="gal-count">1 / ${items.length}</span>
+    <button class="gal-nav prev" disabled aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"/></svg></button>
+    <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"/></svg></button>
+    <div class="gal-track">${items.map(s=>`
+      <div class="slide"><div class="ph">${s.src?`<img src="${s.src}" alt="${s.t}" loading="lazy">`:art(...s.img)}</div>
+        <div class="cap">${s.t?`<b>${s.t}</b>`:""}<p>${s.c}</p></div></div>`).join("")}
+    </div>
+    <div class="gal-dots">${items.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join("")}</div>
+  </div>`;
+}
+function wireGalleries(root){
+  root.querySelectorAll(".gal").forEach(g=>{
+    const track=g.querySelector(".gal-track"), n=track.children.length;
+    const count=g.querySelector(".gal-count"), dots=[...g.querySelectorAll(".gal-dots i")];
+    const prev=g.querySelector(".prev"), next=g.querySelector(".next");
+    const idx=()=>Math.round(track.scrollLeft/track.clientWidth);
+    const update=()=>{ const i=idx();
+      count.textContent=`${i+1} / ${n}`;
+      dots.forEach((d,k)=>d.classList.toggle("on",k===i));
+      prev.disabled=i===0; next.disabled=i===n-1; };
+    track.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});
+    prev.onclick=()=>track.scrollTo({left:(idx()-1)*track.clientWidth,behavior:"smooth"});
+    next.onclick=()=>track.scrollTo({left:(idx()+1)*track.clientWidth,behavior:"smooth"});
+  });
+}
+
+function numberize(root){
+  const post=root.querySelector(".post"); if(!post) return;
+  root.querySelectorAll("img").forEach(img=>{
+    const m=img.getAttribute("src").match(/(\d\d)\.jpg$/); if(!m) return;
+    const host=img.closest(".slide")||img.closest(".fig"); if(host) host.dataset.no="P"+m[1];
+  });
+  let sec=64, n=0;
+  [...post.children].forEach(el=>{
+    if(el.classList.contains("kicker")||el.classList.contains("d")||el.classList.contains("proto")) return;
+    if(el.tagName==="H1"){ el.dataset.no="標題"; return; }
+    if(el.tagName==="H2"){ sec++; n=0; el.dataset.no=String.fromCharCode(sec)+" 小標"; return; }
+    if(el.classList.contains("fig")||el.classList.contains("gal")) return;
+    if(sec===64){ sec=65; }
+    const no=String.fromCharCode(sec)+(++n);
+    if(el.tagName==="TABLE"){ const t=document.createElement("div"); t.className="tlabel"; t.dataset.no=no; el.before(t); }
+    else el.dataset.no=no;
+  });
+}
+function addNumBtn(root){
+  const top=root.querySelector(".a-top"); if(!top||!root.querySelector(".post")) return;
+  const b=document.createElement("button"); b.className="numbtn"; b.textContent="顯示編號";
+  b.onclick=()=>{ const on=root.classList.toggle("edit-on"); b.classList.toggle("on",on); b.textContent=on?"隱藏編號":"顯示編號"; };
+  top.appendChild(b);
+  const tip=document.createElement("div"); tip.className="edit-tip";
+  tip.innerHTML="修改時照編號寫就好，例如：「A2：改成……」「P08：圖說改成……」「P13：刪掉」。";
+  top.after(tip);
+}
+
+function route(){
+  try{ closeD(); }catch(e){}
+  const m = location.hash.match(/^#post-(.+)$/);
+  const id = PAGE_POST || (m && m[1]);
+  const p = id && posts.find(x=>x.id===id);
+  if(p){
+    article.innerHTML = articleHTML(p);
+    wireGalleries(article);
+    if(!PROD){ article.classList.remove("edit-on"); numberize(article); addNumBtn(article); }
+    document.body.classList.add("reading"); bar.classList.remove("show");
+    scrollTo(0,0);
+  } else {
+    document.body.classList.remove("reading");
+  }
+}
+window.addEventListener("hashchange",route);
+
+renderPop(); renderFilter(); renderList(); route();
+if(location.hash.startsWith("#cat-")){
+  const c=decodeURIComponent(location.hash.slice(5));
+  if(cats.includes(c)){ setCat(c); setTimeout(()=>document.getElementById("list-anchor").scrollIntoView(),60); }
+}
+</script>
+</body>
+</html>
