@@ -30,7 +30,7 @@
     --c-blue-50:#EFF4FF;/* 心得字卡底色 */
     --c-red:#A81919;    /* 分類標籤文字、折扣與優惠序號、正文重點字 */
     --c-red-50:#FCEDED; /* 分類標籤底色 */
-    --c-lime:#95C11F;   /* 滑過、按下的互動提示 */
+    --c-lime:#FFD23F;   /* 滑過、按下的互動提示（黃色） */
     --ink:var(--c-ink); --sub:#8a8a8e; --line:#ececec; --bg:var(--c-white); --soft:#f6f6f4;
     --accent:var(--c-blue); --accent-2:var(--c-blue-50);
   }
@@ -352,7 +352,7 @@
   .ask-go:active{background:var(--c-lime);color:var(--c-ink)}
   /* 開頭藍底字卡（A1～A3） */
   .one.intro{padding:16px 13px 18px 14px}
-  .a-body .one.intro p{margin-top:14px;color:var(--c-ink);font-size:min(14.5px,3.75vw);line-height:1.85;letter-spacing:-.01em}
+  .a-body .one.intro p{margin-top:14px;color:var(--c-ink);font-size:16px;line-height:1.85}
   .one.intro p:first-child{margin-top:0}
   /* 觀看影片字卡 */
   .video-card{display:flex;align-items:center;gap:14px;margin-top:16px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--c-white);transition:border-color .15s,box-shadow .15s}
@@ -371,7 +371,6 @@
   /* 直式照片 */
   .fig.tall .ph{aspect-ratio:4/5}
   /* 文末聲明：一行、小字 */
-  .a-body p.note-line{white-space:nowrap;font-size:min(11.5px,3.3vw);line-height:1.5;color:var(--sub);letter-spacing:-.01em;padding:22px 0 0;overflow:hidden;text-overflow:ellipsis}
   /* 官方 LINE＋複製詢問 */
   .ask-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
   .ask-actions>*{flex:1 1 100px}
@@ -424,6 +423,39 @@
   .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 28px);transform:translate(-50%,12px);background:var(--c-ink);color:#fff;
     font-size:14px;padding:10px 16px;border-radius:99px;opacity:0;pointer-events:none;transition:.2s;z-index:70;white-space:nowrap}
   .toast.on{opacity:1;transform:translate(-50%,0)}
+  /* 文章排版：自然換行 */
+  .a-body h1,.a-body h2,.a-body h3{text-wrap:balance}
+  .a-body p,.a-body figcaption,.slide .cap p,.tbl td{text-wrap:pretty}
+  .a-body p{font-size:16px;line-height:1.85}
+  .nw{white-space:nowrap}
+  .tbl .cond{display:block;margin-top:4px;font-size:13.5px}
+  .gscore em{display:block}
+  .gscore{flex-wrap:wrap;row-gap:6px}
+  .gscore a{white-space:nowrap}
+  .a-body p.note-line{font-size:12px;line-height:1.6;color:var(--sub);text-align:center;margin-top:22px;text-wrap:balance}
+  .offer strong.off{background:none;padding:0}
+  .offer .of-copy{min-width:9.5em}
+  /* 單欄優惠卡 */
+  .offer{margin-top:16px;background:var(--c-white);border:1px solid #e6e6e6;border-radius:16px;padding:4px 18px}
+  .of-sec{padding:16px 0}
+  .of-sec+.of-sec{border-top:1px solid #f0f0f0}
+  .a-body h3.of-k{margin:0 0 6px;font-size:14px;font-weight:700;color:var(--c-blue);letter-spacing:.02em}
+  .a-body p.of-main{margin:0;font-size:20px;font-weight:700;color:var(--c-ink);line-height:1.5}
+  .a-body p.of-sub{margin:4px 0 0;font-size:13px;color:var(--sub);line-height:1.6}
+  .a-body p.of-code{margin:0 0 12px;font-size:15px;color:var(--c-ink);line-height:1.6}
+  .of-code b{color:var(--c-red);font-weight:800;font-size:19px;letter-spacing:.06em;margin-left:4px;font-family:ui-monospace,"SF Mono",Menlo,monospace}
+  .of-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
+  .offer .of-copy{margin:0;padding:10px 16px;border-radius:10px;border:1.5px solid var(--c-blue);color:var(--c-blue);background:var(--c-white);font-size:14.5px;font-weight:700}
+  .of-hint{font-size:12.5px;color:var(--sub);line-height:1.6}
+  .a-body p.of-hint{margin:8px 0 0;font-size:12.5px;text-align:center;color:var(--sub)}
+  .of-line{display:block;text-align:center;padding:14px;border-radius:12px;background:var(--c-blue);color:var(--c-white);font-weight:700;font-size:15.5px;transition:background-color .15s,color .15s}
+  .a-body p.of-id{margin:6px 0 0;font-size:12.5px;color:#9a9a9a;text-align:center}
+  /* 分享給親友 */
+  .btn-share{display:block;width:100%;margin-top:14px;padding:13px;border-radius:12px;background:var(--c-blue);color:var(--c-white);font-size:15px;font-weight:700;text-align:center;border:1px solid var(--c-blue)}
+  /* 複製成功：黃色 */
+  .copy.done,.offer .of-copy.done,.btn-share.done{background:var(--c-lime);border-color:var(--c-lime);color:var(--c-ink)}
+  @media (hover:hover){ .of-line:hover{background:var(--c-lime);color:var(--c-ink)} }
+  .of-line:active{background:var(--c-lime);color:var(--c-ink)}
   /* 滑鼠裝置：滑過 */
   @media (hover:hover){
     .tag:not(.on):hover,.menu-pop button:not(.on):hover,.spot-list span:hover{background:var(--c-lime);color:var(--c-ink)}
@@ -532,47 +564,53 @@
     <div class="d">2026. 11. 08. · Mika</div>
 
     <div class="one intro">
-    <p>這次我們入住的是宜蘭冬山鄉的『巷往 Villa』<br>整棟民宿就在田野間，遠遠看過去滿氣派的。<br>原本以為客廳就已經夠大了，但走進去才發現，<br><strong>每間房間都比我想像中還要寬敞！</strong></p>
-    <p><strong>一樓就有兩間雙人房！</strong><br>如果有帶長輩一起來，<br>可以把房間安排在這一層，<br>晚上在客廳聊完天，回房也不用爬樓梯。</p>
-    <p>二樓的房間用了<strong>台灣檜木</strong>，<br>一進房間就聞得到淡淡的檜木香。<br>戶外有草坪步道、雲朵鞦韆和戲水池，<br>想待在室內也能唱 KTV、打麻將或玩街機。<br>就算一整天都待在民宿，也不會無聊。</p>
+    <p>這次我們入住的是宜蘭冬山鄉的「巷往 Villa」。整棟民宿就在田野間，遠遠看過去滿氣派的。</p>
+    <p>原本以為客廳就已經夠大了，走進去才發現，<strong>每間房間都比想像中還要寬敞</strong>。</p>
+    <p><strong>一樓就有兩間雙人房</strong>，帶長輩一起來的話，可以把房間安排在這層，晚上在客廳聊完天，回房也不用爬樓梯。</p>
+    <p>二樓的房間用了<strong>台灣檜木</strong>，一進門就聞得到淡淡的檜木香。</p>
+    <p>戶外有草坪步道、雲朵鞦韆和戲水池，室內也能唱 KTV、打麻將或玩街機，就算一整天都待在民宿也不會無聊。</p>
     </div>
 
     <a class="video-card" href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener">
       <div class="vc-thumb"><img src="img/hangwang/04_s.jpg" alt="巷往 Villa 開箱影片" loading="lazy"><span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span></div>
-      <div class="vc-txt"><small>觀看影片</small><b>巷往 Villa 開箱影片</b><span>在 Instagram 觀看 →</span></div>
+      <div class="vc-txt"><small>觀看影片</small><b>巷往 Villa <span class="nw">開箱影片</span></b><span>在 Instagram 觀看 →</span></div>
     </a>
 
     <h2>住宿基本資訊</h2>
     <table class="tbl">
       <tbody><tr><td>名稱</td><td>巷往 Villa</td></tr>
-      <tr><td>地址</td><td>宜蘭縣冬山鄉美和路一段 62 巷 197 號</td></tr>
-      <tr><td>包棟人數</td><td>8～22 人</td></tr>
+      <tr><td>地址</td><td>宜蘭縣冬山鄉美和路一段 <span class="nw">62 巷 197 號</span></td></tr>
+      <tr><td>包棟人數</td><td><span class="nw">8～22 人</span></td></tr>
       <tr><td>室內空間</td><td>約 120 坪</td></tr>
-      <tr><td>入住／退房</td><td>15:00 入住，11:00 退房</td></tr>
+      <tr><td>入住／退房</td><td><span class="nw">15:00 入住</span>，<span class="nw">11:00 退房</span></td></tr>
       <tr><td>停車</td><td>可停車</td></tr>
       <tr><td>早餐</td><td>有附早餐</td></tr>
       <tr><td>房價</td><td>包棟價格請直接向民宿詢問</td></tr>
-      <tr><td>Mika 專屬優惠</td><td>符合適用日期，享包棟<strong class="off">定價 75 折</strong><br><span class="cond">※暑假、週六、連假及春節期間不適用</span></td></tr>
+      <tr><td>Mika 專屬優惠</td><td>符合適用日期，享包棟<strong class="off nw">定價 75 折</strong><span class="cond">※暑假、週六、連假及春節期間不適用</span></td></tr>
     </tbody></table>
-    <div class="ask">
-      <div class="ask-card">
-        <small>官方Line 詢問優惠</small>
-        <div class="ask-row"><b>@hope2795</b><button class="copy" data-code="@hope2795">複製</button></div>
-        <div class="ask-actions">
-          <a class="ask-go" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">官方 LINE</a>
-          <button class="copy ask-copy" data-copy="hangwang-ask" data-label="複製詢問">複製詢問</button>
+
+    <section class="offer" aria-label="巷往 Villa 訂房優惠">
+      <div class="of-sec">
+        <h3 class="of-k">巷往 Villa 訂房優惠</h3>
+        <p class="of-main">包棟定價 <strong class="off nw">75 折</strong></p>
+        <p class="of-sub">暑假、週六、連假及春節期間不適用。</p>
+      </div>
+      <div class="of-sec">
+        <p class="of-code">優惠碼 <b class="nw">MIKA888</b></p>
+        <div class="of-row">
+          <button class="copy of-copy" data-copy="hangwang-ask" data-label="複製詢問訊息" data-done="已複製">複製詢問訊息</button>
+          <span class="of-hint">已含優惠碼 <span class="nw">MIKA888</span></span>
         </div>
-        <p class="ask-hint">複製後，到官方 LINE 貼上並填寫日期和人數。</p>
       </div>
-      <div class="ask-card">
-        <small>優惠碼</small>
-        <div class="ask-row"><b class="code">MIKA888</b><button class="copy" data-code="MIKA888">複製</button></div>
-        <p class="ask-note">詢問時提供優惠碼</p>
+      <div class="of-sec">
+        <a class="of-line" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">用 LINE 詢問空房</a>
+        <p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>
+        <p class="of-id">官方 LINE ID　<span class="nw">@hope2795</span></p>
       </div>
-    </div>
+    </section>
 
     <h2>房間怎麼分</h2>
-    <p>巷往 Villa 一共三層樓，有六間房，可入住 <strong>8～22 人</strong>，<br>每間都有獨立衛浴。</p>
+    <p>巷往 Villa 一共三層樓、六間房，可入住 <strong class="nw">8～22 人</strong>，每間都有獨立衛浴。</p>
     <table class="tbl rooms">
       <tbody><tr><th>樓層</th><th>房型</th><th>適合安排</th></tr>
       <tr><td>一樓</td><td>2 間雙人房</td><td>長輩、不想爬樓梯的人</td></tr>
@@ -581,7 +619,7 @@
     </tbody></table>
 
     <h3>一樓｜兩間雙人房</h3>
-    <figure class="fig"><div class="ph"><img src="img/hangwang/06.jpg" alt="同行有長輩可以安排住這層的雙人房" loading="lazy"></div><figcaption>同行有長輩可以安排住這層的雙人房</figcaption></figure>
+    <figure class="fig"><div class="ph"><img src="img/hangwang/06.jpg" alt="同行有長輩，可以安排住這層的雙人房" loading="lazy"></div><figcaption>同行有長輩，可以安排住這層的雙人房</figcaption></figure>
 
     <h3>二樓｜三間四人房</h3>
     <div class="gal">
@@ -590,11 +628,11 @@
     <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
     <div class="gal-track">
       <div class="slide"><div class="ph"><img src="img/hangwang/07.jpg" alt="" loading="lazy"></div>
-        <div class="cap"><p>二樓房間使用了台灣檜木元素，走進去聞得到淡淡的檜木香</p></div></div>
+        <div class="cap"><p>二樓房間用了台灣檜木，走進去聞得到淡淡的木頭香</p></div></div>
       <div class="slide"><div class="ph"><img src="img/hangwang/08.jpg" alt="" loading="lazy"></div>
-        <div class="cap"><p>二樓每間房間皆有陽台</p></div></div>
+        <div class="cap"><p>二樓每間房間都有陽台</p></div></div>
       <div class="slide"><div class="ph"><img src="img/hangwang/09.jpg" alt="" loading="lazy"></div>
-        <div class="cap"><p>房間寬敞光線明亮</p></div></div>
+        <div class="cap"><p>房間寬敞，光線也很明亮</p></div></div>
     </div>
     <div class="gal-dots"><i class="on"></i><i class=""></i><i class=""></i></div>
   </div>
@@ -617,8 +655,8 @@
     <figure class="fig"><div class="ph"><img src="img/hangwang/14.jpg" alt="每間房間都有自己的獨立衛浴" loading="lazy"></div><figcaption>每間房間都有自己的獨立衛浴</figcaption></figure>
 
     <h2>住在這裡可以玩什麼</h2>
-
-    <p><strong>室內空間：</strong>KTV、電動麻將桌、Switch、雙人街機、積木桌<br><strong>室外空間：</strong>戲水池、兒童嚕嚕車、雲朵鞦韆</p>
+    <p><strong>室內空間：</strong>KTV、電動麻將桌、Switch、雙人街機和積木桌。</p>
+    <p><strong>室外空間：</strong>戲水池、兒童嚕嚕車和雲朵鞦韆。</p>
     <div class="gal">
     <span class="gal-count">1 / 4</span>
     <button class="gal-nav prev" disabled="" aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
@@ -636,55 +674,62 @@
     <div class="gal-dots"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div>
   </div>
 
-    <h3>懶得下廚，晚餐可以怎麼吃？</h3>
-    <p>如果想在民宿吃晚餐，又懶得自己備料下廚，<br>可以額外加購<strong>海鮮火鍋、烤肉或私廚料理</strong>。</p>
+    <h2>三餐怎麼安排</h2>
+    <h3>下廚與烤肉</h3>
+    <p>開放式廚房可以開火，大型冰箱、微波爐、烤箱、咖啡機和洗碗機都有，餐具也準備得很齊全。</p>
+    <p>戶外還有半戶外烤肉區，晚上可以一起烤肉。</p>
     <div class="gal">
     <span class="gal-count">1 / 2</span>
     <button class="gal-nav prev" disabled="" aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
     <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
     <div class="gal-track">
       <div class="slide"><div class="ph"><img src="img/hangwang/03.jpg" alt="" loading="lazy"></div>
-        <div class="cap"><p>開放式廚房可以開火<br>有大型冰箱、微波爐、烤箱、咖啡機和洗碗機<br>餐具也準備得很齊全</p></div></div>
+        <div class="cap"><p>開放式廚房可以開火，設備和餐具都很齊全</p></div></div>
       <div class="slide"><div class="ph"><img src="img/hangwang/12.jpg" alt="" loading="lazy"></div>
-        <div class="cap"><p>茶水區有咖啡機，檯面上也擺了泡麵和零食</p></div></div>
+        <div class="cap"><p>茶水區有咖啡機，也擺了泡麵和零食</p></div></div>
     </div>
     <div class="gal-dots"><i class="on"></i><i class=""></i></div>
   </div>
 
+    <h3>懶得下廚，晚餐可以怎麼吃？</h3>
+    <p>想在民宿吃晚餐，又懶得自己備料的話，可以額外加購<strong>海鮮火鍋、烤肉或私廚料理</strong>。</p>
+
+    <h3>隔天早餐吃什麼？</h3>
+    <p>早餐有<strong>中式和西式</strong>兩種選擇，份量很實在，那天吃完相當有飽足感。</p>
+    <p>餐點都裝在外帶紙盒裡，吃不完直接帶走也很方便。</p>
+    <figure class="fig tall"><div class="ph"><img src="img/hangwang/15.jpg" alt="巷往 Villa 早餐" loading="lazy"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
+
     <h2>適合誰入住</h2>
     <div class="who-list who-titles">
       <div><b>三代同遊</b></div>
-      <div><b>幾組家庭相約出遊</b></div>
+      <div><b>幾組家庭同遊</b></div>
       <div><b>朋友聚會</b></div>
       <div><b>公司團體旅遊</b></div>
     </div>
-    <button class="copy btn-ghost" data-copy="hangwang-share" data-label="複製給同行的人">複製給同行的人</button>
-
-    <h3>隔天早餐吃什麼？</h3>
-    <p>早餐提供<strong>中式和西式</strong>兩種選擇，份量很實在，那天吃完相當有飽足感。<br>餐點都裝在外帶紙盒裡，吃不完直接帶走也很方便。</p>
-    <figure class="fig tall"><div class="ph"><img src="img/hangwang/15.jpg" alt="巷往 Villa 早餐" loading="lazy"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
+    <button class="copy btn-share" data-copy="hangwang-share" data-label="分享給親友">分享給親友</button>
 
     <h2>附近可以順遊哪裡</h2>
     <div class="spot-list"><span>冬山火車站</span><span>冬山河生態綠洲</span><span>冬山老街</span><span>梅花湖風景區</span><span>羅東夜市</span></div>
 
     <h3>入住前想先逛一下</h3>
-    <p>可以把<strong>冬山火車站、冬山老街和冬山河生態綠洲</strong>排在一起。<br>想慢慢走，就挑其中兩站，逛完再去民宿。</p>
+    <p>可以把<strong>冬山火車站、冬山老街和冬山河生態綠洲</strong>排在一起。想慢慢走，就挑其中兩站，逛完再去民宿。</p>
     <h3>晚上想出去覓食</h3>
-    <p>可以去<strong>羅東夜市</strong>，想在外面吃晚餐，或買點宵夜回民宿都方便。</p>
+    <p>可以去<strong>羅東夜市</strong>，在外面吃晚餐，或買點宵夜回民宿都方便。</p>
     <h3>退房後還想走走</h3>
-    <p>可以把<strong>梅花湖</strong>排成隔天第一站。<br>如果這趟主要是想跟朋友在民宿聚一聚，隔天留這一站就夠了。</p>
+    <p>可以把<strong>梅花湖</strong>排成隔天第一站。如果這趟主要是跟朋友在民宿聚一聚，隔天留這一站就夠了。</p>
 
     <h2>入住心得與訂房</h2>
-    <p>整體來說，巷往最讓我印象深刻的是<br><strong>每間房間都比我想像中寬敞</strong>，<br>還有一樓雙人房帶來的方便。<br>戶外的草坪和步道也打理得滿好的。<br>吃飽後出來散散步，在民宿裡慢慢待著就很悠閒。</p>
-    <p>入住前有個小地方可以先留意。<br>因為民宿就在田野間，戶外偶爾會看到一些搖蚊，<br><strong>進出時可以順手把門帶上。</strong></p>
-    <p>如果你正在找一間適合帶長輩、小朋友，<br>或揪幾個朋友一起住的包棟民宿，我覺得巷往可以放進名單。</p>
+    <p>整體來說，巷往最讓我印象深刻的是<strong>每間房間都比想像中寬敞</strong>，還有一樓雙人房帶來的方便。</p>
+    <p>戶外的草坪和步道也打理得滿好的，吃飽後出來散散步，在民宿裡慢慢待著就很悠閒。</p>
+    <p>入住前有個小地方可以先留意：民宿就在田野間，戶外偶爾會看到一些搖蚊，<strong>進出時記得順手把門帶上</strong>。</p>
+    <p>如果你正在找適合帶長輩、小朋友，或揪朋友一起住的包棟民宿，我覺得巷往可以放進名單。</p>
     <div class="gscore">
-      <div><b>5.0</b><span>Google 評分<br><em>307 則評論・2026/11/09 查詢</em></span></div>
+      <div><b>5.0</b><span>Google 評分<em><span class="nw">307 則評論</span>・<span class="nw">2026/11/09 查詢</span></em></span></div>
       <a href="https://maps.app.goo.gl/iErNHsiGQupGAaUs6" target="_blank" rel="noopener">在 Google 地圖查看</a>
     </div>
     <div class="price-note">包棟價格請直接向民宿詢問。</div>
     <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" target="_blank" rel="noopener">查看民宿官網</a></div>
-    <p class="proto note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
+    <p class="note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
   </div></article>
 
 <!-- search -->
@@ -815,7 +860,7 @@ function tick(){ document.querySelectorAll("[data-cd]").forEach(el=>{ const d=de
 setInterval(tick,30000);
 /* ---------- 複製功能：優惠碼、訂房詢問、揪團摘要 ---------- */
 const COPY_TEXTS = {
-  "hangwang-ask": "您好，我是看 Mika Checkin 的巷往 Villa 資訊來的，想詢問＿＿月＿＿日，＿＿位大人、＿＿位小孩的包棟空房與報價。也想確認這個日期是否適用優惠碼 MIKA888，謝謝！",
+  "hangwang-ask": "您好，我是從「Mika今晚住這裡」看到巷往 Villa 的資訊！\n\n想詢問＿＿月＿＿日\n＿＿位大人、＿＿位小孩，是否還有空房？\n\n也想請問使用優惠碼 MIKA888 的包棟價格，謝謝！",
   "hangwang-share": "我找到一間宜蘭冬山的包棟民宿，叫巷往 Villa！\n可以住 8～22 人，一樓有兩間雙人房，可以留給長輩。每間房都有獨立衛浴，也有附早餐。\n房間照片跟完整介紹在這裡 👇\nhttps://mikacheckin.com/hangwang/",
 };
 function legacyCopy(text){
@@ -850,7 +895,7 @@ document.addEventListener("click",async e=>{
   const label = b.dataset.label || "複製";
   const ok = await copyText(text);
   if(!ok){ showManualCopy(text); return; }
-  b.textContent="已複製 ✓"; b.classList.add("done");
+  b.textContent=b.dataset.done||"已複製 ✓"; b.classList.add("done");
   clearTimeout(b._t); b._t=setTimeout(()=>{ b.textContent=label; b.classList.remove("done"); },2000);
 });
 /* 提示小字 */
@@ -1044,47 +1089,53 @@ function renderHangwang(p){
     <div class="d">${p.date} · Mika</div>
 
     <div class="one intro">
-    <p>這次我們入住的是宜蘭冬山鄉的『巷往 Villa』<br>整棟民宿就在田野間，遠遠看過去滿氣派的。<br>原本以為客廳就已經夠大了，但走進去才發現，<br><strong>每間房間都比我想像中還要寬敞！</strong></p>
-    <p><strong>一樓就有兩間雙人房！</strong><br>如果有帶長輩一起來，<br>可以把房間安排在這一層，<br>晚上在客廳聊完天，回房也不用爬樓梯。</p>
-    <p>二樓的房間用了<strong>台灣檜木</strong>，<br>一進房間就聞得到淡淡的檜木香。<br>戶外有草坪步道、雲朵鞦韆和戲水池，<br>想待在室內也能唱 KTV、打麻將或玩街機。<br>就算一整天都待在民宿，也不會無聊。</p>
+    <p>這次我們入住的是宜蘭冬山鄉的「巷往 Villa」。整棟民宿就在田野間，遠遠看過去滿氣派的。</p>
+    <p>原本以為客廳就已經夠大了，走進去才發現，<strong>每間房間都比想像中還要寬敞</strong>。</p>
+    <p><strong>一樓就有兩間雙人房</strong>，帶長輩一起來的話，可以把房間安排在這層，晚上在客廳聊完天，回房也不用爬樓梯。</p>
+    <p>二樓的房間用了<strong>台灣檜木</strong>，一進門就聞得到淡淡的檜木香。</p>
+    <p>戶外有草坪步道、雲朵鞦韆和戲水池，室內也能唱 KTV、打麻將或玩街機，就算一整天都待在民宿也不會無聊。</p>
     </div>
 
     <a class="video-card" href="${p.video||'https://www.instagram.com/mika.checkin/reels/'}" target="_blank" rel="noopener">
       <div class="vc-thumb"><img src="${IMG}04_s.jpg" alt="巷往 Villa 開箱影片" loading="lazy"><span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div>
-      <div class="vc-txt"><small>觀看影片</small><b>巷往 Villa 開箱影片</b><span>在 Instagram 觀看 →</span></div>
+      <div class="vc-txt"><small>觀看影片</small><b>巷往 Villa <span class="nw">開箱影片</span></b><span>在 Instagram 觀看 →</span></div>
     </a>
 
     <h2>住宿基本資訊</h2>
     <table class="tbl">
       <tr><td>名稱</td><td>巷往 Villa</td></tr>
-      <tr><td>地址</td><td>宜蘭縣冬山鄉美和路一段 62 巷 197 號</td></tr>
-      <tr><td>包棟人數</td><td>8～22 人</td></tr>
+      <tr><td>地址</td><td>宜蘭縣冬山鄉美和路一段 <span class="nw">62 巷 197 號</span></td></tr>
+      <tr><td>包棟人數</td><td><span class="nw">8～22 人</span></td></tr>
       <tr><td>室內空間</td><td>約 120 坪</td></tr>
-      <tr><td>入住／退房</td><td>15:00 入住，11:00 退房</td></tr>
+      <tr><td>入住／退房</td><td><span class="nw">15:00 入住</span>，<span class="nw">11:00 退房</span></td></tr>
       <tr><td>停車</td><td>可停車</td></tr>
       <tr><td>早餐</td><td>有附早餐</td></tr>
       <tr><td>房價</td><td>包棟價格請直接向民宿詢問</td></tr>
-      <tr><td>Mika 專屬優惠</td><td>符合適用日期，享包棟<strong class="off">定價 75 折</strong><br><span class="cond">※暑假、週六、連假及春節期間不適用</span></td></tr>
+      <tr><td>Mika 專屬優惠</td><td>符合適用日期，享包棟<strong class="off nw">定價 75 折</strong><span class="cond">※暑假、週六、連假及春節期間不適用</span></td></tr>
     </table>
-    <div class="ask">
-      <div class="ask-card">
-        <small>官方Line 詢問優惠</small>
-        <div class="ask-row"><b>@hope2795</b><button class="copy" data-code="@hope2795">複製</button></div>
-        <div class="ask-actions">
-          <a class="ask-go" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">官方 LINE</a>
-          <button class="copy ask-copy" data-copy="hangwang-ask" data-label="複製詢問">複製詢問</button>
+
+    <section class="offer" aria-label="巷往 Villa 訂房優惠">
+      <div class="of-sec">
+        <h3 class="of-k">巷往 Villa 訂房優惠</h3>
+        <p class="of-main">包棟定價 <strong class="off nw">75 折</strong></p>
+        <p class="of-sub">暑假、週六、連假及春節期間不適用。</p>
+      </div>
+      <div class="of-sec">
+        <p class="of-code">優惠碼 <b class="nw">MIKA888</b></p>
+        <div class="of-row">
+          <button class="copy of-copy" data-copy="hangwang-ask" data-label="複製詢問訊息" data-done="已複製">複製詢問訊息</button>
+          <span class="of-hint">已含優惠碼 <span class="nw">MIKA888</span></span>
         </div>
-        <p class="ask-hint">複製後，到官方 LINE 貼上並填寫日期和人數。</p>
       </div>
-      <div class="ask-card">
-        <small>優惠碼</small>
-        <div class="ask-row"><b class="code">MIKA888</b><button class="copy" data-code="MIKA888">複製</button></div>
-        <p class="ask-note">詢問時提供優惠碼</p>
+      <div class="of-sec">
+        <a class="of-line" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">用 LINE 詢問空房</a>
+        <p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>
+        <p class="of-id">官方 LINE ID　<span class="nw">@hope2795</span></p>
       </div>
-    </div>
+    </section>
 
     <h2>房間怎麼分</h2>
-    <p>巷往 Villa 一共三層樓，有六間房，可入住 <strong>8～22 人</strong>，<br>每間都有獨立衛浴。</p>
+    <p>巷往 Villa 一共三層樓、六間房，可入住 <strong class="nw">8～22 人</strong>，每間都有獨立衛浴。</p>
     <table class="tbl rooms">
       <tr><th>樓層</th><th>房型</th><th>適合安排</th></tr>
       <tr><td>一樓</td><td>2 間雙人房</td><td>長輩、不想爬樓梯的人</td></tr>
@@ -1093,13 +1144,13 @@ function renderHangwang(p){
     </table>
 
     <h3>一樓｜兩間雙人房</h3>
-    ${fig("06","同行有長輩可以安排住這層的雙人房")}
+    ${fig("06","同行有長輩，可以安排住這層的雙人房")}
 
     <h3>二樓｜三間四人房</h3>
     ${gal([
-      ["07","二樓房間使用了台灣檜木元素，走進去聞得到淡淡的檜木香"],
-      ["08","二樓每間房間皆有陽台"],
-      ["09","房間寬敞光線明亮"],
+      ["07","二樓房間用了台灣檜木，走進去聞得到淡淡的木頭香"],
+      ["08","二樓每間房間都有陽台"],
+      ["09","房間寬敞，光線也很明亮"],
     ])}
 
     <h3>三樓｜一間六人房</h3>
@@ -1112,8 +1163,8 @@ function renderHangwang(p){
     ${fig("14","每間房間都有自己的獨立衛浴")}
 
     <h2>住在這裡可以玩什麼</h2>
-
-    <p><strong>室內空間：</strong>KTV、電動麻將桌、Switch、雙人街機、積木桌<br><strong>室外空間：</strong>戲水池、兒童嚕嚕車、雲朵鞦韆</p>
+    <p><strong>室內空間：</strong>KTV、電動麻將桌、Switch、雙人街機和積木桌。</p>
+    <p><strong>室外空間：</strong>戲水池、兒童嚕嚕車和雲朵鞦韆。</p>
     ${gal([
       ["02","一樓客廳，旁邊就是上樓的樓梯"],
       ["04","長餐桌旁就是麻將桌和街機，窗外是草坪"],
@@ -1121,47 +1172,54 @@ function renderHangwang(p){
       ["13","給小朋友的積木桌"],
     ])}
 
-    <h3>懶得下廚，晚餐可以怎麼吃？</h3>
-    <p>如果想在民宿吃晚餐，又懶得自己備料下廚，<br>可以額外加購<strong>海鮮火鍋、烤肉或私廚料理</strong>。</p>
+    <h2>三餐怎麼安排</h2>
+    <h3>下廚與烤肉</h3>
+    <p>開放式廚房可以開火，大型冰箱、微波爐、烤箱、咖啡機和洗碗機都有，餐具也準備得很齊全。</p>
+    <p>戶外還有半戶外烤肉區，晚上可以一起烤肉。</p>
     ${gal([
-      ["03","開放式廚房可以開火<br>有大型冰箱、微波爐、烤箱、咖啡機和洗碗機<br>餐具也準備得很齊全"],
-      ["12","茶水區有咖啡機，檯面上也擺了泡麵和零食"],
+      ["03","開放式廚房可以開火，設備和餐具都很齊全"],
+      ["12","茶水區有咖啡機，也擺了泡麵和零食"],
     ])}
+
+    <h3>懶得下廚，晚餐可以怎麼吃？</h3>
+    <p>想在民宿吃晚餐，又懶得自己備料的話，可以額外加購<strong>海鮮火鍋、烤肉或私廚料理</strong>。</p>
+
+    <h3>隔天早餐吃什麼？</h3>
+    <p>早餐有<strong>中式和西式</strong>兩種選擇，份量很實在，那天吃完相當有飽足感。</p>
+    <p>餐點都裝在外帶紙盒裡，吃不完直接帶走也很方便。</p>
+    <figure class="fig tall"><div class="ph"><img src="${IMG}15.jpg" alt="巷往 Villa 早餐" loading="lazy"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
 
     <h2>適合誰入住</h2>
     <div class="who-list who-titles">
       <div><b>三代同遊</b></div>
-      <div><b>幾組家庭相約出遊</b></div>
+      <div><b>幾組家庭同遊</b></div>
       <div><b>朋友聚會</b></div>
       <div><b>公司團體旅遊</b></div>
     </div>
-    <button class="copy btn-ghost" data-copy="hangwang-share" data-label="複製給同行的人">複製給同行的人</button>
-
-    <h3>隔天早餐吃什麼？</h3>
-    <p>早餐提供<strong>中式和西式</strong>兩種選擇，份量很實在，那天吃完相當有飽足感。<br>餐點都裝在外帶紙盒裡，吃不完直接帶走也很方便。</p>
-    <figure class="fig tall"><div class="ph"><img src="${IMG}15.jpg" alt="巷往 Villa 早餐" loading="lazy"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
+    <button class="copy btn-share" data-copy="hangwang-share" data-label="分享給親友">分享給親友</button>
 
     <h2>附近可以順遊哪裡</h2>
     <div class="spot-list"><span>冬山火車站</span><span>冬山河生態綠洲</span><span>冬山老街</span><span>梅花湖風景區</span><span>羅東夜市</span></div>
 
     <h3>入住前想先逛一下</h3>
-    <p>可以把<strong>冬山火車站、冬山老街和冬山河生態綠洲</strong>排在一起。<br>想慢慢走，就挑其中兩站，逛完再去民宿。</p>
+    <p>可以把<strong>冬山火車站、冬山老街和冬山河生態綠洲</strong>排在一起。想慢慢走，就挑其中兩站，逛完再去民宿。</p>
     <h3>晚上想出去覓食</h3>
-    <p>可以去<strong>羅東夜市</strong>，想在外面吃晚餐，或買點宵夜回民宿都方便。</p>
+    <p>可以去<strong>羅東夜市</strong>，在外面吃晚餐，或買點宵夜回民宿都方便。</p>
     <h3>退房後還想走走</h3>
-    <p>可以把<strong>梅花湖</strong>排成隔天第一站。<br>如果這趟主要是想跟朋友在民宿聚一聚，隔天留這一站就夠了。</p>
+    <p>可以把<strong>梅花湖</strong>排成隔天第一站。如果這趟主要是跟朋友在民宿聚一聚，隔天留這一站就夠了。</p>
 
     <h2>入住心得與訂房</h2>
-    <p>整體來說，巷往最讓我印象深刻的是<br><strong>每間房間都比我想像中寬敞</strong>，<br>還有一樓雙人房帶來的方便。<br>戶外的草坪和步道也打理得滿好的。<br>吃飽後出來散散步，在民宿裡慢慢待著就很悠閒。</p>
-    <p>入住前有個小地方可以先留意。<br>因為民宿就在田野間，戶外偶爾會看到一些搖蚊，<br><strong>進出時可以順手把門帶上。</strong></p>
-    <p>如果你正在找一間適合帶長輩、小朋友，<br>或揪幾個朋友一起住的包棟民宿，我覺得巷往可以放進名單。</p>
+    <p>整體來說，巷往最讓我印象深刻的是<strong>每間房間都比想像中寬敞</strong>，還有一樓雙人房帶來的方便。</p>
+    <p>戶外的草坪和步道也打理得滿好的，吃飽後出來散散步，在民宿裡慢慢待著就很悠閒。</p>
+    <p>入住前有個小地方可以先留意：民宿就在田野間，戶外偶爾會看到一些搖蚊，<strong>進出時記得順手把門帶上</strong>。</p>
+    <p>如果你正在找適合帶長輩、小朋友，或揪朋友一起住的包棟民宿，我覺得巷往可以放進名單。</p>
     <div class="gscore">
-      <div><b>5.0</b><span>Google 評分<br><em>307 則評論・2026/11/09 查詢</em></span></div>
+      <div><b>5.0</b><span>Google 評分<em><span class="nw">307 則評論</span>・<span class="nw">2026/11/09 查詢</span></em></span></div>
       <a href="https://maps.app.goo.gl/iErNHsiGQupGAaUs6" target="_blank" rel="noopener">在 Google 地圖查看</a>
     </div>
     <div class="price-note">包棟價格請直接向民宿詢問。</div>
     <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" target="_blank" rel="noopener">查看民宿官網</a></div>
-    <p class="proto note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
+    <p class="note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
   </div>`;
 }
 
