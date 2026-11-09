@@ -53,6 +53,7 @@ def make_page(src, **kw):
 
 
 def main():
+    subprocess.run([sys.executable, os.path.join(ROOT, "source", "make_lqip.py")], check=True)
     src = open(SRC, encoding="utf-8").read()
     if os.path.exists(DIST):
         shutil.rmtree(DIST)
