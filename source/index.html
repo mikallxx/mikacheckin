@@ -335,6 +335,43 @@
   .edit-on .edit-only{display:block;padding:12px 14px;border:1px dashed #ff6b3d;border-radius:10px;color:#a2492a;font-size:14px}
   @media (hover:hover){ .ask-go:hover{background:var(--c-lime);color:var(--c-ink)} }
   .ask-go:active{background:var(--c-lime);color:var(--c-ink)}
+  /* 開頭藍底字卡（A1～A3） */
+  .one.intro{padding:16px 13px 18px 14px}
+  .a-body .one.intro p{margin-top:14px;color:var(--c-ink);font-size:min(14.5px,3.75vw);line-height:1.85;letter-spacing:-.01em}
+  .one.intro p:first-child{margin-top:0}
+  /* 觀看影片字卡 */
+  .video-card{display:flex;align-items:center;gap:14px;margin-top:16px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--c-white);transition:border-color .15s,box-shadow .15s}
+  .vc-thumb{position:relative;flex:0 0 112px;aspect-ratio:4/3;border-radius:10px;overflow:hidden}
+  .vc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .vc-thumb::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.18)}
+  .vc-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;z-index:1;transition:background-color .15s}
+  .vc-play svg{width:18px;height:18px;fill:var(--c-blue);margin-left:2px}
+  .vc-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .vc-txt small{font-size:12px;font-weight:700;color:var(--c-blue);letter-spacing:.06em}
+  .vc-txt b{font-size:15.5px;line-height:1.45;color:var(--c-ink)}
+  .vc-txt span{font-size:13px;color:var(--sub)}
+  @media (hover:hover){ .video-card:hover{border-color:var(--c-blue);box-shadow:0 0 0 1px var(--c-blue)} .video-card:hover .vc-play{background:var(--c-lime)} }
+  .video-card:active{border-color:var(--c-blue);box-shadow:0 0 0 1px var(--c-blue)}
+  .video-card:active .vc-play{background:var(--c-lime)}
+  /* 直式照片 */
+  .fig.tall .ph{aspect-ratio:4/5}
+  /* 文末聲明：一行、小字 */
+  .a-body p.note-line{white-space:nowrap;font-size:min(11.5px,3.3vw);line-height:1.5;color:var(--sub);letter-spacing:-.01em;padding:22px 0 0;overflow:hidden;text-overflow:ellipsis}
+  /* 官方 LINE＋複製詢問 */
+  .ask-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+  .ask-actions>*{flex:1 1 100px}
+  .ask-actions .ask-go{margin-top:0}
+  .ask-card .ask-copy{margin:0;padding:10px;border-radius:10px;font-size:14px;text-align:center}
+  .a-body p.ask-hint{font-size:12px;line-height:1.55;color:var(--sub);margin:0}
+  /* 次要按鈕 */
+  .btn-ghost{display:block;width:100%;margin-top:14px;padding:13px;border-radius:12px;border:1px solid var(--c-ink);background:var(--c-white);color:var(--c-ink);font-size:15px;font-weight:700;text-align:center}
+  /* 手動複製視窗 */
+  #manual-copy{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+  #manual-copy.on{display:flex}
+  .mc-panel{background:#fff;border-radius:14px;padding:18px;width:100%;max-width:420px;display:flex;flex-direction:column;gap:10px}
+  .mc-panel p{font-size:13px;color:var(--sub)}
+  .mc-panel textarea{width:100%;min-height:150px;font:inherit;font-size:14px;line-height:1.6;padding:10px;border:1px solid var(--line);border-radius:10px;resize:vertical}
+  .mc-panel button{padding:11px;border-radius:10px;background:var(--c-blue);color:#fff;font-weight:700}
   /* 滑鼠裝置：滑過 */
   @media (hover:hover){
     .tag:not(.on):hover,.menu-pop button:not(.on):hover,.spot-list span:hover{background:var(--c-lime);color:var(--c-ink)}
@@ -382,7 +419,7 @@
         <button class="share" aria-label="分享"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
       </div>
       <div class="actions">
-        <a class="follow" href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">＋ 追蹤 IG</a>
+        <a class="follow" href="#list-anchor" data-golist>看住宿攻略 ↓</a>
         <a class="sq" href="#list-anchor" aria-label="文章列表"><svg class="i" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg></a>
         <a class="sq" href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener" aria-label="短影音"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a>
         <button class="sq" data-open aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
@@ -554,13 +591,51 @@ function dealCard(id){ const d=dealOf(id); if(!d) return ""; const st=status(d);
   </section>`; }
 function tick(){ document.querySelectorAll("[data-cd]").forEach(el=>{ const d=dealOf(el.dataset.cd); if(d) el.textContent=el.dataset.prefix+countdown(d); }); }
 setInterval(tick,30000);
+/* ---------- 複製功能：優惠碼、訂房詢問、揪團摘要 ---------- */
+const COPY_TEXTS = {
+  "hangwang-ask": "您好，我是看 Mika Checkin 的巷往 Villa 資訊來的，想詢問＿＿月＿＿日，＿＿位大人、＿＿位小孩的包棟空房與報價。也想確認這個日期是否適用優惠碼 MIKA888，謝謝！",
+  "hangwang-share": "我找到一間宜蘭冬山的包棟民宿，叫巷往 Villa！\n可以住 8～22 人，一樓有兩間雙人房，可以留給長輩。每間房都有獨立衛浴，也有附早餐。\n房間照片跟完整介紹在這裡 👇\nhttps://mikacheckin.com/hangwang/",
+};
+function legacyCopy(text){
+  const ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly","");
+  ta.style.cssText="position:fixed;top:0;left:0;opacity:0;pointer-events:none";
+  document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,text.length);
+  let ok=false; try{ ok=document.execCommand("copy"); }catch(e){ ok=false; }
+  ta.remove(); return ok;
+}
+async function copyText(text){
+  if(navigator.clipboard && window.isSecureContext){
+    try{ await navigator.clipboard.writeText(text); return true; }catch(e){}
+  }
+  return legacyCopy(text);
+}
+function showManualCopy(text){
+  let box=document.getElementById("manual-copy");
+  if(!box){
+    box=document.createElement("div"); box.id="manual-copy";
+    box.innerHTML='<div class="mc-panel"><b>請手動複製下方文字</b><p>瀏覽器限制自動複製，長按或全選後複製即可。</p><textarea readonly></textarea><button type="button">關閉</button></div>';
+    document.body.appendChild(box);
+    box.querySelector("button").onclick=()=>box.classList.remove("on");
+    box.onclick=e=>{ if(e.target===box) box.classList.remove("on"); };
+  }
+  const ta=box.querySelector("textarea"); ta.value=text;
+  box.classList.add("on"); setTimeout(()=>{ ta.focus(); ta.select(); },50);
+}
 document.addEventListener("click",async e=>{
   const b=e.target.closest(".copy"); if(!b) return; e.preventDefault();
-  try{ await navigator.clipboard.writeText(b.dataset.code); }catch(err){
-    const r=document.createRange(); r.selectNodeContents(b.parentElement.querySelector("b"));
-    const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+  const text = b.dataset.copy ? COPY_TEXTS[b.dataset.copy] : b.dataset.code;
+  if(!text) return;
+  const label = b.dataset.label || "複製";
+  const ok = await copyText(text);
+  if(!ok){ showManualCopy(text); return; }
   b.textContent="已複製 ✓"; b.classList.add("done");
-  setTimeout(()=>{ b.textContent="複製"; b.classList.remove("done"); },2000);
+  clearTimeout(b._t); b._t=setTimeout(()=>{ b.textContent=label; b.classList.remove("done"); },2000);
+});
+/* 首頁主按鈕：滑到文章列表並切到「文章」分頁 */
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-golist]"); if(!a) return; e.preventDefault();
+  const t=document.querySelector('[data-tab="posts"]'); if(t) t.click();
+  document.getElementById("list-anchor").scrollIntoView({behavior:"smooth",block:"start"});
 });
 
 const notices = [
@@ -718,10 +793,16 @@ function renderHangwang(p){
     <h1>${p.title}</h1>
     <div class="d">${p.date} · Mika</div>
 
+    <div class="one intro">
     <p>這次我們入住的是宜蘭冬山鄉的『巷往 Villa』<br>整棟民宿就在田野間，遠遠看過去滿氣派的。<br>原本以為客廳就已經夠大了，但走進去才發現，<br><strong>每間房間都比我想像中還要寬敞！</strong></p>
     <p><strong>一樓就有兩間雙人房！</strong><br>如果有帶長輩一起來，<br>可以把房間安排在這一層，<br>晚上在客廳聊完天，回房也不用爬樓梯。</p>
     <p>二樓的房間用了<strong>台灣檜木</strong>，<br>一進房間就聞得到淡淡的檜木香。<br>戶外有草坪步道、雲朵鞦韆和戲水池，<br>想待在室內也能唱 KTV、打麻將或玩街機。<br>就算一整天都待在民宿，也不會無聊。</p>
-    <div class="one"><small>這次住下來</small>我最喜歡的是，這裡連房間都很寬敞，一樓也有兩間雙人房，帶長輩一起住比較好安排。</div>
+    </div>
+
+    <a class="video-card" href="${p.video||'https://www.instagram.com/mika.checkin/reels/'}" target="_blank" rel="noopener">
+      <div class="vc-thumb"><img src="${IMG}04_s.jpg" alt="巷往 Villa 開箱影片" loading="lazy"><span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div>
+      <div class="vc-txt"><small>觀看影片</small><b>巷往 Villa 開箱影片</b><span>在 Instagram 觀看 →</span></div>
+    </a>
 
     <h2>住宿基本資訊</h2>
     <table class="tbl">
@@ -739,7 +820,11 @@ function renderHangwang(p){
       <div class="ask-card">
         <small>官方Line 詢問優惠</small>
         <div class="ask-row"><b>@hope2795</b><button class="copy" data-code="@hope2795">複製</button></div>
-        <a class="ask-go" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">加入官方 LINE</a>
+        <div class="ask-actions">
+          <a class="ask-go" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">官方 LINE</a>
+          <button class="copy ask-copy" data-copy="hangwang-ask" data-label="複製詢問">複製詢問</button>
+        </div>
+        <p class="ask-hint">複製後，到官方 LINE 貼上並填寫日期和人數。</p>
       </div>
       <div class="ask-card">
         <small>優惠碼</small>
@@ -778,7 +863,6 @@ function renderHangwang(p){
 
     <h2>住在這裡可以玩什麼</h2>
 
-    <h3>室內娛樂</h3>
     <p><strong>室內空間：</strong>KTV、電動麻將桌、Switch、雙人街機、積木桌<br><strong>室外空間：</strong>戲水池、兒童嚕嚕車、雲朵鞦韆</p>
     ${gal([
       ["02","一樓客廳，旁邊就是上樓的樓梯"],
@@ -801,9 +885,11 @@ function renderHangwang(p){
       <div><b>朋友聚會</b></div>
       <div><b>公司團體旅遊</b></div>
     </div>
+    <button class="copy btn-ghost" data-copy="hangwang-share" data-label="複製給同行的人">複製給同行的人</button>
 
     <h3>隔天早餐吃什麼？</h3>
-    <div class="edit-only">待補：早餐照片與說明（這個提示只在「顯示編號」時看得到）</div>
+    <p>早餐提供<strong>中式和西式</strong>兩種選擇，份量很實在，那天吃完相當有飽足感。<br>餐點都裝在外帶紙盒裡，吃不完直接帶走也很方便。</p>
+    <figure class="fig tall"><div class="ph"><img src="${IMG}15.jpg" alt="巷往 Villa 早餐" loading="lazy"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
 
     <h2>附近可以順遊哪裡</h2>
     <div class="spot-list"><span>冬山火車站</span><span>冬山河生態綠洲</span><span>冬山老街</span><span>梅花湖風景區</span><span>羅東夜市</span></div>
@@ -825,7 +911,7 @@ function renderHangwang(p){
     </div>
     <div class="price-note">包棟價格請直接向民宿詢問。</div>
     <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" target="_blank" rel="noopener">查看民宿官網</a></div>
-    <p class="proto" style="padding-bottom:0">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
+    <p class="proto note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
   </div>`;
 }
 
