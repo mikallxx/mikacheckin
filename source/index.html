@@ -467,6 +467,16 @@
   .offer{background:#FFFAE8}
   .a-body p.of-sub{color:#555}
   .offer .of-copy{background:transparent}
+  /* 包棟價格 → 優惠卡 */
+  .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
+  .pb-txt{min-width:0}
+  .pb-arrow{flex:none;font-size:13.5px;font-weight:700;color:var(--c-blue)}
+  @media (hover:hover){ .price-btn:hover{background:var(--c-lime);border-color:var(--c-lime)} .price-btn:hover .pb-arrow{color:var(--c-ink)} }
+  .price-btn:active{background:var(--c-lime);border-color:var(--c-lime)}
+  .price-btn:active .pb-arrow{color:var(--c-ink)}
+  .offer{scroll-margin-top:76px}
+  .offer.flash{animation:offerFlash 1.4s ease-out .35s}
+  @keyframes offerFlash{0%{box-shadow:0 0 0 0 rgba(244,211,94,.9)}40%{box-shadow:0 0 0 6px rgba(244,211,94,.55)}100%{box-shadow:0 0 0 0 rgba(244,211,94,0)}}
   /* 滑鼠裝置：滑過 */
   @media (hover:hover){
     .tag:not(.on):hover,.menu-pop button:not(.on):hover,.spot-list span:hover{background:var(--c-lime);color:var(--c-ink)}
@@ -764,6 +774,13 @@ document.addEventListener("click",async e=>{
   res.addEventListener("click",e=>{ if(e.target.closest(".srch-item")) close(); });
   document.addEventListener("keydown",e=>{ if(e.key==="Escape") close(); });
 })();
+/* 文章內跳轉（例：包棟價格 → 優惠卡） */
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-goto]"); if(!a) return;
+  const t=document.querySelector(a.dataset.goto); if(!t) return; e.preventDefault();
+  t.scrollIntoView({behavior:"smooth",block:"start"});
+  t.classList.remove("flash"); void t.offsetWidth; t.classList.add("flash");
+});
 /* 首頁主按鈕：滑到文章列表並切到「文章」分頁 */
 document.addEventListener("click",e=>{
   const a=e.target.closest("[data-golist]"); if(!a) return; e.preventDefault();
@@ -953,7 +970,7 @@ function renderHangwang(p){
       <tr><td>Mika 專屬優惠</td><td>符合適用日期，享包棟<strong class="off nw">定價 75 折</strong><span class="cond">※暑假、週六、連假及春節期間不適用</span></td></tr>
     </table>
 
-    <section class="offer" aria-label="巷往 Villa 訂房優惠">
+    <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
       <div class="of-sec">
         <h3 class="of-k">巷往 Villa 訂房優惠</h3>
         <p class="of-main">包棟定價 <strong class="off nw">75 折</strong></p>
@@ -1060,7 +1077,7 @@ function renderHangwang(p){
       <div><b>5.0</b><span>Google 評分<em><span class="nw">307 則評論</span>・<span class="nw">2026/11/09 查詢</span></em></span></div>
       <a href="https://maps.app.goo.gl/iErNHsiGQupGAaUs6" target="_blank" rel="noopener">在 Google 地圖查看</a>
     </div>
-    <div class="price-note">包棟價格請直接向民宿詢問。</div>
+    <a class="price-note price-btn" href="#offer" data-goto=".offer"><span class="pb-txt"><span class="nw">包棟價格</span><wbr><span class="nw">請直接向民宿詢問</span></span><span class="pb-arrow">查看優惠 ↑</span></a>
     <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" target="_blank" rel="noopener">查看民宿官網</a></div>
     <p class="note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
   </div>`;
