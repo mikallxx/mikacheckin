@@ -482,6 +482,9 @@
   .offer{background:#FFFAE8}
   .a-body p.of-sub{color:#555}
   .offer .of-copy{background:transparent}
+  /* 文章大標固定兩行：字級隨螢幕寬度縮放 */
+  .a-body h1.h1-fit{font-size:min(24px,calc((min(100vw,560px) - 40px) / 19.4));line-height:1.45;letter-spacing:0}
+  .h1-fit .h1l{display:block;white-space:nowrap}
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -596,7 +599,7 @@
   <figure class="fig cover-fig" style="margin:0"><div class="a-cover"><img src="img/hangwang/01.jpg" alt="巷往 Villa 外觀"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
   <div class="a-body post">
     <div class="kicker">宜蘭 · 包棟民宿</div>
-    <h1>巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，<br>8～22 人入住，一樓孝親房、二樓檜木房</h1>
+    <h1 class="h1-fit"><span class="h1l">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，</span><span class="h1l">8～22 人入住，一樓孝親房、二樓檜木房</span></h1>
     <div class="d">2026. 11. 08. · Mika</div>
 
     <div class="one intro">
@@ -827,7 +830,7 @@ const SHOW_SAMPLES = false;
 const ALL_POSTS = [
   { id:"hangwang", real:true, date:"2026. 11. 08.", region:"宜蘭", type:"民宿",
     title:"巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房",
-    h1:'巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，<br>8～22 人入住，一樓孝親房、二樓檜木房',
+    h1:'<span class="h1l">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，</span><span class="h1l">8～22 人入住，一樓孝親房、二樓檜木房</span>',
     excerpt:"每間房間都比想像中寬敞，一樓就有兩間雙人房。房間怎麼分、可以玩什麼、適合誰住，一篇整理。",
     tags:["宜蘭","冬山","包棟民宿","三代同遊"], cover:IMG+"01_s.jpg", render:renderHangwang },
   { sample:true, id:"yuguang", real:true, date:"2026. 11. 03.", region:"台南", type:"民宿",
@@ -1134,7 +1137,7 @@ function renderHangwang(p){
   <figure class="fig cover-fig" style="margin:0"><div class="a-cover"><img src="${IMG}01.jpg" alt="巷往 Villa 外觀"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
   <div class="a-body post">
     <div class="kicker">宜蘭 · 包棟民宿</div>
-    <h1>${p.h1||p.title}</h1>
+    <h1 class="${p.h1?'h1-fit':''}">${p.h1||p.title}</h1>
     <div class="d">${p.date} · Mika</div>
 
     <div class="one intro">
