@@ -372,6 +372,43 @@
   .mc-panel p{font-size:13px;color:var(--sub)}
   .mc-panel textarea{width:100%;min-height:150px;font:inherit;font-size:14px;line-height:1.6;padding:10px;border:1px solid var(--line);border-radius:10px;resize:vertical}
   .mc-panel button{padding:11px;border-radius:10px;background:var(--c-blue);color:#fff;font-weight:700}
+  /* 封面個人區 */
+  .who b em{font-style:normal;font-weight:500;font-size:14px;opacity:.88}
+  /* IG 頻道按鈕 */
+  .ig-ch{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 18px}
+  .ig-btn{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;color:#fff;
+    background:linear-gradient(45deg,#f9a03f 0%,#f2564f 30%,#e1306c 55%,#c13584 75%,#833ab4 100%);
+    box-shadow:0 2px 10px rgba(193,53,132,.22);transition:filter .15s,transform .15s}
+  .ig-btn .igi{width:26px;height:26px;flex:none;fill:none;stroke:#fff;stroke-width:1.8;color:#fff}
+  .ig-btn span{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+  .ig-btn b{font-size:15px}
+  .ig-btn small{font-size:11.5px;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  @media (hover:hover){ .ig-btn:hover{filter:brightness(1.08) saturate(1.1)} }
+  .ig-btn:active{transform:scale(.98);filter:brightness(1.08)}
+  /* 折扣碼／團購中標籤：閃耀 */
+  .badge.code,.badge.live{overflow:hidden}
+  .badge.code::after,.badge.live::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg);animation:shine 2.4s ease-in-out infinite}
+  .badge.code i{box-shadow:0 0 8px 1px rgba(233,194,122,.9)}
+  @keyframes shine{0%{left:-60%}55%,100%{left:130%}}
+  @media (prefers-reduced-motion:reduce){ .badge.code::after,.badge.live::after{animation:none;display:none} }
+  /* 搜尋 */
+  .srch{position:fixed;inset:0;background:var(--c-white);z-index:50;display:none;flex-direction:column;max-width:560px;margin:0 auto}
+  .srch.on{display:flex}
+  .srch-bar{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;border-bottom:1px solid var(--line)}
+  .srch-bar input{flex:1;font:inherit;font-size:16px;border:0;outline:0;background:var(--soft);padding:10px 12px;border-radius:10px;color:var(--c-ink)}
+  .srch-bar button{color:var(--c-blue);font-weight:700;font-size:15px}
+  .srch-res{overflow-y:auto;padding:8px 16px 30px}
+  .srch-hint{color:var(--sub);font-size:14px;text-align:center;padding:30px 0}
+  .srch-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+  .srch-item .thumb{flex:0 0 72px;aspect-ratio:1;border-radius:8px}
+  .srch-item .badge{display:none}
+  .srch-item b{display:block;font-size:14.5px;line-height:1.45}
+  .srch-item small{font-size:12.5px;color:var(--sub)}
+  /* 提示小字 */
+  .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 28px);transform:translate(-50%,12px);background:var(--c-ink);color:#fff;
+    font-size:14px;padding:10px 16px;border-radius:99px;opacity:0;pointer-events:none;transition:.2s;z-index:70;white-space:nowrap}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
   /* 滑鼠裝置：滑過 */
   @media (hover:hover){
     .tag:not(.on):hover,.menu-pop button:not(.on):hover,.spot-list span:hover{background:var(--c-lime);color:var(--c-ink)}
@@ -394,9 +431,9 @@
 
 <!-- sticky bar after scroll -->
 <div class="bar" id="bar">
-  <span class="logo">mika</span>
-  <span class="t">Mika Check-in｜住進每一個值得的地方</span>
-  <button aria-label="搜尋"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+  <span class="logo">blog</span>
+  <span class="t">今晚住這裡｜住哪裡，怎麼玩</span>
+  <button aria-label="搜尋" data-search><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
   <button aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 </div>
 
@@ -404,28 +441,31 @@
   <section class="hero">
     <img class="scene" src="img/site/cover.jpg" alt="Mika 在民宿庭園拍照">
     <div class="hero-top">
-      <div class="brand"><span class="dot">M</span>mika</div>
+      <div class="brand"><span class="dot">M</span>blog</div>
       <div style="display:flex;gap:18px">
-        <button aria-label="搜尋"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+        <button aria-label="搜尋" data-search><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
         <button aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       </div>
     </div>
     <div class="hero-body">
-      <div class="stats">住宿開箱 · 台灣 &amp; 海外</div>
-      <h1>Mika Check-in｜<br>住進每一個值得的地方</h1>
+      <div class="stats">台灣與海外・住宿開箱・旅遊攻略</div>
+      <h1>今晚住這裡<br>住哪裡，怎麼玩</h1>
       <div class="who">
         <div class="avatar"><svg viewBox="0 0 56 56" width="56" height="56"><rect width="56" height="56" fill="#e9a78a"/><circle cx="28" cy="22" r="10" fill="#fbe3c4"/><path d="M8 56c2-14 12-20 20-20s18 6 20 20z" fill="#274B9B"/></svg></div>
-        <div><b>Mika</b><span>旅宿開箱創作者 · @mika.checkin</span></div>
-        <button class="share" aria-label="分享"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
+        <div><b>Mika<em>｜住宿與旅遊內容創作者</em></b></div>
+        <button class="share" aria-label="複製網站連結" data-copyurl><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
       </div>
       <div class="actions">
         <a class="follow" href="#list-anchor" data-golist>看住宿攻略 ↓</a>
-        <a class="sq" href="#list-anchor" aria-label="文章列表"><svg class="i" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg></a>
-        <a class="sq" href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener" aria-label="短影音"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a>
         <button class="sq" data-open aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
       </div>
     </div>
   </section>
+
+  <div class="ig-ch">
+    <a class="ig-btn" href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="igi"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg><span><b>住宿頻道</b><small>@mika.checkin</small></span></a>
+    <a class="ig-btn" href="https://www.instagram.com/mika.travel_/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="igi"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg><span><b>旅遊頻道</b><small>@mika.travel_</small></span></a>
+  </div>
 
   <div class="sep"></div>
 
@@ -440,11 +480,6 @@
   <h2 class="sec-h">人氣文章</h2>
   <div class="pop" id="pop"></div>
 
-  <div class="sep"></div>
-  <a class="ig" href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">
-    <span class="g"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px;color:#fff"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></span>
-    instagram.com/mika.checkin
-  </a>
   <div class="sep"></div>
 
   <div class="tabs" id="list-anchor">
@@ -475,6 +510,17 @@
 </main>
 
 <article id="article"></article>
+
+<!-- search -->
+<div class="srch" id="srch">
+  <div class="srch-bar">
+    <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="srchInput" type="search" placeholder="搜尋住宿、地區，例如：宜蘭、包棟" autocomplete="off">
+    <button id="srchClose" type="button">取消</button>
+  </div>
+  <div class="srch-res" id="srchRes"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- drawer -->
 <div class="shade" id="shade"></div>
@@ -631,6 +677,34 @@ document.addEventListener("click",async e=>{
   b.textContent="已複製 ✓"; b.classList.add("done");
   clearTimeout(b._t); b._t=setTimeout(()=>{ b.textContent=label; b.classList.remove("done"); },2000);
 });
+/* 提示小字 */
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("on");
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),1800); }
+/* 分享鈕：複製網站網址 */
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-copyurl]"); if(!b) return; e.preventDefault();
+  const url="https://mikacheckin.com/";
+  if(await copyText(url)) toast("已複製網站連結 ✓"); else showManualCopy(url);
+});
+/* 搜尋 */
+(function(){
+  const box=document.getElementById("srch"), inp=document.getElementById("srchInput"), res=document.getElementById("srchRes");
+  const norm=t=>(t||"").toLowerCase();
+  function render(){
+    const q=norm(inp.value.trim());
+    if(!q){ res.innerHTML='<p class="srch-hint">輸入住宿名稱、縣市或關鍵字</p>'; return; }
+    const hit=posts.filter(p=>norm([p.title,p.excerpt,p.region,p.type,(p.tags||[]).join(" ")].join(" ")).includes(q));
+    res.innerHTML = hit.length ? hit.map(p=>`<a class="srch-item" href="${postLink(p.id)}">${thumb(p)}<span><b>${p.title}</b><small>${p.region} · ${p.type}</small></span></a>`).join("")
+      : '<p class="srch-hint">找不到相關文章，換個關鍵字試試</p>';
+  }
+  const open=()=>{ box.classList.add("on"); render(); setTimeout(()=>inp.focus(),50); };
+  const close=()=>{ box.classList.remove("on"); inp.value=""; };
+  document.querySelectorAll("[data-search]").forEach(b=>b.onclick=open);
+  document.getElementById("srchClose").onclick=close;
+  inp.addEventListener("input",render);
+  res.addEventListener("click",e=>{ if(e.target.closest(".srch-item")) close(); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") close(); });
+})();
 /* 首頁主按鈕：滑到文章列表並切到「文章」分頁 */
 document.addEventListener("click",e=>{
   const a=e.target.closest("[data-golist]"); if(!a) return; e.preventDefault();
