@@ -490,6 +490,11 @@
   img.lq{opacity:0;transition:opacity .6s ease}
   img.lq.lq-in{opacity:1}
   img.lq.lq-instant{transition:none}
+  /* 優惠卡「包棟定價 75 折」：黃色螢光筆劃重點 */
+  .offer .mk{padding:.05em .2em;margin:0 -.2em;background:linear-gradient(100deg,rgba(255,210,63,.95),rgba(255,210,63,.7)) no-repeat 0 70%;
+    background-size:0% 42%;animation:mkr 3s ease-in-out infinite;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  @keyframes mkr{0%{background-size:0% 42%;background-position:0 70%}38%,62%{background-size:100% 42%;background-position:0 70%}100%{background-size:0% 42%;background-position:100% 70%}}
+  @media (prefers-reduced-motion:reduce){ .offer .mk{animation:none;background-size:100% 42%} }
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -1076,7 +1081,7 @@ function renderHangwang(p){
     <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
       <div class="of-sec">
         <h3 class="of-k">巷往 Villa 訂房優惠</h3>
-        <p class="of-main">包棟定價 <strong class="off nw">75 折</strong></p>
+        <p class="of-main"><span class="mk nw">包棟定價 <strong class="off">75 折</strong></span></p>
         <p class="of-sub">暑假、週六、連假及春節期間不適用。</p>
       </div>
       <div class="of-sec">

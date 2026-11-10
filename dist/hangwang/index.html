@@ -490,6 +490,11 @@
   img.lq{opacity:0;transition:opacity .6s ease}
   img.lq.lq-in{opacity:1}
   img.lq.lq-instant{transition:none}
+  /* 優惠卡「包棟定價 75 折」：黃色螢光筆劃重點 */
+  .offer .mk{padding:.05em .2em;margin:0 -.2em;background:linear-gradient(100deg,rgba(255,210,63,.95),rgba(255,210,63,.7)) no-repeat 0 70%;
+    background-size:0% 42%;animation:mkr 3s ease-in-out infinite;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  @keyframes mkr{0%{background-size:0% 42%;background-position:0 70%}38%,62%{background-size:100% 42%;background-position:0 70%}100%{background-size:0% 42%;background-position:100% 70%}}
+  @media (prefers-reduced-motion:reduce){ .offer .mk{animation:none;background-size:100% 42%} }
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -660,7 +665,7 @@
 </main>
 
 <article id="article"><div class="a-top"><a href="./" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></a><span class="t">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房</span></div>
-  <figure class="fig cover-fig" style="margin:0"><div class="a-cover lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIEAwX/xAAkEAABAwMDBAMAAAAAAAAAAAABAAIEAxEhBRITFCNBUSIxMv/EABUBAQEAAAAAAAAAAAAAAAAAAAEA/8QAFxEBAQEBAAAAAAAAAAAAAAAAAAERAv/aAAwDAQACEQMRAD8A6fXTDU46ji248Kae09OKtzu9lSRtQdIf3j3mYI9qic81IAbSu47sg+lbokaRtUfHjnieNwGU9PXZbw21QbichQOogUxwt+R+7qNlItkEDcHDyRhF6pxk/Gti2MrtoQiI1P8AQTTQBHJAF0ISn//Z&quot;);"><img src="img/hangwang/01.jpg" alt="巷往 Villa 外觀" data-lq="1" class="lq lq-in"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
+  <figure class="fig cover-fig" style="margin:0"><div class="a-cover lq-box" style=""><img src="img/hangwang/01.jpg" alt="巷往 Villa 外觀" data-lq="1" class="lq lq-in"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
   <div class="a-body post">
     <div class="kicker">宜蘭 · 包棟民宿</div>
     <h1 class="h1-fit"><span class="h1l">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，</span><span class="h1l">8～22 人入住，一樓孝親房、二樓檜木房</span></h1>
@@ -695,7 +700,7 @@
     <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
       <div class="of-sec">
         <h3 class="of-k">巷往 Villa 訂房優惠</h3>
-        <p class="of-main">包棟定價 <strong class="off nw">75 折</strong></p>
+        <p class="of-main"><span class="mk nw">包棟定價 <strong class="off">75 折</strong></span></p>
         <p class="of-sub">暑假、週六、連假及春節期間不適用。</p>
       </div>
       <div class="of-sec">
@@ -1254,7 +1259,7 @@ function renderHangwang(p){
     <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
       <div class="of-sec">
         <h3 class="of-k">巷往 Villa 訂房優惠</h3>
-        <p class="of-main">包棟定價 <strong class="off nw">75 折</strong></p>
+        <p class="of-main"><span class="mk nw">包棟定價 <strong class="off">75 折</strong></span></p>
         <p class="of-sub">暑假、週六、連假及春節期間不適用。</p>
       </div>
       <div class="of-sec">
