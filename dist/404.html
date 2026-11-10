@@ -515,6 +515,35 @@
   @keyframes ldHop{0%,40%,100%{transform:translateY(0);color:rgba(255,255,255,.42);text-shadow:none}20%{transform:translateY(-6px);color:#fff;text-shadow:0 0 12px rgba(255,210,63,.8)}}
   @keyframes ldBar{0%{background-size:0% 100%,auto}85%,92%{background-size:100% 100%,auto;opacity:1}100%{background-size:100% 100%,auto;opacity:0}}
   @media (prefers-reduced-motion:reduce){ .ld b{animation:none;color:#fff} .ld::after{animation:none;background-size:60% 100%,auto} }
+  /* 單張照片的相簿：不顯示滑動控制 */
+  .gal.single .gal-count,.gal.single .gal-nav,.gal.single .gal-dots{display:none}
+  /* 樓層分頁 */
+  .floor-tabs{margin-top:18px}
+  .ft-bar{position:relative;display:flex;border-bottom:1px solid var(--line);margin-bottom:4px}
+  .ft-tab{flex:1;padding:12px 4px 11px;font-size:15px;font-weight:700;color:var(--sub);text-align:center;white-space:nowrap;transition:color .2s}
+  .ft-tab.on{color:var(--c-red)}
+  @media (hover:hover){ .ft-tab:not(.on):hover{color:var(--c-ink)} }
+  .ft-tab:focus-visible{outline:2px solid var(--c-red);outline-offset:-2px;border-radius:6px}
+  .ft-ind{position:absolute;left:0;bottom:-1px;height:2.5px;width:0;background:var(--c-red);border-radius:2px;transition:transform .3s cubic-bezier(.3,1.1,.4,1),width .3s cubic-bezier(.3,1.1,.4,1)}
+  .post .ft-panel h3.ft-title{margin:18px 0 10px}
+  .post .ft-panel .gal{margin-bottom:0}
+  .post .ft-panel+.ft-panel{margin-top:0}
+  @media (prefers-reduced-motion:reduce){ .ft-ind{transition:none} }
+  /* 設施卡片：可左右滑動，右側露出下一張 */
+  .rail{position:relative;margin:0 -20px 24px}
+  .rail-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;padding:0 20px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .rail-track::-webkit-scrollbar{display:none}
+  .rail-card{flex:0 0 82%;scroll-snap-align:start;margin:0;background:var(--c-white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .rail-card .ph{aspect-ratio:4/3}
+  .rail-card figcaption{padding:12px 14px 14px;background:var(--c-white);display:flex;flex-direction:column;gap:4px}
+  .rail-card figcaption b{font-size:15px;line-height:1.5;color:var(--c-ink);font-weight:700}
+  .rail-card figcaption span{position:relative;padding-left:11px;font-size:14px;line-height:1.7;color:#555;text-wrap:pretty}
+  .rail-card figcaption span::before{content:"";position:absolute;left:0;top:calc(.85em - 8px);width:3px;height:16px;border-radius:2px;background:#F4D35E}
+  .rail-nav{display:none;position:absolute;top:calc(41% - 18px);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);place-items:center;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:background-color .15s,opacity .2s}
+  .rail-nav.prev{left:8px}.rail-nav.next{right:8px}
+  .rail-nav[disabled]{opacity:0;pointer-events:none}
+  @media (hover:hover){ .rail-nav{display:grid} .rail-nav:hover{background:var(--c-lime)} }
+  .post .facil+.rail{margin-top:24px}
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -599,6 +628,9 @@
     .post .fig .ph{border-radius:14px;overflow:hidden}
     .post .fig figcaption{margin-left:0;margin-right:0}
     .post .fig.tall .ph{width:min(100%,520px)}
+    .rail{margin-left:0;margin-right:0}
+    .rail-track{padding:0 0 4px;scroll-padding:0}
+    .rail-card{flex:0 0 calc((100% - 12px) / 2.35)}
   }
 </style>
 </head>
@@ -1136,20 +1168,15 @@ function renderHangwang(p){
       <tr><td>三樓</td><td>1 間六人房</td><td>朋友同住、大家庭</td></tr>
     </table>
 
-    <h3>一樓｜兩間雙人房</h3>
-    ${fig("06","同行有長輩，可以安排住這層的雙人房")}
-
-    <h3>二樓｜三間四人房</h3>
-    ${gal([
-      ["07","二樓房間用了台灣檜木，走進去聞得到淡淡的木頭香"],
-      ["08","二樓每間房間都有陽台"],
-      ["09","房間寬敞，光線也很明亮"],
-    ])}
-
-    <h3>三樓｜一間六人房</h3>
-    ${gal([
-      ["10","三樓六人房，三張床並排在木地台上"],
-      ["11","房內有長桌、電視、掛衣架和除濕機"],
+    ${floorTabs([
+      {id:"f1", tab:"一樓孝親房", title:"一樓｜兩間雙人房", photos:[["06","同行有長輩，可以安排住這層的雙人房"]]},
+      {id:"f2", tab:"二樓檜木房", title:"二樓｜三間四人房", photos:[
+        ["07","二樓房間用了台灣檜木，走進去聞得到淡淡的木頭香"],
+        ["08","二樓每間房間都有陽台"],
+        ["09","房間寬敞，光線也很明亮"]]},
+      {id:"f3", tab:"三樓六人房", title:"三樓｜一間六人房", photos:[
+        ["10","三樓六人房，三張床並排在木地台上"],
+        ["11","房內有長桌、電視、掛衣架和除濕機"]]},
     ])}
 
     <h3>衛浴空間</h3>
@@ -1162,11 +1189,11 @@ function renderHangwang(p){
       <div class="fac-k">戶外設施</div>
       <p class="fac-list">${facList(["戲水池","兒童嚕嚕車","雲朵鞦韆"])}</p>
     </div>
-    ${gal([
-      ["02","一樓客廳，旁邊就是上樓的樓梯"],
-      ["04","長餐桌旁就是麻將桌和街機，窗外是草坪"],
-      ["05","電動麻將桌和雙人街機"],
-      ["13","給小朋友的積木桌"],
+    ${cardRail([
+      {n:"02", cap:"一樓客廳，旁邊就是上樓的樓梯"},
+      {n:"04", cap:"長餐桌旁就是麻將桌和街機，窗外是草坪"},
+      {n:"05", title:"電動麻將桌和雙人街機"},
+      {n:"13", title:"給小朋友的積木桌"},
     ])}
 
     <h2>三餐怎麼安排</h2>
@@ -1221,8 +1248,57 @@ function renderHangwang(p){
 }
 
 /* ---------- 照片輪播：A 照片配 A 文案 ---------- */
+/* 樓層分頁：選樓層切換標題、照片、圖說 */
+function floorTabs(floors){
+  const tabs=floors.map((f,i)=>`<button type="button" role="tab" id="tab-${f.id}" aria-controls="panel-${f.id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" class="ft-tab${i===0?" on":""}" data-floor="${f.id}">${f.tab}</button>`).join("");
+  const panels=floors.map((f,i)=>`<div class="ft-panel" role="tabpanel" id="panel-${f.id}" aria-labelledby="tab-${f.id}"${i?" hidden":""}>
+      <h3 class="ft-title">${f.title}</h3>
+      ${gallery(f.photos.map(([n,c])=>({src:IMG+n+".jpg", t:"", c})))}
+    </div>`).join("");
+  return `<div class="floor-tabs"><div class="ft-bar" role="tablist" aria-label="選擇樓層">${tabs}<span class="ft-ind" aria-hidden="true"></span></div>${panels}</div>`;
+}
+function wireFloorTabs(root){
+  root.querySelectorAll(".floor-tabs").forEach(w=>{
+    const tabs=[...w.querySelectorAll(".ft-tab")], ind=w.querySelector(".ft-ind");
+    const move=t=>{ ind.style.width=t.offsetWidth+"px"; ind.style.transform=`translateX(${t.offsetLeft}px)`; };
+    const select=(t,focus)=>{
+      tabs.forEach(x=>{ const on=x===t; x.classList.toggle("on",on); x.setAttribute("aria-selected",on); x.tabIndex=on?0:-1;
+        const pn=w.querySelector("#panel-"+x.dataset.floor); pn.hidden=!on;
+        if(on){ const tr=pn.querySelector(".gal-track"); if(tr){ tr.scrollLeft=0; const g=pn.querySelector(".gal"); g&&g._update&&g._update(); } } });
+      move(t); if(focus) t.focus();
+    };
+    tabs.forEach((t,i)=>{
+      t.onclick=()=>select(t);
+      t.onkeydown=e=>{ const k={ArrowRight:1,ArrowLeft:-1}[e.key]; if(!k&&e.key!=="Home"&&e.key!=="End") return; e.preventDefault();
+        const j=e.key==="Home"?0:e.key==="End"?tabs.length-1:(i+k+tabs.length)%tabs.length; select(tabs[j],true); };
+    });
+    requestAnimationFrame(()=>{ ind.style.transition="none"; move(tabs.find(t=>t.classList.contains("on"))); requestAnimationFrame(()=>ind.style.transition=""); });
+    addEventListener("resize",()=>move(tabs.find(t=>t.classList.contains("on"))));
+  });
+}
+/* 可左右滑動的卡片（右側露出下一張） */
+function cardRail(cards){
+  return `<div class="rail">
+    <button class="rail-nav prev" type="button" aria-label="上一張" disabled><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"/></svg></button>
+    <button class="rail-nav next" type="button" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"/></svg></button>
+    <div class="rail-track">${cards.map(c=>`
+      <figure class="rail-card"><div class="ph"><img src="${IMG}${c.n}.jpg" alt="${c.cap||c.title}" loading="lazy"></div>
+        <figcaption>${c.title?`<b>${c.title}</b>`:""}${c.cap?`<span>${c.cap}</span>`:""}</figcaption></figure>`).join("")}
+    </div></div>`;
+}
+function wireRails(root){
+  root.querySelectorAll(".rail").forEach(r=>{
+    const tr=r.querySelector(".rail-track"), prev=r.querySelector(".prev"), next=r.querySelector(".next");
+    const step=()=>{ const c=tr.querySelector(".rail-card"); return c?c.offsetWidth+parseFloat(getComputedStyle(tr).columnGap||12):tr.clientWidth; };
+    const upd=()=>{ prev.disabled=tr.scrollLeft<4; next.disabled=tr.scrollLeft+tr.clientWidth>=tr.scrollWidth-4; };
+    tr.addEventListener("scroll",()=>requestAnimationFrame(upd),{passive:true});
+    prev.onclick=()=>tr.scrollBy({left:-step(),behavior:"smooth"});
+    next.onclick=()=>tr.scrollBy({left:step(),behavior:"smooth"});
+    upd();
+  });
+}
 function gallery(items){
-  return `<div class="gal">
+  return `<div class="gal${items.length<2?" single":""}">
     <span class="gal-count">1 / ${items.length}</span>
     <button class="gal-nav prev" disabled aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"/></svg></button>
     <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"/></svg></button>
@@ -1239,13 +1315,14 @@ function wireGalleries(root){
     const count=g.querySelector(".gal-count"), dots=[...g.querySelectorAll(".gal-dots i")];
     const prev=g.querySelector(".prev"), next=g.querySelector(".next");
     const idx=()=>Math.round(track.scrollLeft/track.clientWidth);
-    const update=()=>{ const i=idx();
+    const update=()=>{ if(!track.clientWidth) return; const i=idx();
       count.textContent=`${i+1} / ${n}`;
       dots.forEach((d,k)=>d.classList.toggle("on",k===i));
       prev.disabled=i===0; next.disabled=i===n-1; };
     track.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});
     prev.onclick=()=>track.scrollTo({left:(idx()-1)*track.clientWidth,behavior:"smooth"});
     next.onclick=()=>track.scrollTo({left:(idx()+1)*track.clientWidth,behavior:"smooth"});
+    g._update=update;
   });
 }
 
@@ -1310,7 +1387,7 @@ function route(){
   const p = id && posts.find(x=>x.id===id);
   if(p){
     article.innerHTML = articleHTML(p);
-    wireGalleries(article);
+    wireGalleries(article); wireFloorTabs(article); wireRails(article);
     placeOffer();
     if(!PROD){ article.classList.remove("edit-on"); numberize(article); addNumBtn(article); }
     document.body.classList.add("reading"); bar.classList.remove("show");
