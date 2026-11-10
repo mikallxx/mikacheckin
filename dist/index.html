@@ -495,6 +495,13 @@
     background-size:0% 42%;animation:mkr 3s ease-in-out infinite;-webkit-box-decoration-break:clone;box-decoration-break:clone}
   @keyframes mkr{0%{background-size:0% 42%;background-position:0 70%}38%,62%{background-size:100% 42%;background-position:0 70%}100%{background-size:0% 42%;background-position:100% 70%}}
   @media (prefers-reduced-motion:reduce){ .offer .mk{animation:none;background-size:100% 42%} }
+  /* 「用 LINE 詢問空房」：深藍漸層自動緩慢流動 */
+  .offer .of-line{background-color:var(--c-blue);background-image:linear-gradient(to right,#1E3A7A 0%,#274B9B 30%,#5B86E0 51%,#274B9B 70%,#1E3A7A 100%);
+    background-size:200% auto;background-position:left center;animation:lineFlow 4s ease-in-out infinite}
+  @keyframes lineFlow{0%,100%{background-position:left center}50%{background-position:right center}}
+  @media (hover:hover){ .offer .of-line:hover{background-image:none;background-color:var(--c-lime);color:var(--c-ink)} }
+  .offer .of-line:active{background-image:none;background-color:var(--c-lime);color:var(--c-ink)}
+  @media (prefers-reduced-motion:reduce){ .offer .of-line{animation:none;background-position:center} }
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
