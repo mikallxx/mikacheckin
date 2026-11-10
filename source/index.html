@@ -487,6 +487,19 @@
   @media (hover:hover){ .offer .of-line:hover{background-image:none;background-color:var(--c-lime);color:var(--c-ink)} }
   .offer .of-line:active{background-image:none;background-color:var(--c-lime);color:var(--c-ink)}
   @media (prefers-reduced-motion:reduce){ .offer .of-line{animation:none;background-position:center} }
+  /* 照片載入較慢時（超過 0.8 秒）才出現的 LOADING 動畫 */
+  .lq-box{position:relative}
+  .hero.lq-box{position:relative}
+  .ld-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:1}
+  .ld-ov.on{opacity:1}
+  .ld{position:relative;display:inline-flex;padding-bottom:10px;font:700 20px/1.1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.14em}
+  .ld-ov.sm .ld{font-size:15px;padding-bottom:8px}
+  .ld b{font-weight:inherit;display:inline-block;color:rgba(255,255,255,.42);animation:ldHop 1.6s ease-in-out infinite;animation-delay:calc(var(--i) * .1s)}
+  .ld::after{content:"";position:absolute;left:0;right:.14em;bottom:0;height:3px;border-radius:3px;
+    background:linear-gradient(90deg,#274B9B,#FFD23F) 0 0/0% 100% no-repeat,rgba(255,255,255,.3);animation:ldBar 3.2s cubic-bezier(.6,0,.4,1) infinite}
+  @keyframes ldHop{0%,40%,100%{transform:translateY(0);color:rgba(255,255,255,.42);text-shadow:none}20%{transform:translateY(-6px);color:#fff;text-shadow:0 0 12px rgba(255,210,63,.8)}}
+  @keyframes ldBar{0%{background-size:0% 100%,auto}85%,92%{background-size:100% 100%,auto;opacity:1}100%{background-size:100% 100%,auto;opacity:0}}
+  @media (prefers-reduced-motion:reduce){ .ld b{animation:none;color:#fff} .ld::after{animation:none;background-size:60% 100%,auto} }
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -700,11 +713,25 @@
     const k=keyOf(img.getAttribute("src")); const ph=k&&LQIP[k]; const box=img.parentElement;
     if(!ph||!box) return;
     box.classList.add("lq-box"); box.style.backgroundImage=`url("${ph}")`;
-    const done=()=>{ img.classList.add("lq-in"); setTimeout(()=>{ box.style.backgroundImage=""; },700); };
+    let ov=null, timer=null;
+    const startTimer=()=>{ timer=setTimeout(()=>{
+      if(img.classList.contains("lq-in") || img.classList.contains("scene") || box.clientWidth<200) return;
+      ov=document.createElement("div"); ov.className="ld-ov"+(box.clientWidth<320?" sm":""); ov.setAttribute("aria-hidden","true");
+      ov.innerHTML='<div class="ld">'+[..."LOADING"].map((c,i)=>`<b style="--i:${i}">${c}</b>`).join("")+'</div>';
+      box.appendChild(ov); requestAnimationFrame(()=>ov.classList.add("on"));
+    },800); };
+    /* 照片進到畫面才開始計時，畫面外的照片不會先出現 LOADING */
+    if("IntersectionObserver" in window){
+      const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); if(!img.classList.contains("lq-in")) startTimer(); } });
+      io.observe(box); img._io=io;
+    } else startTimer();
+    const done=()=>{ clearTimeout(timer); if(img._io) img._io.disconnect(); img.classList.add("lq-in");
+      if(ov){ ov.classList.remove("on"); setTimeout(()=>ov.remove(),600); }
+      setTimeout(()=>{ box.style.backgroundImage=""; },700); };
     if(img.complete && img.naturalWidth){ img.classList.add("lq","lq-in","lq-instant"); box.style.backgroundImage=""; return; }
     img.classList.add("lq");
     img.addEventListener("load",done,{once:true});
-    img.addEventListener("error",()=>img.classList.add("lq-in"),{once:true});
+    img.addEventListener("error",done,{once:true});
   }
   const scan=root=>root.querySelectorAll&&root.querySelectorAll("img").forEach(prep);
   new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{ if(n.tagName==="IMG") prep(n); else scan(n); })))
