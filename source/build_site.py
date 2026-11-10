@@ -84,7 +84,7 @@ def main():
         out = subprocess.run(["node", "-e", f"""
 const {{chromium}}=require('playwright');
 (async()=>{{const b=await chromium.launch();const r={{}};
-for(const id of {ids}){{const p=await b.newPage();await p.goto('http://localhost:8765/'+id+'/');await p.waitForTimeout(600);
+for(const id of {ids}){{const p=await b.newPage({{viewport:{{width:390,height:800}}}});await p.goto('http://localhost:8765/'+id+'/');await p.waitForTimeout(600);
  r[id]=await p.$eval('#article',e=>e.innerHTML);await p.close();}}
 console.log(JSON.stringify(r));await b.close();}})();"""], capture_output=True, text=True, check=True)
         rendered = json.loads(out.stdout)

@@ -501,6 +501,65 @@
   .card:active .thumb,.pop a:active .thumb{box-shadow:0 0 0 2px var(--c-blue)}
   .gal-nav:active,.dlist a:active,.quick a:active span{background:var(--c-lime)}
   a,button{-webkit-tap-highlight-color:transparent}
+
+  /* =====================================================
+     電腦版（螢幕寬度 900px 以上才生效，手機版完全不受影響）
+     ===================================================== */
+  @media (min-width:900px){
+    :root{--pad:max(32px, calc((100vw - 1120px) / 2))}
+    body{max-width:none}
+    /* 頂部橫列 */
+    .bar{max-width:none;padding-left:var(--pad);padding-right:var(--pad)}
+    /* 首頁封面 */
+    .hero{height:min(80vh,640px)}
+    .hero .scene{object-position:50% 30%}
+    .hero::after{background:linear-gradient(90deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.22) 45%,rgba(0,0,0,0) 70%),linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+    .hero-top{padding-left:var(--pad);padding-right:var(--pad)}
+    .hero-body{left:var(--pad);right:auto;width:min(620px, calc(100vw - 64px));bottom:52px}
+    .stats{font-size:15px;margin-bottom:12px}
+    .hero h1{font-size:48px;line-height:1.25}
+    .who{margin:28px 0 22px}
+    /* IG 頻道、公告、人氣文章 */
+    .ig-ch{padding:22px var(--pad);grid-template-columns:repeat(2,minmax(0,300px))}
+    .notice{padding-left:var(--pad);padding-right:var(--pad)}
+    .sec-h{padding:34px var(--pad) 18px;font-size:22px}
+    .pop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;overflow:visible;padding:0 var(--pad) 34px}
+    .pop a{flex:none}
+    .pop h3{font-size:15.5px}
+    /* 文章列表 */
+    .tabs{padding:0 var(--pad);justify-content:flex-start;gap:8px}
+    .tabs button{flex:0 0 140px}
+    .toolbar{padding:22px var(--pad) 6px}
+    .menu-pop{left:var(--pad)}
+    #list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px;padding:0 var(--pad) 70px}
+    #list>p{grid-column:1/-1}
+    #list.rows{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+    #list.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:10px var(--pad) 70px}
+    #list.grid .card .thumb{border-radius:10px}
+    .reels{padding-left:var(--pad);padding-right:var(--pad)}
+    /* 搜尋 */
+    .srch{max-width:none;padding:0 max(24px, calc((100vw - 680px) / 2))}
+    /* 文章頁：頂部、封面、雙欄 */
+    #article .a-top{padding-left:var(--pad);padding-right:var(--pad)}
+    #article .cover-fig{width:min(1120px, calc(100vw - 64px));margin:28px auto 0!important}
+    #article .cover-fig .a-cover{aspect-ratio:21/9;border-radius:18px;overflow:hidden}
+    #article .cover-fig figcaption{margin:12px 0 0}
+    .a-cols{display:flex;align-items:flex-start;gap:56px;width:min(1120px, calc(100vw - 64px));margin:0 auto}
+    .a-cols>.a-body:not(.a-side){flex:1 1 auto;min-width:0;max-width:720px;padding:34px 0 90px}
+    .a-side{flex:0 0 340px;position:sticky;top:86px;padding:34px 0 40px}
+    .a-side .offer{margin-top:0}
+    .a-body h1.h1-fit{font-size:30px}
+    /* 文章內照片：不再左右貼齊螢幕，改成圓角 */
+    .post .gal{margin-left:0;margin-right:0;container-type:inline-size}
+    .post .gal .ph{border-radius:14px;overflow:hidden}
+    .post .gal-nav{top:calc(100cqw * .375)}
+    .post .gal-nav.prev{left:14px}.post .gal-nav.next{right:14px}
+    .post .slide .cap{padding:10px 0 0}
+    .post .fig{margin-left:0;margin-right:0}
+    .post .fig .ph{border-radius:14px;overflow:hidden}
+    .post .fig figcaption{margin-left:0;margin-right:0}
+    .post .fig.tall .ph{width:min(100%,520px)}
+  }
 </style>
 </head>
 <body>
@@ -1169,6 +1228,32 @@ function addNumBtn(root){
   top.after(tip);
 }
 
+/* 電腦版：把優惠卡移到右側固定欄，手機版放回原位 */
+const DESK_MQ = matchMedia("(min-width:900px)");
+function placeOffer(){
+  const art=document.getElementById("article"); if(!art) return;
+  const offer=art.querySelector(".offer"); if(!offer) return;
+  let cols=art.querySelector(".a-cols");
+  if(DESK_MQ.matches){
+    const body=art.querySelector(".a-body"); if(!body) return;
+    if(!cols){
+      cols=document.createElement("div"); cols.className="a-cols";
+      body.before(cols); cols.appendChild(body);
+      const side=document.createElement("aside"); side.className="a-side a-body post"; cols.appendChild(side);
+    }
+    const side=cols.querySelector(".a-side");
+    if(offer.parentElement!==side){
+      const slot=document.createElement("span"); slot.className="offer-slot"; slot.hidden=true;
+      offer.before(slot); side.appendChild(offer);
+    }
+  } else {
+    const slot=art.querySelector(".offer-slot");
+    if(slot){ slot.replaceWith(offer); }
+    if(cols){ const body=cols.querySelector(".a-body:not(.a-side)"); cols.before(body); cols.remove(); }
+  }
+}
+DESK_MQ.addEventListener("change",placeOffer);
+
 function route(){
   try{ closeD(); }catch(e){}
   const m = location.hash.match(/^#post-(.+)$/);
@@ -1177,6 +1262,7 @@ function route(){
   if(p){
     article.innerHTML = articleHTML(p);
     wireGalleries(article);
+    placeOffer();
     if(!PROD){ article.classList.remove("edit-on"); numberize(article); addNumBtn(article); }
     document.body.classList.add("reading"); bar.classList.remove("show");
     scrollTo(0,0);
