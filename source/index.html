@@ -644,7 +644,6 @@
 
   <div class="tabs" id="list-anchor">
     <button class="on" data-tab="posts">文章</button>
-    <button data-tab="reels">短影音</button>
   </div>
 
   <div id="posts-pane">
@@ -661,10 +660,6 @@
     <div id="list"></div>
   </div>
 
-  <div id="reels-pane" class="reels" hidden>
-    每支住宿開箱短影音都在 IG。<br>看完影片，回來這裡看完整攻略。
-    <br><a href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener">到 IG 看全部短影音</a>
-  </div>
 
   <p class="proto preview-only">試作版｜網站正式上線前的預覽</p>
 </main>
@@ -979,7 +974,7 @@ document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("on",x===b));
   document.getElementById("posts-pane").hidden = b.dataset.tab!=="posts";
-  document.getElementById("reels-pane").hidden = b.dataset.tab!=="reels";
+  const rp=document.getElementById("reels-pane"); if(rp) rp.hidden = b.dataset.tab!=="reels";
 });
 
 const openD=()=>{drawer.classList.add("on");shade.classList.add("on")};
