@@ -544,6 +544,30 @@
   .rail-nav[disabled]{opacity:0;pointer-events:none}
   @media (hover:hover){ .rail-nav{display:grid} .rail-nav:hover{background:var(--c-lime)} }
   .post .facil+.rail{margin-top:24px}
+  /* 附近怎麼玩：三張直向卡片（只作用在 .nearby） */
+  .nearby{--nb-blue:#23467C;--nb-line:#DAE3F0;margin-top:-4px}
+  .nearby .nb-sub{font-size:13.5px;color:#555;margin:0 0 14px}
+  .nearby .nb-card{border:1px solid var(--nb-line);border-radius:14px;overflow:hidden;background:var(--c-white)}
+  .nearby .nb-card+.nb-card{margin-top:12px}
+  .nearby .nb-head{background:var(--nb-blue);color:#fff;padding:13px 16px 12px}
+  .nearby .nb-title{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;line-height:1.4}
+  .nearby .nb-ic{width:18px;height:18px;flex:none;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .nearby .nb-desc{margin-top:4px;font-size:13.5px;line-height:1.6;color:#fff;text-wrap:balance}
+  .nearby .nb-list{list-style:none;margin:0;padding:0;background:var(--c-white)}
+  .nearby .nb-list li+li{border-top:1px solid var(--nb-line)}
+  .post .nearby .nb-row{text-decoration:none}
+  .nearby .nb-row{display:flex;align-items:center;gap:10px;min-height:56px;padding:10px 12px 10px 16px;color:var(--c-ink);transition:background-color .15s}
+  .nearby .nb-name{flex:1;min-width:0;display:flex;flex-direction:column}
+  .nearby .nb-name b{font-size:15px;font-weight:700;line-height:1.45}
+  .nearby .nb-name small{font-size:12px;color:#777;line-height:1.4}
+  .nearby .nb-meta{flex:none;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+  .nearby .nb-meta b{font-size:14.5px;font-weight:700;color:var(--nb-blue);line-height:1.4}
+  .nearby .nb-meta small{font-size:12px;color:#888;line-height:1.4}
+  .nearby .nb-ext{width:14px;height:14px;flex:none;fill:none;stroke:#8aa0bf;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  @media (hover:hover){ .nearby .nb-row:hover{background:#EEF3F9} .nearby .nb-row:hover .nb-ext{stroke:var(--nb-blue)} }
+  .nearby .nb-row:active{background:#EEF3F9}
+  .nearby .nb-row:focus-visible{outline:2px solid var(--nb-blue);outline-offset:-3px;border-radius:10px;background:#EEF3F9}
+  .nearby .nb-note{margin-top:12px;font-size:12px;color:#888;text-align:center}
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -876,15 +900,46 @@
     </div>
     <button class="copy btn-share" data-copy="hangwang-share" data-label="分享給親友">分享給親友</button>
 
-    <h2>附近可以順遊哪裡</h2>
-    <div class="spot-list"><span>冬山火車站</span><span>冬山河生態綠洲</span><span>冬山老街</span><span>梅花湖風景區</span><span>羅東夜市</span></div>
-
-    <h3>入住前想先逛一下</h3>
-    <p>可以把<strong>冬山火車站、冬山老街和冬山河生態綠洲</strong>排在一起。想慢慢走，就挑其中兩站，逛完再去民宿。</p>
-    <h3>晚上想出去覓食</h3>
-    <p>可以去<strong>羅東夜市</strong>，在外面吃晚餐，或買點宵夜回民宿都方便。</p>
-    <h3>退房後還想走走</h3>
-    <p>可以把<strong>梅花湖</strong>排成隔天第一站。如果這趟主要是跟朋友在民宿聚一聚，隔天留這一站就夠了。</p>
+    <h2>巷往 Villa 附近怎麼玩？</h2>
+    <section class="nearby" aria-label="巷往 Villa 附近景點">
+      <div class="nb-sub">從民宿開車出發的單程時間與距離</div>
+      <div class="nb-card">
+        <div class="nb-head"><div class="nb-title"><svg class="nb-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"></path><path d="m9 15-1-1"></path><path d="m15 15 1-1"></path><path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"></path><path d="m8 19-2 3"></path><path d="m16 19 2 3"></path></svg><span>入住前</span></div><div class="nb-desc">車站和老街一起逛，有空再去綠舟散步。</div></div>
+        <ul class="nb-list">
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.6363%2C121.7920993&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="冬山火車站，開車約 5 分鐘，2.0 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>冬山火車站</b></span>
+            <span class="nb-meta"><b><span class="nw">約 5 分鐘</span></b><small><span class="nw">2.0 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+          </a></li>
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.634598%2C121.791104&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="冬山老街，開車約 4 分鐘，1.6 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>冬山老街</b></span>
+            <span class="nb-meta"><b><span class="nw">約 4 分鐘</span></b><small><span class="nw">1.6 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+          </a></li>
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.638719%2C121.78828&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="冬山河生態綠舟，開車約 4 分鐘，1.2 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>冬山河生態綠舟</b></span>
+            <span class="nb-meta"><b><span class="nw">約 4 分鐘</span></b><small><span class="nw">1.2 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+          </a></li>
+        </ul>
+      </div>
+      <div class="nb-card">
+        <div class="nb-head"><div class="nb-title"><svg class="nb-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg><span>晚上覓食</span></div><div class="nb-desc">逛夜市吃晚餐，或買宵夜回民宿。</div></div>
+        <ul class="nb-list">
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.6765867%2C121.7681073&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="羅東夜市，開車約 13 分鐘，5.3 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>羅東夜市</b></span>
+            <span class="nb-meta"><b><span class="nw">約 13 分鐘</span></b><small><span class="nw">5.3 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+          </a></li>
+        </ul>
+      </div>
+      <div class="nb-card">
+        <div class="nb-head"><div class="nb-title"><svg class="nb-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg><span>退房後</span></div><div class="nb-desc">不急著回家，就去湖邊走走。</div></div>
+        <ul class="nb-list">
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.6449668%2C121.7307341&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="梅花湖風景區遊客中心，開車約 11 分鐘，6.1 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>梅花湖風景區</b><small>遊客中心</small></span>
+            <span class="nb-meta"><b><span class="nw">約 11 分鐘</span></b><small><span class="nw">6.1 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+          </a></li>
+        </ul>
+      </div>
+      <div class="nb-note">點景點開啟 Google 地圖・車程依路況而異</div>
+    </section>
 
     <h2>入住心得與訂房</h2>
     <p>整體來說，巷往最讓我印象深刻的是<strong>每間房間都比想像中寬敞</strong>，還有一樓雙人房帶來的方便。</p>
@@ -1411,15 +1466,46 @@ function renderHangwang(p){
     </div>
     <button class="copy btn-share" data-copy="hangwang-share" data-label="分享給親友">分享給親友</button>
 
-    <h2>附近可以順遊哪裡</h2>
-    <div class="spot-list"><span>冬山火車站</span><span>冬山河生態綠洲</span><span>冬山老街</span><span>梅花湖風景區</span><span>羅東夜市</span></div>
-
-    <h3>入住前想先逛一下</h3>
-    <p>可以把<strong>冬山火車站、冬山老街和冬山河生態綠洲</strong>排在一起。想慢慢走，就挑其中兩站，逛完再去民宿。</p>
-    <h3>晚上想出去覓食</h3>
-    <p>可以去<strong>羅東夜市</strong>，在外面吃晚餐，或買點宵夜回民宿都方便。</p>
-    <h3>退房後還想走走</h3>
-    <p>可以把<strong>梅花湖</strong>排成隔天第一站。如果這趟主要是跟朋友在民宿聚一聚，隔天留這一站就夠了。</p>
+    <h2>巷往 Villa 附近怎麼玩？</h2>
+    <section class="nearby" aria-label="巷往 Villa 附近景點">
+      <div class="nb-sub">從民宿開車出發的單程時間與距離</div>
+      <div class="nb-card">
+        <div class="nb-head"><div class="nb-title"><svg class="nb-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/><path d="m9 15-1-1"/><path d="m15 15 1-1"/><path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"/><path d="m8 19-2 3"/><path d="m16 19 2 3"/></svg><span>入住前</span></div><div class="nb-desc">車站和老街一起逛，有空再去綠舟散步。</div></div>
+        <ul class="nb-list">
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.6363%2C121.7920993&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="冬山火車站，開車約 5 分鐘，2.0 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>冬山火車站</b></span>
+            <span class="nb-meta"><b><span class="nw">約 5 分鐘</span></b><small><span class="nw">2.0 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a></li>
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.634598%2C121.791104&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="冬山老街，開車約 4 分鐘，1.6 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>冬山老街</b></span>
+            <span class="nb-meta"><b><span class="nw">約 4 分鐘</span></b><small><span class="nw">1.6 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a></li>
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.638719%2C121.78828&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="冬山河生態綠舟，開車約 4 分鐘，1.2 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>冬山河生態綠舟</b></span>
+            <span class="nb-meta"><b><span class="nw">約 4 分鐘</span></b><small><span class="nw">1.2 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a></li>
+        </ul>
+      </div>
+      <div class="nb-card">
+        <div class="nb-head"><div class="nb-title"><svg class="nb-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg><span>晚上覓食</span></div><div class="nb-desc">逛夜市吃晚餐，或買宵夜回民宿。</div></div>
+        <ul class="nb-list">
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.6765867%2C121.7681073&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="羅東夜市，開車約 13 分鐘，5.3 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>羅東夜市</b></span>
+            <span class="nb-meta"><b><span class="nw">約 13 分鐘</span></b><small><span class="nw">5.3 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a></li>
+        </ul>
+      </div>
+      <div class="nb-card">
+        <div class="nb-head"><div class="nb-title"><svg class="nb-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg><span>退房後</span></div><div class="nb-desc">不急著回家，就去湖邊走走。</div></div>
+        <ul class="nb-list">
+          <li><a class="nb-row" href="https://www.google.com/maps/dir/?api=1&amp;origin=24.6387496%2C121.7796397&amp;destination=24.6449668%2C121.7307341&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="梅花湖風景區遊客中心，開車約 11 分鐘，6.1 公里，在 Google 地圖開啟路線">
+            <span class="nb-name"><b>梅花湖風景區</b><small>遊客中心</small></span>
+            <span class="nb-meta"><b><span class="nw">約 11 分鐘</span></b><small><span class="nw">6.1 公里</span></small></span><svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a></li>
+        </ul>
+      </div>
+      <div class="nb-note">點景點開啟 Google 地圖・車程依路況而異</div>
+    </section>
 
     <h2>入住心得與訂房</h2>
     <p>整體來說，巷往最讓我印象深刻的是<strong>每間房間都比想像中寬敞</strong>，還有一樓雙人房帶來的方便。</p>
