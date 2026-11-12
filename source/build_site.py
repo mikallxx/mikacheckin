@@ -17,6 +17,13 @@ HOME_DESC = "Mika 的住宿開箱攻略：看完 IG 影片，在這裡看房型�
 # posts that are live (title / description / cover for share previews)
 POSTS = [
     {
+        "id": "hakuna",
+        "title": "哈庫納馬塔塔｜宜蘭市包棟民宿，全台唯一非洲風格",
+        "desc": "宜蘭市包棟民宿哈庫納馬塔塔，全台唯一非洲風格，附 Mika 開箱影片與專屬折扣碼。",
+        "image": "img/site/cover.jpg",
+        "draft": True,
+    },
+    {
         "id": "guipu",
         "title": "歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美",
         "desc": "嘉義歸樸森活露營區入住心得：不用帶任何裝備的懶人營區，傍晚夕陽非常漂亮，附 Mika 開箱影片。",

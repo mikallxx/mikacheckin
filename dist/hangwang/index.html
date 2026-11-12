@@ -1050,10 +1050,21 @@ const IMG="img/hangwang/";
 /* 範例文章：SHOW_SAMPLES 改成 true 就會重新顯示 */
 const SHOW_SAMPLES = false;
 const ALL_POSTS = [
+  { id:"hakuna", draft:true, real:true, date:"2026. 11. 13.", region:"宜蘭", type:"民宿",
+    title:"哈庫納馬塔塔｜宜蘭市包棟民宿，全台唯一非洲風格",
+    excerpt:"全台唯一非洲風格的包棟民宿，就在宜蘭市。有 Mika 專屬折扣碼，照片和詳細介紹整理中。",
+    tags:["宜蘭","宜蘭市","包棟民宿","非洲風格"], textCover:["#F6C35A","#E07B39","#7A3E2A"],
+    kind:"包棟民宿", host:"民宿", code:"Mikamika",
+    intro:["這次住的是宜蘭市的「哈庫納馬塔塔」，標榜<strong>全台唯一非洲風格</strong>的包棟民宿。",
+           "包棟入住不用跟其他房客共用空間，適合家人朋友一起來。"],
+    video:"https://www.instagram.com/reel/DfSDBugJbNS/", render:renderSimple },
   { id:"guipu", draft:true, real:true, date:"2026. 11. 13.", region:"嘉義", type:"露營",
     title:"歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美",
     excerpt:"不用帶任何裝備的懶人營區，傍晚的夕陽非常漂亮。照片和詳細介紹整理中。",
     tags:["嘉義","懶人露營","免裝備","看夕陽"], textCover:["#F2A65A","#D9623B","#5B3A6B"],
+    kind:"懶人露營（免帶裝備）", host:"營區",
+    intro:["這次住的是嘉義的「歸樸森活露營區」，<strong>不用帶任何裝備</strong>的懶人營區，人到就能入住。",
+           "最推薦的是傍晚，<strong>夕陽非常漂亮</strong>，記得把時間留給這一段。"],
     video:"https://www.instagram.com/reel/DfYnfihJlN6/", render:renderSimple },
   { id:"hangwang", real:true, date:"2026. 11. 08.", region:"宜蘭", type:"民宿",
     video:"https://www.instagram.com/reel/DfnyZmLhHLV/",
@@ -1089,6 +1100,7 @@ const posts = ALL_POSTS.filter(p=>(SHOW_SAMPLES||!p.sample) && !(PROD && p.draft
    正式版會從「優惠活動」表讀入固定日期；這裡用「今天前後幾天」做示範 */
 const D=864e5, H=36e5, t0=Date.now();
 const deals = [
+  { post:"hakuna", type:"折扣碼", start:0, end:Infinity, code:"Mikamika", line:"專屬折扣碼 Mikamika" },
   { post:"hangwang", type:"折扣碼", start:0, end:Infinity, code:"MIKA888", line:"專屬折扣碼 MIKA888 · 包棟定價 75 折" },
   { post:"yuguang", type:"團購", start:t0-2*D, end:t0+3*D+4*H,
     title:"餘光 雙人入住專屬團購（示範）", perk:"平日入住享 <strong class='off'>9 折</strong>，加贈早餐一份。這裡寫實際優惠內容。",
@@ -1560,8 +1572,7 @@ function renderSimple(p){
     <div class="d">${p.date} · Mika</div>
 
     <div class="one intro">
-      <p>這次住的是嘉義的「${name}」，<strong>不用帶任何裝備</strong>的懶人營區，人到就能入住。</p>
-      <p>最推薦的是傍晚，<strong>夕陽非常漂亮</strong>，記得把時間留給這一段。</p>
+      ${(p.intro||[]).map(t=>`<p>${t}</p>`).join("")}
     </div>
 
     ${p.video?`<a class="video-card" href="${p.video}" target="_blank" rel="noopener">
@@ -1573,12 +1584,22 @@ function renderSimple(p){
     <table class="tbl">
       <tr><td>名稱</td><td>${name}</td></tr>
       <tr><td>地區</td><td>${p.region}</td></tr>
-      <tr><td>類型</td><td>懶人露營（免帶裝備）</td></tr>
-      <tr><td>價格</td><td>請直接向營區詢問</td></tr>
+      <tr><td>類型</td><td>${p.kind||p.type}</td></tr>
+      <tr><td>價格</td><td>請直接向${p.host||"民宿"}詢問</td></tr>
     </table>
+    ${p.code?`<section class="offer" id="offer" aria-label="${name} 專屬折扣碼">
+      <div class="of-sec">
+        <h3 class="of-k">${name} 專屬優惠</h3>
+        <p class="of-code">折扣碼 <b class="nw">${p.code}</b></p>
+        <div class="of-row">
+          <button class="copy of-copy" data-code="${p.code}" data-label="複製折扣碼" data-done="已複製">複製折扣碼</button>
+          <span class="of-hint">優惠內容請向${p.host||"民宿"}詢問</span>
+        </div>
+      </div>
+    </section>`:""}
 
     <div class="soon-note">更多照片和詳細介紹整理中，先看上面的開箱影片吧。</div>
-    <p class="note-line">本頁為個人非官方住宿攻略，資訊以營區官方公告為準。</p>
+    <p class="note-line">本頁為個人非官方住宿攻略，資訊以${p.host||"民宿"}官方公告為準。</p>
   </div>`;
 }
 /* 樓層分頁：選樓層切換標題、照片、圖說 */
