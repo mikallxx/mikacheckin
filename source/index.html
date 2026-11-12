@@ -553,6 +553,8 @@
   .nearby .nb-row:active{background:#EEF3F9}
   .nearby .nb-row:focus-visible{outline:2px solid var(--nb-blue);outline-offset:-3px;border-radius:10px;background:#EEF3F9}
   .nearby .nb-note{margin-top:12px;font-size:12px;color:#888;text-align:center}
+  /* 優惠卡放在文章最上方（大標之前） */
+  .post>.offer:first-child{margin-top:0;margin-bottom:26px}
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -1119,6 +1121,26 @@ function renderHangwang(p){
   return `
   <figure class="fig cover-fig" style="margin:0"><div class="a-cover"><img src="${IMG}01.jpg" alt="巷往 Villa 外觀"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
   <div class="a-body post">
+    <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
+      <div class="of-sec">
+        <h3 class="of-k">巷往 Villa 訂房優惠</h3>
+        <p class="of-main"><span class="mk nw">包棟定價 <strong class="off">75 折</strong></span></p>
+        <p class="of-sub">暑假、週六、連假及春節期間不適用。</p>
+      </div>
+      <div class="of-sec">
+        <p class="of-code">優惠碼 <b class="nw">MIKA888</b></p>
+        <div class="of-row">
+          <button class="copy of-copy" data-copy="hangwang-ask" data-label="複製詢問訊息" data-done="已複製">複製詢問訊息</button>
+          <span class="of-hint">已含優惠碼 <span class="nw">MIKA888</span></span>
+        </div>
+      </div>
+      <div class="of-sec">
+        <a class="of-line" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">用 LINE 詢問空房</a>
+        <p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>
+        <p class="of-id">官方 LINE ID　<span class="nw">@hope2795</span></p>
+      </div>
+    </section>
+
     <div class="kicker">宜蘭 · 包棟民宿</div>
     <h1 class="${p.h1?'h1-fit':''}">${p.h1||p.title}</h1>
     <div class="d">${p.date} · Mika</div>
@@ -1149,25 +1171,6 @@ function renderHangwang(p){
       <tr><td>Mika 專屬優惠</td><td>符合適用日期，享包棟<strong class="off nw">定價 75 折</strong><span class="cond">※暑假、週六、連假及春節期間不適用</span></td></tr>
     </table>
 
-    <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
-      <div class="of-sec">
-        <h3 class="of-k">巷往 Villa 訂房優惠</h3>
-        <p class="of-main"><span class="mk nw">包棟定價 <strong class="off">75 折</strong></span></p>
-        <p class="of-sub">暑假、週六、連假及春節期間不適用。</p>
-      </div>
-      <div class="of-sec">
-        <p class="of-code">優惠碼 <b class="nw">MIKA888</b></p>
-        <div class="of-row">
-          <button class="copy of-copy" data-copy="hangwang-ask" data-label="複製詢問訊息" data-done="已複製">複製詢問訊息</button>
-          <span class="of-hint">已含優惠碼 <span class="nw">MIKA888</span></span>
-        </div>
-      </div>
-      <div class="of-sec">
-        <a class="of-line" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">用 LINE 詢問空房</a>
-        <p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>
-        <p class="of-id">官方 LINE ID　<span class="nw">@hope2795</span></p>
-      </div>
-    </section>
 
     <h2>房間怎麼分</h2>
     <p>巷往 Villa 一共三層樓、六間房，可入住 <strong class="nw">8～22 人</strong>，每間都有獨立衛浴。</p>
