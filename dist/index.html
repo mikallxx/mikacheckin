@@ -831,7 +831,7 @@ const IMG="img/hangwang/";
 /* 範例文章：SHOW_SAMPLES 改成 true 就會重新顯示 */
 const SHOW_SAMPLES = false;
 const ALL_POSTS = [
-  { id:"guipu", real:true, date:"2026. 11. 13.", region:"嘉義", type:"露營",
+  { id:"guipu", draft:true, real:true, date:"2026. 11. 13.", region:"嘉義", type:"露營",
     title:"歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美",
     excerpt:"不用帶任何裝備的懶人營區，傍晚的夕陽非常漂亮。照片和詳細介紹整理中。",
     tags:["嘉義","懶人露營","免裝備","看夕陽"], textCover:["#F2A65A","#D9623B","#5B3A6B"],
@@ -863,7 +863,8 @@ const ALL_POSTS = [
     excerpt:"範例文章：這裡會放這間民宿的簡介。",
     tags:["台東","民宿"], img:["room","#a9a48f","#cfe0b8"] },
 ];
-const posts = ALL_POSTS.filter(p=>SHOW_SAMPLES||!p.sample);
+/* draft:true 的文章只出現在試作版，正式網站不會顯示 */
+const posts = ALL_POSTS.filter(p=>(SHOW_SAMPLES||!p.sample) && !(PROD && p.draft));
 
 /* ---------- 優惠活動：只要填開始、結束時間，狀態會自動切換 ----------
    正式版會從「優惠活動」表讀入固定日期；這裡用「今天前後幾天」做示範 */

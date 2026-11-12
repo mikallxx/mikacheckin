@@ -21,6 +21,7 @@ POSTS = [
         "title": "歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美",
         "desc": "嘉義歸樸森活露營區入住心得：不用帶任何裝備的懶人營區，傍晚夕陽非常漂亮，附 Mika 開箱影片。",
         "image": "img/site/cover.jpg",
+        "draft": True,
     },
     {
         "id": "hangwang",
@@ -59,6 +60,8 @@ def make_page(src, **kw):
 
 
 def main():
+    global POSTS
+    POSTS = [p for p in POSTS if not p.get("draft")]
     subprocess.run([sys.executable, os.path.join(ROOT, "source", "make_lqip.py")], check=True)
     src = open(SRC, encoding="utf-8").read()
     if os.path.exists(DIST):
