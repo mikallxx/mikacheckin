@@ -17,6 +17,12 @@ HOME_DESC = "Mika 的住宿開箱攻略：看完 IG 影片，在這裡看房型�
 # posts that are live (title / description / cover for share previews)
 POSTS = [
     {
+        "id": "guipu",
+        "title": "歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美",
+        "desc": "嘉義歸樸森活露營區入住心得：不用帶任何裝備的懶人營區，傍晚夕陽非常漂亮，附 Mika 開箱影片。",
+        "image": "img/site/cover.jpg",
+    },
+    {
         "id": "hangwang",
         "title": "巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房",
         "desc": "宜蘭冬山包棟民宿巷往 Villa 入住心得：一樓兩間雙人房帶長輩好安排、二樓檜木四人房、三樓六人房，KTV、麻將、戲水池，附 Mika 專屬折扣碼。",
@@ -61,7 +67,9 @@ def main():
     # assets: only images actually referenced
     shutil.copytree(os.path.join(ROOT, "source", "img", "site"), f"{DIST}/img/site")
     for p in POSTS:
-        shutil.copytree(os.path.join(ROOT, "source", "img", p["id"]), f"{DIST}/img/{p['id']}")
+        src_img = os.path.join(ROOT, "source", "img", p["id"])
+        if os.path.isdir(src_img):
+            shutil.copytree(src_img, f"{DIST}/img/{p['id']}")
     open(f"{DIST}/favicon.svg", "w").write(FAVICON)
 
     home = make_page(src, title=SITE_NAME, desc=HOME_DESC, url=DOMAIN + "/", image="img/site/cover.jpg")

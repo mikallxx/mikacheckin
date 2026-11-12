@@ -570,6 +570,10 @@
   .nearby .nb-note{margin-top:12px;font-size:12px;color:#888;text-align:center}
   /* 優惠卡放在文章最上方（大標之前） */
   .post>.offer:first-child{margin-top:0;margin-bottom:26px}
+  /* 簡易版文章 */
+  .tcover{display:block;width:100%;height:100%}
+  .vc-thumb .tcover text{display:none}
+  .soon-note{margin-top:22px;padding:14px 16px;border-radius:12px;background:var(--soft);font-size:14.5px;color:#555;line-height:1.7;text-align:center}
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
   .pb-txt{min-width:0}
@@ -1046,6 +1050,11 @@ const IMG="img/hangwang/";
 /* 範例文章：SHOW_SAMPLES 改成 true 就會重新顯示 */
 const SHOW_SAMPLES = false;
 const ALL_POSTS = [
+  { id:"guipu", real:true, date:"2026. 11. 13.", region:"嘉義", type:"露營",
+    title:"歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美",
+    excerpt:"不用帶任何裝備的懶人營區，傍晚的夕陽非常漂亮。照片和詳細介紹整理中。",
+    tags:["嘉義","懶人露營","免裝備","看夕陽"], textCover:["#F2A65A","#D9623B","#5B3A6B"],
+    video:"https://www.instagram.com/reel/DfYnfihJlN6/", render:renderSimple },
   { id:"hangwang", real:true, date:"2026. 11. 08.", region:"宜蘭", type:"民宿",
     video:"https://www.instagram.com/reel/DfnyZmLhHLV/",
     title:"巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房",
@@ -1210,12 +1219,12 @@ const notices = [
   "合作邀約請透過 IG 私訊 @mika.checkin",
 ];
 
-const cats = ["全部文章","優惠中","宜蘭","台南","花東","海外","民宿","飯店","美食景點"];
+const cats = ["全部文章","優惠中","宜蘭","嘉義","台南","花東","海外","民宿","飯店","露營","美食景點"];
 let currentCat = "全部文章";
 
 /* ---------- render ---------- */
 function thumb(p, extraStyle=""){
-  const pic = p.cover ? `<img src="${p.cover}" alt="${p.title}" loading="lazy">` : art(...p.img);
+  const pic = p.cover ? `<img src="${p.cover}" alt="${p.title}" loading="lazy">` : p.textCover ? textCover(p) : art(...p.img);
   return `<div class="thumb" style="${extraStyle}">${pic}${badge(p.id)}${p.real?"":'<span class="sample">範例</span>'}</div>`;
 }
 function renderPop(){
@@ -1528,6 +1537,49 @@ function renderHangwang(p){
 }
 
 /* ---------- 照片輪播：A 照片配 A 文案 ---------- */
+/* 還沒有照片的文章：文字封面 */
+function textCover(p){
+  const [a,b,c]=p.textCover, name=p.title.split("｜")[0], u="tc"+p.id+Math.random().toString(36).slice(2,6);
+  return `<svg class="tcover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" role="img" aria-label="${name}">
+    <defs><linearGradient id="${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset=".55" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></linearGradient></defs>
+    <rect width="400" height="260" fill="url(#${u})"/><circle cx="290" cy="160" r="40" fill="#FFE2A8" opacity=".85"/>
+    <path d="M0 200 L70 155 L120 180 L190 130 L260 185 L320 160 L400 195 L400 260 L0 260Z" fill="#2B2238" opacity=".55"/>
+    <path d="M0 228 L90 198 L170 222 L250 192 L330 218 L400 205 L400 260 L0 260Z" fill="#1E1828" opacity=".7"/>
+    <text x="200" y="82" text-anchor="middle" fill="#fff" font-size="28" font-weight="700" font-family="Noto Sans TC,sans-serif">${name}</text>
+    <text x="200" y="110" text-anchor="middle" fill="#fff" opacity=".9" font-size="15" font-family="Noto Sans TC,sans-serif">${p.region} · ${p.type}</text></svg>`;
+}
+/* 簡易版文章（照片之後補） */
+function renderSimple(p){
+  const name=p.title.split("｜")[0];
+  return `
+  <figure class="fig cover-fig" style="margin:0"><div class="a-cover">${textCover(p)}</div></figure>
+  <div class="a-body post">
+    <div class="kicker">${p.region} · ${p.type}</div>
+    <h1>${p.title}</h1>
+    <div class="d">${p.date} · Mika</div>
+
+    <div class="one intro">
+      <p>這次住的是嘉義的「${name}」，<strong>不用帶任何裝備</strong>的懶人營區，人到就能入住。</p>
+      <p>最推薦的是傍晚，<strong>夕陽非常漂亮</strong>，記得把時間留給這一段。</p>
+    </div>
+
+    ${p.video?`<a class="video-card" href="${p.video}" target="_blank" rel="noopener">
+      <div class="vc-thumb">${textCover(p)}<span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div>
+      <div class="vc-txt"><small>觀看影片</small><b>${name} <span class="nw">開箱影片</span></b><span>在 Instagram 觀看 →</span></div>
+    </a>`:""}
+
+    <h2>住宿基本資訊</h2>
+    <table class="tbl">
+      <tr><td>名稱</td><td>${name}</td></tr>
+      <tr><td>地區</td><td>${p.region}</td></tr>
+      <tr><td>類型</td><td>懶人露營（免帶裝備）</td></tr>
+      <tr><td>價格</td><td>請直接向營區詢問</td></tr>
+    </table>
+
+    <div class="soon-note">更多照片和詳細介紹整理中，先看上面的開箱影片吧。</div>
+    <p class="note-line">本頁為個人非官方住宿攻略，資訊以營區官方公告為準。</p>
+  </div>`;
+}
 /* 樓層分頁：選樓層切換標題、照片、圖說 */
 function floorTabs(floors){
   const tabs=floors.map((f,i)=>`<button type="button" role="tab" id="tab-${f.id}" aria-controls="panel-${f.id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" class="ft-tab${i===0?" on":""}" data-floor="${f.id}">${f.tab}</button>`).join("");
