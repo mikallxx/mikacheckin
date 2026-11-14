@@ -710,6 +710,11 @@
   .tabs .sub-filters .chip-tog.on{color:#F2C230}
   /* 整齊版：第一排縮小到手機一行放得下；第二排改成較輕的次要樣式 */
   /* 第二排：兩顆等寬撐滿整行（A 版：白底，選中黃底黑字） */
+  /* 第一排：五顆撐滿整行、不用左右滑 */
+  .tabs .cat-chips{overflow:visible;gap:6px;padding:2px 4px 5px 2px}
+  .tabs .cat-chips button{flex:1 1 auto;min-width:0;padding:0 6px;white-space:nowrap}
+  @media (max-width:350px){.tabs .cat-chips{gap:4px}.tabs .cat-chips button{padding:0 3px;font-size:13px}}
+  @media (min-width:900px){.tabs .cat-chips{gap:8px}.tabs .cat-chips button{flex:none;padding:0 16px}}
   .tabs .sub-filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 4px 5px 2px}
   .tabs .sub-filters .chip-sel,.tabs .sub-filters .chip-tog{width:100%;height:38px;justify-content:center;font-size:14.5px;border:2px solid #1A1A1A!important;box-shadow:2px 2px 0 #1A1A1A;background:#fff;color:#1A1A1A}
   .tabs .sub-filters .chip-sel.on,.tabs .sub-filters .chip-tog.on{background:#F2C230;color:#1A1A1A}
