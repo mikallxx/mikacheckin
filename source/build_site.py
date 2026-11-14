@@ -8,7 +8,7 @@ Output: dist/
 import json, os, re, shutil, subprocess, sys, time, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DOMAIN = "https://mikacheckin.com"
+DOMAIN = os.environ.get("SITE_DOMAIN", "https://mikacheckin.com")
 SRC = os.path.join(ROOT, "source", "index.html")
 DIST = os.path.join(ROOT, "dist")
 SITE_NAME = "Mika Check-in｜今晚住這裡"
@@ -20,7 +20,7 @@ POSTS = [
         "id": "hangwang",
         "title": "巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房",
         "desc": "宜蘭冬山包棟民宿巷往 Villa 入住心得：一樓兩間雙人房帶長輩好安排、二樓檜木四人房、三樓六人房，KTV、麻將、戲水池，附 Mika 專屬折扣碼。",
-        "image": "img/hangwang/01.jpg",
+        "image": "img/hangwang/og-card.jpg",
     },
 ]
 
@@ -54,6 +54,7 @@ def make_page(src, **kw):
 
 def main():
     subprocess.run([sys.executable, os.path.join(ROOT, "source", "make_lqip.py")], check=True)
+    subprocess.run([sys.executable, os.path.join(ROOT, "source", "make_cards.py")], check=True)
     src = open(SRC, encoding="utf-8").read()
     if os.path.exists(DIST):
         shutil.rmtree(DIST)

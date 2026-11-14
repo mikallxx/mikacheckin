@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://mikacheckin.com/sitemap.xml
+Sitemap: https://card-preview.mikacheckin.pages.dev/sitemap.xml

@@ -435,6 +435,20 @@
   .a-body p.of-hint{margin:8px 0 0;font-size:12.5px;text-align:center;color:var(--sub)}
   .of-line{display:block;text-align:center;padding:14px;border-radius:12px;background:var(--c-blue);color:var(--c-white);font-weight:700;font-size:15.5px;transition:background-color .15s,color .15s}
   .a-body p.of-id{margin:6px 0 0;font-size:12.5px;color:#9a9a9a;text-align:center}
+  /* 揪團卡 */
+  .btn-card{display:block;width:100%;margin-top:14px;padding:13px;border-radius:12px;background:var(--c-white);color:var(--c-blue);font-size:15px;font-weight:700;text-align:center;border:1.5px solid var(--c-blue)}
+  .btn-card+.btn-share{margin-top:10px}
+  @media (hover:hover){ .btn-card:hover{background:var(--c-lime);border-color:var(--c-lime);color:var(--c-ink)} }
+  .btn-card:active{background:var(--c-lime);border-color:var(--c-lime);color:var(--c-ink)}
+  #card-view{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+  #card-view.on{display:flex}
+  #card-view .cv-panel{background:#fff;border-radius:16px;padding:16px;max-width:380px;width:100%;text-align:center}
+  #card-view img{display:block;width:100%;border-radius:10px;-webkit-touch-callout:default}
+  #card-view p{margin:12px 0;font-size:14px;color:#555;line-height:1.6}
+  #card-view .cv-row{display:flex;gap:8px}
+  #card-view .cv-row a,#card-view .cv-row button{flex:1;padding:12px;border-radius:10px;font-weight:700;font-size:14.5px}
+  #card-view .cv-dl{background:var(--c-blue);color:#fff}
+  #card-view .cv-x{border:1px solid #ddd}
   /* 分享給親友 */
   .btn-share{display:block;width:100%;margin-top:14px;padding:13px;border-radius:12px;background:var(--c-blue);color:var(--c-white);font-size:15px;font-weight:700;text-align:center;border:1px solid var(--c-blue)}
   /* 複製成功：黃色 */
@@ -927,6 +941,43 @@ document.addEventListener("click",async e=>{
   b.textContent=b.dataset.done||"已複製 ✓"; b.classList.add("done");
   clearTimeout(b._t); b._t=setTimeout(()=>{ b.textContent=label; b.classList.remove("done"); },2000);
 });
+/* 揪團卡：用手機分享選單把圖片傳到 LINE；不支援時顯示圖片讓讀者長按儲存 */
+const cardFiles={};
+function prepCard(id){
+  if(cardFiles[id]) return cardFiles[id];
+  cardFiles[id]=fetch(`img/${id}/share-card.jpg`).then(r=>r.blob())
+    .then(b=>({file:new File([b],`${id}-揪團卡.jpg`,{type:"image/jpeg"})})).catch(()=>({}));
+  cardFiles[id].then(v=>cardFiles[id+"_ready"]=v);
+  return cardFiles[id];
+}
+new MutationObserver(()=>document.querySelectorAll("[data-card]").forEach(b=>prepCard(b.dataset.card)))
+  .observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener("pointerdown",e=>{ const b=e.target.closest("[data-card]"); if(b) prepCard(b.dataset.card); });
+function showCard(id){
+  let box=document.getElementById("card-view");
+  if(!box){
+    box=document.createElement("div"); box.id="card-view";
+    box.innerHTML='<div class="cv-panel"><img alt="揪團卡"><p>長按圖片可以儲存或直接分享，<br>存到相簿後就能傳到 LINE 群組。</p><div class="cv-row"><a class="cv-dl" download>下載圖片</a><button type="button" class="cv-x">關閉</button></div></div>';
+    document.body.appendChild(box);
+    box.querySelector(".cv-x").onclick=()=>box.classList.remove("on");
+    box.onclick=e=>{ if(e.target===box) box.classList.remove("on"); };
+  }
+  const src=`img/${id}/share-card.jpg`;
+  box.querySelector("img").src=src;
+  const a=box.querySelector(".cv-dl"); a.href=src; a.setAttribute("download",`${id}-揪團卡.jpg`);
+  box.classList.add("on");
+}
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-card]"); if(!b) return; e.preventDefault();
+  const id=b.dataset.card;
+  const ready=cardFiles[id+"_ready"] || await prepCard(id);
+  const f=ready&&ready.file;
+  if(f && navigator.canShare && navigator.canShare({files:[f]})){
+    try{ await navigator.share({files:[f]}); return; }
+    catch(err){ if(err && err.name==="AbortError") return; }
+  }
+  showCard(id);
+});
 /* 提示小字 */
 function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("on");
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),1800); }
@@ -1235,6 +1286,7 @@ function renderHangwang(p){
       <div><b>朋友聚會</b></div>
       <div><b>公司團體旅遊</b></div>
     </div>
+    <button class="btn-card" data-card="hangwang">傳揪團卡到 LINE</button>
     <button class="copy btn-share" data-copy="hangwang-share" data-label="分享給親友">分享給親友</button>
 
     <h2>巷往 Villa 附近怎麼玩？</h2>

@@ -30,7 +30,7 @@ def main():
         if not os.path.isdir(d):
             continue
         for f in sorted(os.listdir(d)):
-            if not f.lower().endswith((".jpg", ".jpeg", ".png", ".webp")) or "_s." in f:
+            if not f.lower().endswith((".jpg", ".jpeg", ".png", ".webp")) or "_s." in f or "-card." in f:
                 continue
             data[f"img/{folder}/{f}"] = lqip(os.path.join(d, f))
     s = open(INDEX, encoding="utf-8").read()
