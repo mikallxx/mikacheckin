@@ -719,6 +719,20 @@
   .toolbar{padding:22px 18px 4px!important;scroll-margin-top:60px}
   /* 資訊表：讓黑框圓角完整顯示 */
   .tbl{border-collapse:separate!important;border-spacing:0;overflow:hidden}
+  /* 優惠標籤（2026-11）：黑色膠囊＋小圓點；團購中為紅包底金字 */
+  .badge{background:#1A1A1A!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1.5px solid #1A1A1A!important;color:var(--bc,#fff)!important;overflow:visible!important}
+  .badge::after{display:none!important}
+  .badge i{width:7px;height:7px;background:var(--bc,#fff)!important;box-shadow:none!important;animation:none}
+  .badge.code{--bc:#F2C230;--br:242,194,48}
+  .badge.live{--bc:#F2C230;--br:242,194,48;background:#D7261E!important}
+  .badge.code i{animation:bdgBr 1.6s ease-out infinite!important}
+  .badge.live i{animation:bdgBr 1.2s ease-out infinite!important}
+  .badge.soon{--bc:#fff}
+  .badge.soon i{background:transparent!important;border:1.5px solid #fff;width:6px;height:6px;animation:bdgBl 2.4s ease-in-out infinite!important}
+  .badge.ended{--bc:#9A9A9A;background:rgba(255,255,255,.88)!important;border-color:#D0D0D0!important}
+  @keyframes bdgBr{0%{box-shadow:0 0 0 0 rgba(var(--br),.85)}70%{box-shadow:0 0 0 7px rgba(var(--br),0)}100%{box-shadow:0 0 0 0 rgba(var(--br),0)}}
+  @keyframes bdgBl{0%,100%{opacity:1}50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.badge i{animation:none!important}}
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
