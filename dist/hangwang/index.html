@@ -672,7 +672,7 @@
   /* 主要按鈕：黑底白字＋黑邊＋實心陰影 */
   .follow,.cta .p,.deal-go,.reels a,.ask-go,.mc-panel button,.of-line,.btn-share,.offer .of-line,.deal.soon .deal-go{background:#1A1A1A!important;background-image:none!important;color:#fff!important;border:2px solid #1A1A1A!important;border-radius:99px!important;box-shadow:3px 3px 0 #1A1A1A!important}
   /* 首頁封面「旅宿資訊」：黃底黑字 */
-  .follow{background:#F2C230!important;color:#1A1A1A!important;border-color:#1A1A1A!important;box-shadow:3px 3px 0 #1A1A1A!important}
+  .follow{background:var(--c-lime,#F5BF31)!important;color:#1A1A1A!important;border-color:#1A1A1A!important;box-shadow:3px 3px 0 #1A1A1A!important}
   .sq{background:#fff!important;border:2px solid #1A1A1A;border-radius:99px!important;color:#1A1A1A}
   /* IG 按鈕：黑底＋黃色陰影 */
   .ig-btn{background:#1A1A1A!important;border:2px solid #1A1A1A;box-shadow:4px 4px 0 #F2C230;border-radius:18px!important}
@@ -734,17 +734,17 @@
   .toolbar{padding:22px 18px 4px!important;scroll-margin-top:60px}
   /* 資訊表：讓黑框圓角完整顯示 */
   .tbl{border-collapse:separate!important;border-spacing:0;overflow:hidden}
-  /* 優惠標籤（2026-11）：黑色膠囊＋小圓點；團購中為紅包底金字 */
-  .badge{background:#1A1A1A!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1.5px solid #1A1A1A!important;color:var(--bc,#fff)!important;overflow:visible!important}
+  /* 優惠標籤 A 方案「黃黑原色」：實色底，金黃共用「旅宿資訊」按鈕的 --c-lime */
+  .badge{--gold:var(--c-lime,#F5BF31);background:var(--bb)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1px solid var(--bl,transparent)!important;color:var(--bc)!important;overflow:visible!important}
   .badge::after{display:none!important}
-  .badge i{width:7px;height:7px;background:var(--bc,#fff)!important;box-shadow:none!important;animation:none}
-  .badge.code{--bc:#F2C230;--br:242,194,48}
-  .badge.live{--bc:#F2C230;--br:242,194,48;background:#D7261E!important}
+  .badge i{width:7px;height:7px;background:var(--bc)!important;box-shadow:none!important;animation:none}
+  .badge.code{--bb:#191919;--bc:var(--gold);--br:245,191,49}
+  .badge.live{--bb:var(--gold);--bc:#191919;--br:25,25,25}
+  .badge.soon{--bb:#FFF5DF;--bc:#191919;--bl:#191919}
+  .badge.ended{--bb:#E5E5E5;--bc:#595959}
   .badge.code i{animation:bdgBr 1.6s ease-out infinite!important}
   .badge.live i{animation:bdgBr 1.2s ease-out infinite!important}
-  .badge.soon{--bc:#fff}
-  .badge.soon i{background:transparent!important;border:1.5px solid #fff;width:6px;height:6px;animation:bdgBl 2.4s ease-in-out infinite!important}
-  .badge.ended{--bc:#9A9A9A;background:rgba(255,255,255,.88)!important;border-color:#D0D0D0!important}
+  .badge.soon i{background:transparent!important;border:1.5px solid #191919;width:6px;height:6px;animation:bdgBl 2.4s ease-in-out infinite!important}
   @keyframes bdgBr{0%{box-shadow:0 0 0 0 rgba(var(--br),.85)}70%{box-shadow:0 0 0 7px rgba(var(--br),0)}100%{box-shadow:0 0 0 0 rgba(var(--br),0)}}
   @keyframes bdgBl{0%,100%{opacity:1}50%{opacity:.25}}
   @media (prefers-reduced-motion:reduce){.badge i{animation:none!important}}
