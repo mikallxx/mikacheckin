@@ -743,6 +743,26 @@
   .a-body > h2 + p{margin-top:0}
   /* 重點字：改為黑色粗體（跟首頁配色一致，不用紅色與底線） */
   .post strong:not(.off){color:#1A1A1A!important;font-weight:800;background:none!important;padding:0}  /* 價格／折數（.off）維持紅色 */
+  /* 分享給親友：選單＋浮動鈕 */
+  .a-body .btn-share{margin-top:16px}
+  #shareSheet{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0);display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background .2s}
+  #shareSheet.on{background:rgba(0,0,0,.45);pointer-events:auto}
+  .sh-panel{width:100%;max-width:480px;background:#fff;border:2px solid #1A1A1A;border-bottom:0;border-radius:20px 20px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .25s ease}
+  #shareSheet.on .sh-panel{transform:none}
+  @media (min-width:900px){#shareSheet{align-items:center}.sh-panel{border-bottom:2px solid #1A1A1A;border-radius:20px;box-shadow:5px 5px 0 #1A1A1A;transform:translateY(20px);opacity:0;transition:transform .2s,opacity .2s}#shareSheet.on .sh-panel{opacity:1}}
+  .sh-head{display:flex;align-items:center;justify-content:space-between;margin:2px 4px 6px}
+  .sh-head b{font-size:17px;font-weight:900;color:#1A1A1A}
+  .sh-x{width:36px;height:36px;border-radius:50%;font-size:16px;color:#1A1A1A}
+  .sh-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px;margin-top:10px;border:2px solid #1A1A1A;border-radius:14px;background:#fff;box-shadow:2px 2px 0 #1A1A1A}
+  .sh-row:active{background:#FCEBB3}
+  .sh-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#FCEBB3;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .sh-txt b{display:block;font-size:15px;font-weight:800;color:#1A1A1A}
+  .sh-txt small{display:block;font-size:12.5px;color:var(--sub);margin-top:2px}
+  .share-fab{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom) + 18px);z-index:40;display:flex;align-items:center;gap:6px;height:48px;padding:0 16px 0 14px;border-radius:99px;background:#1A1A1A;color:#fff;border:2px solid #1A1A1A;box-shadow:3px 3px 0 var(--c-lime,#F5BF31);font-size:14.5px;font-weight:800;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .2s,transform .2s}
+  .share-fab.on{opacity:1;transform:none;pointer-events:auto}
+  .share-fab svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+  @media (min-width:900px){.share-fab{right:calc(var(--pad,32px) - 8px);bottom:28px}}
+  @media print{.share-fab{display:none}}
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
@@ -1144,6 +1164,63 @@ document.addEventListener("click",async e=>{
 /* 提示小字 */
 function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("on");
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),1800); }
+/* ---------- 分享給親友：固定按鈕＋浮動按鈕，打開分享選單 ---------- */
+const SHARE_GROUP_CATS=["包棟民宿","露營"];
+function shareTexts(p){
+  const url=`https://mikacheckin.com/${p.id}/`;
+  const name=p.title.split("｜")[0];
+  const d=dealOf(p.id), code=d&&["live","code"].includes(status(d))?(d.code||p.code||""):"";
+  const brief=(p.excerpt||"").replace(/照片和詳細介紹整理中。?/,"").trim();
+  const rec=COPY_TEXTS[p.id+"-share"] || [`推薦你這間${p.region}的${(p.kind&&!/（/.test(p.kind))?p.kind:catOf(p)}：${name}！`, brief, (code&&!/折扣碼/.test(brief))?`用 Mika 的折扣碼 ${code} 訂房有優惠。`:(code?`折扣碼：${code}`:""), "完整介紹在這裡 👇", url].filter(Boolean).join("\n");
+  const cap=(p.info||[]).find(([k])=>/人數|房間/.test(k));
+  const grp=[`要不要一起包「${name}」？`, p.id==="hangwang"?"可以住 8～22 人，一樓有孝親房，大家都住得下。":(cap?cap[1]:""), "想約＿＿月＿＿日，可以的人 +1，我再去問空房 🙋", url].filter(Boolean).join("\n");
+  return {url,rec,grp:SHARE_GROUP_CATS.includes(catOf(p))?grp:""};
+}
+function currentPost(){ const m=location.hash.match(/^#post-(.+)$/); const id=PAGE_POST||(m&&m[1]); return id&&posts.find(x=>x.id===id); }
+function openShare(){
+  const p=currentPost(); if(!p) return; const t=shareTexts(p);
+  let sh=document.getElementById("shareSheet");
+  if(!sh){
+    sh=document.createElement("div"); sh.id="shareSheet"; sh.setAttribute("role","dialog"); sh.setAttribute("aria-modal","true"); sh.setAttribute("aria-label","分享給親友");
+    document.body.appendChild(sh);
+    sh.addEventListener("click",async e=>{
+      if(e.target===sh||e.target.closest("[data-close]")){ sh.classList.remove("on"); return; }
+      const b=e.target.closest("[data-sh]"); if(!b) return;
+      const k=b.dataset.sh, tt=shareTexts(currentPost());
+      if(k==="line"){ window.open("https://line.me/R/share?text="+encodeURIComponent(tt.rec),"_blank","noopener"); sh.classList.remove("on"); return; }
+      if(k==="more"){ try{ await navigator.share({title:document.title,text:tt.rec.replace(tt.url,"").trim(),url:tt.url}); }catch(err){} sh.classList.remove("on"); return; }
+      const text={url:tt.url,rec:tt.rec,grp:tt.grp}[k];
+      sh.classList.remove("on");
+      if(await copyText(text)) toast({url:"已複製網址 ✓",rec:"已複製推薦訊息，貼到聊天室就好 ✓",grp:"已複製揪團訊息 ✓"}[k]);
+      else showManualCopy(text);
+    });
+  }
+  const row=(k,ic,b,sm)=>`<button type="button" class="sh-row" data-sh="${k}"><span class="sh-ic">${ic}</span><span class="sh-txt"><b>${b}</b><small>${sm}</small></span></button>`;
+  sh.innerHTML=`<div class="sh-panel"><div class="sh-head"><b>分享給親友</b><button type="button" class="sh-x" data-close aria-label="關閉">✕</button></div>
+    ${row("rec","💬","複製推薦訊息","附上介紹和網址，直接貼到 LINE 或群組")}
+    ${t.grp?row("grp","🙋","複製揪團訊息","問大家要不要一起包、哪天可以"):""}
+    ${row("url","🔗","只複製網址","最快，貼給一個人看")}
+    ${row("line","🟢","用 LINE 分享","直接選聊天室傳送")}
+    ${navigator.share?row("more","⋯","更多分享方式","IG、Messenger、訊息…"):""}</div>`;
+  requestAnimationFrame(()=>sh.classList.add("on"));
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-share]"); if(!b) return; e.preventDefault(); openShare(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ const sh=document.getElementById("shareSheet"); sh&&sh.classList.remove("on"); } });
+/* 浮動分享鈕：滑過「入住心得」後才出現；看到文末固定按鈕時先藏起來 */
+(function(){
+  const fab=document.createElement("button"); fab.type="button"; fab.className="share-fab"; fab.setAttribute("data-share",""); fab.setAttribute("aria-label","分享給親友");
+  fab.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg><span>分享</span>';
+  document.body.appendChild(fab);
+  const upd=()=>{
+    const art=document.getElementById("article");
+    if(!document.body.classList.contains("reading")||!art){ fab.classList.remove("on"); return; }
+    const start=art.querySelector(".a-body h2"), fixed=art.querySelector(".a-body .btn-share");
+    const past=start? start.getBoundingClientRect().top < innerHeight*0.6 : scrollY>600;
+    let nearEnd=false; if(fixed){ nearEnd=fixed.getBoundingClientRect().top < innerHeight+40; }
+    fab.classList.toggle("on", past && !nearEnd);
+  };
+  addEventListener("scroll",upd,{passive:true}); addEventListener("resize",upd); addEventListener("hashchange",()=>setTimeout(upd,50)); setTimeout(upd,300);
+})();
 /* 分享鈕：複製網站網址 */
 document.addEventListener("click",async e=>{
   const b=e.target.closest("[data-copyurl]"); if(!b) return; e.preventDefault();
@@ -1529,20 +1606,9 @@ function renderHangwang(p){
 
     <!-- 8 查空房與官方資訊 -->
     <h2>查空房與官方資訊</h2>
-    <p>整體來說，巷往最讓我印象深刻的是<strong>每間房間都比想像中寬敞</strong>，還有一樓雙人房帶來的方便。</p>
-    <p>戶外的草坪和步道也打理得滿好的，吃飽後出來散散步，在民宿裡慢慢待著就很悠閒。</p>
-    <p>如果你正在找適合帶長輩、小朋友，或揪朋友一起住的包棟民宿，我覺得巷往可以放進名單。</p>
-    <h3>適合誰入住</h3>
-    <div class="who-list who-titles">
-      <div><b>三代同遊</b></div>
-      <div><b>幾組家庭同遊</b></div>
-      <div><b>朋友聚會</b></div>
-      <div><b>公司團體旅遊</b></div>
-    </div>
-    <button class="copy btn-share" data-copy="hangwang-share" data-label="分享給親友">分享給親友</button>
-
     <a class="price-note price-btn" href="#offer" data-goto=".offer"><span class="pb-txt"><span class="nw">包棟價格</span><wbr><span class="nw">請直接向民宿詢問</span></span><span class="pb-arrow">查看優惠 ↑</span></a>
     <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" target="_blank" rel="noopener">查看民宿官網</a></div>
+    <button type="button" class="btn-share" data-share>分享給親友</button>
     <p class="note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
   </div>`;
 }
@@ -1605,6 +1671,7 @@ function renderSimple(p){  /* 依固定 8 大區塊排列；沒有資料的區�
 
     ${p.highlights?`<h2>住宿亮點</h2><ul class="hl-list">${p.highlights.map(t=>`<li>${t}</li>`).join("")}</ul>`:""}
     ${p.notes?`<h2>入住須知</h2><ul class="hl-list warn">${p.notes.map(t=>`<li>${t}</li>`).join("")}</ul>`:""}
+    <button type="button" class="btn-share" data-share>分享給親友</button>
     <div class="soon-note">更多照片和詳細介紹整理中，先看上面的開箱影片吧。</div>
     <p class="note-line">本頁為個人非官方住宿攻略，資訊以${p.host||"民宿"}官方公告為準。</p>
   </div>`;
