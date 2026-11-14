@@ -709,16 +709,13 @@
   .tabs .sub-filters .chip-tog{flex:none;height:38px;padding:0 16px;color:#1A1A1A;border:2px solid #1A1A1A!important}
   .tabs .sub-filters .chip-tog.on{color:#F2C230}
   /* 整齊版：第一排縮小到手機一行放得下；第二排改成較輕的次要樣式 */
-  .cat-chips{gap:5px;padding:2px 3px 5px 0;margin:0}
-  .cat-chips button{height:36px;padding:0 11px;font-size:14px}
-  @media (max-width:385px){.cat-chips{gap:4px}.cat-chips button{padding:0 9px;font-size:13.5px}}
-  .sub-filters{gap:6px;padding:8px 0 2px;align-items:center}
-  .tabs .sub-filters .chip-sel,.tabs .sub-filters .chip-tog{height:32px;padding:0 12px;font-size:13.5px;border-width:1.5px!important;box-shadow:none}
-  .tabs .sub-filters .chip-sel{padding-right:9px}
-  .chip-sel svg{width:14px;height:14px}
-  .sub-filters .f-sep{width:1px;height:18px;background:#D9D9D9;margin:0 4px}
-  .tabs .sub-filters .f-clear{flex:none;margin-left:auto;font-size:13px;font-weight:700;color:var(--sub);text-decoration:underline;text-underline-offset:3px;padding:6px 2px;background:none;border:0}
-  .sub-filters .f-clear[hidden]{display:none}
+  /* 第二排：兩顆等寬撐滿整行（A 版：白底，選中黃底黑字） */
+  .tabs .sub-filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 4px 5px 2px}
+  .tabs .sub-filters .chip-sel,.tabs .sub-filters .chip-tog{width:100%;height:38px;justify-content:center;font-size:14.5px;border:2px solid #1A1A1A!important;box-shadow:2px 2px 0 #1A1A1A;background:#fff;color:#1A1A1A}
+  .tabs .sub-filters .chip-sel.on,.tabs .sub-filters .chip-tog.on{background:#F2C230;color:#1A1A1A}
+  .toolbar .f-clear{flex:none;margin-right:12px;font-size:13px;font-weight:700;color:var(--sub);text-decoration:underline;text-underline-offset:3px;padding:6px 2px;background:none;border:0}
+  .toolbar .f-clear[hidden]{display:none}
+  .toolbar .f-clear+.views{margin-left:0!important}
   .chip-sel,.chip-tog{position:relative;flex:none;display:inline-flex;align-items:center;gap:4px;height:38px;padding:0 14px 0 16px;border-radius:99px;border:2px solid #1A1A1A;background:#fff;font-size:14.5px;font-weight:700;color:#1A1A1A;box-shadow:2px 2px 0 #1A1A1A;cursor:pointer}
   .chip-sel svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
   .chip-sel select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px;-webkit-appearance:none;appearance:none}
@@ -733,6 +730,7 @@
   /* 資訊表：讓黑框圓角完整顯示 */
   .tbl{border-collapse:separate!important;border-spacing:0;overflow:hidden}
   @media (min-width:900px){.toolbar{padding:26px var(--pad) 4px!important}.tabs{padding:12px var(--pad)!important}}
+  @media (min-width:900px){.tabs{display:grid!important;grid-template-columns:max-content;justify-content:start}}
 </style>
 </head>
 <body class="reading">
@@ -795,6 +793,7 @@
       <button class="filter" id="filterBtn"><span id="filterLabel">全部文章</span>
         <svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m6 9 6 6 6-6"/></svg></button>
       <div class="menu-pop" id="filterMenu"></div>
+      <button class="f-clear" id="fClear" type="button" hidden>清除篩選</button>
       <div class="views">
         <button data-view="grid" aria-label="格狀"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></button>
         <button data-view="rows" aria-label="清單"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="4" width="12" height="3" rx="1"/><rect x="17" y="4" width="4" height="3" rx="1"/><rect x="3" y="10.5" width="12" height="3" rx="1"/><rect x="17" y="10.5" width="4" height="3" rx="1"/><rect x="3" y="17" width="12" height="3" rx="1"/><rect x="17" y="17" width="4" height="3" rx="1"/></svg></button>
@@ -807,7 +806,6 @@
       <label class="chip-sel" id="regionChip"><span id="regionLabel">地區</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         <select id="regionSel" aria-label="地區"></select></label>
       <button class="chip-tog" id="dealTog" aria-pressed="false">優惠中</button>
-      <button class="f-clear" id="fClear" type="button" hidden>清除</button>
     </div>
   </div>
 
