@@ -25,13 +25,13 @@
   :root{
     /* ===== 品牌配色：全站共用，改這裡就會全部更新 ===== */
     --c-white:#FFFFFF;  /* 頁面背景、文章卡片底色 */
-    --c-ink:#171717;    /* 正文、一般標題 */
-    --c-blue:#274B9B;   /* 小標、連結、主要按鈕、選中狀態 */
-    --c-blue-50:#EFF4FF;/* 心得字卡底色 */
+    --c-ink:#1A1A1A;    /* 正文、一般標題 */
+    --c-blue:#1A1A1A;   /* 小標、連結、主要按鈕、選中狀態 */
+    --c-blue-50:#FCEBB3;/* 心得字卡底色 */
     --c-red:#A81919;    /* 分類標籤文字、折扣與優惠序號、正文重點字 */
     --c-red-50:#FCEDED; /* 分類標籤底色 */
-    --c-lime:#FFD23F;   /* 滑過、按下的互動提示（黃色） */
-    --ink:var(--c-ink); --sub:#8a8a8e; --line:#ececec; --bg:var(--c-white); --soft:#f6f6f4;
+    --c-lime:#F2C230;   /* 滑過、按下的互動提示（黃色） */
+    --ink:var(--c-ink); --sub:#8a8a8e; --line:#ececec; --bg:var(--c-white); --soft:#FCEBB3;
     --accent:var(--c-blue); --accent-2:var(--c-blue-50);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -496,7 +496,7 @@
   @keyframes mkr{0%{background-size:0% 42%;background-position:0 70%}38%,62%{background-size:100% 42%;background-position:0 70%}100%{background-size:0% 42%;background-position:100% 70%}}
   @media (prefers-reduced-motion:reduce){ .offer .mk{animation:none;background-size:100% 42%} }
   /* 「用 LINE 詢問空房」：深藍漸層自動緩慢流動 */
-  .offer .of-line{background-color:var(--c-blue);background-image:linear-gradient(to right,#1E3A7A 0%,#274B9B 30%,#5B86E0 51%,#274B9B 70%,#1E3A7A 100%);
+  .offer .of-line{background-color:var(--c-blue);background-image:linear-gradient(to right,#000000 0%,#1A1A1A 30%,#F2C230 51%,#1A1A1A 70%,#000000 100%);
     background-size:200% auto;background-position:left center;animation:lineFlow 4s ease-in-out infinite}
   @keyframes lineFlow{0%,100%{background-position:left center}50%{background-position:right center}}
   @media (hover:hover){ .offer .of-line:hover{background-image:none;background-color:var(--c-lime);color:var(--c-ink)} }
@@ -511,7 +511,7 @@
   .ld-ov.sm .ld{font-size:15px;padding-bottom:8px}
   .ld b{font-weight:inherit;display:inline-block;color:rgba(255,255,255,.42);animation:ldHop 1.6s ease-in-out infinite;animation-delay:calc(var(--i) * .1s)}
   .ld::after{content:"";position:absolute;left:0;right:.14em;bottom:0;height:3px;border-radius:3px;
-    background:linear-gradient(90deg,#274B9B,#FFD23F) 0 0/0% 100% no-repeat,rgba(255,255,255,.3);animation:ldBar 3.2s cubic-bezier(.6,0,.4,1) infinite}
+    background:linear-gradient(90deg,#1A1A1A,#F2C230) 0 0/0% 100% no-repeat,rgba(255,255,255,.3);animation:ldBar 3.2s cubic-bezier(.6,0,.4,1) infinite}
   @keyframes ldHop{0%,40%,100%{transform:translateY(0);color:rgba(255,255,255,.42);text-shadow:none}20%{transform:translateY(-6px);color:#fff;text-shadow:0 0 12px rgba(255,210,63,.8)}}
   @keyframes ldBar{0%{background-size:0% 100%,auto}85%,92%{background-size:100% 100%,auto;opacity:1}100%{background-size:100% 100%,auto;opacity:0}}
   @media (prefers-reduced-motion:reduce){ .ld b{animation:none;color:#fff} .ld::after{animation:none;background-size:60% 100%,auto} }
@@ -545,7 +545,7 @@
   @media (hover:hover){ .rail-nav{display:grid} .rail-nav:hover{background:var(--c-lime)} }
   .post .facil+.rail{margin-top:24px}
   /* 附近怎麼玩：三張直向卡片（只作用在 .nearby） */
-  .nearby{--nb-blue:#23467C;--nb-line:#DAE3F0;margin-top:-4px}
+  .nearby{--nb-blue:#1A1A1A;--nb-line:#1A1A1A;margin-top:-4px}
   .nearby .nb-sub{font-size:13.5px;color:#555;margin:0 0 14px}
   .nearby .nb-card{border:1px solid var(--nb-line);border-radius:14px;overflow:hidden;background:var(--c-white)}
   .nearby .nb-card+.nb-card{margin-top:12px}
@@ -564,9 +564,9 @@
   .nearby .nb-meta b{font-size:14.5px;font-weight:700;color:var(--nb-blue);line-height:1.4}
   .nearby .nb-meta small{font-size:12px;color:#888;line-height:1.4}
   .nearby .nb-ext{width:14px;height:14px;flex:none;fill:none;stroke:#8aa0bf;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  @media (hover:hover){ .nearby .nb-row:hover{background:#EEF3F9} .nearby .nb-row:hover .nb-ext{stroke:var(--nb-blue)} }
-  .nearby .nb-row:active{background:#EEF3F9}
-  .nearby .nb-row:focus-visible{outline:2px solid var(--nb-blue);outline-offset:-3px;border-radius:10px;background:#EEF3F9}
+  @media (hover:hover){ .nearby .nb-row:hover{background:#FCEBB3} .nearby .nb-row:hover .nb-ext{stroke:var(--nb-blue)} }
+  .nearby .nb-row:active{background:#FCEBB3}
+  .nearby .nb-row:focus-visible{outline:2px solid var(--nb-blue);outline-offset:-3px;border-radius:10px;background:#FCEBB3}
   .nearby .nb-note{margin-top:12px;font-size:12px;color:#888;text-align:center}
   /* 優惠卡放在文章最上方（大標之前） */
   .post>.offer:first-child{margin-top:0;margin-bottom:26px}
@@ -667,6 +667,46 @@
     .rail-track{padding:0 0 4px;scroll-padding:0}
     .rail-card{flex:0 0 calc((100% - 12px) / 2.35)}
   }
+
+  /* ===== 2026-11 改版：芥末黃 × 墨黑＋黑邊陰影（照片不加框） ===== */
+  /* 主要按鈕：黑底白字＋黑邊＋實心陰影 */
+  .follow,.cta .p,.deal-go,.reels a,.ask-go,.mc-panel button,.of-line,.btn-share,.offer .of-line,.deal.soon .deal-go{background:#1A1A1A!important;background-image:none!important;color:#fff!important;border:2px solid #1A1A1A!important;border-radius:99px!important;box-shadow:3px 3px 0 #1A1A1A!important}
+  /* 首頁封面「旅宿資訊」：黃底黑字 */
+  .follow{background:#F2C230!important;color:#1A1A1A!important;border-color:#1A1A1A!important;box-shadow:3px 3px 0 #1A1A1A!important}
+  .sq{background:#fff!important;border:2px solid #1A1A1A;border-radius:99px!important;color:#1A1A1A}
+  /* IG 按鈕：黑底＋黃色陰影 */
+  .ig-btn{background:#1A1A1A!important;border:2px solid #1A1A1A;box-shadow:4px 4px 0 #F2C230;border-radius:18px!important}
+  .ig-btn .g,.ig .g{background:#F2C230!important;color:#1A1A1A}
+  /* 次要按鈕：白底黑框 */
+  .copy,.offer .of-copy,.btn-ghost,.ask-row .copy{border:2px solid #1A1A1A!important;border-radius:99px!important;box-shadow:3px 3px 0 #1A1A1A;background:#fff!important;color:#1A1A1A!important}
+  /* 卡片：黑邊＋實心陰影 */
+  .deal,.offer,.info,.ask-card,.gscore,.nearby .nb-card,.who-list div,.price-btn,.one,.tbl{border:2px solid #1A1A1A!important;border-radius:18px!important;box-shadow:5px 5px 0 #1A1A1A!important}
+  .deal,.offer,.price-btn{background:#FFF8E1!important}
+  .deal::before{display:none}
+  .one{background:#FCEBB3!important;border-left-width:2px!important}
+  /* 有照片的地方：不加黑邊、不加陰影 */
+  .thumb,.card .thumb,.pop .thumb,.spot .thumb,.srch-item .thumb,#list.grid .card .thumb,#article .cover-fig .a-cover,.post .gal .ph,.post .fig .ph,.vc-thumb{border:0!important;box-shadow:none!important}
+  .thumb,.card .thumb,.pop .thumb{border-radius:14px!important}
+  .rail-card,.video-card,.spot{box-shadow:none!important;border:1.5px solid #E5DCC8!important;border-radius:18px!important}
+  /* 標籤與小細節 */
+  .tag,.spot-list span{background:#FCEBB3!important;color:#1A1A1A!important;border:1.5px solid #1A1A1A}
+  .tag.on{background:#1A1A1A!important;color:#F2C230!important}
+  .a-body h2{border-left:6px solid #F2C230!important}
+  .tabs button.on{border-bottom:3px solid #F2C230!important}
+  .nearby .nb-head{background:#1A1A1A!important}
+  .vc-play{background:#F2C230!important;color:#1A1A1A}
+  .sep{background:#FFF8E1!important}
+  /* 分類籤：取代原本只剩一個的「文章」分頁 */
+  .tabs{padding:12px 18px!important;border-bottom:1px solid var(--line)!important}
+  .cat-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 4px 5px 2px}
+  .cat-chips::-webkit-scrollbar{display:none}
+  .cat-chips button{flex:none;height:38px;padding:0 16px;border-radius:99px;border:2px solid #1A1A1A;background:#fff;font-size:14.5px;font-weight:700;color:#1A1A1A;box-shadow:2px 2px 0 #1A1A1A}
+  .cat-chips button.on{background:#1A1A1A;color:#F2C230;border:2px solid #1A1A1A!important}
+  .toolbar .filter,.toolbar .menu-pop{display:none!important}
+  .list-h{font-size:20px;font-weight:900;margin-right:auto}
+  .toolbar{padding:22px 18px 4px!important;scroll-margin-top:60px}
+  /* 資訊表：讓黑框圓角完整顯示 */
+  .tbl{border-collapse:separate!important;border-spacing:0;overflow:hidden}
 </style>
 </head>
 <body class="reading">
@@ -693,12 +733,12 @@
       <div class="stats">台灣與海外・住宿開箱・旅遊攻略</div>
       <h1>今晚住這裡<br>住哪裡，怎麼玩</h1>
       <div class="who">
-        <div class="avatar"><svg viewBox="0 0 56 56" width="56" height="56"><rect width="56" height="56" fill="#e9a78a"/><circle cx="28" cy="22" r="10" fill="#fbe3c4"/><path d="M8 56c2-14 12-20 20-20s18 6 20 20z" fill="#274B9B"/></svg></div>
+        <div class="avatar"><svg viewBox="0 0 56 56" width="56" height="56"><rect width="56" height="56" fill="#e9a78a"/><circle cx="28" cy="22" r="10" fill="#fbe3c4"/><path d="M8 56c2-14 12-20 20-20s18 6 20 20z" fill="#1A1A1A"/></svg></div>
         <div><b>Mika<em>｜住宿與旅遊內容創作者</em></b></div>
         <button class="share" aria-label="複製網站連結" data-copyurl><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
       </div>
       <div class="actions">
-        <a class="follow" href="#list-anchor" data-golist>看住宿攻略 ↓</a>
+        <a class="follow" href="#list-anchor" data-golist>旅宿資訊 ↓</a>
         <button class="sq" data-open aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
       </div>
     </div>
@@ -724,12 +764,8 @@
 
   <div class="sep"></div>
 
-  <div class="tabs" id="list-anchor">
-    <button class="on" data-tab="posts">文章</button>
-  </div>
-
-  <div id="posts-pane">
-    <div class="toolbar">
+    <div class="toolbar" id="list-anchor">
+      <h2 class="list-h">所有開箱</h2>
       <button class="filter" id="filterBtn"><span id="filterLabel">全部文章</span>
         <svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m6 9 6 6 6-6"/></svg></button>
       <div class="menu-pop" id="filterMenu"></div>
@@ -739,6 +775,11 @@
         <button data-view="cards" class="on" aria-label="大圖"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/></svg></button>
       </div>
     </div>
+  <div class="tabs">
+    <div class="cat-chips" id="catChips" role="group" aria-label="文章分類"></div>
+  </div>
+
+  <div id="posts-pane">
     <div id="list"></div>
   </div>
 
@@ -1349,7 +1390,14 @@ function renderList(){
       </div>
     </a>`).join("") : `<p style="padding:40px 0;text-align:center;color:var(--sub)">這個分類還沒有文章</p>`;
 }
+function catCount(c){
+  const active=p=>{const d=dealOf(p.id);return d&&["live","code"].includes(status(d));};
+  return posts.filter(p=>c==="全部文章"||(c==="優惠中"?active(p):(p.region===c||p.type===c))).length;
+}
 function renderFilter(){
+  const cc=document.getElementById("catChips");
+  if(cc) cc.innerHTML = cats.filter(c=>c==="全部文章"||c===currentCat||catCount(c)>0)
+    .map(c=>`<button class="${c===currentCat?'on':''}" data-c="${c}">${c==="全部文章"?"全部":c}</button>`).join("");
   filterMenu.innerHTML = cats.map(c=>`<button class="${c===currentCat?'on':''}" data-c="${c}">${c}</button>`).join("");
   filterLabel.textContent = currentCat;
 }
@@ -1368,6 +1416,7 @@ setInterval(()=>{
 
 /* interactions */
 filterBtn.onclick = e=>{ e.stopPropagation(); filterMenu.classList.toggle("on"); };
+{const cc=document.getElementById("catChips"); if(cc) cc.onclick=e=>{const c=e.target.closest("[data-c]"); if(c) setCat(c.dataset.c);};}
 filterMenu.onclick = e=>{ const c=e.target.dataset.c; if(c){ setCat(c); filterMenu.classList.remove("on"); } };
 document.addEventListener("click",()=>filterMenu.classList.remove("on"));
 
