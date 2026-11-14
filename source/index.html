@@ -437,7 +437,8 @@
   .a-body p.of-id{margin:6px 0 0;font-size:12.5px;color:#9a9a9a;text-align:center}
   /* 揪團卡 */
   .btn-card{display:block;width:100%;margin-top:14px;padding:13px;border-radius:12px;background:var(--c-white);color:var(--c-blue);font-size:15px;font-weight:700;text-align:center;border:1.5px solid var(--c-blue)}
-  .btn-card+.btn-share{margin-top:10px}
+  .btn-cardimg{display:block;width:100%;margin-top:8px;padding:6px;font-size:13px;color:var(--c-blue);text-decoration:underline;text-underline-offset:3px}
+  .btn-cardimg+.btn-share{margin-top:10px}
   @media (hover:hover){ .btn-card:hover{background:var(--c-lime);border-color:var(--c-lime);color:var(--c-ink)} }
   .btn-card:active{background:var(--c-lime);border-color:var(--c-lime);color:var(--c-ink)}
   #card-view{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
@@ -957,7 +958,7 @@ function showCard(id){
   let box=document.getElementById("card-view");
   if(!box){
     box=document.createElement("div"); box.id="card-view";
-    box.innerHTML='<div class="cv-panel"><img alt="揪團卡"><p>長按圖片可以儲存或直接分享，<br>存到相簿後就能傳到 LINE 群組。<br>文章連結已複製，貼在圖片下面就好。</p><div class="cv-row"><a class="cv-dl" download>下載圖片</a><button type="button" class="cv-x">關閉</button></div></div>';
+    box.innerHTML='<div class="cv-panel"><img alt="揪團卡"><p>長按圖片可以儲存或直接分享，<br>存到相簿後就能傳到 LINE 群組。</p><div class="cv-row"><a class="cv-dl" download>下載圖片</a><button type="button" class="cv-x">關閉</button></div></div>';
     document.body.appendChild(box);
     box.querySelector(".cv-x").onclick=()=>box.classList.remove("on");
     box.onclick=e=>{ if(e.target===box) box.classList.remove("on"); };
@@ -967,20 +968,20 @@ function showCard(id){
   const a=box.querySelector(".cv-dl"); a.href=src; a.setAttribute("download",`${id}-揪團卡.jpg`);
   box.classList.add("on");
 }
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-cardimg]"); if(!b) return; e.preventDefault(); showCard(b.dataset.cardimg);
+});
 document.addEventListener("click",async e=>{
   const b=e.target.closest("[data-card]"); if(!b) return; e.preventDefault();
   const id=b.dataset.card;
-  const ready=cardFiles[id+"_ready"] || await prepCard(id);
-  const f=ready&&ready.file;
-  const link=`https://mikacheckin.com/${id}/`;
+  const origin=/^https:/.test(location.origin)?location.origin:"https://mikacheckin.com";
+  const link=`${origin}/${id}/`;
   const msg=`房間照片和完整介紹在這裡 👇\n${link}`;
-  copyText(link);
-  if(f && navigator.canShare && navigator.canShare({files:[f]})){
-    const data=navigator.canShare({files:[f],text:msg})?{files:[f],text:msg}:{files:[f]};
-    try{ await navigator.share(data); toast("連結也已複製，沒跟著圖片出現的話可以直接貼上"); return; }
+  if(navigator.share){
+    try{ await navigator.share({text:msg}); return; }
     catch(err){ if(err && err.name==="AbortError") return; }
   }
-  showCard(id);
+  if(await copyText(msg)) toast("已複製連結，貼到 LINE 群組就會出現揪團卡"); else showManualCopy(msg);
 });
 /* 提示小字 */
 function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("on");
@@ -1291,6 +1292,7 @@ function renderHangwang(p){
       <div><b>公司團體旅遊</b></div>
     </div>
     <button class="btn-card" data-card="hangwang">傳揪團卡到 LINE</button>
+    <button class="btn-cardimg" data-cardimg="hangwang">想發限動或存相簿？下載揪團卡圖片</button>
     <button class="copy btn-share" data-copy="hangwang-share" data-label="分享給親友">分享給親友</button>
 
     <h2>巷往 Villa 附近怎麼玩？</h2>
