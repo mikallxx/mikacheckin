@@ -703,10 +703,25 @@
   .cat-chips button{flex:none;height:38px;padding:0 16px;border-radius:99px;border:2px solid #1A1A1A;background:#fff;font-size:14.5px;font-weight:700;color:#1A1A1A;box-shadow:2px 2px 0 #1A1A1A}
   .cat-chips button.on{background:#1A1A1A;color:#F2C230;border:2px solid #1A1A1A!important}
   .toolbar .filter,.toolbar .menu-pop{display:none!important}
+  /* 第二排：地區下拉＋優惠中開關 */
+  .tabs{flex-direction:column;align-items:stretch}
+  .sub-filters{display:flex;gap:8px;padding:6px 2px 4px}
+  .tabs .sub-filters .chip-tog{flex:none;height:38px;padding:0 16px;color:#1A1A1A;border:2px solid #1A1A1A!important}
+  .tabs .sub-filters .chip-tog.on{color:#F2C230}
+  .chip-sel,.chip-tog{position:relative;flex:none;display:inline-flex;align-items:center;gap:4px;height:38px;padding:0 14px 0 16px;border-radius:99px;border:2px solid #1A1A1A;background:#fff;font-size:14.5px;font-weight:700;color:#1A1A1A;box-shadow:2px 2px 0 #1A1A1A;cursor:pointer}
+  .chip-sel svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .chip-sel select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px;-webkit-appearance:none;appearance:none}
+  .chip-tog{padding:0 16px}
+  .chip-sel.on,.chip-tog.on{background:#1A1A1A;color:#F2C230}
+  .chip-sel:focus-within{outline:2px solid #F2C230;outline-offset:2px}
+  .empty-state{padding:44px 0 36px;text-align:center;color:var(--sub);font-size:15px}
+  .empty-state button{margin-top:14px;height:40px;padding:0 20px;border-radius:99px;border:2px solid #1A1A1A;background:#F2C230;color:#1A1A1A;font-weight:800;font-size:14.5px;box-shadow:2px 2px 0 #1A1A1A}
+  .card .meta{white-space:nowrap}
   .list-h{font-size:20px;font-weight:900;margin-right:auto}
   .toolbar{padding:22px 18px 4px!important;scroll-margin-top:60px}
   /* 資訊表：讓黑框圓角完整顯示 */
   .tbl{border-collapse:separate!important;border-spacing:0;overflow:hidden}
+  @media (min-width:900px){.toolbar{padding:26px var(--pad) 4px!important}.tabs{padding:12px var(--pad)!important}}
 </style>
 </head>
 <body class="reading">
@@ -776,7 +791,12 @@
       </div>
     </div>
   <div class="tabs">
-    <div class="cat-chips" id="catChips" role="group" aria-label="文章分類"></div>
+    <div class="cat-chips" id="catChips" role="group" aria-label="住宿分類"></div>
+    <div class="sub-filters">
+      <label class="chip-sel" id="regionChip"><span id="regionLabel">地區</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        <select id="regionSel" aria-label="地區"></select></label>
+      <button class="chip-tog" id="dealTog" aria-pressed="false">優惠中</button>
+    </div>
   </div>
 
   <div id="posts-pane">
@@ -1201,7 +1221,7 @@ const ALL_POSTS = [
     intro:["這次住的是嘉義的「歸樸森活露營區」，<strong>不用帶任何裝備</strong>的懶人營區，人到就能入住。",
            "最推薦的是傍晚，<strong>夕陽非常漂亮</strong>，記得把時間留給這一段。"],
     video:"https://www.instagram.com/reel/DfYnfihJlN6/", render:renderSimple },
-  { id:"hangwang", real:true, date:"2026. 11. 08.", region:"宜蘭", type:"民宿",
+  { id:"hangwang", real:true, date:"2026. 11. 08.", region:"宜蘭", area:"冬山", cat:"包棟民宿", type:"民宿",
     video:"https://www.instagram.com/reel/DfnyZmLhHLV/",
     title:"巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房",
     h1:'<span class="h1l">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，</span><span class="h1l">8～22 人入住，一樓孝親房、二樓檜木房</span>',
@@ -1362,8 +1382,15 @@ const notices = [
   "合作邀約請透過 IG 私訊 @mika.checkin",
 ];
 
-const cats = ["全部文章","優惠中",...new Set(posts.map(p=>p.region)),...new Set(posts.map(p=>p.type))];
+/* 篩選：住宿大分類 × 地區 × 優惠中 */
+const BIG_CATS = ["全部","飯店旅館","民宿","包棟民宿","露營"];
+const catOf = p => p.cat || (/包棟/.test(p.kind||"") ? "包棟民宿" : p.type==="露營" ? "露營" : p.type==="民宿" ? "民宿" : ["飯店","旅店"].includes(p.type) ? "飯店旅館" : p.type);
+const metaOf = p => [p.region, p.area, catOf(p)].filter(Boolean).join("・");
+const REGIONS = [...new Set(posts.filter(p=>!p.sample).map(p=>p.region))];
+const cats = ["全部文章","優惠中",...BIG_CATS,"飯店","民宿",...REGIONS];   /* 給側邊選單／#cat- 連結用 */
+const F = { cat:"全部", region:"", deal:false };
 let currentCat = "全部文章";
+const hasDeal = p=>{const d=dealOf(p.id);return !!d&&["live","code"].includes(status(d));};
 
 /* ---------- render ---------- */
 function thumb(p, extraStyle=""){
@@ -1372,11 +1399,13 @@ function thumb(p, extraStyle=""){
 }
 function renderPop(){
   pop.innerHTML = posts.slice(0,4).map(p=>`
-    <a href="${postLink(p.id)}">${thumb(p)}<h3>${p.title}</h3><div class="cat">${p.region} · ${p.type}</div></a>`).join("");
+    <a href="${postLink(p.id)}">${thumb(p)}<h3>${p.title}</h3><div class="cat">${metaOf(p).split("・").map(x=>`<span style="white-space:nowrap">${x}</span>`).join("・")}</div></a>`).join("");
+}
+function filtered(){
+  return posts.filter(p=>(F.cat==="全部"||catOf(p)===F.cat) && (!F.region||p.region===F.region) && (!F.deal||hasDeal(p)));
 }
 function renderList(){
-  const active=p=>{const d=dealOf(p.id);return d&&["live","code"].includes(status(d));};
-  const shown = posts.filter(p=>currentCat==="全部文章"||(currentCat==="優惠中"?active(p):(p.region===currentCat||p.type===currentCat)));
+  const shown = filtered();
   list.innerHTML = shown.length ? shown.map(p=>`
     <a class="card" href="${postLink(p.id)}">
       <div class="date">${p.date}</div>
@@ -1385,23 +1414,32 @@ function renderList(){
         <h3>${p.title}</h3>
         ${dealLine(p.id)}
         <p>${p.excerpt}</p>
-        <span class="meta">${p.date} · ${p.region}</span>
-        <div class="tags">${p.tags.map(t=>`<span class="tag${t===currentCat?' on':''}">#${t}</span>`).join("")}</div>
+        <span class="meta">${metaOf(p)}</span>
+        <div class="tags">${p.tags.map(t=>`<span class="tag">#${t}</span>`).join("")}</div>
       </div>
-    </a>`).join("") : `<p style="padding:40px 0;text-align:center;color:var(--sub)">這個分類還沒有文章</p>`;
-}
-function catCount(c){
-  const active=p=>{const d=dealOf(p.id);return d&&["live","code"].includes(status(d));};
-  return posts.filter(p=>c==="全部文章"||(c==="優惠中"?active(p):(p.region===c||p.type===c))).length;
+    </a>`).join("") : `<div class="empty-state"><p>目前沒有符合條件的住宿</p><button type="button" id="clearF">清除篩選</button></div>`;
+  const cb=document.getElementById("clearF"); if(cb) cb.onclick=()=>{ setF({cat:"全部",region:"",deal:false}); const cc=document.getElementById("catChips"); if(cc) cc.scrollTo({left:0,behavior:"smooth"}); };
 }
 function renderFilter(){
   const cc=document.getElementById("catChips");
-  if(cc) cc.innerHTML = cats.filter(c=>c==="全部文章"||c===currentCat||catCount(c)>0)
-    .map(c=>`<button class="${c===currentCat?'on':''}" data-c="${c}">${c==="全部文章"?"全部":c}</button>`).join("");
-  filterMenu.innerHTML = cats.map(c=>`<button class="${c===currentCat?'on':''}" data-c="${c}">${c}</button>`).join("");
-  filterLabel.textContent = currentCat;
+  if(cc) cc.innerHTML = BIG_CATS.map(c=>`<button class="${c===F.cat?'on':''}" data-c="${c}" aria-pressed="${c===F.cat}">${c}</button>`).join("");
+  const sel=document.getElementById("regionSel");
+  if(sel){ sel.innerHTML = `<option value="">不限地區</option>`+REGIONS.map(r=>`<option value="${r}">${r}</option>`).join(""); sel.value=F.region; }
+  const rl=document.getElementById("regionLabel"); if(rl) rl.textContent = F.region||"地區";
+  const rc=document.getElementById("regionChip"); if(rc) rc.classList.toggle("on",!!F.region);
+  const dt=document.getElementById("dealTog"); if(dt){ dt.classList.toggle("on",F.deal); dt.setAttribute("aria-pressed",F.deal); }
+  filterMenu.innerHTML = ""; filterLabel.textContent = F.cat;
 }
-function setCat(c){ currentCat=c; renderFilter(); renderList(); }
+function setF(o){ Object.assign(F,o); renderFilter(); renderList(); }
+/* 舊的單一分類入口（側邊選單、#cat- 連結）轉成新篩選 */
+function setCat(c){
+  if(c==="全部文章"||c==="全部") return setF({cat:"全部",region:"",deal:false});
+  if(c==="優惠中") return setF({cat:"全部",region:"",deal:true});
+  if(c==="飯店") return setF({cat:"飯店旅館",region:"",deal:false});
+  if(BIG_CATS.includes(c)) return setF({cat:c,region:"",deal:false});
+  if(REGIONS.includes(c)) return setF({cat:"全部",region:c,deal:false});
+  setF({cat:"全部",region:"",deal:false});
+}
 
 /* notice carousel */
 notice.innerHTML = notices.map((n,i)=>`<div class="notice-item ${i?'':'on'}">${n}</div>`).join("");
@@ -1416,7 +1454,9 @@ setInterval(()=>{
 
 /* interactions */
 filterBtn.onclick = e=>{ e.stopPropagation(); filterMenu.classList.toggle("on"); };
-{const cc=document.getElementById("catChips"); if(cc) cc.onclick=e=>{const c=e.target.closest("[data-c]"); if(c) setCat(c.dataset.c);};}
+{const cc=document.getElementById("catChips"); if(cc) cc.onclick=e=>{const c=e.target.closest("[data-c]"); if(c){ setF({cat:c.dataset.c}); c.scrollIntoView({block:"nearest",inline:"nearest",behavior:"smooth"}); }};}
+{const sel=document.getElementById("regionSel"); if(sel) sel.onchange=()=>setF({region:sel.value});}
+{const dt=document.getElementById("dealTog"); if(dt) dt.onclick=()=>setF({deal:!F.deal});}
 filterMenu.onclick = e=>{ const c=e.target.dataset.c; if(c){ setCat(c); filterMenu.classList.remove("on"); } };
 document.addEventListener("click",()=>filterMenu.classList.remove("on"));
 
