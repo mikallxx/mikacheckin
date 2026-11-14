@@ -737,7 +737,8 @@
   /* 優惠標籤 A 方案「黃黑原色」：實色底，金黃共用「旅宿資訊」按鈕的 --c-lime */
   .badge{--gold:var(--c-lime,#F5BF31);background:var(--bb)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1px solid var(--bl,transparent)!important;color:var(--bc)!important;overflow:visible!important}
   .badge::after{display:none!important}
-  .badge i{width:7px;height:7px;background:var(--bc)!important;box-shadow:none!important;animation:none}
+  .badge i{width:7px;height:7px;background:var(--bc)!important;animation:none}
+  .badge.code i,.badge.live i,.badge.soon i,.badge.ended i{box-shadow:none}  /* 不能加 !important，否則會蓋掉呼吸動畫 */
   .badge.code{--bb:#191919;--bc:var(--gold);--br:245,191,49}
   .badge.live{--bb:var(--gold);--bc:#191919;--br:25,25,25}
   .badge.soon{--bb:#FFF5DF;--bc:#191919;--bl:#191919}
