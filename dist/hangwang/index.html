@@ -573,6 +573,11 @@
   /* 簡易版文章 */
   .tcover{display:block;width:100%;height:100%}
   .vc-thumb .tcover text{display:none}
+  .post .hl-list{margin:0;padding:0;list-style:none}
+  .post .hl-list li{position:relative;padding:10px 0 10px 22px;border-bottom:1px solid var(--line);font-size:15.5px;line-height:1.7;text-wrap:pretty}
+  .post .hl-list li:last-child{border-bottom:0}
+  .post .hl-list li::before{content:"";position:absolute;left:4px;top:calc(10px + .85em - 4px);width:8px;height:8px;border-radius:50%;background:var(--c-blue)}
+  .post .hl-list.warn li::before{background:var(--c-red)}
   .soon-note{margin-top:22px;padding:14px 16px;border-radius:12px;background:var(--soft);font-size:14.5px;color:#555;line-height:1.7;text-align:center}
   /* 包棟價格 → 優惠卡 */
   .price-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFAE8;border:1px solid #efe3bd;color:var(--c-ink);font-weight:700;transition:background-color .15s,border-color .15s}
@@ -1050,6 +1055,95 @@ const IMG="img/hangwang/";
 /* 範例文章：SHOW_SAMPLES 改成 true 就會重新顯示 */
 const SHOW_SAMPLES = false;
 const ALL_POSTS = [
+  { id:"pabohou", draft:true, real:true, date:"2026. 11. 14.", region:"高雄", type:"旅店",
+    title:"帕鉑候工所｜高雄大港橋、駁二住宿，輕軌站就在附近",
+    excerpt:"位置在大港橋、駁二一帶，輕軌站就在附近，搭車移動很方便。",
+    tags:["高雄","駁二","大港橋","輕軌"], textCover:["#7FB3C8","#3F6E8C","#1F3550"], motif:"city", kind:"旅店", host:"旅店",
+    intro:["這次住的是高雄的「帕鉑候工所」，位置在<strong>大港橋、駁二一帶</strong>。","<strong>輕軌站就在附近</strong>，搭車移動很方便。"],
+    notes:["淺眠的人建議自備耳塞。"],
+    video:"https://www.instagram.com/reel/DejHuecJehq/", render:renderSimple },
+  { id:"xushu", draft:true, real:true, date:"2026. 11. 14.", region:"台中", type:"旅店",
+    title:"旭樹。寓所｜台中東海商圈住宿，輸入折扣碼享 95 折",
+    excerpt:"就在台中東海商圈，輸入 Mika 專屬折扣碼享 95 折。",
+    tags:["台中","東海商圈","折扣碼"], textCover:["#B9D7A8","#6E9C6A","#2F4F3A"], motif:"city", kind:"旅店", host:"旅店",
+    intro:["這次住的是台中的「旭樹。寓所」，位置就在<strong>東海商圈</strong>。"],
+    code:"AR55t9g", codeNote:"輸入折扣碼享 95 折",
+    video:"https://www.instagram.com/reel/DeZRD9wpo88/", render:renderSimple },
+  { id:"yunxiu", draft:true, real:true, date:"2026. 11. 14.", region:"宜蘭", type:"民宿",
+    title:"雲岫海景渡假會館｜宜蘭海景包棟民宿，看得到龜山島，折扣碼享 65 折",
+    excerpt:"整棟五間房、最多住 14 人，看得到海景和龜山島，有 25 米海景泳池。輸入折扣碼享 65 折。",
+    tags:["宜蘭","包棟民宿","海景","龜山島"], textCover:["#9FD3E6","#3F8FB5","#1D4466"], motif:"sea", kind:"包棟民宿", host:"民宿",
+    info:[["房間","整棟五間房，最多住 14 人"],["餐點","入住附下午茶和早餐"]],
+    intro:["這次住的是宜蘭的包棟民宿「雲岫海景渡假會館」，<strong>整棟五間房，最多住 14 人</strong>。","從民宿就<strong>看得到海景和龜山島</strong>，很適合待在民宿好好放鬆。"],
+    highlights:["25 米海景泳池","兒童遊戲區、電動車和大片草皮","包棟內有獨立 KTV 和電動麻將桌","入住附下午茶和早餐","公共空間有 24 小時自助飲料吧和泡麵牆"],
+    code:"mikamika", codeNote:"輸入折扣碼享 65 折",
+    video:"https://www.instagram.com/reel/DeQqBRaJAuA/", render:renderSimple },
+  { id:"paboshe", draft:true, real:true, date:"2026. 11. 14.", region:"高雄", type:"旅店",
+    title:"帕鉑舍旅｜高雄車站走路 3 分鐘，四人住一人不到 600 元",
+    excerpt:"距離高雄車站走路只要 3 分鐘，四人入住平均一人不到 600 元，公共空間免費提供咖啡和點心。",
+    tags:["高雄","高雄車站","平價住宿","復古工業風"], textCover:["#E8B98A","#B5704A","#4A2E2A"], motif:"city", kind:"旅店", host:"旅店",
+    intro:["這次住的是高雄的「帕鉑舍旅」，<strong>距離高雄車站走路只要 3 分鐘</strong>。","四人入住，<strong>平均一人不到 600 元</strong>。從雙人房到四人房都有，空間配置也各有不同。"],
+    highlights:["房間走復古工業風","部分房型有大片窗戶，採光很好，還能直接看到高雄車站","每間客房的淋浴間和廁所各自獨立","公共空間免費提供咖啡、茶飲和小點心"],
+    video:"https://www.instagram.com/reel/Dd5648KJ0gG/", render:renderSimple },
+  { id:"yiqi", draft:true, real:true, date:"2026. 11. 14.", region:"台中", type:"旅店",
+    title:"一期家旅｜台中住宿，大片落地窗、頂樓露台看夜景",
+    excerpt:"房間有大片落地窗，提供 Dyson 吹風機和茶籽堂備品，頂樓露台可以看夜景。",
+    tags:["台中","落地窗","夜景","茶籽堂"], textCover:["#C9B6E4","#7B67B0","#2E2650"], motif:"city", kind:"旅店", host:"旅店",
+    intro:["這次住的是台中的「一期家旅」，房間有<strong>大片落地窗</strong>，採光很好。"],
+    highlights:["提供 Dyson 吹風機和膠囊咖啡機","浴室備有茶籽堂沐浴用品和面膜","頂樓露台可以坐著欣賞夜景","入住會拿到《期中限報》，可以探索附近店家和景點","大廳可以列印照片，交換其他旅人的旅行視角"],
+    notes:["房型靠近馬路，對聲音敏感的人要留意，櫃檯有耳塞可以自取。","停車空間有限，有需求建議訂房時先告知。"],
+    video:"https://www.instagram.com/reel/DcifDscJveq/", render:renderSimple },
+  { id:"hanyu", draft:true, real:true, date:"2026. 11. 14.", region:"台北", type:"飯店",
+    title:"瀚寓酒店｜台北住宿，房間就能看到 101，附開放式廚房",
+    excerpt:"房間就能直接看到台北 101，空間寬敞還有開放式廚房，鄰近新光三越和捷運。",
+    tags:["台北","101","開放式廚房","健身房"], textCover:["#A9C4E8","#4E74B5","#1E2F5C"], motif:"city", kind:"飯店", host:"飯店",
+    intro:["這次住的是台北的「瀚寓酒店」，<strong>房間就能直接看到台北 101</strong>。","房型空間寬敞，鄰近 101、新光三越和捷運。"],
+    highlights:["開放式廚房，有微波爐和雙層冰箱（不可開火）","公共空間有健身房和洗衣設備","鄰近台北 101、新光三越和捷運"],
+    notes:["早餐是簡單的自助吧，整體選擇不多。","房型不同，看出去的景觀也可能不同。"],
+    video:"https://www.instagram.com/reel/DcafKx7phTl/", render:renderSimple },
+  { id:"yuguang", draft:true, real:true, date:"2026. 11. 14.", region:"台南", type:"民宿",
+    title:"餘光民宿｜台南安平漁光島，榻榻米房、早餐喝牛肉湯",
+    excerpt:"一進門就是大片榻榻米，還能騎腳踏車去海邊看夕陽，隔天早餐喝得到台南牛肉湯。",
+    tags:["台南","安平","漁光島","榻榻米"], textCover:["#F4C9A0","#D98E6A","#5B4A5E"], motif:"sea", kind:"民宿", host:"民宿",
+    info:[["入住房型","「岩」榻榻米房"]],
+    intro:["一進門就是<strong>大片榻榻米</strong>，搭配窗外的日式造景，光坐在這裡放空就很舒服。","浴室和廁所是分開的，備品也準備得很細心，除了基本的沐浴用品，連洗面乳和耳塞都有。"],
+    highlights:["民宿提供腳踏車，可以騎去海邊散步、看夕陽","隔天早餐喝得到台南牛肉湯，不吃牛也有虱目魚粥可以選"],
+    video:"https://www.instagram.com/reel/Dbw8vmmJ1uK/", render:renderSimple },
+  { id:"lvju", draft:true, real:true, date:"2026. 11. 14.", region:"台中", type:"旅店",
+    title:"旅居文旅｜台中住宿，70 吋大電視、24 小時免費零食咖啡",
+    excerpt:"房間乾淨舒服，有 70 吋超大電視，大廳 24 小時有免費零食和咖啡。",
+    tags:["台中","大電視","免費零食","自助洗衣"], textCover:["#F2C6C2","#C9736E","#5A2E3A"], motif:"city", kind:"旅店", host:"旅店",
+    intro:["這次住的是台中的「旅居文旅」，房間乾淨舒服，浴室有乾濕分離。","還有一台 <strong>70 吋超大電視</strong>，晚上躺在床上追劇真的很享受。"],
+    highlights:["房內有桌椅，吃東西、化妝或臨時辦公都方便","大廳共享空間 24 小時有免費零食和咖啡","隔天早上有簡單輕食","有自助洗衣房","附近餐廳和宵夜選擇很多"],
+    video:"https://www.instagram.com/reel/DbnnnbbRrkc/", render:renderSimple },
+  { id:"caosu", draft:true, real:true, date:"2026. 11. 14.", region:"南投", type:"旅店",
+    title:"草宿 Auto 智旅｜南投草屯無人旅店，24 小時自助入住",
+    excerpt:"草屯市區新開幕的無人旅店，24 小時自助入住，很適合喜歡自在入住的 I 人。",
+    tags:["南投","草屯","無人旅店","自助入住"], textCover:["#CFE3B0","#86A85C","#34452A"], motif:"city", kind:"無人旅店", host:"旅店",
+    intro:["南投草屯新開幕的<strong>無人旅店</strong>，24 小時自助入住，整體空間舒服。","位置在草屯市區，非常方便，很適合喜歡自在入住的 I 人。"],
+    video:"https://www.instagram.com/reel/DazwLnUJlt7/", render:renderSimple },
+  { id:"youli", draft:true, real:true, date:"2026. 11. 14.", region:"苗栗", type:"露營",
+    title:"有里日子露營區｜苗栗卓蘭免裝備露營，還能玩攀樹",
+    excerpt:"結合自然與冒險，可以體驗免裝備露營，還能參加刺激又安全的攀樹活動。",
+    tags:["苗栗","卓蘭","懶人露營","攀樹"], textCover:["#B8DDA0","#5F9B5A","#24402A"], motif:"mount", kind:"懶人露營（免帶裝備）", host:"營區",
+    intro:["苗栗卓蘭的「有里日子露營區」結合自然與冒險，<strong>可以體驗免裝備的露營</strong>。","還能參加刺激又安全的<strong>攀樹活動</strong>，大人小孩都玩得超開心。"],
+    video:"https://www.instagram.com/reel/DahJDL5JRJQ/", render:renderSimple },
+  { id:"r9", draft:true, real:true, date:"2026. 11. 14.", region:"沖繩", type:"飯店",
+    title:"R9 貨櫃屋｜沖繩宇流麻市貨櫃屋飯店，乾淨安靜的獨立客房",
+    excerpt:"乾淨、安靜的獨立貨櫃屋客房，每天有人協助簡單打掃，適合自駕自由行。",
+    tags:["沖繩","宇流麻市","貨櫃屋","自駕"], textCover:["#A8E0E0","#3AA0A8","#1A4A55"], motif:"sea", kind:"貨櫃屋飯店", host:"飯店",
+    intro:["這次入住的是沖繩宇流麻市的貨櫃屋飯店，<strong>乾淨、安靜，又是獨立客房</strong>，每天還有人協助簡單打掃，對自由行來說很加分。","房間空間不算大，但該有的都有，很適合想簡單住、方便移動的旅人。"],
+    highlights:["步行可以到 7-11 和 Lawson","飯店前方的路上有唐吉訶德、餐廳和大型店鋪"],
+    notes:["店家之間比較分散，建議自駕會方便很多。"],
+    video:"https://www.instagram.com/reel/DaFo8ndJPzi/", render:renderSimple },
+  { id:"jinshi", draft:true, real:true, date:"2026. 11. 14.", region:"新北", type:"民宿",
+    title:"金石新月光｜新北九份山城民宿，看山也看海，五種主題房",
+    excerpt:"有主人品味的山城民宿，一邊看山一邊看海，有停車場，開車約五分鐘到九份。",
+    tags:["新北","九份","山城民宿","海景"], textCover:["#C8D8E8","#7E9AB8","#3A4A62"], motif:"sea", kind:"民宿", host:"民宿",
+    info:[["入住房型","希臘房"],["停車","有停車場"]],
+    intro:["這裡比較像走進一間<strong>有主人品味的山城民宿</strong>，一邊看山一邊看海。","最方便的是有<strong>停車場</strong>，開車來不用一直繞山路找車位。"],
+    highlights:["房型有東方、希臘、鄉村、摩登、西班牙五種主題","房內有冰箱和浴缸，吹風機風量也很夠","沐浴用品是茶籽堂","早餐很好吃，也可以提前預約午餐、晚餐，中西式都有","開車約五分鐘到九份，也能順遊陰陽海、黃金博物館和黃金瀑布"],
+    video:"https://www.instagram.com/reel/DaCbCe7J_6B/", render:renderSimple },
   { id:"hakuna", draft:true, real:true, date:"2026. 11. 13.", region:"宜蘭", type:"民宿",
     title:"哈庫納馬塔塔｜宜蘭市包棟民宿，全台唯一非洲風格",
     excerpt:"全台唯一非洲風格的包棟民宿，就在宜蘭市。有 Mika 專屬折扣碼，照片和詳細介紹整理中。",
@@ -1072,10 +1166,6 @@ const ALL_POSTS = [
     h1:'<span class="h1l">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，</span><span class="h1l">8～22 人入住，一樓孝親房、二樓檜木房</span>',
     excerpt:"每間房間都比想像中寬敞，一樓就有兩間雙人房。房間怎麼分、可以玩什麼、適合誰住，一篇整理。",
     tags:["宜蘭","冬山","包棟民宿","三代同遊"], cover:IMG+"01_s.jpg", render:renderHangwang },
-  { sample:true, id:"yuguang", real:true, date:"2026. 11. 03.", region:"台南", type:"民宿",
-    title:"台南安平住宿｜餘光．漁光島民宿「岩」榻榻米房開箱",
-    excerpt:"住在漁光島上的一晚。房型、價位、交通和我的真實心得，還有附近可以吃、可以逛的地方，一次整理給看完影片的你。",
-    tags:["台南","安平","漁光島","民宿"], img:["sea","#f4c9a0","#8fb3b5"] },
   { sample:true, id:"s1", date:"2026. 10. 25.", region:"花東", type:"飯店",
     title:"（範例）花蓮海景飯店開箱｜無邊際泳池＋早餐評比",
     excerpt:"範例文章：這裡會放這間飯店的簡介和一句重點心得。",
@@ -1100,11 +1190,10 @@ const posts = ALL_POSTS.filter(p=>(SHOW_SAMPLES||!p.sample) && !(PROD && p.draft
    正式版會從「優惠活動」表讀入固定日期；這裡用「今天前後幾天」做示範 */
 const D=864e5, H=36e5, t0=Date.now();
 const deals = [
+  { post:"xushu", type:"折扣碼", start:0, end:Infinity, code:"AR55t9g", line:"專屬折扣碼 AR55t9g · 95 折" },
+  { post:"yunxiu", type:"折扣碼", start:0, end:Infinity, code:"mikamika", line:"專屬折扣碼 mikamika · 65 折" },
   { post:"hakuna", type:"折扣碼", start:0, end:Infinity, code:"Mikamika", line:"專屬折扣碼 Mikamika" },
   { post:"hangwang", type:"折扣碼", start:0, end:Infinity, code:"MIKA888", line:"專屬折扣碼 MIKA888 · 包棟定價 75 折" },
-  { post:"yuguang", type:"團購", start:t0-2*D, end:t0+3*D+4*H,
-    title:"餘光 雙人入住專屬團購（示範）", perk:"平日入住享 <strong class='off'>9 折</strong>，加贈早餐一份。這裡寫實際優惠內容。",
-    code:"MIKA-DEMO", link:"#" },
   { post:"s1", type:"折扣碼", start:t0-10*D, end:t0+20*D,
     title:"海景飯店官網訂房折扣碼（示範）", perk:"官網訂房輸入折扣碼，房價<strong class='off'>再折 300 元</strong>。", code:"MIKA300", link:"#" },
   { post:"s2", type:"團購", start:t0+5*D, end:t0+12*D,
@@ -1232,7 +1321,7 @@ const notices = [
   "合作邀約請透過 IG 私訊 @mika.checkin",
 ];
 
-const cats = ["全部文章","優惠中","宜蘭","嘉義","台南","花東","海外","民宿","飯店","露營","美食景點"];
+const cats = ["全部文章","優惠中",...new Set(posts.map(p=>p.region)),...new Set(posts.map(p=>p.type))];
 let currentCat = "全部文章";
 
 /* ---------- render ---------- */
@@ -1550,14 +1639,18 @@ function renderHangwang(p){
 }
 
 /* ---------- 照片輪播：A 照片配 A 文案 ---------- */
-/* 還沒有照片的文章：文字封面 */
+/* 還沒有照片的文章：文字封面（山／海／城市三種圖樣） */
+const TC_MOTIF={
+  mount:`<path d="M0 200 L70 155 L120 180 L190 130 L260 185 L320 160 L400 195 L400 260 L0 260Z" fill="#2B2238" opacity=".55"/><path d="M0 228 L90 198 L170 222 L250 192 L330 218 L400 205 L400 260 L0 260Z" fill="#1E1828" opacity=".7"/>`,
+  sea:`<path d="M0 190 L400 190 L400 260 L0 260Z" fill="#14324A" opacity=".45"/><path d="M0 204 Q50 196 100 204 T200 204 T300 204 T400 204" stroke="#fff" stroke-opacity=".45" stroke-width="2" fill="none"/><path d="M0 222 Q50 214 100 222 T200 222 T300 222 T400 222" stroke="#fff" stroke-opacity=".3" stroke-width="2" fill="none"/><path d="M40 190 Q70 168 110 176 Q140 170 160 190Z" fill="#1E2A38" opacity=".55"/>`,
+  city:`<g fill="#1E1E2E" opacity=".55"><rect x="20" y="170" width="40" height="90"/><rect x="66" y="145" width="34" height="115"/><rect x="106" y="185" width="46" height="75"/><rect x="158" y="135" width="30" height="125"/><rect x="194" y="175" width="52" height="85"/><rect x="252" y="155" width="36" height="105"/><rect x="294" y="190" width="44" height="70"/><rect x="344" y="165" width="40" height="95"/></g><rect y="236" width="400" height="24" fill="#16161F" opacity=".6"/>`
+};
 function textCover(p){
   const [a,b,c]=p.textCover, name=p.title.split("｜")[0], u="tc"+p.id+Math.random().toString(36).slice(2,6);
   return `<svg class="tcover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" role="img" aria-label="${name}">
     <defs><linearGradient id="${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset=".55" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></linearGradient></defs>
     <rect width="400" height="260" fill="url(#${u})"/><circle cx="290" cy="160" r="40" fill="#FFE2A8" opacity=".85"/>
-    <path d="M0 200 L70 155 L120 180 L190 130 L260 185 L320 160 L400 195 L400 260 L0 260Z" fill="#2B2238" opacity=".55"/>
-    <path d="M0 228 L90 198 L170 222 L250 192 L330 218 L400 205 L400 260 L0 260Z" fill="#1E1828" opacity=".7"/>
+    ${TC_MOTIF[p.motif||"mount"]}
     <text x="200" y="82" text-anchor="middle" fill="#fff" font-size="28" font-weight="700" font-family="Noto Sans TC,sans-serif">${name}</text>
     <text x="200" y="110" text-anchor="middle" fill="#fff" opacity=".9" font-size="15" font-family="Noto Sans TC,sans-serif">${p.region} · ${p.type}</text></svg>`;
 }
@@ -1585,6 +1678,7 @@ function renderSimple(p){
       <tr><td>名稱</td><td>${name}</td></tr>
       <tr><td>地區</td><td>${p.region}</td></tr>
       <tr><td>類型</td><td>${p.kind||p.type}</td></tr>
+      ${(p.info||[]).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join("")}
       <tr><td>價格</td><td>請直接向${p.host||"民宿"}詢問</td></tr>
     </table>
     ${p.code?`<section class="offer" id="offer" aria-label="${name} 專屬折扣碼">
@@ -1593,11 +1687,13 @@ function renderSimple(p){
         <p class="of-code">折扣碼 <b class="nw">${p.code}</b></p>
         <div class="of-row">
           <button class="copy of-copy" data-code="${p.code}" data-label="複製折扣碼" data-done="已複製">複製折扣碼</button>
-          <span class="of-hint">優惠內容請向${p.host||"民宿"}詢問</span>
+          <span class="of-hint">${p.codeNote||`優惠內容請向${p.host||"民宿"}詢問`}</span>
         </div>
       </div>
     </section>`:""}
 
+    ${p.highlights?`<h2>住宿亮點</h2><ul class="hl-list">${p.highlights.map(t=>`<li>${t}</li>`).join("")}</ul>`:""}
+    ${p.notes?`<h2>入住前可以先留意</h2><ul class="hl-list warn">${p.notes.map(t=>`<li>${t}</li>`).join("")}</ul>`:""}
     <div class="soon-note">更多照片和詳細介紹整理中，先看上面的開箱影片吧。</div>
     <p class="note-line">本頁為個人非官方住宿攻略，資訊以${p.host||"民宿"}官方公告為準。</p>
   </div>`;
