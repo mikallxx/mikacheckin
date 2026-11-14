@@ -752,7 +752,7 @@
 </main>
 
 <article id="article"><div class="a-top"><a href="./" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></a><span class="t">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房</span></div>
-  <figure class="fig cover-fig" style="margin:0"><div class="a-cover lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIEAwX/xAAkEAABAwMDBAMAAAAAAAAAAAABAAIEAxEhBRITFCNBUSIxMv/EABUBAQEAAAAAAAAAAAAAAAAAAAEA/8QAFxEBAQEBAAAAAAAAAAAAAAAAAAERAv/aAAwDAQACEQMRAD8A6fXTDU46ji248Kae09OKtzu9lSRtQdIf3j3mYI9qic81IAbSu47sg+lbokaRtUfHjnieNwGU9PXZbw21QbichQOogUxwt+R+7qNlItkEDcHDyRhF6pxk/Gti2MrtoQiI1P8AQTTQBHJAF0ISn//Z&quot;);"><img src="img/hangwang/01.jpg" alt="巷往 Villa 外觀" data-lq="1" class="lq lq-in"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
+  <figure class="fig cover-fig" style="margin:0"><div class="a-cover lq-box" style=""><img src="img/hangwang/01.jpg" alt="巷往 Villa 外觀" data-lq="1" class="lq lq-in"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
   <div class="a-body post">
     <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
       <div class="of-sec">
@@ -1192,7 +1192,7 @@ function showCard(id){
   let box=document.getElementById("card-view");
   if(!box){
     box=document.createElement("div"); box.id="card-view";
-    box.innerHTML='<div class="cv-panel"><img alt="揪團卡"><p>長按圖片可以儲存或直接分享，<br>存到相簿後就能傳到 LINE 群組。</p><div class="cv-row"><a class="cv-dl" download>下載圖片</a><button type="button" class="cv-x">關閉</button></div></div>';
+    box.innerHTML='<div class="cv-panel"><img alt="揪團卡"><p>長按圖片可以儲存或直接分享，<br>存到相簿後就能傳到 LINE 群組。<br>文章連結已複製，貼在圖片下面就好。</p><div class="cv-row"><a class="cv-dl" download>下載圖片</a><button type="button" class="cv-x">關閉</button></div></div>';
     document.body.appendChild(box);
     box.querySelector(".cv-x").onclick=()=>box.classList.remove("on");
     box.onclick=e=>{ if(e.target===box) box.classList.remove("on"); };
@@ -1207,8 +1207,12 @@ document.addEventListener("click",async e=>{
   const id=b.dataset.card;
   const ready=cardFiles[id+"_ready"] || await prepCard(id);
   const f=ready&&ready.file;
+  const link=`https://mikacheckin.com/${id}/`;
+  const msg=`房間照片和完整介紹在這裡 👇\n${link}`;
+  copyText(link);
   if(f && navigator.canShare && navigator.canShare({files:[f]})){
-    try{ await navigator.share({files:[f]}); return; }
+    const data=navigator.canShare({files:[f],text:msg})?{files:[f],text:msg}:{files:[f]};
+    try{ await navigator.share(data); toast("連結也已複製，沒跟著圖片出現的話可以直接貼上"); return; }
     catch(err){ if(err && err.name==="AbortError") return; }
   }
   showCard(id);

@@ -957,7 +957,7 @@ function showCard(id){
   let box=document.getElementById("card-view");
   if(!box){
     box=document.createElement("div"); box.id="card-view";
-    box.innerHTML='<div class="cv-panel"><img alt="揪團卡"><p>長按圖片可以儲存或直接分享，<br>存到相簿後就能傳到 LINE 群組。</p><div class="cv-row"><a class="cv-dl" download>下載圖片</a><button type="button" class="cv-x">關閉</button></div></div>';
+    box.innerHTML='<div class="cv-panel"><img alt="揪團卡"><p>長按圖片可以儲存或直接分享，<br>存到相簿後就能傳到 LINE 群組。<br>文章連結已複製，貼在圖片下面就好。</p><div class="cv-row"><a class="cv-dl" download>下載圖片</a><button type="button" class="cv-x">關閉</button></div></div>';
     document.body.appendChild(box);
     box.querySelector(".cv-x").onclick=()=>box.classList.remove("on");
     box.onclick=e=>{ if(e.target===box) box.classList.remove("on"); };
@@ -972,8 +972,12 @@ document.addEventListener("click",async e=>{
   const id=b.dataset.card;
   const ready=cardFiles[id+"_ready"] || await prepCard(id);
   const f=ready&&ready.file;
+  const link=`https://mikacheckin.com/${id}/`;
+  const msg=`房間照片和完整介紹在這裡 👇\n${link}`;
+  copyText(link);
   if(f && navigator.canShare && navigator.canShare({files:[f]})){
-    try{ await navigator.share({files:[f]}); return; }
+    const data=navigator.canShare({files:[f],text:msg})?{files:[f],text:msg}:{files:[f]};
+    try{ await navigator.share(data); toast("連結也已複製，沒跟著圖片出現的話可以直接貼上"); return; }
     catch(err){ if(err && err.name==="AbortError") return; }
   }
   showCard(id);
