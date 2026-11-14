@@ -749,6 +749,10 @@
   @keyframes bdgBr{0%{box-shadow:0 0 0 0 rgba(var(--br),.85)}70%{box-shadow:0 0 0 7px rgba(var(--br),0)}100%{box-shadow:0 0 0 0 rgba(var(--br),0)}}
   @keyframes bdgBl{0%,100%{opacity:1}50%{opacity:.25}}
   @media (prefers-reduced-motion:reduce){.badge i{animation:none!important}}
+  /* 文章內文：字距、行距、段落間距（2026-11 調整，參考範例文章） */
+  .a-body > p,.a-body .one.intro p{font-size:17px;line-height:1.85;letter-spacing:.01em;text-wrap:wrap}
+  .a-body > p + p,.a-body .one.intro p + p{margin-top:1.5em}
+  .a-body > h2 + p{margin-top:0}
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
@@ -865,7 +869,7 @@
 
     <div class="kicker">宜蘭 · 包棟民宿</div>
     <h1 class="h1-fit"><span class="h1l">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，</span><span class="h1l">8～22 人入住，一樓孝親房、二樓檜木房</span></h1>
-    <div class="d">2026. 11. 08. · Mika</div>
+    <div class="d">Mika</div>
 
     <div class="one intro">
     <p>這次我們入住的是宜蘭冬山鄉的「巷往 Villa」。整棟民宿就在田野間，遠遠看過去滿氣派的。</p>
@@ -964,9 +968,9 @@
     <button class="rail-nav prev" type="button" aria-label="上一張" disabled=""><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
     <button class="rail-nav next" type="button" aria-label="下一張" disabled=""><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
     <div class="rail-track">
-      <figure class="rail-card"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEBQb/xAAiEAABAwMEAwEAAAAAAAAAAAABAAIDBBEhBRITMSJBUTT/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAGhEBAAIDAQAAAAAAAAAAAAAAAAERAhIyIf/aAAwDAQACEQMRAD8AqvTiuifLkA5CfVzwSzOLSLAYssJsz6mqIYNu44umzQzUxJJ6yUrmj19KqNcr4yY4jtaDYWCjl1KtlHnM9Om1Bl/KOx+p1JIydhe6NtvWFE20ik8BPOzPtW6m47W5PX1CFWPAy6c7VE83a3aD8LUIUk//2Q==&quot;);"><img src="img/hangwang/05.jpg" alt="電動麻將桌和雙人街機" loading="lazy" data-lq="1" class="lq lq-in"></div>
+      <figure class="rail-card"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEBQb/xAAiEAABAwMEAwEAAAAAAAAAAAABAAIDBBEhBRITMSJBUTT/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAGhEBAAIDAQAAAAAAAAAAAAAAAAERAhIyIf/aAAwDAQACEQMRAD8AqvTiuifLkA5CfVzwSzOLSLAYssJsz6mqIYNu44umzQzUxJJ6yUrmj19KqNcr4yY4jtaDYWCjl1KtlHnM9Om1Bl/KOx+p1JIydhe6NtvWFE20ik8BPOzPtW6m47W5PX1CFWPAy6c7VE83a3aD8LUIUk//2Q==&quot;);"><img src="img/hangwang/05.jpg" alt="電動麻將桌和雙人街機" loading="lazy" data-lq="1" class="lq"></div>
         <figcaption><b>電動麻將桌和雙人街機</b></figcaption></figure>
-      <figure class="rail-card"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwYE/8QAJBAAAgIBAgUFAAAAAAAAAAAAAQIAAxEEIQUSIkFRExQyQmH/xAAYAQEAAwEAAAAAAAAAAAAAAAAEAAECA//EABwRAAICAwEBAAAAAAAAAAAAAAABAhESITETQf/aAAwDAQACEQMRAD8Abpra9RplvV1LsNxneUe9ZThRjMzfBOF6hLhZZdhV7RzdbXSpYnmx4h5p3ok87VcLL79Sw6SDmRptakg56u+Ytt4sQuy8ufEXevZdaxNjAfs15tI5Rjk9mip+TTk1H3hCX9FCkS3RAG1sgHeEIh8QeHWf/9k=&quot;);"><img src="img/hangwang/13.jpg" alt="給小朋友的積木桌" loading="lazy" data-lq="1" class="lq lq-in"></div>
+      <figure class="rail-card"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwYE/8QAJBAAAgIBAgUFAAAAAAAAAAAAAQIAAxEEIQUSIkFRExQyQmH/xAAYAQEAAwEAAAAAAAAAAAAAAAAEAAECA//EABwRAAICAwEBAAAAAAAAAAAAAAABAhESITETQf/aAAwDAQACEQMRAD8Abpra9RplvV1LsNxneUe9ZThRjMzfBOF6hLhZZdhV7RzdbXSpYnmx4h5p3ok87VcLL79Sw6SDmRptakg56u+Ytt4sQuy8ufEXevZdaxNjAfs15tI5Rjk9mip+TTk1H3hCX9FCkS3RAG1sgHeEIh8QeHWf/9k=&quot;);"><img src="img/hangwang/13.jpg" alt="給小朋友的積木桌" loading="lazy" data-lq="1" class="lq"></div>
         <figcaption><b>給小朋友的積木桌</b></figcaption></figure>
     </div></div>
 
@@ -1441,7 +1445,6 @@ function renderList(){
   const shown = filtered();
   list.innerHTML = shown.length ? shown.map(p=>`
     <a class="card" href="${postLink(p.id)}">
-      <div class="date">${p.date}</div>
       ${thumb(p)}
       <div class="txt">
         <h3>${p.title}</h3>
@@ -1528,7 +1531,7 @@ function articleHTML(p){
   if(p.render) return back + p.render(p);
   if(!p.real){
     return back + `<div class="a-cover">${art(...p.img)}</div><div class="a-body">
-      <div class="kicker">${p.region} · ${p.type}</div><h1>${p.title}</h1><div class="d">${p.date}</div>${dealCard(p.id)}
+      <div class="kicker">${p.region} · ${p.type}</div><h1>${p.title}</h1>${dealCard(p.id)}
       <div class="todo">這是範例文章，只是用來示範版面。真的開箱文會像「餘光」那篇一樣，有基本資訊、心得、周邊推薦和官網連結。</div>
       <div class="cta"><a class="s" href="#">回首頁</a><a class="p" href="#post-yuguang">看「餘光」完整範本</a></div></div>`;
   }
@@ -1537,7 +1540,7 @@ function articleHTML(p){
   <div class="a-body">
     <div class="kicker">台南 · 民宿開箱</div>
     <h1>${p.title}</h1>
-    <div class="d">${p.date} · Mika</div>
+    <div class="d">Mika</div>
 
     ${dealCard(p.id)}
     <h2>看完影片的你，先看這裡</h2>
@@ -1612,7 +1615,7 @@ function renderHangwang(p){
 
     <div class="kicker">宜蘭 · 包棟民宿</div>
     <h1 class="${p.h1?'h1-fit':''}">${p.h1||p.title}</h1>
-    <div class="d">${p.date} · Mika</div>
+    <div class="d">Mika</div>
 
     <div class="one intro">
     <p>這次我們入住的是宜蘭冬山鄉的「巷往 Villa」。整棟民宿就在田野間，遠遠看過去滿氣派的。</p>
@@ -1786,7 +1789,7 @@ function renderSimple(p){
   <div class="a-body post">
     <div class="kicker">${p.region} · ${p.type}</div>
     <h1>${p.title}</h1>
-    <div class="d">${p.date} · Mika</div>
+    <div class="d">Mika</div>
 
     <div class="one intro">
       ${(p.intro||[]).map(t=>`<p>${t}</p>`).join("")}
