@@ -810,6 +810,12 @@
   .fm-card{margin-top:40px;padding:18px 18px 20px;background:#FFF8E7;border:2px solid #1A1A1A;border-radius:16px;box-shadow:4px 4px 0 #1A1A1A}
   .a-body .fm .fm-card .fm-h{margin:0 0 8px}
   .a-body .fm .fm-card p{margin:0}
+  /* 「用 LINE 詢問空房」：恢復舊版「漸層自動緩慢流動」，改成墨黑底＋金色光帶 */
+  .offer .of-line{background-color:#1A1A1A!important;background-image:linear-gradient(100deg,#111 0%,#1A1A1A 30%,#7A5E10 44%,#C9A02A 50%,#7A5E10 56%,#1A1A1A 70%,#111 100%)!important;background-size:250% 100%!important;background-position:0% 50%;animation:lineFlow2 4.5s ease-in-out infinite;color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+  @keyframes lineFlow2{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  @media (hover:hover){ .offer .of-line:hover{background-image:none!important;background-color:var(--c-lime,#F2C230)!important;color:#1A1A1A!important;text-shadow:none} }
+  .offer .of-line:active{background-image:none!important;background-color:var(--c-lime,#F2C230)!important;color:#1A1A1A!important;text-shadow:none}
+  @media (prefers-reduced-motion:reduce){ .offer .of-line{animation:none;background-position:50% 50%} }
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
