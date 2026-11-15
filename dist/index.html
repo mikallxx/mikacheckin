@@ -695,6 +695,7 @@
   .tag,.spot-list span{background:#FCEBB3!important;color:#1A1A1A!important;border:1.5px solid #1A1A1A}
   .tag.on{background:#1A1A1A!important;color:#F2C230!important}
   .a-body h2{border-left:6px solid #F2C230!important}
+  .a-body > h2,.a-body.post h2{font-size:21px;font-weight:900;line-height:1.4}  /* 大標比小標（18.5px）大，層級清楚 */
   .tabs button.on{border-bottom:3px solid #F2C230!important}
   .nearby .nb-head{background:#1A1A1A!important}
   .vc-play{background:#F2C230!important;color:#1A1A1A}
@@ -757,7 +758,7 @@
   .a-body > p + p,.a-body .one.intro p + p{margin-top:1.5em}
   .a-body > h2 + p{margin-top:0}
   /* 重點字：改為黑色粗體（跟首頁配色一致，不用紅色與底線） */
-  .post strong:not(.off){color:#1A1A1A!important;font-weight:800;background:none!important;padding:0}  /* 價格／折數（.off）維持紅色 */
+  .post strong:not(.off){color:#1A1A1A!important;font-weight:800;background:linear-gradient(transparent 58%,rgba(242,194,48,.55) 58%,rgba(242,194,48,.55) 92%,transparent 92%)!important;padding:0 1px;-webkit-box-decoration-break:clone;box-decoration-break:clone}  /* 價格／折數（.off）維持紅色 */
   /* 分享給親友：選單＋浮動鈕 */
   .a-body .btn-share{margin-top:16px}
   #shareSheet{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0);display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background .2s}
@@ -781,14 +782,19 @@
   @media print{.share-fab{display:none}}
   /* 巷往「設施與餐食」：四個同層級小標 */
   .a-body .fm{margin-top:4px}
-  .a-body .fm .fm-h{font-size:18px;font-weight:800;line-height:1.45;color:var(--c-ink);margin:40px 0 12px;padding:0}
+  .a-body .fm .fm-h{font-size:18.5px;font-weight:800;line-height:1.45;color:var(--c-ink);margin:40px 0 12px;padding:0}
   .a-body .fm > .fm-h:first-child{margin-top:6px}
   .a-body .fm .fm-h + p{margin-top:0}
+  .a-body .fm .fm-h::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c-lime,#F2C230);margin-right:9px;vertical-align:.18em;box-shadow:0 0 0 1.5px #1A1A1A}
   .a-body .fm p{font-size:17px;line-height:1.85;letter-spacing:.01em;text-wrap:wrap}
   .fm-tags{display:flex;flex-direction:column;gap:10px}
   .fm-row{display:flex;align-items:flex-start;gap:10px}
   .fm-tag{flex:none;display:inline-flex;align-items:center;height:28px;padding:0 11px;border-radius:99px;background:#FCEBB3;color:#1A1A1A;font-size:14px;font-weight:800;letter-spacing:.04em;margin-top:2px}
-  .a-body .fm .fm-row p{margin:0;font-size:16.5px;line-height:1.85}
+  .a-body .fm .fm-row p .nw{margin-right:2px}
+  @media (max-width:399px){.a-body .fm .fm-row p .nw{margin-right:0}}
+  .a-body .fm .fm-row p{margin:0;font-size:15.5px;line-height:1.75;letter-spacing:0;font-feature-settings:"halt"}  /* 標點半形，讓清單排得進一行 */
+  @media (max-width:419px){.a-body .fm .fm-row p{font-size:15px}.fm-row{gap:8px}.fm-tag{padding:0 9px;font-size:13.5px}}
+  @media (max-width:379px){.a-body .fm .fm-row p{font-size:14px}}
   .a-body .fm .fm-tags + .rail{margin-top:22px}
   .a-body .fm p + .gal,.a-body .fm p + .fig{margin-top:20px}
   .a-body .fm .gal{margin-left:0;margin-right:0;container-type:inline-size}
@@ -1588,8 +1594,8 @@ function renderHangwang(p){
     <div class="fm">
       <h3 class="fm-h">室內外設施</h3>
       <div class="fm-tags">
-        <div class="fm-row"><span class="fm-tag">室內</span><p>KTV、電動麻將桌、Switch、雙人街機、積木桌</p></div>
-        <div class="fm-row"><span class="fm-tag">戶外</span><p>戲水池、兒童嚕嚕車、雲朵鞦韆</p></div>
+        <div class="fm-row"><span class="fm-tag">室內</span><p><span class="nw">KTV、</span><span class="nw">電動麻將桌、</span><span class="nw">Switch、</span><span class="nw">雙人街機、</span><span class="nw">積木桌</span></p></div>
+        <div class="fm-row"><span class="fm-tag">戶外</span><p><span class="nw">戲水池、</span><span class="nw">兒童嚕嚕車、</span><span class="nw">雲朵鞦韆</span></p></div>
       </div>
     ${cardRail([
       {n:"05", title:"電動麻將桌和雙人街機"},
