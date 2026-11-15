@@ -806,6 +806,8 @@
   .offer .of-line:active::before{opacity:0}
   .offer .of-line:active{background-color:var(--c-lime,#F2C230)!important;color:#1A1A1A!important;text-shadow:none}
   @media (prefers-reduced-motion:reduce){ .offer .of-line::before{animation:none;background-position:50% 50%} }
+  /* 複製按鈕：按下去／複製成功時變黃色 */
+  .copy:active,.offer .of-copy:active,.copy.done,.offer .of-copy.done{background:var(--c-lime,#F2C230)!important;color:#1A1A1A!important}
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
