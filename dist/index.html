@@ -823,6 +823,9 @@
   @media (prefers-reduced-motion:reduce){ .offer .of-line::before{animation:none;background-position:50% 50%} }
   /* 複製按鈕：按下去／複製成功時變黃色 */
   .copy:active,.offer .of-copy:active,.copy.done,.offer .of-copy.done{background:var(--c-lime,#F2C230)!important;color:#1A1A1A!important}
+  /* 照片來源小字：貼在照片右下角，很小、不搶畫面 */
+  .a-cover,.ph{position:relative}
+  .ph-credit{position:absolute;right:8px;bottom:6px;z-index:2;font-size:10px;line-height:1;letter-spacing:.02em;color:rgba(255,255,255,.88);background:rgba(0,0,0,.28);padding:3px 6px;border-radius:99px;pointer-events:none}
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
@@ -1440,7 +1443,7 @@ function renderHangwang(p){
   return `
   <!-- 住宿文章固定 8 大區塊：1 首圖標題訂房入口／2 入住心得／3 基本資料／4 房間與公共空間／5 設施與餐食／6 入住須知／7 附近吃什麼去哪玩／8 查空房與官方資訊 -->
   <!-- 1 首圖、標題與訂房入口 -->
-  <figure class="fig cover-fig" style="margin:0"><div class="a-cover"><img src="${IMG}01.jpg" alt="巷往 Villa 外觀"></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
+  <figure class="fig cover-fig" style="margin:0"><div class="a-cover"><img src="${IMG}01.jpg" alt="巷往 Villa 外觀"><span class="ph-credit">照片提供：巷往 Villa</span></div><figcaption>巷往是位在宜蘭冬山的獨棟包棟民宿</figcaption></figure>
   <div class="a-body post">
     <section class="offer" id="offer" aria-label="巷往 Villa 訂房優惠">
       <div class="of-sec">
