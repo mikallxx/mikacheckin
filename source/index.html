@@ -755,7 +755,8 @@
   .sh-x{width:36px;height:36px;border-radius:50%;font-size:16px;color:#1A1A1A}
   .sh-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px;margin-top:10px;border:2px solid #1A1A1A;border-radius:14px;background:#fff;box-shadow:2px 2px 0 #1A1A1A}
   .sh-row:active{background:#FCEBB3}
-  .sh-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#FCEBB3;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .sh-ic{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center}
+  .sh-ic svg{width:44px;height:44px;overflow:visible}
   .sh-txt b{display:block;font-size:15px;font-weight:800;color:#1A1A1A}
   .sh-txt small{display:block;font-size:12.5px;color:var(--sub);margin-top:2px}
   .share-fab{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom) + 18px);z-index:40;display:flex;align-items:center;gap:6px;height:48px;padding:0 16px 0 14px;border-radius:99px;background:#1A1A1A;color:#fff;border:2px solid #1A1A1A;box-shadow:3px 3px 0 var(--c-lime,#F5BF31);font-size:14.5px;font-weight:800;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .2s,transform .2s}
@@ -763,6 +764,31 @@
   .share-fab svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
   @media (min-width:900px){.share-fab{right:calc(var(--pad,32px) - 8px);bottom:28px}}
   @media print{.share-fab{display:none}}
+  /* 巷往「設施與餐食」：四個同層級小標 */
+  .a-body .fm{margin-top:4px}
+  .a-body .fm .fm-h{font-size:18px;font-weight:800;line-height:1.45;color:var(--c-ink);margin:40px 0 12px;padding:0}
+  .a-body .fm > .fm-h:first-child{margin-top:6px}
+  .a-body .fm .fm-h + p{margin-top:0}
+  .a-body .fm p{font-size:17px;line-height:1.85;letter-spacing:.01em;text-wrap:wrap}
+  .fm-tags{display:flex;flex-direction:column;gap:10px}
+  .fm-row{display:flex;align-items:flex-start;gap:10px}
+  .fm-tag{flex:none;display:inline-flex;align-items:center;height:28px;padding:0 11px;border-radius:99px;background:#FCEBB3;color:#1A1A1A;font-size:14px;font-weight:800;letter-spacing:.04em;margin-top:2px}
+  .a-body .fm .fm-row p{margin:0;font-size:16.5px;line-height:1.85}
+  .a-body .fm .fm-tags + .rail{margin-top:22px}
+  .a-body .fm p + .gal,.a-body .fm p + .fig{margin-top:20px}
+  .a-body .fm .gal{margin-left:0;margin-right:0;container-type:inline-size}
+  .a-body .fm .gal .ph{border-radius:14px;overflow:hidden}
+  .a-body .fm .gal-nav{top:calc(100cqw * .375)}
+  .a-body .fm .gal-nav.prev{left:10px}.a-body .fm .gal-nav.next{right:10px}
+  .a-body .fm .slide .cap{padding:10px 0 0}
+  .a-body .fm .fig{margin-left:0;margin-right:0}
+  .a-body .fm .fig .ph{border-radius:14px;overflow:hidden}
+  .a-body .fm .fig figcaption{margin-left:0;margin-right:0}
+  .fm-wide .ph{aspect-ratio:4/3!important}
+  .fm-wide .ph img{object-position:50% 46%}
+  .fm-card{margin-top:40px;padding:18px 18px 20px;background:#FFF8E7;border:2px solid #1A1A1A;border-radius:16px;box-shadow:4px 4px 0 #1A1A1A}
+  .a-body .fm .fm-card .fm-h{margin:0 0 8px}
+  .a-body .fm .fm-card p{margin:0}
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
@@ -1124,7 +1150,7 @@ setInterval(tick,30000);
 /* ---------- 複製功能：優惠碼、訂房詢問、揪團摘要 ---------- */
 const COPY_TEXTS = {
   "hangwang-ask": "您好，我是從「Mika今晚住這裡」看到巷往 Villa 的資訊！\n\n想詢問＿＿月＿＿日\n＿＿位大人、＿＿位小孩，是否還有空房？\n\n也想請問使用優惠碼 MIKA888 的包棟價格，謝謝！",
-  "hangwang-share": "我找到一間宜蘭冬山的包棟民宿，叫巷往 Villa！\n可以住 8～22 人，一樓有兩間雙人房，可以留給長輩。每間房都有獨立衛浴，也有附早餐。\n房間照片跟完整介紹在這裡 👇\nhttps://mikacheckin.com/hangwang/",
+  "hangwang-share": "要不要一起去宜蘭包棟？我找到冬山一間叫「巷往 Villa」的民宿，可以住 8～22 人。一樓有兩間雙人房，可以留給長輩住，每間房都有獨立衛浴，住宿也有附早餐！\n\n我想約＿＿月＿＿日，那天有空又想去的人幫我 +1，我再去問有沒有空房 🙋\n\n房間照片跟完整介紹在這裡 👇\nhttps://mikacheckin.com/hangwang/",
 };
 function legacyCopy(text){
   const ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly","");
@@ -1171,11 +1197,30 @@ function shareTexts(p){
   const name=p.title.split("｜")[0];
   const d=dealOf(p.id), code=d&&["live","code"].includes(status(d))?(d.code||p.code||""):"";
   const brief=(p.excerpt||"").replace(/照片和詳細介紹整理中。?/,"").trim();
-  const rec=COPY_TEXTS[p.id+"-share"] || [`推薦你這間${p.region}的${(p.kind&&!/（/.test(p.kind))?p.kind:catOf(p)}：${name}！`, brief, (code&&!/折扣碼/.test(brief))?`用 Mika 的折扣碼 ${code} 訂房有優惠。`:(code?`折扣碼：${code}`:""), "完整介紹在這裡 👇", url].filter(Boolean).join("\n");
+  const rec=[`推薦你這間${p.region}的${(p.kind&&!/（/.test(p.kind))?p.kind:catOf(p)}：${name}！`, brief, (code&&!/折扣碼/.test(brief))?`用 Mika 的折扣碼 ${code} 訂房有優惠。`:(code?`折扣碼：${code}`:""), "完整介紹在這裡 👇", url].filter(Boolean).join("\n");
   const cap=(p.info||[]).find(([k])=>/人數|房間/.test(k));
   const grp=[`要不要一起包「${name}」？`, p.id==="hangwang"?"可以住 8～22 人，一樓有孝親房，大家都住得下。":(cap?cap[1]:""), "想約＿＿月＿＿日，可以的人 +1，我再去問空房 🙋", url].filter(Boolean).join("\n");
-  return {url,rec,grp:SHARE_GROUP_CATS.includes(catOf(p))?grp:""};
+  const custom=COPY_TEXTS[p.id+"-share"];
+  return {url,rec:custom||rec,grp:custom?"":(SHARE_GROUP_CATS.includes(catOf(p))?grp:"")};
 }
+/* 手繪蠟筆風小圖（分享選單用） */
+const SK_DEFS='<defs><filter id="skW" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter><filter id="skC" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.6" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in" result="t"/><feDisplacementMap in="t" in2="n" scale="1.4"/></filter></defs>';
+const SK_ICON={
+  chat:`<svg viewBox="0 0 44 44" aria-hidden="true">${SK_DEFS}
+    <g filter="url(#skC)" stroke="#F2C230" stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M10 12l20-2M9 16l25-3M9 20l26-3M10 24l24-3M12 28l18-2"/></g>
+    <g filter="url(#skW)" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7.5 12.5c.2-3 2.2-4.8 5.4-4.9l17.6-.4c3.2 0 5.6 2 5.7 5.2l.2 10.6c0 3.1-2.3 5.2-5.4 5.3l-11.3.2-6.9 6.1 1.2-6.1-1.8.1c-2.9 0-4.8-2-4.9-4.9z"/>
+      <path d="M8.3 13.1c.3-2.4 1.9-4.1 4.4-4.3" opacity=".55"/>
+      <path d="M21.4 22.6c-2.6-1.7-5.1-3.6-5-6 .1-1.6 1.3-2.6 2.6-2.5 1.1 0 1.9.8 2.4 1.7.5-.9 1.4-1.7 2.5-1.7 1.4.1 2.5 1.2 2.4 2.7-.1 2.3-2.6 4.1-4.9 5.8z" fill="#1A1A1A" fill-opacity=".9"/>
+    </g></svg>`,
+  link:`<svg viewBox="0 0 44 44" aria-hidden="true">${SK_DEFS}
+    <g filter="url(#skC)" stroke="#F2C230" stroke-width="3.4" stroke-linecap="round" fill="none"><path d="M12 30l10-12M15 33l13-15M19 34l12-14M24 33l8-9"/></g>
+    <g filter="url(#skW)" fill="none" stroke="#1A1A1A" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19.6 24.6l-3.9 4c-2.2 2.2-5.6 2.1-7.6-.1-1.9-2.1-1.8-5.3.3-7.3l4.4-4.3c2.1-2 5.3-2 7.3-.1"/>
+      <path d="M24.2 19.2l4-4.1c2.2-2.2 5.6-2.2 7.6 0 1.9 2.1 1.8 5.2-.2 7.2l-4.4 4.4c-2.1 2.1-5.4 2.1-7.4.1"/>
+      <path d="M17.8 26.4l8.6-8.7"/>
+    </g></svg>`
+};
 function currentPost(){ const m=location.hash.match(/^#post-(.+)$/); const id=PAGE_POST||(m&&m[1]); return id&&posts.find(x=>x.id===id); }
 function openShare(){
   const p=currentPost(); if(!p) return; const t=shareTexts(p);
@@ -1189,19 +1234,16 @@ function openShare(){
       const k=b.dataset.sh, tt=shareTexts(currentPost());
       if(k==="line"){ window.open("https://line.me/R/share?text="+encodeURIComponent(tt.rec),"_blank","noopener"); sh.classList.remove("on"); return; }
       if(k==="more"){ try{ await navigator.share({title:document.title,text:tt.rec.replace(tt.url,"").trim(),url:tt.url}); }catch(err){} sh.classList.remove("on"); return; }
-      const text={url:tt.url,rec:tt.rec,grp:tt.grp}[k];
+      const text=k==="url"?tt.url:(tt.grp||tt.rec);
       sh.classList.remove("on");
-      if(await copyText(text)) toast({url:"已複製網址 ✓",rec:"已複製推薦訊息，貼到聊天室就好 ✓",grp:"已複製揪團訊息 ✓"}[k]);
+      if(await copyText(text)) toast(k==="url"?"已複製網址 ✓":"已複製訊息，貼到聊天室就好 ✓");
       else showManualCopy(text);
     });
   }
   const row=(k,ic,b,sm)=>`<button type="button" class="sh-row" data-sh="${k}"><span class="sh-ic">${ic}</span><span class="sh-txt"><b>${b}</b><small>${sm}</small></span></button>`;
   sh.innerHTML=`<div class="sh-panel"><div class="sh-head"><b>分享給親友</b><button type="button" class="sh-x" data-close aria-label="關閉">✕</button></div>
-    ${row("rec","💬","複製推薦訊息","附上介紹和網址，直接貼到 LINE 或群組")}
-    ${t.grp?row("grp","🙋","複製揪團訊息","問大家要不要一起包、哪天可以"):""}
-    ${row("url","🔗","只複製網址","最快，貼給一個人看")}
-    ${row("line","🟢","用 LINE 分享","直接選聊天室傳送")}
-    ${navigator.share?row("more","⋯","更多分享方式","IG、Messenger、訊息…"):""}</div>`;
+    ${row("msg",SK_ICON.chat,(t.grp||SHARE_GROUP_CATS.includes(catOf(p)))?"複製邀約訊息":"複製推薦訊息",(t.grp||SHARE_GROUP_CATS.includes(catOf(p)))?"揪親友一起去，附上介紹和網址":"附上介紹和網址，直接貼到聊天室")}
+    ${row("url",SK_ICON.link,"只複製網址","貼給一個人看最快")}</div>`;
   requestAnimationFrame(()=>sh.classList.add("on"));
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-share]"); if(!b) return; e.preventDefault(); openShare(); });
@@ -1528,35 +1570,34 @@ function renderHangwang(p){
 
     <!-- 5 設施與餐食 -->
     <h2>設施與餐食</h2>
-    <h3>設施</h3>
-    <div class="facil">
-      <div class="fac-k">室內設施</div>
-      <p class="fac-list">${facList(["KTV","電動麻將桌","Switch","雙人街機","積木桌"])}</p>
-      <div class="fac-k">戶外設施</div>
-      <p class="fac-list">${facList(["戲水池","兒童嚕嚕車","雲朵鞦韆"])}</p>
-    </div>
+    <div class="fm">
+      <h3 class="fm-h">室內外設施</h3>
+      <div class="fm-tags">
+        <div class="fm-row"><span class="fm-tag">室內</span><p>KTV、電動麻將桌、Switch、雙人街機、積木桌</p></div>
+        <div class="fm-row"><span class="fm-tag">戶外</span><p>戲水池、兒童嚕嚕車、雲朵鞦韆</p></div>
+      </div>
     ${cardRail([
       {n:"05", title:"電動麻將桌和雙人街機"},
       {n:"13", title:"給小朋友的積木桌"},
     ])}
 
-    <h3>餐食</h3>
-    <h4>下廚與烤肉</h4>
-    <p>開放式廚房可以開火，大型冰箱、微波爐、烤箱、咖啡機和洗碗機都有，餐具也準備得很齊全。</p>
-    <p>戶外還有半戶外烤肉區，晚上可以一起烤肉。</p>
+      <h3 class="fm-h">廚房與烤肉區</h3>
+      <p>開放式廚房可以下廚，冰箱、微波爐、烤箱、咖啡機、洗碗機和餐具都有準備。民宿也有烤肉區，<strong>使用需另外租借</strong>。</p>
     ${gal([
       ["03","開放式廚房可以開火，設備和餐具都很齊全"],
       ["04","長餐桌旁就是麻將桌和街機，窗外是草坪"],
       ["12","茶水區有咖啡機，也擺了泡麵和零食"],
     ])}
 
-    <h4>懶得下廚，晚餐可以怎麼吃？</h4>
-    <p>想在民宿吃晚餐，又懶得自己備料的話，可以額外加購<strong>海鮮火鍋、烤肉或私廚料理</strong>。</p>
+      <h3 class="fm-h">住宿附早餐</h3>
+      <p>早餐有中式和西式可以選，份量蠻夠的。餐點用紙盒裝，吃不完也方便帶走。</p>
+      <figure class="fig fm-wide"><div class="ph"><img src="${IMG}15.jpg" alt="巷往 Villa 早餐" loading="lazy"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
 
-    <h4>隔天早餐吃什麼？</h4>
-    <p>早餐有<strong>中式和西式</strong>兩種選擇，份量很實在，那天吃完相當有飽足感。</p>
-    <p>餐點都裝在外帶紙盒裡，吃不完直接帶走也很方便。</p>
-    <figure class="fig tall"><div class="ph"><img src="${IMG}15.jpg" alt="巷往 Villa 早餐" loading="lazy"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
+      <section class="fm-card" aria-label="晚餐可加購">
+        <h3 class="fm-h">晚餐可加購</h3>
+        <p>想留在民宿吃晚餐，可以向民宿加購火鍋或私廚料理。</p>
+      </section>
+    </div>
 
     <!-- 6 入住須知 -->
     <h2>入住須知</h2>
