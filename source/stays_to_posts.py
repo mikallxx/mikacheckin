@@ -22,10 +22,13 @@ def md(t):
     return t
 
 def plain(t):
-    return re.sub(r"\*\*|\[\[|\]\]", "", str(t or "")).strip()
+    t = re.sub(r"\*\*|\[\[|\]\]", "", str(t or "")).strip()
+    return "" if t in EMPTY_WORDS else t
+
+EMPTY_WORDS = {"", "無", "沒有", "-", "－", "—", "N/A", "n/a", "不適用", "未確認", "x", "X"}
 
 def ok(v):
-    return v not in ("", None, "未確認")
+    return v is not None and str(v).strip() not in EMPTY_WORDS
 
 def host_of(s):
     if s.get("cat") == "露營": return "營區"
