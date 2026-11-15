@@ -44,6 +44,17 @@ def type_of(s):
 def js(v):
     return json.dumps(v, ensure_ascii=False)
 
+PLATFORMS = {"agoda": "Agoda", "booking": "Booking.com", "trip.com": "Trip.com", "hotels.com": "Hotels.com", "expedia": "Expedia",
+             "klook": "Klook", "kkday": "KKday", "asiayo": "AsiaYo", "easytravel": "易遊網", "liontravel": "雄獅旅遊",
+             "airbnb": "Airbnb", "rakuten": "樂天旅遊", "jalan": "Jalan", "eztravel": "易遊網"}
+
+def auto_label(l):
+    """按鈕文字沒填：依網址判斷平台，例如「Agoda 訂房」"""
+    url = (l.get("url") or "").lower()
+    for k, name in PLATFORMS.items():
+        if k in url: return f"{name} 訂房"
+    return "官網訂房" if l.get("type") == "官網訂房" else "查看空房與價格"
+
 def flag(s, k):
     """後台「有優惠碼／有 LINE／有訂房連結」開關；舊資料沒有開關時依內容判斷"""
     if k in s: return bool(s[k])
@@ -97,7 +108,7 @@ def post_entry(pid, s, old_tags):
     nb = [{k: (str(n.get(k) or "").strip()) for k in ("name", "group", "drive", "dist", "url")} for n in s.get("nearby", []) if plain(n.get("name"))]
     for n in nb: n["name"] = html.escape(n["name"], quote=False)
     if nb: p["nearby"] = nb
-    links = [{"type": l.get("type") or "訂房平台", "label": html.escape(plain(l.get("label")), quote=False), "url": l["url"].strip()}
+    links = [{"type": l.get("type") or "訂房平台", "label": html.escape(plain(l.get("label")) or auto_label(l), quote=False), "url": l["url"].strip()}
              for l in s.get("links", []) if ok(l.get("url"))]
     if links: p["links"] = links
     if ok(s.get("bath")): p["bath"] = s["bath"]

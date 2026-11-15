@@ -1673,7 +1673,7 @@ function renderSimple(p){
         ${p.lineId?`<p class="of-id">官方 LINE ID　<span class="nw">${p.lineId}</span></p>`:""}
       </div>`:""}
       ${links.length?`<div class="of-sec">${links.map(l=>`<a class="of-link" href="${l.url}" target="_blank" rel="${l.type==="聯盟行銷"?"sponsored noopener":"noopener"}">${l.label||(l.type==="官網訂房"?"官網訂房":"查看空房與價格")} ↗</a>`).join("")}
-        ${links.some(l=>l.type==="聯盟行銷")?`<p class="of-disc">透過連結訂房我可能獲得分潤，不影響你的價格。</p>`:""}</div>`:""}
+</div>`:""}
     </section>`:""}
 
     <div class="kicker">${p.region} · ${p.type}</div>
