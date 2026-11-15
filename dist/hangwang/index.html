@@ -828,6 +828,13 @@
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
   @media (min-width:900px){.toolbar{padding:26px var(--pad) 4px!important}.tabs{padding:12px var(--pad)!important}}
   @media (min-width:900px){.tabs{display:grid!important;grid-template-columns:max-content;justify-content:start}}
+  /* 訂房入口：訂房平台／聯盟行銷按鈕（白底黑框） */
+  .offer .of-link{display:block;text-align:center;padding:13px 14px;margin-top:10px;font-weight:700;font-size:15.5px;border:2px solid #1A1A1A;border-radius:99px;box-shadow:3px 3px 0 #1A1A1A;background:#fff;color:#1A1A1A;transition:background-color .15s}
+  .offer .of-link:first-child{margin-top:0}
+  @media (hover:hover){ .offer .of-link:hover{background:var(--c-lime)} }
+  .offer .of-link:active{background:var(--c-lime)}
+  .a-body p.of-disc{margin:10px 0 0;font-size:12px;line-height:1.6;color:#777;text-align:center}
+  .fm .fm-card+.fm-card{margin-top:16px}
 </style>
 </head>
 <body class="reading">
@@ -1229,7 +1236,7 @@ const ALL_POSTS = [
     excerpt:"每間房間都比想像中寬敞，一樓就有兩間雙人房。房間怎麼分、可以玩什麼、適合誰住，一篇整理。",
     tags:["宜蘭","冬山","包棟民宿","三代同遊"], cover:IMG+"01_s.jpg", render:renderHangwang },
   /* <後台產生：文章> */
-  { id:"guipu", draft:true, real:true, region:"嘉義", area:"番路", cat:"露營", type:"露營", kind:"懶人露營（免帶裝備）", title:"歸樸森活露營區｜嘉義懶人露營，免帶裝備、超美夕陽", excerpt:"不用帶任何裝備的懶人營區，傍晚的夕陽非常漂亮。照片和詳細介紹整理中。", tags:["嘉義", "露營"], textCover:["#F2A65A", "#D9623B", "#5B3A6B"], motif:"mount", host:"營區", soon:true, lineUrl:"https://line.me/R/ti/p/@153irfgg", lineId:"@gp123", video:"https://www.instagram.com/reel/DfYnfihJlN6/", mapUrl:"https://maps.app.goo.gl/NqzPuAxpsWimse9T9?g_st=ic", breakfast:"有附早餐", address:"嘉義縣番路鄉下石頭埔7鄰69號", checkin:"15:00/11:00", parkingText:"有停車場", breakfastInfo:"有附早餐，一泊二食提供下午茶和早餐", intro:["其實我不是很愛露營，因為想到要帶一堆裝備和大自然環境(個人有點小潔癖 哈哈)就會開始猶豫！", "但是這次來到「歸樸森活露營區」我真的很滿意，環境打造的很舒適，不管是公共空間、浴廁還有私人空間都是乾乾淨淨的。", "最讓我印象深刻的，就是傍晚的夕陽。\n那天看到的時候，真的忍不住停下來多看幾眼！\n跟另一半邊走邊看，很浪漫，\n跟朋友來的話，就一起拍幾張照，製造美好回憶。", "這間露營區是我當下就立刻想推薦給朋友的營區(⁎⁍̴̛ᴗ⁍̴̛⁎)"], render:renderSimple },
+  { id:"guipu", draft:true, real:true, region:"嘉義", area:"番路", cat:"露營", type:"露營", kind:"懶人露營（免帶裝備）", title:"歸樸森活露營區｜嘉義懶人露營，免帶裝備、超美夕陽", excerpt:"不用帶任何裝備的懶人營區，傍晚的夕陽非常漂亮。照片和詳細介紹整理中。", tags:["嘉義", "露營"], textCover:["#F2A65A", "#D9623B", "#5B3A6B"], motif:"mount", host:"營區", soon:true, lineUrl:"https://line.me/R/ti/p/@153irfgg", lineId:"@gp123", video:"https://www.instagram.com/reel/DfYnfihJlN6/", mapUrl:"https://maps.app.goo.gl/NqzPuAxpsWimse9T9?g_st=ic", breakfast:"有附早餐", address:"嘉義縣番路鄉下石頭埔7鄰69號", checkin:"15:00/11:00", parkingText:"有停車場", breakfastInfo:"有附早餐，一泊二食提供下午茶和早餐", intro:["其實我不是很愛露營，因為想到要帶一堆裝備和大自然環境(個人有點小潔癖 哈哈)就會開始猶豫！", "但是這次來到「歸樸森活露營區」我真的很滿意，環境打造的很舒適，不管是公共空間、浴廁還有私人空間都是乾乾淨淨的。", "最讓我印象深刻的，就是傍晚的夕陽。<br>那天看到的時候，真的忍不住停下來多看幾眼！<br>跟另一半邊走邊看，很浪漫，<br>跟朋友來的話，就一起拍幾張照，製造美好回憶。", "這間露營區是我當下就立刻想推薦給朋友的營區(⁎⁍̴̛ᴗ⁍̴̛⁎)"], annexes:[{"name": "客廳帳", "items": "四人桌椅、美式烤肉爐、洗手台"}], render:renderSimple },
   { id:"hakuna", draft:true, real:true, region:"宜蘭", area:"宜蘭市", cat:"包棟民宿", type:"包棟民宿", title:"哈庫納馬塔塔｜宜蘭市包棟民宿，全台唯一非洲風格", excerpt:"全台唯一非洲風格的包棟民宿，就在宜蘭市。有 Mika 專屬折扣碼，照片和詳細介紹整理中。", tags:["宜蘭", "宜蘭市", "包棟民宿"], textCover:["#F6C35A", "#E07B39", "#7A3E2A"], motif:"mount", host:"民宿", soon:true, code:"Mikamika", video:"https://www.instagram.com/reel/DfSDBugJbNS/", intro:["這次住的是宜蘭市的「哈庫納馬塔塔」，標榜<strong>全台唯一非洲風格</strong>的包棟民宿。", "包棟入住不用跟其他房客共用空間，適合家人朋友一起來。"], render:renderSimple },
   { id:"pabohou", draft:true, real:true, region:"高雄", area:"大港橋、駁二", cat:"飯店旅館", type:"旅店", kind:"旅店", title:"帕鉑候工所｜高雄大港橋、駁二住宿，輕軌站就在附近", excerpt:"位置在大港橋、駁二一帶，輕軌站就在附近，搭車移動很方便。", tags:["高雄", "大港橋、駁二", "飯店旅館"], textCover:["#7FB3C8", "#3F6E8C", "#1F3550"], motif:"city", host:"旅店", soon:true, video:"https://www.instagram.com/reel/DejHuecJehq/", intro:["這次住的是高雄的「帕鉑候工所」，位置在<strong>大港橋、駁二一帶</strong>。", "<strong>輕軌站就在附近</strong>，搭車移動很方便。"], rules:[{"cat": "其他", "text": "淺眠的人建議自備耳塞。"}], render:renderSimple },
   { id:"xushu", draft:true, real:true, region:"台中", area:"東海商圈", cat:"飯店旅館", type:"旅店", kind:"旅店", title:"旭樹。寓所｜台中東海商圈住宿，輸入折扣碼享 95 折", excerpt:"就在台中東海商圈，輸入 Mika 專屬折扣碼享 95 折。", tags:["台中", "東海商圈", "飯店旅館"], textCover:["#B9D7A8", "#6E9C6A", "#2F4F3A"], motif:"city", host:"旅店", soon:true, code:"AR55t9g", video:"https://www.instagram.com/reel/DeZRD9wpo88/", codeNote:"輸入折扣碼享 <strong class=\"off\">95 折</strong>", intro:["這次住的是台中的「旭樹。寓所」，位置就在<strong>東海商圈</strong>。"], render:renderSimple },
@@ -1856,17 +1863,23 @@ function nbRow(n,p){
   </a></li>`;
 }
 function renderSimple(p){
-  const name=p.title.split("｜")[0], host=p.host||"民宿", hasOffer=p.code||p.lineUrl||p.codeNote;
+  const name=p.title.split("｜")[0], host=p.host||"民宿", links=p.links||[], hasOffer=p.code||p.lineUrl||p.codeNote||links.length;
+  const na=n=>(p.na||[]).includes(n), camp=p.cat==="露營";
+  const xs=n=>((p.x||{})[n]||[]).map(x=>`${x.title?`<h3 class="fm-h">${x.title}</h3>`:""}${x.text?`<p>${x.text}</p>`:""}`).join("");
+  const hasX=n=>((p.x||{})[n]||[]).length>0;
+  const B4={"露營":"營帳與衛浴","飯店旅館":"房型與公共空間"}[p.cat]||"房間與公共空間";
+  const COLS={"飯店旅館":["房型","床型","坪數／可住"],"民宿":["房型","床型","特色"]}[p.cat]||["樓層","房型","適合安排"];
+  const KITCHEN={"露營":"開伙與烤肉","飯店旅館":"廚房與交誼廳","民宿":"廚房"}[p.cat]||"廚房與烤肉區";
   const tagRow=(t,l)=>l&&l.length?`<div class="fm-row"><span class="fm-tag">${t}</span><p>${l.map((x,i)=>`<span class="nw">${x}${i<l.length-1?"、":""}</span>`).join("")}</p></div>`:"";
   const veg=v=>v?`<span class="nw">（有素食）</span>`:"";
-  const info=[["名稱",name],["地址",p.address],["人數",p.capacity&&`<span class="nw">${p.capacity}</span>`],["入住／退房",p.checkin],["停車",p.parkingText],["早餐",p.breakfastInfo],
+  const info=[["名稱",name],["地址",p.address],[camp?"每帳人數":"人數",p.capacity&&`<span class="nw">${p.capacity}</span>`],["入住／退房",p.checkin],["停車",p.parkingText],["早餐",p.breakfastInfo],
     ["房價",p.price||(p.cat==="包棟民宿"?"包棟價格請直接向民宿詢問":`請直接向${host}詢問`)],
     ["Mika 專屬優惠",p.codeNote&&`${p.codeNote}${p.codeCond?`<span class="cond">※${p.codeCond}</span>`:""}`]].filter(x=>x[1]);
   const fac=p.facilityText||(p.indoor&&p.indoor.length)||(p.outdoor&&p.outdoor.length);
-  const hasFm=fac||p.kitchen||p.breakfastText||p.dinner;
-  const hasRooms=p.roomsIntro||(p.roomRows&&p.roomRows.length)||p.spaces;
-  const rules=p.rules||[], ruleCats=[...new Set(rules.map(r=>r.cat))];
-  const nbGroups=NB_ORDER.map(g=>[g,(p.nearby||[]).filter(n=>n.group===g)]).filter(x=>x[1].length);
+  const hasFm=!na(4)&&(fac||p.kitchen||p.breakfastText||p.dinner||hasX(4));
+  const hasRooms=!na(3)&&(p.roomsIntro||(p.roomRows&&p.roomRows.length)||p.spaces||(p.tentGear&&p.tentGear.length)||p.bath||(p.annexes&&p.annexes.length)||hasX(3));
+  const rules=na(5)?[]:(p.rules||[]), ruleCats=[...new Set(rules.map(r=>r.cat))];
+  const nbGroups=na(6)?[]:NB_ORDER.map(g=>[g,(p.nearby||[]).filter(n=>n.group===g)]).filter(x=>x[1].length);
   const priceTxt=p.priceBtn||(p.cat==="包棟民宿"?"包棟價格請直接向民宿詢問":`價格請直接向${host}詢問`);
   return `
   <!-- 1 首圖、標題與訂房入口 -->
@@ -1877,7 +1890,7 @@ function renderSimple(p){
         <h3 class="of-k">${name} 訂房優惠</h3>
         <p class="of-main"><span class="mk">${p.codeNote}</span></p>
         ${p.codeCond?`<p class="of-sub">${p.codeCond}。</p>`:""}
-      </div>`:`<div class="of-sec"><h3 class="of-k">${name} ${p.code?"專屬優惠":"訂房資訊"}</h3>${p.code?`<p class="of-sub">優惠內容請向${host}詢問。</p>`:""}</div>`}
+      </div>`:p.code?`<div class="of-sec"><h3 class="of-k">${name} 專屬優惠</h3><p class="of-sub">優惠內容請向${host}詢問。</p></div>`:`<div class="of-sec"><h3 class="of-k">${name} 訂房資訊</h3></div>`}
       ${p.code?`<div class="of-sec">
         <p class="of-code">優惠碼 <b class="nw">${p.code}</b></p>
         <div class="of-row">${p.lineUrl
@@ -1889,6 +1902,8 @@ function renderSimple(p){
         ${p.code?`<p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>`:""}
         ${p.lineId?`<p class="of-id">官方 LINE ID　<span class="nw">${p.lineId}</span></p>`:""}
       </div>`:""}
+      ${links.length?`<div class="of-sec">${links.map(l=>`<a class="of-link" href="${l.url}" target="_blank" rel="${l.type==="聯盟行銷"?"sponsored noopener":"noopener"}">${l.label||(l.type==="官網訂房"?"官網訂房":"查看空房與價格")} ↗</a>`).join("")}
+        ${links.some(l=>l.type==="聯盟行銷")?`<p class="of-disc">透過連結訂房我可能獲得分潤，不影響你的價格。</p>`:""}</div>`:""}
     </section>`:""}
 
     <div class="kicker">${p.region} · ${p.type}</div>
@@ -1909,30 +1924,37 @@ function renderSimple(p){
       <div><b>${p.gRating}</b><span>Google 評分<em>${p.gCount?`<span class="nw">${p.gCount} 則評論</span>`:""}${p.gCount&&p.gDate?"・":""}${p.gDate?`<span class="nw">${p.gDate} 查詢</span>`:""}</em></span></div>
       ${p.mapUrl?`<a href="${p.mapUrl}" target="_blank" rel="noopener">在 Google 地圖查看</a>`:""}
     </div>`:""}
+    ${hasX(2)?`<div class="fm">${xs(2)}</div>`:""}
 
     <!-- 4 房間與公共空間 -->
-    ${hasRooms?`<h2>房間與公共空間</h2>
+    ${hasRooms?`<h2>${B4}</h2>
     ${p.roomsIntro?`<p>${p.roomsIntro}</p>`:""}
-    ${p.roomRows&&p.roomRows.length?`<table class="tbl rooms"><tr><th>樓層</th><th>房型</th><th>適合安排</th></tr>${p.roomRows.map(r=>`<tr><td>${r.floor}</td><td>${r.type}</td><td>${r.fit}</td></tr>`).join("")}</table>`:""}
-    ${p.spaces?`<p>${p.spaces}</p>`:""}`:""}
+    ${camp?`<div class="fm">
+      ${(p.tentGear&&p.tentGear.length)||p.bath?`<div class="fm-tags">${tagRow("帳內設備",p.tentGear)}${p.bath?`<div class="fm-row"><span class="fm-tag">浴廁</span><p>${[p.bath,p.bathNote].filter(Boolean).join("，")}</p></div>`:""}</div>`:""}
+      ${(p.annexes||[]).map(a=>`<section class="fm-card" aria-label="${a.name}"><h3 class="fm-h">${a.name}</h3>${a.items?`<p>${a.items}</p>`:""}</section>`).join("")}
+      ${xs(3)}</div>`:`
+    ${p.roomRows&&p.roomRows.length?`<table class="tbl rooms"><tr>${COLS.map(c=>`<th>${c}</th>`).join("")}</tr>${p.roomRows.map(r=>`<tr><td>${r.floor}</td><td>${r.type}</td><td>${r.fit}</td></tr>`).join("")}</table>`:""}
+    ${p.spaces?`<p>${p.spaces}</p>`:""}
+    ${hasX(3)?`<div class="fm">${xs(3)}</div>`:""}`}`:""}
 
     <!-- 5 設施與餐食 -->
     ${hasFm?`<h2>設施與餐食</h2>
     <div class="fm">
-      ${fac?`<h3 class="fm-h">室內外設施</h3>${p.facilityText?`<p>${p.facilityText}</p>`:""}
-      ${(p.indoor&&p.indoor.length)||(p.outdoor&&p.outdoor.length)?`<div class="fm-tags">${tagRow("室內",p.indoor)}${tagRow("戶外",p.outdoor)}</div>`:""}`:""}
-      ${p.kitchen?`<h3 class="fm-h">廚房與烤肉區</h3><p>${p.kitchen}</p>`:""}
+      ${fac?`<h3 class="fm-h">${camp?"營區設施":"室內外設施"}</h3>${p.facilityText?`<p>${p.facilityText}</p>`:""}
+      ${(p.indoor&&p.indoor.length)||(p.outdoor&&p.outdoor.length)?`<div class="fm-tags">${tagRow(camp?"公共":"室內",p.indoor)}${tagRow(camp?"營區":"戶外",p.outdoor)}</div>`:""}`:""}
+      ${p.kitchen?`<h3 class="fm-h">${KITCHEN}</h3><p>${p.kitchen}</p>`:""}
       ${p.breakfastText?`<h3 class="fm-h">${p.breakfast==="有附早餐"?"住宿附早餐":p.breakfast==="可加購"?"早餐可加購":"早餐"}</h3><p>${p.breakfastText}${veg(p.breakfastVeg)}</p>`:""}
-      ${p.dinner?`<section class="fm-card" aria-label="晚餐可加購"><h3 class="fm-h">晚餐可加購</h3><p>${p.dinner}${veg(p.dinnerVeg)}</p></section>`:""}
+      ${p.dinner?`<section class="fm-card" aria-label="晚餐"><h3 class="fm-h">${/附|含/.test(p.dinner)&&!/加購/.test(p.dinner)?"晚餐":"晚餐可加購"}</h3><p>${p.dinner}${veg(p.dinnerVeg)}</p></section>`:""}
+      ${xs(4)}
     </div>`:""}
 
     <!-- 6 入住須知 -->
-    ${rules.length?`<h2>入住須知</h2>${ruleCats.length===1
+    ${rules.length||(!na(5)&&hasX(5))?`<h2>入住須知</h2>${!rules.length?"":ruleCats.length===1
       ?(rules.length===1?`<p>${rules[0].text}</p>`:`<ul class="hl-list warn">${rules.map(r=>`<li>${r.text}</li>`).join("")}</ul>`)
-      :`<div class="fm">${ruleCats.map(c=>`<h3 class="fm-h">${c}</h3>${rules.filter(r=>r.cat===c).map(r=>`<p>${r.text}</p>`).join("")}`).join("")}</div>`}`:""}
+      :`<div class="fm">${ruleCats.map(c=>`<h3 class="fm-h">${c}</h3>${rules.filter(r=>r.cat===c).map(r=>`<p>${r.text}</p>`).join("")}`).join("")}</div>`}${hasX(5)?`<div class="fm">${xs(5)}</div>`:""}`:""}
 
     <!-- 7 附近吃什麼、去哪玩 -->
-    ${p.nearbyIntro||nbGroups.length?`<h2>附近吃什麼、去哪玩</h2>
+    ${!na(6)&&(p.nearbyIntro||nbGroups.length||hasX(6))?`<h2>附近吃什麼、去哪玩</h2>
     ${nbGroups.length?`<section class="nearby" aria-label="${name} 附近景點">
       ${p.nearbyIntro?`<div class="nb-sub">${p.nearbyIntro}</div>`:""}
       ${nbGroups.map(([g,l])=>`<div class="nb-card">
@@ -1940,11 +1962,11 @@ function renderSimple(p){
         <ul class="nb-list">${l.map(n=>nbRow(n,p)).join("")}</ul>
       </div>`).join("")}
       <div class="nb-note">點地點開啟 Google 地圖・車程依路況而異</div>
-    </section>`:`<p>${p.nearbyIntro}</p>`}`:""}
+    </section>`:p.nearbyIntro?`<p>${p.nearbyIntro}</p>`:""}${hasX(6)?`<div class="fm">${xs(6)}</div>`:""}`:""}
 
     <!-- 8 查空房與官方資訊 -->
     <h2>查空房與官方資訊</h2>
-    ${hasOffer?`<a class="price-note price-btn" href="#offer" data-goto=".offer"><span class="pb-txt">${priceTxt}</span><span class="pb-arrow">查看優惠 ↑</span></a>`:`<p class="price-note">${priceTxt}</p>`}
+    ${hasOffer?`<a class="price-note price-btn" href="#offer" data-goto=".offer"><span class="pb-txt">${priceTxt}</span><span class="pb-arrow">${p.code?"查看優惠":"訂房方式"} ↑</span></a>`:`<p class="price-note">${priceTxt}</p>`}
     ${p.website?`<div class="cta"><a class="p" href="${p.website}" target="_blank" rel="noopener">查看${host}官網</a></div>`:""}
     <button type="button" class="btn-share" data-share>分享給親友</button>
     ${p.soon?`<div class="soon-note">更多照片整理中，先看上面的開箱影片吧。</div>`:""}

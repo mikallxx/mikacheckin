@@ -19,7 +19,7 @@ def md(t):
     t = html.escape(str(t or "").strip(), quote=False)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"\[\[(.+?)\]\]", r'<strong class="off">\1</strong>', t)
-    return t
+    return re.sub(r"\s*\n\s*", "<br>", t)
 
 def plain(t):
     t = re.sub(r"\*\*|\[\[|\]\]", "", str(t or "")).strip()
@@ -43,6 +43,23 @@ def type_of(s):
 
 def js(v):
     return json.dumps(v, ensure_ascii=False)
+
+def flag(s, k):
+    """後台「有優惠碼／有 LINE／有訂房連結」開關；舊資料沒有開關時依內容判斷"""
+    if k in s: return bool(s[k])
+    if k == "useCode": return ok(s.get("code")) or ok(s.get("codeNote"))
+    if k == "useLine": return ok(s.get("lineUrl"))
+    return any(ok(l.get("url")) for l in s.get("links", []))
+
+def clean(s):
+    """關掉的開關 → 對應欄位當作空白"""
+    s = dict(s)
+    if not flag(s, "useCode"):
+        for k in ("code", "codeNote", "codeCond"): s[k] = ""
+    if not flag(s, "useLine"):
+        for k in ("lineUrl", "lineId", "askText"): s[k] = ""
+    if not flag(s, "useLinks"): s["links"] = []
+    return s
 
 def post_entry(pid, s, old_tags):
     p = {"id": pid}
@@ -70,7 +87,7 @@ def post_entry(pid, s, old_tags):
     if s.get("breakfastVeg"): p["breakfastVeg"] = True
     if s.get("dinnerVeg"): p["dinnerVeg"] = True
     p["intro"] = [md(t) for t in s.get("intro", []) if plain(t)]
-    for k in ("indoor", "outdoor"):
+    for k in ("indoor", "outdoor", "tentGear"):
         l = [md(t) for t in s.get(k, []) if plain(t)]
         if l: p[k] = l
     rows = [{k: md(r.get(k, "")) for k in ("floor", "type", "fit")} for r in s.get("roomRows", []) if any(plain(r.get(k)) for k in ("floor", "type", "fit"))]
@@ -80,6 +97,19 @@ def post_entry(pid, s, old_tags):
     nb = [{k: (str(n.get(k) or "").strip()) for k in ("name", "group", "drive", "dist", "url")} for n in s.get("nearby", []) if plain(n.get("name"))]
     for n in nb: n["name"] = html.escape(n["name"], quote=False)
     if nb: p["nearby"] = nb
+    links = [{"type": l.get("type") or "訂房平台", "label": html.escape(plain(l.get("label")), quote=False), "url": l["url"].strip()}
+             for l in s.get("links", []) if ok(l.get("url"))]
+    if links: p["links"] = links
+    if ok(s.get("bath")): p["bath"] = s["bath"]
+    if ok(s.get("bathNote")): p["bathNote"] = md(s["bathNote"])
+    ann = [{"name": html.escape(plain(a.get("name")), quote=False), "items": md(a.get("items"))} for a in s.get("annexes", []) if plain(a.get("name"))]
+    if ann: p["annexes"] = ann
+    x = {}
+    for b in range(2, 7):
+        l = [{"title": html.escape(plain(e.get("title")), quote=False), "text": md(e.get("text"))} for e in s.get(f"x{b}", []) if plain(e.get("title")) or plain(e.get("text"))]
+        if l: x[str(b)] = l
+    if x: p["x"] = x
+    if s.get("naBlocks"): p["na"] = sorted(set(int(n) for n in s["naBlocks"]))
     render = HANDMADE.get(pid, "renderSimple")
     body = ", ".join(f"{k}:{js(v)}" for k, v in p.items())
     return f"  {{ {body}, render:{render} }},"
@@ -95,7 +125,7 @@ def replace_block(src, name, body):
 
 def main(path):
     docs = json.load(open(path, encoding="utf-8"))
-    stays = [(d["data"].get("slug") or d["id"], d["data"]) for d in docs if plain(d["data"].get("name"))]
+    stays = [(d["data"].get("slug") or d["id"], clean(d["data"])) for d in docs if plain(d["data"].get("name"))]
     stays.sort(key=lambda x: -(x[1].get("order") or 0))
     src = SRC.read_text(encoding="utf-8")
     old_tags = {m.group(1): json.loads(m.group(2)) for m in re.finditer(r'\{ id:"([^"]+)".*?tags:(\[[^\]]*\])', src)}
@@ -105,7 +135,7 @@ def main(path):
             pass
         else:
             posts.append(post_entry(pid, s, old_tags.get(pid)))
-        if ok(s.get("code")) and s.get("deal") != "已結束":
+        if ok(s.get("code")) and s.get("deal") not in ("已結束",):
             note = plain(s.get("codeNote")).replace("輸入折扣碼享 ", "").replace("輸入折扣碼享", "")
             line = f"專屬折扣碼 {s['code'].strip()}" + (f" · {note}" if note else "")
             deals.append(f'  {{ post:{js(pid)}, type:"折扣碼", start:0, end:Infinity, code:{js(s["code"].strip())}, line:{js(line)} }},')
