@@ -782,10 +782,10 @@
   @media print{.share-fab{display:none}}
   /* 巷往「設施與餐食」：四個同層級小標 */
   .a-body .fm{margin-top:4px}
-  .a-body .fm .fm-h{font-size:18.5px;font-weight:800;line-height:1.45;color:var(--c-ink);margin:40px 0 12px;padding:0}
+  .a-body .fm-h{font-size:18.5px;font-weight:800;line-height:1.45;color:var(--c-ink);margin:40px 0 12px;padding:0}
   .a-body .fm > .fm-h:first-child{margin-top:6px}
-  .a-body .fm .fm-h + p{margin-top:0}
-  .a-body .fm .fm-h::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c-lime,#F2C230);margin-right:9px;vertical-align:.18em;box-shadow:0 0 0 1.5px #1A1A1A}
+  .a-body .fm-h + p{margin-top:0}
+  .a-body .fm-h::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c-lime,#F2C230);margin-right:9px;vertical-align:.18em;box-shadow:0 0 0 1.5px #1A1A1A}
   .a-body .fm p{font-size:17px;line-height:1.85;letter-spacing:.01em;text-wrap:wrap}
   .fm-tags{display:flex;flex-direction:column;gap:10px}
   .fm-row{display:flex;align-items:flex-start;gap:10px}
@@ -810,12 +810,17 @@
   .fm-card{margin-top:40px;padding:18px 18px 20px;background:#FFF8E7;border:2px solid #1A1A1A;border-radius:16px;box-shadow:4px 4px 0 #1A1A1A}
   .a-body .fm .fm-card .fm-h{margin:0 0 8px}
   .a-body .fm .fm-card p{margin:0}
-  /* 「用 LINE 詢問空房」：恢復舊版「漸層自動緩慢流動」，改成墨黑底＋金色光帶 */
-  .offer .of-line{background-color:#1A1A1A!important;background-image:linear-gradient(100deg,#111 0%,#1A1A1A 30%,#7A5E10 44%,#C9A02A 50%,#7A5E10 56%,#1A1A1A 70%,#111 100%)!important;background-size:250% 100%!important;background-position:0% 50%;animation:lineFlow2 4.5s ease-in-out infinite;color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+  /* 「用 LINE 詢問空房」：恢復舊版「漸層自動緩慢流動」，墨黑底＋金色光帶。
+     光帶畫在 ::before 上動畫（按鈕本身的 background 有 !important，動畫改不動） */
+  .offer .of-line{position:relative;overflow:hidden;isolation:isolate;color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+  .offer .of-line::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+    background:linear-gradient(100deg,#111 0%,#1A1A1A 30%,#7A5E10 44%,#D4A82C 50%,#7A5E10 56%,#1A1A1A 70%,#111 100%);
+    background-size:250% 100%;background-position:0% 50%;animation:lineFlow2 4.5s ease-in-out infinite}
   @keyframes lineFlow2{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-  @media (hover:hover){ .offer .of-line:hover{background-image:none!important;background-color:var(--c-lime,#F2C230)!important;color:#1A1A1A!important;text-shadow:none} }
-  .offer .of-line:active{background-image:none!important;background-color:var(--c-lime,#F2C230)!important;color:#1A1A1A!important;text-shadow:none}
-  @media (prefers-reduced-motion:reduce){ .offer .of-line{animation:none;background-position:50% 50%} }
+  @media (hover:hover){ .offer .of-line:hover::before{opacity:0} .offer .of-line:hover{background-color:var(--c-lime,#F2C230)!important;color:#1A1A1A!important;text-shadow:none} }
+  .offer .of-line:active::before{opacity:0}
+  .offer .of-line:active{background-color:var(--c-lime,#F2C230)!important;color:#1A1A1A!important;text-shadow:none}
+  @media (prefers-reduced-motion:reduce){ .offer .of-line::before{animation:none;background-position:50% 50%} }
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
@@ -1022,10 +1027,10 @@
   </div>
     </div></div>
 
-    <h3>衛浴空間</h3>
+    <h3 class="fm-h">衛浴空間</h3>
     <figure class="fig"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwQG/8QAJhAAAQMEAQIHAQAAAAAAAAAAAQACAwQFESESMUEGFSIzNFFxcv/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEQMRAD8A0uoOIPCZ4aTkjPVJ6yYw1D2noSumge2YBrcZK5q7Qvjrnc2kDOjjRWZWrD2lJkt7HdsKy3U7GCQ/ZRSAstrcjQClQTCSJ2B3UkKH5jf1M/EbGeUuPFudbwhCMmqreAbSM79KxWv2D/RQhIf/2Q==&quot;);"><img src="img/hangwang/14.jpg" alt="每間房間都有自己的獨立衛浴" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>每間房間都有自己的獨立衛浴</figcaption></figure>
 
-    <h3>一樓客廳</h3>
+    <h3 class="fm-h">一樓客廳</h3>
     <figure class="fig"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQCAwUG/8QAJBAAAgIBAwQCAwAAAAAAAAAAAQIAAxEEEkEGITFRBRM0YnH/xAAVAQEBAAAAAAAAAAAAAAAAAAABAv/EABkRAAIDAQAAAAAAAAAAAAAAAAABAhFBIf/aAAwDAQACEQMRAD8A1LtUblZbHDsO3iJoUTJYZ9SvYtFTFwyN7PMTJdhvGXU+jCXXYxVKi/W3vQVKqNp5kss9Asdht/sgCbtMVKso/bzMr59nq0CCtiMHviSimdb1CANOmBzOf0JP3qOO8ISsDR63yZg9R/hiEJKE/9k=&quot;);"><img src="img/hangwang/02.jpg" alt="一樓客廳，旁邊就是上樓的樓梯" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>一樓客廳，旁邊就是上樓的樓梯</figcaption></figure>
 
     <!-- 5 設施與餐食 -->
@@ -1807,10 +1812,10 @@ function renderHangwang(p){
         ["11","房內有長桌、電視、掛衣架和除濕機"]]},
     ])}
 
-    <h3>衛浴空間</h3>
+    <h3 class="fm-h">衛浴空間</h3>
     ${fig("14","每間房間都有自己的獨立衛浴")}
 
-    <h3>一樓客廳</h3>
+    <h3 class="fm-h">一樓客廳</h3>
     ${fig("02","一樓客廳，旁邊就是上樓的樓梯")}
 
     <!-- 5 設施與餐食 -->
