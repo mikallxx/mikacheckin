@@ -1228,111 +1228,22 @@ const ALL_POSTS = [
     h1:'<span class="h1l">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，</span><span class="h1l">8～22 人入住，一樓孝親房、二樓檜木房</span>',
     excerpt:"每間房間都比想像中寬敞，一樓就有兩間雙人房。房間怎麼分、可以玩什麼、適合誰住，一篇整理。",
     tags:["宜蘭","冬山","包棟民宿","三代同遊"], cover:IMG+"01_s.jpg", render:renderHangwang },
-  { id:"guipu", draft:true, real:true, date:"2026. 11. 13.", region:"嘉義", type:"露營",
-    title:"歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美",
-    excerpt:"不用帶任何裝備的懶人營區，傍晚的夕陽非常漂亮。照片和詳細介紹整理中。",
-    tags:["嘉義","懶人露營","免裝備","看夕陽"], textCover:["#F2A65A","#D9623B","#5B3A6B"],
-    kind:"懶人露營（免帶裝備）", host:"營區",
-    intro:["這次住的是嘉義的「歸樸森活露營區」，<strong>不用帶任何裝備</strong>的懶人營區，人到就能入住。",
-           "最推薦的是傍晚，<strong>夕陽非常漂亮</strong>，記得把時間留給這一段。"],
-    video:"https://www.instagram.com/reel/DfYnfihJlN6/", render:renderSimple },
-  { id:"hakuna", draft:true, real:true, date:"2026. 11. 13.", region:"宜蘭", type:"民宿",
-    title:"哈庫納馬塔塔｜宜蘭市包棟民宿，全台唯一非洲風格",
-    excerpt:"全台唯一非洲風格的包棟民宿，就在宜蘭市。有 Mika 專屬折扣碼，照片和詳細介紹整理中。",
-    tags:["宜蘭","宜蘭市","包棟民宿","非洲風格"], textCover:["#F6C35A","#E07B39","#7A3E2A"],
-    kind:"包棟民宿", host:"民宿", code:"Mikamika",
-    intro:["這次住的是宜蘭市的「哈庫納馬塔塔」，標榜<strong>全台唯一非洲風格</strong>的包棟民宿。",
-           "包棟入住不用跟其他房客共用空間，適合家人朋友一起來。"],
-    video:"https://www.instagram.com/reel/DfSDBugJbNS/", render:renderSimple },
-  { id:"pabohou", draft:true, real:true, date:"2026. 11. 14.", region:"高雄", type:"旅店",
-    title:"帕鉑候工所｜高雄大港橋、駁二住宿，輕軌站就在附近",
-    excerpt:"位置在大港橋、駁二一帶，輕軌站就在附近，搭車移動很方便。",
-    tags:["高雄","駁二","大港橋","輕軌"], textCover:["#7FB3C8","#3F6E8C","#1F3550"], motif:"city", kind:"旅店", host:"旅店",
-    intro:["這次住的是高雄的「帕鉑候工所」，位置在<strong>大港橋、駁二一帶</strong>。","<strong>輕軌站就在附近</strong>，搭車移動很方便。"],
-    notes:["淺眠的人建議自備耳塞。"],
-    video:"https://www.instagram.com/reel/DejHuecJehq/", render:renderSimple },
-  { id:"xushu", draft:true, real:true, date:"2026. 11. 14.", region:"台中", type:"旅店",
-    title:"旭樹。寓所｜台中東海商圈住宿，輸入折扣碼享 95 折",
-    excerpt:"就在台中東海商圈，輸入 Mika 專屬折扣碼享 95 折。",
-    tags:["台中","東海商圈","折扣碼"], textCover:["#B9D7A8","#6E9C6A","#2F4F3A"], motif:"city", kind:"旅店", host:"旅店",
-    intro:["這次住的是台中的「旭樹。寓所」，位置就在<strong>東海商圈</strong>。"],
-    code:"AR55t9g", codeNote:"輸入折扣碼享 95 折",
-    video:"https://www.instagram.com/reel/DeZRD9wpo88/", render:renderSimple },
-  { id:"yunxiu", draft:true, real:true, date:"2026. 11. 14.", region:"宜蘭", type:"民宿",
-    title:"雲岫海景渡假會館｜宜蘭海景包棟民宿，看得到龜山島，折扣碼享 65 折",
-    excerpt:"整棟五間房、最多住 14 人，看得到海景和龜山島，有 25 米海景泳池。輸入折扣碼享 65 折。",
-    tags:["宜蘭","包棟民宿","海景","龜山島"], textCover:["#9FD3E6","#3F8FB5","#1D4466"], motif:"sea", kind:"包棟民宿", host:"民宿",
-    info:[["房間","整棟五間房，最多住 14 人"],["餐點","入住附下午茶和早餐"]],
-    intro:["這次住的是宜蘭的包棟民宿「雲岫海景渡假會館」，<strong>整棟五間房，最多住 14 人</strong>。","從民宿就<strong>看得到海景和龜山島</strong>，很適合待在民宿好好放鬆。"],
-    highlights:["25 米海景泳池","兒童遊戲區、電動車和大片草皮","包棟內有獨立 KTV 和電動麻將桌","入住附下午茶和早餐","公共空間有 24 小時自助飲料吧和泡麵牆"],
-    code:"mikamika", codeNote:"輸入折扣碼享 65 折",
-    video:"https://www.instagram.com/reel/DeQqBRaJAuA/", render:renderSimple },
-  { id:"paboshe", draft:true, real:true, date:"2026. 11. 14.", region:"高雄", type:"旅店",
-    title:"帕鉑舍旅｜高雄車站走路 3 分鐘，四人住一人不到 600 元",
-    excerpt:"距離高雄車站走路只要 3 分鐘，四人入住平均一人不到 600 元，公共空間免費提供咖啡和點心。",
-    tags:["高雄","高雄車站","平價住宿","復古工業風"], textCover:["#E8B98A","#B5704A","#4A2E2A"], motif:"city", kind:"旅店", host:"旅店",
-    intro:["這次住的是高雄的「帕鉑舍旅」，<strong>距離高雄車站走路只要 3 分鐘</strong>。","四人入住，<strong>平均一人不到 600 元</strong>。從雙人房到四人房都有，空間配置也各有不同。"],
-    highlights:["房間走復古工業風","部分房型有大片窗戶，採光很好，還能直接看到高雄車站","每間客房的淋浴間和廁所各自獨立","公共空間免費提供咖啡、茶飲和小點心"],
-    video:"https://www.instagram.com/reel/Dd5648KJ0gG/", render:renderSimple },
-  { id:"yiqi", draft:true, real:true, date:"2026. 11. 14.", region:"台中", type:"旅店",
-    title:"一期家旅｜台中住宿，大片落地窗、頂樓露台看夜景",
-    excerpt:"房間有大片落地窗，提供 Dyson 吹風機和茶籽堂備品，頂樓露台可以看夜景。",
-    tags:["台中","落地窗","夜景","茶籽堂"], textCover:["#C9B6E4","#7B67B0","#2E2650"], motif:"city", kind:"旅店", host:"旅店",
-    intro:["這次住的是台中的「一期家旅」，房間有<strong>大片落地窗</strong>，採光很好。"],
-    highlights:["提供 Dyson 吹風機和膠囊咖啡機","浴室備有茶籽堂沐浴用品和面膜","頂樓露台可以坐著欣賞夜景","入住會拿到《期中限報》，可以探索附近店家和景點","大廳可以列印照片，交換其他旅人的旅行視角"],
-    notes:["房型靠近馬路，對聲音敏感的人要留意，櫃檯有耳塞可以自取。","停車空間有限，有需求建議訂房時先告知。"],
-    video:"https://www.instagram.com/reel/DcifDscJveq/", render:renderSimple },
-  { id:"hanyu", draft:true, real:true, date:"2026. 11. 14.", region:"台北", type:"飯店",
-    title:"瀚寓酒店｜台北住宿，房間就能看到 101，附開放式廚房",
-    excerpt:"房間就能直接看到台北 101，空間寬敞還有開放式廚房，鄰近新光三越和捷運。",
-    tags:["台北","101","開放式廚房","健身房"], textCover:["#A9C4E8","#4E74B5","#1E2F5C"], motif:"city", kind:"飯店", host:"飯店",
-    intro:["這次住的是台北的「瀚寓酒店」，<strong>房間就能直接看到台北 101</strong>。","房型空間寬敞，鄰近 101、新光三越和捷運。"],
-    highlights:["開放式廚房，有微波爐和雙層冰箱（不可開火）","公共空間有健身房和洗衣設備","鄰近台北 101、新光三越和捷運"],
-    notes:["早餐是簡單的自助吧，整體選擇不多。","房型不同，看出去的景觀也可能不同。"],
-    video:"https://www.instagram.com/reel/DcafKx7phTl/", render:renderSimple },
-  { id:"yuguang", draft:true, real:true, date:"2026. 11. 14.", region:"台南", type:"民宿",
-    title:"餘光民宿｜台南安平漁光島，榻榻米房、早餐喝牛肉湯",
-    excerpt:"一進門就是大片榻榻米，還能騎腳踏車去海邊看夕陽，隔天早餐喝得到台南牛肉湯。",
-    tags:["台南","安平","漁光島","榻榻米"], textCover:["#F4C9A0","#D98E6A","#5B4A5E"], motif:"sea", kind:"民宿", host:"民宿",
-    info:[["入住房型","「岩」榻榻米房"]],
-    intro:["一進門就是<strong>大片榻榻米</strong>，搭配窗外的日式造景，光坐在這裡放空就很舒服。","浴室和廁所是分開的，備品也準備得很細心，除了基本的沐浴用品，連洗面乳和耳塞都有。"],
-    highlights:["民宿提供腳踏車，可以騎去海邊散步、看夕陽","隔天早餐喝得到台南牛肉湯，不吃牛也有虱目魚粥可以選"],
-    video:"https://www.instagram.com/reel/Dbw8vmmJ1uK/", render:renderSimple },
-  { id:"lvju", draft:true, real:true, date:"2026. 11. 14.", region:"台中", type:"旅店",
-    title:"旅居文旅｜台中住宿，70 吋大電視、24 小時免費零食咖啡",
-    excerpt:"房間乾淨舒服，有 70 吋超大電視，大廳 24 小時有免費零食和咖啡。",
-    tags:["台中","大電視","免費零食","自助洗衣"], textCover:["#F2C6C2","#C9736E","#5A2E3A"], motif:"city", kind:"旅店", host:"旅店",
-    intro:["這次住的是台中的「旅居文旅」，房間乾淨舒服，浴室有乾濕分離。","還有一台 <strong>70 吋超大電視</strong>，晚上躺在床上追劇真的很享受。"],
-    highlights:["房內有桌椅，吃東西、化妝或臨時辦公都方便","大廳共享空間 24 小時有免費零食和咖啡","隔天早上有簡單輕食","有自助洗衣房","附近餐廳和宵夜選擇很多"],
-    video:"https://www.instagram.com/reel/DbnnnbbRrkc/", render:renderSimple },
-  { id:"caosu", draft:true, real:true, date:"2026. 11. 14.", region:"南投", type:"旅店",
-    title:"草宿 Auto 智旅｜南投草屯無人旅店，24 小時自助入住",
-    excerpt:"草屯市區新開幕的無人旅店，24 小時自助入住，很適合喜歡自在入住的 I 人。",
-    tags:["南投","草屯","無人旅店","自助入住"], textCover:["#CFE3B0","#86A85C","#34452A"], motif:"city", kind:"無人旅店", host:"旅店",
-    intro:["南投草屯新開幕的<strong>無人旅店</strong>，24 小時自助入住，整體空間舒服。","位置在草屯市區，非常方便，很適合喜歡自在入住的 I 人。"],
-    video:"https://www.instagram.com/reel/DazwLnUJlt7/", render:renderSimple },
-  { id:"youli", draft:true, real:true, date:"2026. 11. 14.", region:"苗栗", type:"露營",
-    title:"有里日子露營區｜苗栗卓蘭免裝備露營，還能玩攀樹",
-    excerpt:"結合自然與冒險，可以體驗免裝備露營，還能參加刺激又安全的攀樹活動。",
-    tags:["苗栗","卓蘭","懶人露營","攀樹"], textCover:["#B8DDA0","#5F9B5A","#24402A"], motif:"mount", kind:"懶人露營（免帶裝備）", host:"營區",
-    intro:["苗栗卓蘭的「有里日子露營區」結合自然與冒險，<strong>可以體驗免裝備的露營</strong>。","還能參加刺激又安全的<strong>攀樹活動</strong>，大人小孩都玩得超開心。"],
-    video:"https://www.instagram.com/reel/DahJDL5JRJQ/", render:renderSimple },
-  { id:"r9", draft:true, real:true, date:"2026. 11. 14.", region:"沖繩", type:"飯店",
-    title:"R9 貨櫃屋｜沖繩宇流麻市貨櫃屋飯店，乾淨安靜的獨立客房",
-    excerpt:"乾淨、安靜的獨立貨櫃屋客房，每天有人協助簡單打掃，適合自駕自由行。",
-    tags:["沖繩","宇流麻市","貨櫃屋","自駕"], textCover:["#A8E0E0","#3AA0A8","#1A4A55"], motif:"sea", kind:"貨櫃屋飯店", host:"飯店",
-    intro:["這次入住的是沖繩宇流麻市的貨櫃屋飯店，<strong>乾淨、安靜，又是獨立客房</strong>，每天還有人協助簡單打掃，對自由行來說很加分。","房間空間不算大，但該有的都有，很適合想簡單住、方便移動的旅人。"],
-    highlights:["步行可以到 7-11 和 Lawson","飯店前方的路上有唐吉訶德、餐廳和大型店鋪"],
-    notes:["店家之間比較分散，建議自駕會方便很多。"],
-    video:"https://www.instagram.com/reel/DaFo8ndJPzi/", render:renderSimple },
-  { id:"jinshi", draft:true, real:true, date:"2026. 11. 14.", region:"新北", type:"民宿",
-    title:"金石新月光｜新北九份山城民宿，看山也看海，五種主題房",
-    excerpt:"有主人品味的山城民宿，一邊看山一邊看海，有停車場，開車約五分鐘到九份。",
-    tags:["新北","九份","山城民宿","海景"], textCover:["#C8D8E8","#7E9AB8","#3A4A62"], motif:"sea", kind:"民宿", host:"民宿",
-    info:[["入住房型","希臘房"],["停車","有停車場"]],
-    intro:["這裡比較像走進一間<strong>有主人品味的山城民宿</strong>，一邊看山一邊看海。","最方便的是有<strong>停車場</strong>，開車來不用一直繞山路找車位。"],
-    highlights:["房型有東方、希臘、鄉村、摩登、西班牙五種主題","房內有冰箱和浴缸，吹風機風量也很夠","沐浴用品是茶籽堂","早餐很好吃，也可以提前預約午餐、晚餐，中西式都有","開車約五分鐘到九份，也能順遊陰陽海、黃金博物館和黃金瀑布"],
-    video:"https://www.instagram.com/reel/DaCbCe7J_6B/", render:renderSimple },
+  /* <後台產生：文章> */
+  { id:"guipu", draft:true, real:true, region:"嘉義", area:"", cat:"露營", type:"露營", kind:"懶人露營（免帶裝備）", title:"歸樸森活露營區｜嘉義懶人露營，免帶裝備、夕陽超美", excerpt:"不用帶任何裝備的懶人營區，傍晚的夕陽非常漂亮。照片和詳細介紹整理中。", tags:["嘉義", "露營"], textCover:["#F2A65A", "#D9623B", "#5B3A6B"], motif:"mount", host:"營區", soon:true, video:"https://www.instagram.com/reel/DfYnfihJlN6/", intro:["這次住的是嘉義的「歸樸森活露營區」，<strong>不用帶任何裝備</strong>的懶人營區，人到就能入住。", "最推薦的是傍晚，<strong>夕陽非常漂亮</strong>，記得把時間留給這一段。"], render:renderSimple },
+  { id:"hakuna", draft:true, real:true, region:"宜蘭", area:"宜蘭市", cat:"包棟民宿", type:"包棟民宿", title:"哈庫納馬塔塔｜宜蘭市包棟民宿，全台唯一非洲風格", excerpt:"全台唯一非洲風格的包棟民宿，就在宜蘭市。有 Mika 專屬折扣碼，照片和詳細介紹整理中。", tags:["宜蘭", "宜蘭市", "包棟民宿"], textCover:["#F6C35A", "#E07B39", "#7A3E2A"], motif:"mount", host:"民宿", soon:true, code:"Mikamika", video:"https://www.instagram.com/reel/DfSDBugJbNS/", intro:["這次住的是宜蘭市的「哈庫納馬塔塔」，標榜<strong>全台唯一非洲風格</strong>的包棟民宿。", "包棟入住不用跟其他房客共用空間，適合家人朋友一起來。"], render:renderSimple },
+  { id:"pabohou", draft:true, real:true, region:"高雄", area:"大港橋、駁二", cat:"飯店旅館", type:"旅店", kind:"旅店", title:"帕鉑候工所｜高雄大港橋、駁二住宿，輕軌站就在附近", excerpt:"位置在大港橋、駁二一帶，輕軌站就在附近，搭車移動很方便。", tags:["高雄", "大港橋、駁二", "飯店旅館"], textCover:["#7FB3C8", "#3F6E8C", "#1F3550"], motif:"city", host:"旅店", soon:true, video:"https://www.instagram.com/reel/DejHuecJehq/", intro:["這次住的是高雄的「帕鉑候工所」，位置在<strong>大港橋、駁二一帶</strong>。", "<strong>輕軌站就在附近</strong>，搭車移動很方便。"], rules:[{"cat": "其他", "text": "淺眠的人建議自備耳塞。"}], render:renderSimple },
+  { id:"xushu", draft:true, real:true, region:"台中", area:"東海商圈", cat:"飯店旅館", type:"旅店", kind:"旅店", title:"旭樹。寓所｜台中東海商圈住宿，輸入折扣碼享 95 折", excerpt:"就在台中東海商圈，輸入 Mika 專屬折扣碼享 95 折。", tags:["台中", "東海商圈", "飯店旅館"], textCover:["#B9D7A8", "#6E9C6A", "#2F4F3A"], motif:"city", host:"旅店", soon:true, code:"AR55t9g", video:"https://www.instagram.com/reel/DeZRD9wpo88/", codeNote:"輸入折扣碼享 <strong class=\"off\">95 折</strong>", intro:["這次住的是台中的「旭樹。寓所」，位置就在<strong>東海商圈</strong>。"], render:renderSimple },
+  { id:"yunxiu", draft:true, real:true, region:"宜蘭", area:"", cat:"包棟民宿", type:"包棟民宿", title:"雲岫海景渡假會館｜宜蘭海景包棟民宿，看得到龜山島，折扣碼享 65 折", excerpt:"整棟五間房、最多住 14 人，看得到海景和龜山島，有 25 米海景泳池。輸入折扣碼享 65 折。", tags:["宜蘭", "包棟民宿"], textCover:["#9FD3E6", "#3F8FB5", "#1D4466"], motif:"sea", host:"民宿", soon:true, code:"mikamika", video:"https://www.instagram.com/reel/DeQqBRaJAuA/", breakfast:"有附早餐", codeNote:"輸入折扣碼享 <strong class=\"off\">65 折</strong>", roomsIntro:"整棟五間房，最多住 <strong>14 人</strong>。", breakfastText:"入住附下午茶和早餐。", capacity:"最多 14 人", breakfastInfo:"有附早餐，入住附下午茶和早餐", intro:["這次住的是宜蘭的包棟民宿「雲岫海景渡假會館」，<strong>整棟五間房，最多住 14 人</strong>。", "從民宿就<strong>看得到海景和龜山島</strong>，很適合待在民宿好好放鬆。"], indoor:["獨立 KTV", "電動麻將桌", "24 小時自助飲料吧", "泡麵牆"], outdoor:["25 米海景泳池", "兒童遊戲區", "電動車", "大片草皮"], render:renderSimple },
+  { id:"paboshe", draft:true, real:true, region:"高雄", area:"高雄車站", cat:"飯店旅館", type:"旅店", kind:"旅店", title:"帕鉑舍旅｜高雄車站走路 3 分鐘，四人住一人不到 600 元", excerpt:"距離高雄車站走路只要 3 分鐘，四人入住平均一人不到 600 元，公共空間免費提供咖啡和點心。", tags:["高雄", "高雄車站", "飯店旅館"], textCover:["#E8B98A", "#B5704A", "#4A2E2A"], motif:"city", host:"旅店", soon:true, video:"https://www.instagram.com/reel/Dd5648KJ0gG/", roomsIntro:"從雙人房到四人房都有，房間走復古工業風。", spaces:"部分房型有大片窗戶，採光很好，還能直接看到高雄車站。每間客房的淋浴間和廁所各自獨立。", facilityText:"公共空間免費提供咖啡、茶飲和小點心。", intro:["這次住的是高雄的「帕鉑舍旅」，<strong>距離高雄車站走路只要 3 分鐘</strong>。", "四人入住，<strong>平均一人不到 600 元</strong>。從雙人房到四人房都有，空間配置也各有不同。"], render:renderSimple },
+  { id:"yiqi", draft:true, real:true, region:"台中", area:"", cat:"飯店旅館", type:"旅店", kind:"旅店", title:"一期家旅｜台中住宿，大片落地窗、頂樓露台看夜景", excerpt:"房間有大片落地窗，提供 Dyson 吹風機和茶籽堂備品，頂樓露台可以看夜景。", tags:["台中", "飯店旅館"], textCover:["#C9B6E4", "#7B67B0", "#2E2650"], motif:"city", host:"旅店", soon:true, video:"https://www.instagram.com/reel/DcifDscJveq/", spaces:"房間提供 Dyson 吹風機和膠囊咖啡機，浴室備有茶籽堂沐浴用品和面膜。大廳可以列印照片，交換其他旅人的旅行視角。", nearbyIntro:"入住會拿到《期中限報》，可以探索附近店家和景點。", parkingText:"停車空間有限，有需求建議訂房時先告知", intro:["這次住的是台中的「一期家旅」，房間有<strong>大片落地窗</strong>，採光很好。"], indoor:["頂樓露台（可欣賞夜景）", "大廳照片列印"], rules:[{"cat": "其他", "text": "房型靠近馬路，對聲音敏感的人要留意，櫃檯有耳塞可以自取。"}], render:renderSimple },
+  { id:"hanyu", draft:true, real:true, region:"台北", area:"信義區（101 附近）", cat:"飯店旅館", type:"飯店", kind:"飯店", title:"瀚寓酒店｜台北住宿，房間就能看到 101，附開放式廚房", excerpt:"房間就能直接看到台北 101，空間寬敞還有開放式廚房，鄰近新光三越和捷運。", tags:["台北", "信義區（101 附近）", "飯店旅館"], textCover:["#A9C4E8", "#4E74B5", "#1E2F5C"], motif:"city", host:"飯店", soon:true, video:"https://www.instagram.com/reel/DcafKx7phTl/", kitchen:"開放式廚房有微波爐和雙層冰箱，<strong>不可開火</strong>。", breakfastText:"早餐是簡單的自助吧，整體選擇不多。", nearbyIntro:"鄰近台北 101、新光三越和捷運。", intro:["這次住的是台北的「瀚寓酒店」，<strong>房間就能直接看到台北 101</strong>。", "房型空間寬敞，鄰近 101、新光三越和捷運。"], indoor:["健身房", "洗衣設備"], rules:[{"cat": "其他", "text": "房型不同，看出去的景觀也可能不同。"}], render:renderSimple },
+  { id:"yuguang", draft:true, real:true, region:"台南", area:"安平（漁光島）", cat:"民宿", type:"民宿", title:"餘光民宿｜台南安平漁光島，榻榻米房、早餐喝牛肉湯", excerpt:"一進門就是大片榻榻米，還能騎腳踏車去海邊看夕陽，隔天早餐喝得到台南牛肉湯。", tags:["台南", "安平（漁光島）", "民宿"], textCover:["#F4C9A0", "#D98E6A", "#5B4A5E"], motif:"sea", host:"民宿", soon:true, video:"https://www.instagram.com/reel/Dbw8vmmJ1uK/", breakfast:"有附早餐", roomsIntro:"這次入住的是「岩」榻榻米房。", breakfastText:"隔天早餐喝得到台南牛肉湯，不吃牛也有虱目魚粥可以選。", breakfastInfo:"有附早餐", intro:["一進門就是<strong>大片榻榻米</strong>，搭配窗外的日式造景，光坐在這裡放空就很舒服。", "浴室和廁所是分開的，備品也準備得很細心，除了基本的沐浴用品，連洗面乳和耳塞都有。"], outdoor:["腳踏車（可騎去海邊看夕陽）"], render:renderSimple },
+  { id:"lvju", draft:true, real:true, region:"台中", area:"", cat:"飯店旅館", type:"旅店", kind:"旅店", title:"旅居文旅｜台中住宿，70 吋大電視、24 小時免費零食咖啡", excerpt:"房間乾淨舒服，有 70 吋超大電視，大廳 24 小時有免費零食和咖啡。", tags:["台中", "飯店旅館"], textCover:["#F2C6C2", "#C9736E", "#5A2E3A"], motif:"city", host:"旅店", soon:true, video:"https://www.instagram.com/reel/DbnnnbbRrkc/", spaces:"房內有桌椅，吃東西、化妝或臨時辦公都方便。", facilityText:"大廳共享空間 24 小時有免費零食和咖啡。", breakfastText:"隔天早上有簡單輕食。", nearbyIntro:"附近餐廳和宵夜選擇很多。", intro:["這次住的是台中的「旅居文旅」，房間乾淨舒服，浴室有乾濕分離。", "還有一台 <strong>70 吋超大電視</strong>，晚上躺在床上追劇真的很享受。"], indoor:["自助洗衣房"], render:renderSimple },
+  { id:"caosu", draft:true, real:true, region:"南投", area:"草屯", cat:"飯店旅館", type:"無人旅店", kind:"無人旅店", title:"草宿 Auto 智旅｜南投草屯無人旅店，24 小時自助入住", excerpt:"草屯市區新開幕的無人旅店，24 小時自助入住，很適合喜歡自在入住的 I 人。", tags:["南投", "草屯", "飯店旅館"], textCover:["#CFE3B0", "#86A85C", "#34452A"], motif:"city", host:"旅店", soon:true, video:"https://www.instagram.com/reel/DazwLnUJlt7/", intro:["南投草屯新開幕的<strong>無人旅店</strong>，24 小時自助入住，整體空間舒服。", "位置在草屯市區，非常方便，很適合喜歡自在入住的 I 人。"], render:renderSimple },
+  { id:"youli", draft:true, real:true, region:"苗栗", area:"卓蘭", cat:"露營", type:"露營", kind:"懶人露營（免帶裝備）", title:"有里日子露營區｜苗栗卓蘭免裝備露營，還能玩攀樹", excerpt:"結合自然與冒險，可以體驗免裝備露營，還能參加刺激又安全的攀樹活動。", tags:["苗栗", "卓蘭", "露營"], textCover:["#B8DDA0", "#5F9B5A", "#24402A"], motif:"mount", host:"營區", soon:true, video:"https://www.instagram.com/reel/DahJDL5JRJQ/", intro:["苗栗卓蘭的「有里日子露營區」結合自然與冒險，<strong>可以體驗免裝備的露營</strong>。", "還能參加刺激又安全的<strong>攀樹活動</strong>，大人小孩都玩得超開心。"], render:renderSimple },
+  { id:"r9", draft:true, real:true, region:"沖繩", area:"宇流麻市", cat:"飯店旅館", type:"貨櫃屋飯店", kind:"貨櫃屋飯店", title:"R9 貨櫃屋｜沖繩宇流麻市貨櫃屋飯店，乾淨安靜的獨立客房", excerpt:"乾淨、安靜的獨立貨櫃屋客房，每天有人協助簡單打掃，適合自駕自由行。", tags:["沖繩", "宇流麻市", "飯店旅館"], textCover:["#A8E0E0", "#3AA0A8", "#1A4A55"], motif:"sea", host:"飯店", soon:true, video:"https://www.instagram.com/reel/DaFo8ndJPzi/", nearbyIntro:"步行可以到 7-11 和 Lawson，飯店前方的路上還有唐吉訶德、餐廳和大型店鋪。", intro:["這次入住的是沖繩宇流麻市的貨櫃屋飯店，<strong>乾淨、安靜，又是獨立客房</strong>，每天還有人協助簡單打掃，對自由行來說很加分。", "房間空間不算大，但該有的都有，很適合想簡單住、方便移動的旅人。"], rules:[{"cat": "其他", "text": "店家之間比較分散，建議自駕會方便很多。"}], render:renderSimple },
+  { id:"jinshi", draft:true, real:true, region:"新北", area:"九份", cat:"民宿", type:"民宿", title:"金石新月光｜新北九份山城民宿，看山也看海，五種主題房", excerpt:"有主人品味的山城民宿，一邊看山一邊看海，有停車場，開車約五分鐘到九份。", tags:["新北", "九份", "民宿"], textCover:["#C8D8E8", "#7E9AB8", "#3A4A62"], motif:"sea", host:"民宿", soon:true, video:"https://www.instagram.com/reel/DaCbCe7J_6B/", roomsIntro:"房型有東方、希臘、鄉村、摩登、西班牙五種主題，這次入住的是希臘房。", spaces:"房內有冰箱和浴缸，吹風機風量也很夠，沐浴用品是茶籽堂。", breakfastText:"早餐很好吃。", dinner:"也可以提前預約午餐、晚餐，中西式都有。", parkingText:"有停車場", intro:["這裡比較像走進一間<strong>有主人品味的山城民宿</strong>，一邊看山一邊看海。", "最方便的是有<strong>停車場</strong>，開車來不用一直繞山路找車位。"], nearby:[{"name": "九份", "group": "景點", "drive": "約 5 分鐘", "dist": "", "url": ""}, {"name": "陰陽海", "group": "景點", "drive": "", "dist": "", "url": ""}, {"name": "黃金博物館", "group": "景點", "drive": "", "dist": "", "url": ""}, {"name": "黃金瀑布", "group": "景點", "drive": "", "dist": "", "url": ""}], render:renderSimple },
+  /* </後台產生：文章> */
   { sample:true, id:"s1", date:"2026. 10. 25.", region:"花東", type:"飯店",
     title:"（範例）花蓮海景飯店開箱｜無邊際泳池＋早餐評比",
     excerpt:"範例文章：這裡會放這間飯店的簡介和一句重點心得。",
@@ -1357,10 +1268,12 @@ const posts = ALL_POSTS.filter(p=>(SHOW_SAMPLES||!p.sample) && !(PROD && p.draft
    正式版會從「優惠活動」表讀入固定日期；這裡用「今天前後幾天」做示範 */
 const D=864e5, H=36e5, t0=Date.now();
 const deals = [
+  /* <後台產生：優惠> */
+  { post:"hangwang", type:"折扣碼", start:0, end:Infinity, code:"MIKA888", line:"專屬折扣碼 MIKA888 · 包棟定價 75 折" },
+  { post:"hakuna", type:"折扣碼", start:0, end:Infinity, code:"Mikamika", line:"專屬折扣碼 Mikamika" },
   { post:"xushu", type:"折扣碼", start:0, end:Infinity, code:"AR55t9g", line:"專屬折扣碼 AR55t9g · 95 折" },
   { post:"yunxiu", type:"折扣碼", start:0, end:Infinity, code:"mikamika", line:"專屬折扣碼 mikamika · 65 折" },
-  { post:"hakuna", type:"折扣碼", start:0, end:Infinity, code:"Mikamika", line:"專屬折扣碼 Mikamika" },
-  { post:"hangwang", type:"折扣碼", start:0, end:Infinity, code:"MIKA888", line:"專屬折扣碼 MIKA888 · 包棟定價 75 折" },
+  /* </後台產生：優惠> */
   { post:"s1", type:"折扣碼", start:t0-10*D, end:t0+20*D,
     title:"海景飯店官網訂房折扣碼（示範）", perk:"官網訂房輸入折扣碼，房價<strong class='off'>再折 300 元</strong>。", code:"MIKA300", link:"#" },
   { post:"s2", type:"團購", start:t0+5*D, end:t0+12*D,
@@ -1401,8 +1314,10 @@ function tick(){ document.querySelectorAll("[data-cd]").forEach(el=>{ const d=de
 setInterval(tick,30000);
 /* ---------- 複製功能：優惠碼、訂房詢問、揪團摘要 ---------- */
 const COPY_TEXTS = {
+  /* <後台產生：文案> */
   "hangwang-ask": "您好，我是從「Mika今晚住這裡」看到巷往 Villa 的資訊！\n\n想詢問＿＿月＿＿日\n＿＿位大人、＿＿位小孩，是否還有空房？\n\n也想請問使用優惠碼 MIKA888 的包棟價格，謝謝！",
   "hangwang-share": "要不要一起去宜蘭包棟？我找到冬山一間叫「巷往 Villa」的民宿，可以住 8～22 人。一樓有兩間雙人房，可以留給長輩住，每間房都有獨立衛浴，住宿也有附早餐！\n\n我想約＿＿月＿＿日，那天有空又想去的人幫我 +1，我再去問有沒有空房 🙋\n\n房間照片跟完整介紹在這裡 👇\nhttps://mikacheckin.com/hangwang/",
+  /* </後台產生：文案> */
 };
 function legacyCopy(text){
   const ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly","");
@@ -1450,7 +1365,7 @@ function shareTexts(p){
   const d=dealOf(p.id), code=d&&["live","code"].includes(status(d))?(d.code||p.code||""):"";
   const brief=(p.excerpt||"").replace(/照片和詳細介紹整理中。?/,"").trim();
   const rec=[`推薦你這間${p.region}的${(p.kind&&!/（/.test(p.kind))?p.kind:catOf(p)}：${name}！`, brief, (code&&!/折扣碼/.test(brief))?`用 Mika 的折扣碼 ${code} 訂房有優惠。`:(code?`折扣碼：${code}`:""), "完整介紹在這裡 👇", url].filter(Boolean).join("\n");
-  const cap=(p.info||[]).find(([k])=>/人數|房間/.test(k));
+  const cap=p.capacity?["人數","可以住 "+p.capacity.replace(/<[^>]+>/g,"")+"。"]:(p.info||[]).find(([k])=>/人數|房間/.test(k));
   const grp=[`要不要一起包「${name}」？`, p.id==="hangwang"?"可以住 8～22 人，一樓有孝親房，大家都住得下。":(cap?cap[1]:""), "想約＿＿月＿＿日，可以的人 +1，我再去問空房 🙋", url].filter(Boolean).join("\n");
   const custom=COPY_TEXTS[p.id+"-share"];
   return {url,rec:custom||rec,grp:custom?"":(SHARE_GROUP_CATS.includes(catOf(p))?grp:"")};
@@ -1922,51 +1837,117 @@ function textCover(p){
     <text x="200" y="82" text-anchor="middle" fill="#fff" font-size="28" font-weight="700" font-family="Noto Sans TC,sans-serif">${name}</text>
     <text x="200" y="110" text-anchor="middle" fill="#fff" opacity=".9" font-size="15" font-family="Noto Sans TC,sans-serif">${p.region} · ${p.type}</text></svg>`;
 }
-/* 簡易版文章（照片之後補） */
-function renderSimple(p){  /* 依固定 8 大區塊排列；沒有資料的區塊不顯示 */
-  const name=p.title.split("｜")[0];
+/* 一般住宿文章（後台資料產生）：固定 8 大區塊，沒有資料的區塊整段不顯示 */
+const NB_ICON={
+  "入住前":'<path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/><path d="m9 15-1-1"/><path d="m15 15 1-1"/><path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"/><path d="m8 19-2 3"/><path d="m16 19 2 3"/>',
+  "晚上覓食":'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  "美食":'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  "退房後":'<path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>',
+  "景點":'<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>'
+};
+const NB_ORDER=["入住前","晚上覓食","退房後","美食","景點"];
+function nbRow(n,p){
+  const url=n.url||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((p.region||"")+" "+n.name)}`;
+  const meta=[n.drive,n.dist].filter(Boolean);
+  return `<li><a class="nb-row" href="${url}" target="_blank" rel="noopener" aria-label="${n.name}${meta.length?"，開車"+meta.join("，"):""}，在 Google 地圖開啟">
+    <span class="nb-name"><b>${n.name}</b></span>
+    ${meta.length?`<span class="nb-meta">${n.drive?`<b><span class="nw">${n.drive}</span></b>`:""}${n.dist?`<small><span class="nw">${n.dist}</span></small>`:""}</span>`:""}<svg class="nb-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+  </a></li>`;
+}
+function renderSimple(p){
+  const name=p.title.split("｜")[0], host=p.host||"民宿", hasOffer=p.code||p.lineUrl||p.codeNote;
+  const tagRow=(t,l)=>l&&l.length?`<div class="fm-row"><span class="fm-tag">${t}</span><p>${l.map((x,i)=>`<span class="nw">${x}${i<l.length-1?"、":""}</span>`).join("")}</p></div>`:"";
+  const veg=v=>v?`<span class="nw">（有素食）</span>`:"";
+  const info=[["名稱",name],["地址",p.address],["人數",p.capacity&&`<span class="nw">${p.capacity}</span>`],["入住／退房",p.checkin],["停車",p.parkingText],["早餐",p.breakfastInfo],
+    ["房價",p.price||(p.cat==="包棟民宿"?"包棟價格請直接向民宿詢問":`請直接向${host}詢問`)],
+    ["Mika 專屬優惠",p.codeNote&&`${p.codeNote}${p.codeCond?`<span class="cond">※${p.codeCond}</span>`:""}`]].filter(x=>x[1]);
+  const fac=p.facilityText||(p.indoor&&p.indoor.length)||(p.outdoor&&p.outdoor.length);
+  const hasFm=fac||p.kitchen||p.breakfastText||p.dinner;
+  const hasRooms=p.roomsIntro||(p.roomRows&&p.roomRows.length)||p.spaces;
+  const rules=p.rules||[], ruleCats=[...new Set(rules.map(r=>r.cat))];
+  const nbGroups=NB_ORDER.map(g=>[g,(p.nearby||[]).filter(n=>n.group===g)]).filter(x=>x[1].length);
+  const priceTxt=p.priceBtn||(p.cat==="包棟民宿"?"包棟價格請直接向民宿詢問":`價格請直接向${host}詢問`);
   return `
+  <!-- 1 首圖、標題與訂房入口 -->
   <figure class="fig cover-fig" style="margin:0"><div class="a-cover">${textCover(p)}</div></figure>
   <div class="a-body post">
-    ${p.code?`<section class="offer" id="offer" aria-label="${name} 專屬折扣碼">
-      <div class="of-sec">
-        <h3 class="of-k">${name} 專屬優惠</h3>
-        <p class="of-code">折扣碼 <b class="nw">${p.code}</b></p>
-        <div class="of-row">
-          <button class="copy of-copy" data-code="${p.code}" data-label="複製折扣碼" data-done="已複製">複製折扣碼</button>
-          <span class="of-hint">${p.codeNote||`優惠內容請向${p.host||"民宿"}詢問`}</span>
-        </div>
-      </div>
+    ${hasOffer?`<section class="offer" id="offer" aria-label="${name} 訂房優惠">
+      ${p.codeNote?`<div class="of-sec">
+        <h3 class="of-k">${name} 訂房優惠</h3>
+        <p class="of-main"><span class="mk">${p.codeNote}</span></p>
+        ${p.codeCond?`<p class="of-sub">${p.codeCond}。</p>`:""}
+      </div>`:`<div class="of-sec"><h3 class="of-k">${name} ${p.code?"專屬優惠":"訂房資訊"}</h3>${p.code?`<p class="of-sub">優惠內容請向${host}詢問。</p>`:""}</div>`}
+      ${p.code?`<div class="of-sec">
+        <p class="of-code">優惠碼 <b class="nw">${p.code}</b></p>
+        <div class="of-row">${p.lineUrl
+          ?`<button class="copy of-copy" data-copy="${p.id}-ask" data-label="複製詢問訊息" data-done="已複製">複製詢問訊息</button><span class="of-hint">已含優惠碼 <span class="nw">${p.code}</span></span>`
+          :`<button class="copy of-copy" data-code="${p.code}" data-label="複製折扣碼" data-done="已複製">複製折扣碼</button>`}</div>
+      </div>`:""}
+      ${p.lineUrl?`<div class="of-sec">
+        <a class="of-line" href="${p.lineUrl}" target="_blank" rel="noopener">用 LINE 詢問空房</a>
+        ${p.code?`<p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>`:""}
+        ${p.lineId?`<p class="of-id">官方 LINE ID　<span class="nw">${p.lineId}</span></p>`:""}
+      </div>`:""}
     </section>`:""}
 
     <div class="kicker">${p.region} · ${p.type}</div>
     <h1>${p.title}</h1>
     <div class="d">Mika</div>
 
-    <div class="one intro">
-      ${(p.intro||[]).map(t=>`<p>${t}</p>`).join("")}
-    </div>
-
+    <!-- 2 我的入住心得 -->
+    ${p.intro&&p.intro.length?`<div class="one intro">${p.intro.map(t=>`<p>${t}</p>`).join("")}</div>`:""}
     ${p.video?`<a class="video-card" href="${p.video}" target="_blank" rel="noopener">
       <div class="vc-thumb">${textCover(p)}<span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div>
       <div class="vc-txt"><small>觀看影片</small><b>${name} <span class="nw">開箱影片</span></b><span>在 Instagram 觀看 →</span></div>
     </a>`:""}
 
+    <!-- 3 住宿基本資料 -->
     <h2>住宿基本資料</h2>
-    <table class="tbl">
-      <tr><td>名稱</td><td>${name}</td></tr>
-      <tr><td>地區</td><td>${p.region}</td></tr>
-      <tr><td>類型</td><td>${p.kind||p.type}</td></tr>
-      ${(p.info||[]).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join("")}
-      <tr><td>價格</td><td>請直接向${p.host||"民宿"}詢問</td></tr>
-    </table>
+    <table class="tbl">${info.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join("")}</table>
+    ${p.gRating?`<div class="gscore">
+      <div><b>${p.gRating}</b><span>Google 評分<em>${p.gCount?`<span class="nw">${p.gCount} 則評論</span>`:""}${p.gCount&&p.gDate?"・":""}${p.gDate?`<span class="nw">${p.gDate} 查詢</span>`:""}</em></span></div>
+      ${p.mapUrl?`<a href="${p.mapUrl}" target="_blank" rel="noopener">在 Google 地圖查看</a>`:""}
+    </div>`:""}
 
+    <!-- 4 房間與公共空間 -->
+    ${hasRooms?`<h2>房間與公共空間</h2>
+    ${p.roomsIntro?`<p>${p.roomsIntro}</p>`:""}
+    ${p.roomRows&&p.roomRows.length?`<table class="tbl rooms"><tr><th>樓層</th><th>房型</th><th>適合安排</th></tr>${p.roomRows.map(r=>`<tr><td>${r.floor}</td><td>${r.type}</td><td>${r.fit}</td></tr>`).join("")}</table>`:""}
+    ${p.spaces?`<p>${p.spaces}</p>`:""}`:""}
 
-    ${p.highlights?`<h2>住宿亮點</h2><ul class="hl-list">${p.highlights.map(t=>`<li>${t}</li>`).join("")}</ul>`:""}
-    ${p.notes?`<h2>入住須知</h2><ul class="hl-list warn">${p.notes.map(t=>`<li>${t}</li>`).join("")}</ul>`:""}
+    <!-- 5 設施與餐食 -->
+    ${hasFm?`<h2>設施與餐食</h2>
+    <div class="fm">
+      ${fac?`<h3 class="fm-h">室內外設施</h3>${p.facilityText?`<p>${p.facilityText}</p>`:""}
+      ${(p.indoor&&p.indoor.length)||(p.outdoor&&p.outdoor.length)?`<div class="fm-tags">${tagRow("室內",p.indoor)}${tagRow("戶外",p.outdoor)}</div>`:""}`:""}
+      ${p.kitchen?`<h3 class="fm-h">廚房與烤肉區</h3><p>${p.kitchen}</p>`:""}
+      ${p.breakfastText?`<h3 class="fm-h">${p.breakfast==="有附早餐"?"住宿附早餐":p.breakfast==="可加購"?"早餐可加購":"早餐"}</h3><p>${p.breakfastText}${veg(p.breakfastVeg)}</p>`:""}
+      ${p.dinner?`<section class="fm-card" aria-label="晚餐可加購"><h3 class="fm-h">晚餐可加購</h3><p>${p.dinner}${veg(p.dinnerVeg)}</p></section>`:""}
+    </div>`:""}
+
+    <!-- 6 入住須知 -->
+    ${rules.length?`<h2>入住須知</h2>${ruleCats.length===1
+      ?(rules.length===1?`<p>${rules[0].text}</p>`:`<ul class="hl-list warn">${rules.map(r=>`<li>${r.text}</li>`).join("")}</ul>`)
+      :`<div class="fm">${ruleCats.map(c=>`<h3 class="fm-h">${c}</h3>${rules.filter(r=>r.cat===c).map(r=>`<p>${r.text}</p>`).join("")}`).join("")}</div>`}`:""}
+
+    <!-- 7 附近吃什麼、去哪玩 -->
+    ${p.nearbyIntro||nbGroups.length?`<h2>附近吃什麼、去哪玩</h2>
+    ${nbGroups.length?`<section class="nearby" aria-label="${name} 附近景點">
+      ${p.nearbyIntro?`<div class="nb-sub">${p.nearbyIntro}</div>`:""}
+      ${nbGroups.map(([g,l])=>`<div class="nb-card">
+        <div class="nb-head"><div class="nb-title"><svg class="nb-ic" viewBox="0 0 24 24" aria-hidden="true">${NB_ICON[g]}</svg><span>${g}</span></div></div>
+        <ul class="nb-list">${l.map(n=>nbRow(n,p)).join("")}</ul>
+      </div>`).join("")}
+      <div class="nb-note">點地點開啟 Google 地圖・車程依路況而異</div>
+    </section>`:`<p>${p.nearbyIntro}</p>`}`:""}
+
+    <!-- 8 查空房與官方資訊 -->
+    <h2>查空房與官方資訊</h2>
+    ${hasOffer?`<a class="price-note price-btn" href="#offer" data-goto=".offer"><span class="pb-txt">${priceTxt}</span><span class="pb-arrow">查看優惠 ↑</span></a>`:`<p class="price-note">${priceTxt}</p>`}
+    ${p.website?`<div class="cta"><a class="p" href="${p.website}" target="_blank" rel="noopener">查看${host}官網</a></div>`:""}
     <button type="button" class="btn-share" data-share>分享給親友</button>
-    <div class="soon-note">更多照片和詳細介紹整理中，先看上面的開箱影片吧。</div>
-    <p class="note-line">本頁為個人非官方住宿攻略，資訊以${p.host||"民宿"}官方公告為準。</p>
+    ${p.soon?`<div class="soon-note">更多照片整理中，先看上面的開箱影片吧。</div>`:""}
+    <p class="note-line">本頁為個人非官方住宿攻略，資訊以${host}官方公告為準。</p>
   </div>`;
 }
 /* 樓層分頁：選樓層切換標題、照片、圖說 */
