@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mika Check-in｜住宿開箱攻略</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     /* ===== 品牌配色：全站共用，改這裡就會全部更新 ===== */
@@ -836,93 +836,318 @@
   .offer .of-link:active{background:var(--c-lime)}
   .a-body p.of-disc{margin:10px 0 0;font-size:12px;line-height:1.6;color:#777;text-align:center}
   .fm .fm-card+.fm-card{margin-top:16px}
+
+  /* =====================================================================
+     2026-11 黑白萊姆綠版（獨立住宿攝影誌）
+     白底、明體標題、黑體內文、萊姆綠只給主要行動與選中狀態；
+     移除粗框、厚陰影、漸層與裝飾色塊。
+     ===================================================================== */
+  :root{--lx-ink:#171717;--lx-sub:#525252;--lx-mute:#666666;--lx-gray:#F5F5F3;--lx-line:#E7E7E3;--lx-lime:#C7F000;
+    --lx-serif:"Noto Serif TC","Songti TC","PMingLiU",serif;--lx-sans:"Noto Sans TC",system-ui,-apple-system,"PingFang TC",sans-serif;
+    --c-lime:#C7F000;--c-ink:#171717;--c-blue:#171717;--c-blue-50:#F5F5F3}
+  html,body{background:#fff!important;color:var(--lx-ink)}
+  body{font-family:var(--lx-sans)}
+  :focus-visible{outline:2px solid var(--lx-ink)!important;outline-offset:2px}
+  .lx-head{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 20px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid transparent;transform:none!important;opacity:1!important;pointer-events:auto!important}
+  .lx-head.show{border-bottom-color:var(--lx-line)}
+  .lx-logo{font-family:var(--lx-serif);font-weight:900;font-size:21px;letter-spacing:.04em;color:var(--lx-ink)}
+  .lx-iconbtn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:99px;color:var(--lx-ink);background:none;border:0}
+  .lx-iconbtn .i{width:22px;height:22px}
+  @media (hover:hover){.lx-iconbtn:hover{background:var(--lx-gray)}}
+  body.reading .lx-head{display:none}
+
+  /* 封面 */
+  .lx-hero{padding:8px 20px 0}
+  .lx-kick{font-size:14px;color:var(--lx-mute);letter-spacing:.06em;margin:18px 0 10px}
+  .lx-title{font-family:var(--lx-serif);font-weight:900;font-size:40px;line-height:1.2;letter-spacing:.02em;margin:0;color:var(--lx-ink)}
+  .lx-lead{font-family:var(--lx-serif);font-weight:700;font-size:20px;margin:8px 0 0;color:var(--lx-ink)}
+  .lx-by{font-size:14px;color:var(--lx-sub);margin:14px 0 0}
+  .lx-hero-img{margin:22px 0 0;border-radius:10px;overflow:hidden;aspect-ratio:4/5}
+  .lx-hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* 首頁區塊 */
+  .lx-sec{padding:48px 20px 0;scroll-margin-top:68px}
+  .lx-h{font-family:var(--lx-serif);font-weight:900;font-size:26px;line-height:1.35;margin:0 0 16px;color:var(--lx-ink);display:flex;align-items:center;gap:10px}
+  .lx-h::before{content:"";width:4px;height:22px;background:var(--lx-lime);border-radius:2px;flex:none}
+  .lx-news{display:block;font-size:16px;line-height:1.7;color:var(--lx-ink);text-decoration:underline;text-decoration-color:#bbb;text-underline-offset:5px;padding:4px 0}
+  .lx-hrow{display:flex;align-items:center;justify-content:space-between}
+  .lx-hrow .lx-h{margin-bottom:16px}
+  .lx-arrows{display:none;gap:4px;margin-bottom:16px}
+  .lx-pop{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -20px;padding:0 20px 4px;scroll-padding:0 20px;-webkit-overflow-scrolling:touch}
+  .lx-pop::-webkit-scrollbar{display:none}
+  .lx-pcard{flex:0 0 84%;scroll-snap-align:start;color:var(--lx-ink)}
+  .lx-pcard .thumb,.lx-card .thumb{aspect-ratio:4/3!important;border-radius:10px!important;overflow:hidden;box-shadow:none!important;border:0!important}
+  .lx-ct{font-family:var(--lx-serif);font-weight:900;font-size:24px;line-height:1.35;margin:12px 0 0;color:var(--lx-ink)}
+  .lx-cs{font-size:15.5px;line-height:1.6;color:var(--lx-sub);margin:6px 0 0}
+  .lx-cd{font-size:14px;color:var(--lx-ink);margin:6px 0 0;font-weight:700}
+  .lx-cd::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--lx-lime);margin-right:7px;vertical-align:.08em;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+
+  /* 搜尋＋篩選 */
+  .lx-search{display:flex;gap:10px;align-items:center}
+  .lx-q{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:48px;padding:0 6px 0 14px;background:var(--lx-gray);border-radius:12px}
+  .lx-q .i{width:20px;height:20px;color:var(--lx-mute);flex:none}
+  .lx-q input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:16px;color:var(--lx-ink);outline:none;height:100%}
+  .lx-q input::placeholder{color:#8a8a8a}
+  .lx-q input::-webkit-search-cancel-button{display:none}
+  .lx-q:focus-within{box-shadow:0 0 0 2px var(--lx-ink)}
+  .lx-qx{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:0;background:none;color:var(--lx-mute)}
+  .lx-qx .i{width:18px;height:18px}
+  .lx-fbtn{flex:none;display:inline-flex;align-items:center;gap:6px;height:48px;padding:0 16px;border-radius:12px;background:#fff;border:1px solid #D4D4D0;font:inherit;font-size:15px;font-weight:700;color:var(--lx-ink)}
+  .lx-fbtn .i{width:18px;height:18px}
+  .lx-fbtn.on{border-color:var(--lx-ink)}
+  @media (hover:hover){.lx-fbtn:hover{background:var(--lx-gray)}}
+  .lx-types{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:16px -20px 0;padding:0 20px 2px}
+  .lx-types::-webkit-scrollbar{display:none}
+  .lx-types button{flex:none;min-height:44px;padding:0 18px;border-radius:99px;border:1px solid #D4D4D0;background:#fff;font:inherit;font-size:15px;font-weight:700;color:var(--lx-ink)}
+  .lx-types button.on{background:var(--lx-lime);border-color:var(--lx-lime);color:var(--lx-ink)}
+  @media (hover:hover){.lx-types button:not(.on):hover{background:var(--lx-gray)}}
+  .lx-applied{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .lx-applied:empty{display:none}
+  .lx-tag{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:99px;background:var(--lx-gray);border:0;font:inherit;font-size:14px;font-weight:700;color:var(--lx-ink)}
+  .lx-tag span{font-size:16px;line-height:1;color:var(--lx-mute)}
+  .lx-count{font-size:14px;color:var(--lx-mute);margin:16px 0 0}
+  .lx-count:empty{display:none}
+  .lx-list{display:grid;grid-template-columns:1fr;gap:32px;margin-top:16px}
+  .lx-card{display:block;color:var(--lx-ink)}
+  @media (hover:hover){.lx-card:hover .lx-ct,.lx-pcard:hover .lx-ct{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;text-decoration-color:var(--lx-lime)}}
+  .lx-empty{padding:36px 20px;text-align:center;background:var(--lx-gray);border-radius:12px}
+  .lx-empty p{font-size:16px;margin:0 0 14px;color:var(--lx-ink)}
+  .lx-empty-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+  /* 按鈕 */
+  .lx-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:12px;font:inherit;font-size:15.5px;font-weight:700;text-align:center;color:var(--lx-ink)!important;border:1px solid #D4D4D0;background:#fff;text-decoration:none}
+  .lx-btn-main{background:var(--lx-lime)!important;border-color:var(--lx-lime)!important}
+  .lx-btn-ghost{background:#fff!important}
+  @media (hover:hover){.lx-btn-ghost:hover{background:var(--lx-gray)!important}.lx-btn-main:hover{filter:brightness(.96)}}
+
+  /* 篩選面板：手機從底部滑出，桌機浮層 */
+  .lx-sheet{position:fixed;inset:0;z-index:80}
+  .lx-sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .2s}
+  .lx-sheet.on .lx-sheet-bg{background:rgba(0,0,0,.4)}
+  .lx-panel{position:absolute;left:0;right:0;bottom:0;max-height:85vh;display:flex;flex-direction:column;background:#fff;border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform .22s ease;outline:none}
+  .lx-sheet.on .lx-panel{transform:none}
+  .lx-panel-head{display:flex;align-items:center;justify-content:space-between;padding:10px 10px 6px 20px}
+  .lx-panel-head h2{font-family:var(--lx-serif);font-weight:900;font-size:22px;margin:0}
+  .lx-panel-body{overflow:auto;padding:4px 20px 12px}
+  .lx-panel-body fieldset{border:0;margin:0 0 18px;padding:0}
+  .lx-panel-body legend{font-size:15px;font-weight:700;margin-bottom:10px;padding:0}
+  .lx-opts{display:flex;flex-wrap:wrap;gap:8px}
+  .lx-opt{min-height:44px;padding:0 16px;border-radius:99px;border:1px solid #D4D4D0;background:#fff;font:inherit;font-size:15px;color:var(--lx-ink)}
+  .lx-opt.on{background:var(--lx-ink);border-color:var(--lx-ink);color:#fff}
+  .lx-panel-foot{display:flex;gap:10px;padding:12px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--lx-line)}
+  .lx-panel-foot .lx-btn{flex:1}
+  .lx-panel-foot .lx-btn-ghost{flex:0 0 auto}
+  body.lx-lock{overflow:hidden}
+  @media (min-width:900px){
+    .lx-panel{left:50%;right:auto;bottom:auto;top:50%;width:480px;border-radius:16px;transform:translate(-50%,-46%);opacity:0;transition:transform .2s,opacity .2s}
+    .lx-sheet.on .lx-panel{transform:translate(-50%,-50%);opacity:1}
+  }
+
+  /* 頁尾 */
+  .lx-foot{margin-top:64px;padding:32px 20px calc(40px + env(safe-area-inset-bottom));background:var(--lx-gray)}
+  .lx-foot b{display:block;font-family:var(--lx-serif);font-weight:900;font-size:20px}
+  .lx-foot p{font-size:14px;color:var(--lx-sub);margin:6px 0 16px;line-height:1.6}
+  .lx-foot nav{display:flex;flex-wrap:wrap;gap:4px 18px}
+  .lx-foot nav a{display:inline-flex;align-items:center;min-height:44px;font-size:15px;color:var(--lx-ink)}
+
+  /* 隱藏舊版首頁元件 */
+  #home .sep,#home .proto{display:none}
+  .preview-only.proto{display:block!important;text-align:center;font-size:13px;color:var(--lx-mute);padding:24px 0 0}
+
+  /* ---------------- 文章頁 ---------------- */
+  .a-top{background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--lx-line)!important;box-shadow:none!important}
+  .a-top .t{font-family:var(--lx-sans);font-weight:700}
+  .a-body.post{max-width:760px;margin:0 auto;padding:8px 20px 40px!important}
+  .a-body.post p{font-size:16px!important;line-height:1.75!important;letter-spacing:.01em;color:var(--lx-ink)}
+  .lx-crumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;color:var(--lx-mute);padding:14px 0 0}
+  .lx-crumb a{color:var(--lx-mute);min-height:32px;display:inline-flex;align-items:center}
+  .lx-atitle{margin:10px 0 0;font-weight:normal}
+  .lx-an{display:block;font-family:var(--lx-serif);font-weight:900;font-size:36px;line-height:1.25;color:var(--lx-ink)}
+  .lx-as{display:block;font-family:var(--lx-sans);font-weight:500;font-size:17px;line-height:1.6;color:var(--lx-sub);margin-top:8px}
+  .a-body.post p.lx-byline{font-size:14px!important;color:var(--lx-mute);margin:10px 0 0}
+  .a-body .lx-cover{margin:20px -20px 0!important}
+  .a-body .lx-cover .a-cover{aspect-ratio:auto!important;border-radius:0!important}
+  .a-body .lx-cover .a-cover img{width:100%;height:auto!important;max-height:78vh;object-fit:cover}
+  .a-body .lx-cover figcaption{margin:8px 20px 0!important;border:0!important;padding:0!important;font-size:14px;color:var(--lx-mute)}
+  .a-body .lx-cover .a-cover svg{display:block;width:100%;height:auto}
+  .lx-info{margin-top:20px;background:var(--lx-gray);border-radius:12px;padding:16px 18px}
+  .lx-keys{display:grid;gap:12px;margin:0}
+  .lx-keys div{display:grid;grid-template-columns:84px 1fr;gap:10px;align-items:baseline}
+  .lx-keys dt{font-size:14px;color:var(--lx-mute)}
+  .lx-keys dd{margin:0;font-size:16px;font-weight:700;line-height:1.55;color:var(--lx-ink)}
+  @media (max-width:359px){.lx-keys div{grid-template-columns:1fr;gap:2px}}
+  .lx-more{margin-top:14px;border-top:1px solid #E2E2DD;padding-top:4px}
+  .lx-keys:empty+.lx-more,.lx-info>.lx-more:first-child{margin-top:0;border-top:0;padding-top:0}
+  .lx-more summary,.lx-toc summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:15px;font-weight:700;cursor:pointer;list-style:none;color:var(--lx-ink)}
+  .lx-more summary::-webkit-details-marker,.lx-toc summary::-webkit-details-marker{display:none}
+  .lx-more summary .i,.lx-toc summary .i{width:20px;height:20px;transition:transform .2s}
+  .lx-more[open] summary .i,.lx-toc[open] summary .i{transform:rotate(180deg)}
+  .lx-more-b{padding:6px 0 4px}
+  .lx-more-b .tbl{margin:0!important;background:#fff!important;border:0!important;border-radius:10px!important;box-shadow:none!important}
+  .lx-more-b .tbl td{border-color:var(--lx-line)!important}
+  .lx-more-b .gscore{margin-top:12px!important;background:#fff!important;border:0!important;box-shadow:none!important;border-radius:10px!important}
+  .lx-more-b .lx-map{margin-top:12px;width:100%}
+  .lx-toc{margin-top:16px;border:1px solid var(--lx-line);border-radius:12px;padding:2px 16px}
+  .lx-toc ol{margin:0 0 10px;padding:0;list-style:none;counter-reset:t}
+  .lx-toc li{counter-increment:t}
+  .lx-toc li a{display:flex;align-items:center;gap:10px;min-height:44px;font-size:15.5px;color:var(--lx-ink)}
+  .lx-toc li a::before{content:counter(t);font-size:13px;color:var(--lx-mute);width:16px}
+  .lx-sec-a{margin-top:52px}
+  .lx-sec-a>h2{font-family:var(--lx-serif)!important;font-weight:900!important;font-size:26px!important;line-height:1.35!important;margin:0 0 16px!important;padding:0!important;border:0!important;display:flex;align-items:center;gap:10px;scroll-margin-top:72px;color:var(--lx-ink)!important}
+  .lx-sec-a>h2::before{content:"";width:4px;height:22px;background:var(--lx-lime);border-radius:2px;flex:none}
+  .a-body .lx-sec-a h3,.a-body .fm-h,.a-body .ft-title{font-family:var(--lx-serif)!important;font-weight:900!important;font-size:20px!important;color:var(--lx-ink)!important}
+  .a-body .fm-h::before{display:none!important}
+  /* 去除粗框、陰影、漸層、裝飾色 */
+  .a-body .one,.a-body .one.intro{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;border-radius:0!important}
+  .a-body .one.intro p+p{margin-top:1.1em}
+  .a-body .tbl,.a-body .gscore,.a-body .nearby .nb-card,.a-body .rail-card,.a-body .video-card,.a-body .fm-card,.a-body .who-list div,.a-body .price-btn{box-shadow:none!important;border:1px solid var(--lx-line)!important;border-radius:12px!important}
+  .a-body .fm-card{background:var(--lx-gray)!important;border:0!important}
+  .a-body .tbl th,.a-body .tbl tr:first-child th{background:var(--lx-gray)!important}
+  .a-body .nearby .nb-head{background:var(--lx-gray)!important;color:var(--lx-ink)!important}
+  .a-body .nearby .nb-head *{color:var(--lx-ink)!important;stroke:currentColor}
+  .a-body .fm-tag{background:var(--lx-gray)!important}
+  .a-body .vc-play{background:var(--lx-lime)!important}
+  .a-body strong:not(.off){background:none!important;font-weight:700}
+  .a-body strong.off{color:#B42318!important;background:none!important}
+  .a-body .gal .ph,.a-body .fig .ph,.a-body .rail-card .ph{border-radius:10px!important}
+  /* 樓層／房型切換：目前項目萊姆綠 */
+  .a-body .ft-bar{border-bottom:0!important;gap:8px;display:flex;flex-wrap:wrap}
+  .a-body .ft-tab{min-height:44px;padding:0 16px!important;border-radius:99px!important;border:1px solid #D4D4D0!important;background:#fff!important;color:var(--lx-ink)!important;font-weight:700}
+  .a-body .ft-tab.on{background:var(--lx-lime)!important;border-color:var(--lx-lime)!important}
+  .a-body .ft-ind{display:none!important}
+  /* 訂房與優惠 */
+  .lx-book{display:flex;flex-direction:column;gap:14px}
+  .lx-bk{background:var(--lx-gray);border-radius:12px;padding:18px}
+  .a-body.post .lx-bk p{margin:0}
+  .a-body.post p.lx-bk-k{font-size:14px!important;color:var(--lx-mute);font-weight:700}
+  .a-body.post p.lx-bk-big{font-family:var(--lx-serif);font-weight:900;font-size:26px!important;line-height:1.35!important;margin-top:6px!important}
+  .a-body.post p.lx-bk-t{margin-top:6px!important}
+  .a-body.post p.lx-bk-s{font-size:14px!important;color:var(--lx-sub);margin-top:8px!important}
+  .lx-bk-big strong.off{color:var(--lx-ink)!important;background:linear-gradient(transparent 62%,var(--lx-lime) 62%)!important}
+  .lx-code{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding:12px 14px;background:#fff;border-radius:10px}
+  .lx-code-k{font-size:14px;color:var(--lx-mute)}
+  .lx-code-v{font-family:ui-monospace,Menlo,monospace;font-size:22px;letter-spacing:.06em;color:var(--lx-ink)}
+  .a-body .lx-code .lx-copy{margin-left:auto;min-height:44px;padding:0 16px!important;border-radius:10px!important;border:1px solid #D4D4D0!important;background:#fff!important;color:var(--lx-ink)!important;box-shadow:none!important;font-size:15px;font-weight:700}
+  .a-body .lx-code .lx-copy.done{background:var(--lx-lime)!important;border-color:var(--lx-lime)!important}
+  .lx-bk-btns{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .lx-bk-btns .lx-btn{width:100%}
+  .a-body .lx-linkbtn{display:block;margin:12px auto 0;min-height:44px;background:none!important;border:0!important;box-shadow:none!important;font-size:14.5px;color:var(--lx-ink)!important;text-decoration:underline;text-underline-offset:4px;padding:0 4px!important}
+  .a-body .lx-linkbtn.done{text-decoration:none;font-weight:700}
+  .lx-booksec .cta{margin-top:16px!important}
+  .lx-booksec .cta .p,.a-body .btn-share{background:#fff!important;color:var(--lx-ink)!important;border:1px solid #D4D4D0!important;box-shadow:none!important;border-radius:12px!important;min-height:48px}
+  .a-body .btn-share{margin-top:12px!important;width:100%}
+  .lx-booksec .note-line{color:var(--lx-mute)!important}
+  .share-fab{background:var(--lx-ink)!important;border:0!important;box-shadow:none!important}
+  .a-body .soon-note{background:var(--lx-gray)!important;border:0!important;border-radius:12px!important}
+  @media (min-width:900px){
+    .lx-head{padding:0 max(32px,calc((100vw - 1120px)/2));height:68px}
+    .lx-logo{font-size:24px}
+    .lx-hero{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center;padding:24px max(32px,calc((100vw - 1120px)/2)) 0}
+    .lx-title{font-size:56px}
+    .lx-lead{font-size:24px}
+    .lx-hero-img{aspect-ratio:4/5;margin:0;max-height:640px}
+    .lx-sec{padding:64px max(32px,calc((100vw - 1120px)/2)) 0}
+    .lx-h{font-size:28px}
+    .lx-arrows{display:flex}
+    .lx-pop{margin:0;padding:0 0 4px;scroll-padding:0}
+    .lx-pcard{flex:0 0 calc((100% - 28px)/2.4)}
+    .lx-types{margin:16px 0 0;padding:0}
+    .lx-search{max-width:640px}
+    .lx-list{grid-template-columns:1fr 1fr;gap:40px 32px;align-items:start}
+    .lx-foot{padding:40px max(32px,calc((100vw - 1120px)/2)) 48px}
+    .a-body.post{padding:12px 0 60px!important}
+    .lx-an{font-size:48px}
+    .lx-as{font-size:19px}
+    #article .a-body .lx-cover{margin:24px 0 0!important;width:auto!important}
+    .a-body .lx-cover .a-cover{border-radius:12px!important}
+    .a-body .lx-cover figcaption{margin:8px 0 0!important}
+  }
 </style>
 </head>
 <body>
 
-<!-- sticky bar after scroll -->
-<div class="bar" id="bar">
-  <span class="logo">blog</span>
-  <span class="t">今晚住這裡｜住哪裡，怎麼玩</span>
-  <button aria-label="搜尋" data-search><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
-  <button aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-</div>
+<!-- ===== 2026-11 黑白萊姆綠版：頁首 ===== -->
+<header class="lx-head" id="bar">
+  <a class="lx-logo" href="./" data-home>今晚住這裡</a>
+  <button class="lx-iconbtn" aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+</header>
 
 <main id="home">
-  <section class="hero">
-    <img class="scene" src="img/site/cover.jpg" alt="Mika 在民宿庭園拍照">
-    <div class="hero-top">
-      <div class="brand"><span class="dot">M</span>blog</div>
-      <div style="display:flex;gap:18px">
-        <button aria-label="搜尋" data-search><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
-        <button aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-      </div>
+  <section class="lx-hero">
+    <div class="lx-hero-txt">
+      <p class="lx-kick">台灣與海外・住宿開箱・旅遊攻略</p>
+      <h1 class="lx-title">今晚住這裡</h1>
+      <p class="lx-lead">住哪裡，怎麼玩</p>
+      <p class="lx-by">Mika｜住宿與旅遊內容創作者</p>
     </div>
-    <div class="hero-body">
-      <div class="stats">台灣與海外・住宿開箱・旅遊攻略</div>
-      <h1>今晚住這裡<br>住哪裡，怎麼玩</h1>
-      <div class="who">
-        <div class="avatar"><svg viewBox="0 0 56 56" width="56" height="56"><rect width="56" height="56" fill="#e9a78a"/><circle cx="28" cy="22" r="10" fill="#fbe3c4"/><path d="M8 56c2-14 12-20 20-20s18 6 20 20z" fill="#1A1A1A"/></svg></div>
-        <div><b>Mika<em>｜住宿與旅遊內容創作者</em></b></div>
-        <button class="share" aria-label="複製網站連結" data-copyurl><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
-      </div>
-      <div class="actions">
-        <a class="follow" href="#list-anchor" data-golist>旅宿資訊 ↓</a>
-        <button class="sq" data-open aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
-      </div>
-    </div>
+    <figure class="lx-hero-img"><img class="scene" src="img/site/cover.jpg" alt="Mika 在民宿庭園拍照"></figure>
   </section>
 
-  <div class="ig-ch">
-    <a class="ig-btn" href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="igi"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg><span><b>住宿頻道</b><small>@mika.checkin</small></span></a>
-    <a class="ig-btn" href="https://www.instagram.com/mika.travel_/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="igi"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg><span><b>旅遊頻道</b><small>@mika.travel_</small></span></a>
-  </div>
-
-  <div class="sep"></div>
-
-  <section class="notice">
-    <small>NOTICE</small>
-    <div class="notice-track" id="notice"></div>
-    <div class="dots" id="dots"></div>
+  <section class="lx-sec" id="newsSec" aria-labelledby="newsH">
+    <h2 class="lx-h" id="newsH">最新消息</h2>
+    <a class="lx-news" id="news" href="#"></a>
   </section>
 
-  <div class="sep"></div>
-
-  <h2 class="sec-h">人氣文章</h2>
-  <div class="pop" id="pop"></div>
-
-  <div class="sep"></div>
-
-    <div class="toolbar" id="list-anchor">
-      <h2 class="list-h">所有開箱</h2>
-      <button class="filter" id="filterBtn"><span id="filterLabel">全部文章</span>
-        <svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m6 9 6 6 6-6"/></svg></button>
-      <div class="menu-pop" id="filterMenu"></div>
-      <button class="f-clear" id="fClear" type="button" hidden>清除篩選</button>
-      <div class="views">
-        <button data-view="grid" aria-label="格狀"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></button>
-        <button data-view="rows" aria-label="清單"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="4" width="12" height="3" rx="1"/><rect x="17" y="4" width="4" height="3" rx="1"/><rect x="3" y="10.5" width="12" height="3" rx="1"/><rect x="17" y="10.5" width="4" height="3" rx="1"/><rect x="3" y="17" width="12" height="3" rx="1"/><rect x="17" y="17" width="4" height="3" rx="1"/></svg></button>
-        <button data-view="cards" class="on" aria-label="大圖"><svg class="i" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/></svg></button>
+  <section class="lx-sec" aria-labelledby="popH">
+    <div class="lx-hrow">
+      <h2 class="lx-h" id="popH">人氣住宿</h2>
+      <div class="lx-arrows">
+        <button type="button" class="lx-iconbtn" data-pop="-1" aria-label="上一張"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button type="button" class="lx-iconbtn" data-pop="1" aria-label="下一張"><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
       </div>
     </div>
-  <div class="tabs">
-    <div class="cat-chips" id="catChips" role="group" aria-label="住宿分類"></div>
-    <div class="sub-filters">
-      <label class="chip-sel" id="regionChip"><span id="regionLabel">地區</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        <select id="regionSel" aria-label="地區"></select></label>
-      <button class="chip-tog" id="dealTog" aria-pressed="false">優惠中</button>
+    <div class="lx-pop" id="pop"></div>
+  </section>
+
+  <section class="lx-sec" id="list-anchor" aria-labelledby="listH">
+    <h2 class="lx-h" id="listH">所有開箱</h2>
+    <div class="lx-search">
+      <label class="lx-q"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="lxQ" type="search" placeholder="搜尋住宿名稱或地區" autocomplete="off" aria-label="搜尋住宿名稱或地區">
+        <button type="button" class="lx-qx" id="lxQx" aria-label="清空搜尋" hidden><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </label>
+      <button type="button" class="lx-fbtn" id="lxFbtn" aria-haspopup="dialog" aria-controls="lxSheet"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="lxFlabel">篩選</span></button>
     </div>
-  </div>
+    <div class="lx-types" id="catChips" role="group" aria-label="住宿類型"></div>
+    <div class="lx-applied" id="lxApplied"></div>
+    <p class="lx-count" id="lxCount" aria-live="polite"></p>
+    <div id="list" class="lx-list"></div>
+  </section>
 
-  <div id="posts-pane">
-    <div id="list"></div>
+  <!-- 舊版元件（保留給舊程式使用，畫面上不顯示） -->
+  <div hidden aria-hidden="true">
+    <button id="filterBtn"><span id="filterLabel"></span></button><div id="filterMenu"></div>
+    <div id="notice"></div><div id="dots"></div>
   </div>
-
 
   <p class="proto preview-only">試作版｜網站正式上線前的預覽</p>
 </main>
 
+<!-- 篩選面板 -->
+<div class="lx-sheet" id="lxSheet" role="dialog" aria-modal="true" aria-labelledby="lxSheetH" hidden>
+  <div class="lx-sheet-bg" data-sclose></div>
+  <div class="lx-panel" tabindex="-1">
+    <div class="lx-panel-head"><h2 id="lxSheetH">篩選</h2><button type="button" class="lx-iconbtn" data-sclose aria-label="關閉"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="lx-panel-body">
+      <fieldset><legend>地區</legend><div class="lx-opts" id="lxRegions"></div></fieldset>
+      <fieldset><legend>優惠狀態</legend><div class="lx-opts" id="lxDeals"></div></fieldset>
+    </div>
+    <div class="lx-panel-foot"><button type="button" class="lx-btn lx-btn-ghost" id="lxSclear">清除</button><button type="button" class="lx-btn lx-btn-main" id="lxSapply">顯示結果</button></div>
+  </div>
+</div>
+
+
 <article id="article"></article>
+
+<footer class="lx-foot">
+  <b>今晚住這裡</b>
+  <p>Mika 的住宿開箱與旅遊攻略。<br>本站為個人非官方住宿攻略，資訊以各住宿官方公告為準。</p>
+  <nav aria-label="頁尾連結">
+    <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">IG 住宿頻道 @mika.checkin</a>
+    <a href="https://www.instagram.com/mika.travel_/" target="_blank" rel="noopener">IG 旅遊頻道 @mika.travel_</a>
+    <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">合作邀約（IG 私訊）</a>
+  </nav>
+</footer>
 
 <!-- search -->
 <div class="srch" id="srch">
@@ -1275,58 +1500,100 @@ const catOf = p => p.cat || (/包棟/.test(p.kind||"") ? "包棟民宿" : p.type
 const metaOf = p => [p.region, p.area, catOf(p)].filter(Boolean).join("・");
 const REGIONS = [...new Set(posts.filter(p=>!p.sample).map(p=>p.region))];
 const cats = ["全部文章","優惠中",...BIG_CATS,"飯店","民宿",...REGIONS];   /* 給側邊選單／#cat- 連結用 */
-const F = { cat:"全部", region:"", deal:false };
+const NEWS = { text: notices[0], post: "hangwang" };   /* 首頁「最新消息」只放一則 */
+/* ---------- 2026-11 黑白萊姆綠版：首頁列表、搜尋與篩選 ---------- */
+const TYPES = [["全部","全部"],["民宿","民宿"],["包棟","包棟民宿"],["飯店","飯店旅館"],["露營","露營"]];
+const DEAL_OPTS = ["有優惠碼","團購中"];
+const F = { cat:"全部", q:"", regions:[], deals:[] };
 let currentCat = "全部文章";
 const hasDeal = p=>{const d=dealOf(p.id);return !!d&&["live","code"].includes(status(d));};
+const dealState = p=>{ const d=dealOf(p.id); if(!d) return ""; const s=status(d); return s==="code"?"有優惠碼":s==="live"?"團購中":""; };
+/* 大標＝「｜」前的住宿名稱，副標＝後面的完整原文 */
+const splitTitle = t=>{ const i=(t||"").indexOf("｜"); return i<0?[t,""]:[t.slice(0,i),t.slice(i+1)]; };
+const esc = s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm = s=>String(s||"").trim().toLowerCase();
 
-/* ---------- render ---------- */
 function thumb(p, extraStyle=""){
-  const pic = p.cover ? `<img src="${p.cover}" alt="${p.title}" loading="lazy">` : p.textCover ? textCover(p) : art(...p.img);
-  return `<div class="thumb" style="${extraStyle}">${pic}${badge(p.id)}${p.real?"":'<span class="sample">範例</span>'}</div>`;
+  const pic = p.cover ? `<img src="${p.cover}" alt="${esc(splitTitle(p.title)[0])}" loading="lazy">` : p.textCover ? textCover(p) : art(...p.img);
+  return `<div class="thumb" style="${extraStyle}">${pic}${p.real?"":'<span class="sample">範例</span>'}</div>`;
+}
+function lxCard(p, cls){
+  const [h,s]=splitTitle(p.title), ds=dealState(p);
+  return `<a class="${cls}" href="${postLink(p.id)}">${thumb(p)}<h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}${ds?`<p class="lx-cd">${ds}</p>`:""}</a>`;
 }
 function renderPop(){
-  pop.innerHTML = posts.slice(0,4).map(p=>`
-    <a href="${postLink(p.id)}">${thumb(p)}<h3>${p.title}</h3><div class="cat">${metaOf(p).split("・").map(x=>`<span style="white-space:nowrap">${x}</span>`).join("・")}</div></a>`).join("");
+  pop.innerHTML = posts.slice(0,4).map(p=>lxCard(p,"lx-pcard")).join("");
 }
 function filtered(){
-  return posts.filter(p=>(F.cat==="全部"||catOf(p)===F.cat) && (!F.region||p.region===F.region) && (!F.deal||hasDeal(p)));
+  const q=norm(F.q), want=(TYPES.find(t=>t[0]===F.cat)||TYPES[0])[1];
+  return posts.filter(p=>{
+    if(want!=="全部" && catOf(p)!==want) return false;
+    if(q && ![p.title,p.region,p.area,(p.tags||[]).join(" ")].some(x=>norm(x).includes(q))) return false;
+    if(F.regions.length && !F.regions.includes(p.region)) return false;
+    if(F.deals.length && !F.deals.includes(dealState(p))) return false;
+    return true;
+  });
 }
 function renderList(){
   const shown = filtered();
-  list.innerHTML = shown.length ? shown.map(p=>`
-    <a class="card" href="${postLink(p.id)}">
-      ${thumb(p)}
-      <div class="txt">
-        <h3>${p.title}</h3>
-        ${dealLine(p.id)}
-        <p>${p.excerpt}</p>
-        <span class="meta">${metaOf(p)}</span>
-        <div class="tags">${p.tags.map(t=>`<span class="tag">#${t}</span>`).join("")}</div>
-      </div>
-    </a>`).join("") : `<div class="empty-state"><p>目前沒有符合條件的住宿</p><button type="button" id="clearF">清除篩選</button></div>`;
-  const cb=document.getElementById("clearF"); if(cb) cb.onclick=()=>{ setF({cat:"全部",region:"",deal:false}); const cc=document.getElementById("catChips"); if(cc) cc.scrollTo({left:0,behavior:"smooth"}); };
+  const cnt=document.getElementById("lxCount"); if(cnt) cnt.textContent = shown.length?`共 ${shown.length} 間住宿`:"";
+  list.innerHTML = shown.length ? shown.map(p=>lxCard(p,"lx-card")).join("")
+    : `<div class="lx-empty"><p>沒有符合的住宿</p><div class="lx-empty-btns">${(F.regions.length||F.deals.length||F.cat!=="全部")?`<button type="button" class="lx-btn lx-btn-ghost" data-lx="clearf">清除篩選</button>`:""}${F.q?`<button type="button" class="lx-btn lx-btn-ghost" data-lx="clearq">清空搜尋</button>`:""}</div></div>`;
 }
 function renderFilter(){
   const cc=document.getElementById("catChips");
-  if(cc) cc.innerHTML = BIG_CATS.map(c=>`<button class="${c===F.cat?'on':''}" data-c="${c}" aria-pressed="${c===F.cat}">${c}</button>`).join("");
-  const sel=document.getElementById("regionSel");
-  if(sel){ sel.innerHTML = `<option value="">不限地區</option>`+REGIONS.map(r=>`<option value="${r}">${r}</option>`).join(""); sel.value=F.region; }
-  const rl=document.getElementById("regionLabel"); if(rl) rl.textContent = F.region||"地區";
-  const rc=document.getElementById("regionChip"); if(rc) rc.classList.toggle("on",!!F.region);
-  const dt=document.getElementById("dealTog"); if(dt){ dt.classList.toggle("on",F.deal); dt.setAttribute("aria-pressed",F.deal); }
-  const fc=document.getElementById("fClear"); if(fc) fc.hidden = F.cat==="全部" && !F.region && !F.deal;
-  filterMenu.innerHTML = ""; filterLabel.textContent = F.cat;
+  if(cc) cc.innerHTML = TYPES.map(([t])=>`<button type="button" class="${t===F.cat?'on':''}" data-c="${t}" aria-pressed="${t===F.cat}">${t}</button>`).join("");
+  const n=F.regions.length+F.deals.length;
+  const fl=document.getElementById("lxFlabel"); if(fl) fl.textContent = n?`篩選 · ${n}`:"篩選";
+  const fb=document.getElementById("lxFbtn"); if(fb) fb.classList.toggle("on",n>0);
+  const ap=document.getElementById("lxApplied");
+  if(ap) ap.innerHTML = [...F.regions.map(r=>["r",r]),...F.deals.map(d=>["d",d])].map(([k,v])=>`<button type="button" class="lx-tag" data-rm="${k}" data-v="${esc(v)}" aria-label="移除條件：${esc(v)}">${esc(v)} <span aria-hidden="true">×</span></button>`).join("");
+  const qx=document.getElementById("lxQx"); if(qx) qx.hidden=!F.q;
 }
 function setF(o){ Object.assign(F,o); renderFilter(); renderList(); }
-/* 舊的單一分類入口（側邊選單、#cat- 連結）轉成新篩選 */
+/* 側邊選單、#cat- 連結 */
 function setCat(c){
-  if(c==="全部文章"||c==="全部") return setF({cat:"全部",region:"",deal:false});
-  if(c==="優惠中") return setF({cat:"全部",region:"",deal:true});
-  if(c==="飯店") return setF({cat:"飯店旅館",region:"",deal:false});
-  if(BIG_CATS.includes(c)) return setF({cat:c,region:"",deal:false});
-  if(REGIONS.includes(c)) return setF({cat:"全部",region:c,deal:false});
-  setF({cat:"全部",region:"",deal:false});
+  const base={cat:"全部",regions:[],deals:[]};
+  if(c==="優惠中") return setF({...base,deals:["有優惠碼","團購中"]});
+  if(c==="飯店") return setF({...base,cat:"飯店"});
+  const t=TYPES.find(x=>x[0]===c||x[1]===c); if(t) return setF({...base,cat:t[0]});
+  if(REGIONS.includes(c)) return setF({...base,regions:[c]});
+  setF(base);
 }
+/* 篩選面板：開啟時複製一份草稿，按「顯示結果」才套用；直接關閉就不變 */
+(function(){
+  const sh=document.getElementById("lxSheet"); if(!sh) return;
+  const fb=document.getElementById("lxFbtn"), rg=document.getElementById("lxRegions"), dl=document.getElementById("lxDeals");
+  let draft=null;
+  const opt=(k,v,on)=>`<button type="button" class="lx-opt${on?" on":""}" data-k="${k}" data-v="${esc(v)}" aria-pressed="${on}">${esc(v)}</button>`;
+  const paint=()=>{ rg.innerHTML=REGIONS.map(r=>opt("regions",r,draft.regions.includes(r))).join(""); dl.innerHTML=DEAL_OPTS.map(d=>opt("deals",d,draft.deals.includes(d))).join(""); };
+  const open=()=>{ draft={regions:[...F.regions],deals:[...F.deals]}; paint(); sh.hidden=false; requestAnimationFrame(()=>sh.classList.add("on")); document.body.classList.add("lx-lock"); setTimeout(()=>sh.querySelector(".lx-panel").focus(),30); };
+  const close=()=>{ sh.classList.remove("on"); document.body.classList.remove("lx-lock"); setTimeout(()=>{ sh.hidden=true; },220); fb.focus(); };
+  fb.onclick=open;
+  sh.addEventListener("click",e=>{
+    if(e.target.closest("[data-sclose]")) return close();
+    const o=e.target.closest(".lx-opt"); if(o){ const a=draft[o.dataset.k], v=o.dataset.v, i=a.indexOf(v); i<0?a.push(v):a.splice(i,1); paint(); return; }
+  });
+  document.getElementById("lxSclear").onclick=()=>{ draft={regions:[],deals:[]}; paint(); };
+  document.getElementById("lxSapply").onclick=()=>{ setF({regions:draft.regions,deals:draft.deals}); close(); };
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!sh.hidden) close(); });
+})();
+/* 搜尋框、類型、已套用標籤、清除按鈕 */
+(function(){
+  const q=document.getElementById("lxQ"); if(!q) return;
+  q.addEventListener("input",()=>setF({q:q.value}));
+  document.getElementById("lxQx").onclick=()=>{ q.value=""; setF({q:""}); q.focus(); };
+  document.getElementById("catChips").onclick=e=>{ const c=e.target.closest("[data-c]"); if(c) setF({cat:c.dataset.c}); };
+  document.getElementById("lxApplied").onclick=e=>{ const t=e.target.closest("[data-rm]"); if(!t) return; const k=t.dataset.rm==="r"?"regions":"deals"; setF({[k]:F[k].filter(x=>x!==t.dataset.v)}); };
+  list.addEventListener("click",e=>{ const b=e.target.closest("[data-lx]"); if(!b) return;
+    if(b.dataset.lx==="clearf") setF({cat:"全部",regions:[],deals:[]});
+    if(b.dataset.lx==="clearq"){ q.value=""; setF({q:""}); } });
+  /* 人氣住宿左右箭頭 */
+  document.addEventListener("click",e=>{ const b=e.target.closest("[data-pop]"); if(!b) return; const c=pop.querySelector(".lx-pcard"); pop.scrollBy({left:(c?c.offsetWidth+14:300)*+b.dataset.pop,behavior:"smooth"}); });
+  /* 最新消息：只顯示一則 */
+  const nw=document.getElementById("news"), sec=document.getElementById("newsSec");
+  if(nw){ if(NEWS&&NEWS.text){ nw.textContent=NEWS.text; nw.href=NEWS.post?postLink(NEWS.post):(NEWS.href||"#"); } else if(sec) sec.remove(); }
+})();
 
 /* notice carousel */
 notice.innerHTML = notices.map((n,i)=>`<div class="notice-item ${i?'':'on'}">${n}</div>`).join("");
@@ -1372,7 +1639,7 @@ drawer.querySelectorAll("[data-cat]").forEach(a=>a.onclick=e=>{
 window.addEventListener("scroll",()=>{
   const on=!document.body.classList.contains("reading") && scrollY>560;
   bar.classList.toggle("show", on);
-  document.querySelector(".tabs").style.top = on ? bar.offsetHeight+"px" : "0px";
+  const tb=document.querySelector(".tabs"); if(tb) tb.style.top = on ? bar.offsetHeight+"px" : "0px";
 });
 
 /* ---------- 單篇文章頁 ---------- */
@@ -1893,6 +2160,141 @@ function placeOffer(){
 }
 DESK_MQ.addEventListener("change",placeOffer);
 
+/* ---------- 2026-11 黑白萊姆綠版：文章版型重排 ----------
+   順序：原始大標與副標 → 首圖 → 住宿資訊 → 文章目錄 → 入住心得 → 房型與空間 → 設施及餐食 →（入住須知）→ 附近景點 → 訂房與優惠
+   兩種文章（巷往手工版、一般 renderSimple）先照原本方式產生，再在這裡搬到新順序，內容不改。 */
+/* 巷往是手工版，訂房與資訊資料沿用現站文章裡的原文 */
+const LX_EXTRA = {
+  hangwang: {
+    code:"MIKA888", codeNote:'包棟定價 <strong class="off">75 折</strong>', codeCond:"暑假、週六、連假及春節期間不適用",
+    lineUrl:"https://lin.ee/qnUxp3X", lineId:"@hope2795", website:"https://tw-bnb.com/web/hopeful/", host:"民宿",
+    mapUrl:"https://maps.app.goo.gl/iErNHsiGQupGAaUs6",
+    key:[["可住人數","8～22 人"],["房間配置","三層樓六間房，一樓兩間雙人房"],["衛浴","每間房都有獨立衛浴"]]
+  }
+};
+const LX_KEYS = { "民宿":[["房型","room"],["入住人數","capacity"],["早餐","breakfast"]],
+  "包棟民宿":[["可住人數","capacity"],["房間配置","room"],["衛浴","bath"]],
+  "飯店旅館":[["入住房型","room"],["交通","transport"],["停車","parking"]],
+  "露營":[["帳型","tent"],["每帳人數","capacity"],["裝備","gear"]] };
+function lxKeyFacts(p){
+  const x=LX_EXTRA[p.id]||{}; if(x.key) return x.key;
+  const info=Object.fromEntries(p.info||[]), strip=s=>String(s||"").replace(/<[^>]+>/g,"").trim();
+  const v={
+    capacity:p.capacity||info["人數"]||info["可住人數"],
+    room:info["入住房型"]||(p.roomRows&&p.roomRows.length?p.roomRows.map(r=>r.type).filter(Boolean).join("、"):"")||info["房間"]||strip(p.roomsIntro),
+    breakfast:p.breakfastInfo||p.breakfast||info["早餐"]||info["餐點"],
+    bath:p.bath||"", transport:p.transport||"", parking:p.parkingText||info["停車"],
+    tent:p.tent||((p.kind||"").replace(/（.*?）/g,"")||""), gear:/免帶裝備|免裝備/.test((p.kind||"")+(p.title||""))?"免帶裝備，人到就能住":""
+  };
+  return (LX_KEYS[catOf(p)]||LX_KEYS["民宿"]).map(([l,k])=>[l,strip(v[k])]).filter(x=>x[1]);
+}
+function lxBooking(p){
+  const x={...p,...(LX_EXTRA[p.id]||{})}, host=x.host||"民宿", d=dealOf(p.id), st=d&&status(d);
+  const links=x.links||[], plat=links.map((l,i)=>[l,i]).filter(([l])=>l.type!=="官網訂房"), offi=links.map((l,i)=>[l,i]).filter(([l])=>l.type==="官網訂房");
+  const lbl=(l,off)=>l.label?(/訂房|訂|購/.test(l.label)?l.label:l.label+" 訂房"):(off?"官網訂房":"查看空房與價格");
+  let mainUsed=false; const cls=()=>{ if(mainUsed) return "lx-btn lx-btn-ghost"; mainUsed=true; return "lx-btn lx-btn-main"; };
+  const out=[];
+  /* 團購：放最前面 */
+  if(d&&d.type==="團購"){
+    if(st==="live") out.push(`<div class="lx-bk"><p class="lx-bk-k">團購中</p><p class="lx-bk-big">${d.title||"團購方案"}</p>${d.perk?`<p class="lx-bk-t">${d.perk}</p>`:""}<p class="lx-bk-s">截止：${md(d.end)}${d.stay?`・可入住：${d.stay}`:""}</p>${d.link&&d.link!=="#"?`<a class="${cls()}" href="${d.link}" target="_blank" rel="noopener" data-go="${p.id}-group">查看團購方案</a>`:""}</div>`);
+    else if(st==="ended") out.push(`<div class="lx-bk"><p class="lx-bk-k">團購</p><p class="lx-bk-t">本次團購已結束。</p></div>`);
+    else if(st==="soon") out.push(`<div class="lx-bk"><p class="lx-bk-k">即將開團</p><p class="lx-bk-t">${md(d.start)} 開團${d.perk?`・${d.perk}`:""}</p></div>`);
+  }
+  /* 常態優惠碼 */
+  const code=x.code||(d&&d.type!=="團購"&&st==="code"?d.code:"");
+  const ask=COPY_TEXTS[p.id+"-ask"];
+  const entry=[];
+  if(x.lineUrl) entry.push(`<a class="${cls()}" href="${x.lineUrl}" data-go="${p.id}-line" target="_blank" rel="noopener">用 LINE 詢問空房</a>`);
+  plat.forEach(([l,i])=>entry.push(`<a class="${cls()}" href="${l.url}" data-go="${p.id}-book${i+1}" target="_blank" rel="${l.type==="聯盟行銷"?"sponsored noopener":"noopener"}">${lbl(l)} ↗</a>`));
+  offi.forEach(([l,i])=>entry.push(`<a class="${cls()}" href="${l.url}" data-go="${p.id}-book${i+1}" target="_blank" rel="noopener">${lbl(l,true)} ↗</a>`));
+  if(code||x.codeNote){
+    out.push(`<div class="lx-bk">
+      <p class="lx-bk-k">Mika 專屬優惠</p>
+      ${x.codeNote?`<p class="lx-bk-big">${x.codeNote}</p>`:""}
+      ${x.codeCond?`<p class="lx-bk-s">※${x.codeCond}</p>`:""}
+      ${code?`<div class="lx-code"><span class="lx-code-k">優惠碼</span><b class="lx-code-v">${code}</b><button type="button" class="copy lx-copy" data-code="${code}" data-label="複製優惠碼" data-done="已複製">複製優惠碼</button></div>`:""}
+      ${entry.length?`<div class="lx-bk-btns">${entry.join("")}</div>`:""}
+      ${x.lineUrl&&ask?`<button type="button" class="copy lx-linkbtn" data-copy="${p.id}-ask" data-label="複製 LINE 詢問訊息（已含優惠碼）" data-done="已複製詢問訊息">複製 LINE 詢問訊息（已含優惠碼）</button>`:""}
+      ${x.lineId?`<p class="lx-bk-s">官方 LINE ID　${x.lineId}</p>`:""}
+    </div>`);
+  } else if(entry.length){
+    out.push(`<div class="lx-bk"><p class="lx-bk-k">查空房與訂房</p><p class="lx-bk-t">價格與空房以${host}公告為準。</p><div class="lx-bk-btns">${entry.join("")}</div>${x.lineId?`<p class="lx-bk-s">官方 LINE ID　${x.lineId}</p>`:""}</div>`);
+  }
+  return out.join("");
+}
+function relayout(art, p){
+  const body=art.querySelector(".a-body.post"); if(!body||body.dataset.lx) return; body.dataset.lx="1";
+  const x={...p,...(LX_EXTRA[p.id]||{})};
+  const [h,s]=splitTitle(p.title);
+  /* 依 h2 切段落 */
+  const secs=[]; let cur=null; const lead=[];
+  [...body.children].forEach(el=>{ if(el.tagName==="H2"){ cur={h:el,nodes:[]}; secs.push(cur); } else (cur?cur.nodes:lead).push(el); });
+  const find=re=>secs.find(sc=>re.test(sc.h.textContent));
+  const basic=find(/住宿基本資/), rooms=find(/房間與|房型與|營帳與/), fm=find(/設施與/), rules=find(/入住須知/), near=find(/附近/), last=find(/查空房/);
+  const others=secs.filter(sc=>![basic,rooms,fm,rules,near,last].includes(sc));
+  const cover=art.querySelector(".cover-fig");
+  const intro=lead.filter(el=>el.matches(".one.intro,.video-card"));
+  const oldOffer=body.querySelector(".offer"); if(oldOffer) oldOffer.remove();
+  lead.filter(el=>el.matches(".kicker,h1,.d,.offer")).forEach(el=>el.remove());
+  const mk=(tag,cls,html)=>{ const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; };
+  const frag=document.createDocumentFragment();
+  /* 1 大標與副標（完整原文） */
+  frag.appendChild(mk("nav","lx-crumb",`<a href="${homeLink}">首頁</a><span aria-hidden="true">›</span><span>${esc(p.region||"")}</span><span aria-hidden="true">›</span><span>${esc(h)}</span>`)).setAttribute("aria-label","目前位置");
+  frag.appendChild(mk("h1","lx-atitle",`<span class="lx-an">${esc(h)}</span>${s?`<span class="lx-as">${esc(s)}</span>`:""}`));
+  frag.appendChild(mk("p","lx-byline","文／Mika"));
+  /* 2 首圖 */
+  if(cover){ cover.classList.add("lx-cover"); frag.appendChild(cover); }
+  /* 3 住宿資訊：最多三項＋展開完整資訊 */
+  const keys=lxKeyFacts(p).slice(0,3);
+  const info=mk("section","lx-info"); info.setAttribute("aria-label","住宿資訊");
+  info.innerHTML=(keys.length?`<dl class="lx-keys">${keys.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`:"");
+  const more=[...(basic?basic.nodes:[])];
+  const map=x.mapUrl||(body.querySelector(".gscore a")||{}).href;
+  if(more.length||map){
+    const det=mk("details","lx-more"); det.innerHTML=`<summary>查看完整住宿資訊<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="lx-more-b"></div>`;
+    const mb=det.querySelector(".lx-more-b"); more.forEach(n=>mb.appendChild(n));
+    if(map&&!mb.querySelector(".lx-map")) mb.appendChild(mk("p","",`<a class="lx-btn lx-btn-ghost lx-map" href="${map}" target="_blank" rel="noopener">開啟地圖</a>`));
+    info.appendChild(det);
+  }
+  if(info.children.length) frag.appendChild(info);
+  if(basic) basic.h.remove();
+  /* 4 文章目錄（之後填入） */
+  const toc=mk("details","lx-toc"); toc.innerHTML=`<summary>文章目錄<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><ol></ol>`;
+  frag.appendChild(toc);
+  const put=(title,nodes,h2)=>{ if(!nodes.length&&!h2) return; const sec=mk("section","lx-sec-a"); const hh=h2||mk("h2"); if(title) hh.textContent=title; sec.appendChild(hh); nodes.forEach(n=>sec.appendChild(n)); frag.appendChild(sec); };
+  /* 5 入住心得 */
+  if(intro.length) put("入住心得",intro);
+  /* 6 房型與空間 */
+  if(rooms) put(/營帳/.test(rooms.h.textContent)?"營帳與衛浴":"房型與空間",rooms.nodes,rooms.h);
+  /* 7 設施及餐食 */
+  if(fm) put("設施與餐食",fm.nodes,fm.h);
+  others.forEach(sc=>put(null,sc.nodes,sc.h));
+  if(rules) put(null,rules.nodes,rules.h);
+  /* 8 附近景點 */
+  if(near) put("附近景點",near.nodes,near.h);
+  /* 9 訂房與優惠＋原有官網、分享、聲明 */
+  const bk=lxBooking(p);
+  const leadRest=lead.filter(el=>el.isConnected&&!el.matches(".one.intro,.video-card,.kicker,h1,.d,.offer"));
+  const tail=[...leadRest,...(last?last.nodes:[])].filter(n=>!n.matches(".price-note,.price-btn"));
+  if(last) last.h.remove();
+  const bsec=mk("section","lx-sec-a lx-booksec"); bsec.id="offer";
+  bsec.appendChild(mk("h2","","訂房與優惠"));
+  if(bk) bsec.appendChild(mk("div","lx-book",bk));
+  tail.forEach(n=>bsec.appendChild(n));
+  frag.appendChild(bsec);
+  body.innerHTML=""; body.appendChild(frag);
+  /* 目錄：當篇實際存在的段落 */
+  const ol=toc.querySelector("ol"); let n=0;
+  body.querySelectorAll(".lx-sec-a > h2").forEach(h2=>{ h2.id=h2.id||("s"+(++n)); ol.insertAdjacentHTML("beforeend",`<li><a href="#${h2.id}" data-toc="${h2.id}">${esc(h2.textContent)}</a></li>`); });
+  if(!ol.children.length) toc.remove();
+  /* 首頁連結回首頁（預覽版用 #） */
+  body.querySelectorAll(".lx-crumb a").forEach(a=>a.setAttribute("href",homeLink));
+}
+/* 目錄跳轉：用 JS 捲動，避免改到網址 hash（預覽版用 hash 換頁） */
+document.addEventListener("click",e=>{ const a=e.target.closest("[data-toc]"); if(!a) return; e.preventDefault();
+  const t=document.getElementById(a.dataset.toc); if(!t) return; const det=a.closest("details"); if(det) det.open=false;
+  const y=t.getBoundingClientRect().top+scrollY-72; scrollTo({top:y,behavior:"smooth"}); t.setAttribute("tabindex","-1"); t.focus({preventScroll:true}); });
+
 function route(){
   try{ closeD(); }catch(e){}
   const m = location.hash.match(/^#post-(.+)$/);
@@ -1900,6 +2302,7 @@ function route(){
   const p = id && posts.find(x=>x.id===id);
   if(p){
     article.innerHTML = articleHTML(p);
+    relayout(article, p);
     wireGalleries(article); wireFloorTabs(article); wireRails(article);
     /* 正式網站：外連按鈕先經過 /go/<名稱>/ 轉跳頁，Cloudflare 才算得到點擊次數 */
     if(PROD) article.querySelectorAll("a[data-go]").forEach(a=>{ if(!a.dataset.href) a.dataset.href=a.getAttribute("href"); a.setAttribute("href","/go/"+a.dataset.go+"/"); });
