@@ -826,6 +826,19 @@
   /* 照片來源小字：貼在照片右下角，很小、不搶畫面 */
   .a-cover,.ph{position:relative}
   .ph-credit{position:absolute;right:8px;bottom:6px;z-index:2;font-size:10px;line-height:1;letter-spacing:.02em;color:rgba(255,255,255,.88);background:rgba(0,0,0,.28);padding:3px 6px;border-radius:99px;pointer-events:none}
+  /* 訂房方式步驟（沒有折扣碼時讓卡片有內容；B 版） */
+  .offer .of-headrow{display:flex;align-items:center;gap:10px}
+  .offer .of-headrow .of-k{margin:0}
+  .a-body .offer .of-headrow .of-sub{margin:2px 0 0;font-size:13px;color:#777}
+  .of-ic{width:36px;height:36px;flex:none;overflow:visible}
+  .of-steps{display:flex;flex-direction:column;gap:18px}
+  .of-step{display:flex;gap:10px;align-items:flex-start}
+  .of-num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--c-lime,#F2C230);border:1.5px solid #1A1A1A;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .of-stb{flex:1;min-width:0}
+  .a-body .offer p.of-stt{margin:0;font-size:15px;font-weight:800;color:#1A1A1A;line-height:1.5}
+  .a-body .offer p.of-std{margin:1px 0 10px;font-size:13px;color:#666;line-height:1.55}
+  .of-links{display:flex;flex-direction:column;gap:10px}
+  .a-body .offer .of-step p.of-id{text-align:left;margin-left:4px}
   /* 封面按鈕陰影：依照片明暗自動切換（暗→白色陰影，亮→黑色陰影） */
   .hero .follow,.hero .sq{box-shadow:3px 3px 0 #fff!important;transition:box-shadow .3s}
   .hero.is-light .follow,.hero.is-light .sq{box-shadow:3px 3px 0 #1A1A1A!important}
@@ -1385,6 +1398,7 @@ function shareTexts(p){
 /* 手繪蠟筆風小圖（分享選單用） */
 const SK_DEFS='<defs><filter id="skW" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter><filter id="skC" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.6" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in" result="t"/><feDisplacementMap in="t" in2="n" scale="1.4"/></filter></defs>';
 const SK_ICON={
+  cal:`<svg class="of-ic" viewBox="0 0 40 40" aria-hidden="true">${SK_DEFS}<g filter="url(#skC)" stroke="#F2C230" stroke-width="3.4" stroke-linecap="round"><path d="M9 26l20-9M10 30l20-9"/></g><g filter="url(#skW)" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="9" width="28" height="24" rx="3"/><path d="M6 16h28M13 6v6M27 6v6M12 22h4M18 22h4M24 22h4M12 27h4"/></g></svg>`,
   chat:`<svg viewBox="0 0 44 44" aria-hidden="true">${SK_DEFS}
     <g filter="url(#skC)" stroke="#F2C230" stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M10 12l20-2M9 16l25-3M9 20l26-3M10 24l24-3M12 28l18-2"/></g>
     <g filter="url(#skW)" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1884,6 +1898,15 @@ function renderSimple(p){
   const hasRooms=!na(3)&&(p.roomsIntro||(p.roomRows&&p.roomRows.length)||p.spaces||(p.tentGear&&p.tentGear.length)||p.bath||(p.annexes&&p.annexes.length)||hasX(3));
   const rules=na(5)?[]:(p.rules||[]), ruleCats=[...new Set(rules.map(r=>r.cat))];
   const nbGroups=na(6)?[]:NB_ORDER.map(g=>[g,(p.nearby||[]).filter(n=>n.group===g)]).filter(x=>x[1].length);
+  /* 訂房方式（Mika 指定 B 版）：①LINE 問空房 ②訂房平台（可多個）③官網訂房放最後 */
+  const lbl=(l,off)=>l.label?(/訂房|訂|購/.test(l.label)?l.label:l.label+" 訂房"):(off?"官網訂房":"查看空房與價格");
+  const btn=(l,i,off)=>`<a class="of-link" href="${l.url}" data-go="${p.id}-book${i+1}" target="_blank" rel="${l.type==="聯盟行銷"?"sponsored noopener":"noopener"}">${lbl(l,off)} ↗</a>`;
+  const plat=links.map((l,i)=>[l,i]).filter(([l])=>l.type!=="官網訂房"), offi=links.map((l,i)=>[l,i]).filter(([l])=>l.type==="官網訂房");
+  const steps=[];
+  if(p.lineUrl) steps.push({t:"先問空房",d:p.code?"複製上面的詢問訊息，貼到 LINE 送出":"日期、人數、加購都可以直接問",
+    html:`<a class="of-line" href="${p.lineUrl}" data-go="${p.id}-line" target="_blank" rel="noopener">用 LINE 詢問空房</a>${p.lineId?`<p class="of-id">官方 LINE ID　<span class="nw">${p.lineId}</span></p>`:""}`});
+  if(plat.length) steps.push({t:plat.every(([l])=>l.type==="團購")?"團購優惠":"直接線上訂",d:plat.length>1?"看即時房價，可以比價後再訂":"看即時房價，選好日期就能訂",html:`<div class="of-links">${plat.map(([l,i])=>btn(l,i)).join("")}</div>`});
+  if(offi.length) steps.push({t:"官網訂房",d:`在${host}官網直接訂`,html:`<div class="of-links">${offi.map(([l,i])=>btn(l,i,true)).join("")}</div>`});
   const priceTxt=p.priceBtn||(p.cat==="包棟民宿"?"包棟價格請直接向民宿詢問":`價格請直接向${host}詢問`);
   return `
   <!-- 1 首圖、標題與訂房入口 -->
@@ -1894,20 +1917,14 @@ function renderSimple(p){
         <h3 class="of-k">${name} 訂房優惠</h3>
         <p class="of-main"><span class="mk">${p.codeNote}</span></p>
         ${p.codeCond?`<p class="of-sub">${p.codeCond}。</p>`:""}
-      </div>`:p.code?`<div class="of-sec"><h3 class="of-k">${name} 專屬優惠</h3><p class="of-sub">優惠內容請向${host}詢問。</p></div>`:`<div class="of-sec"><h3 class="of-k">${name} 訂房資訊</h3></div>`}
+      </div>`:p.code?`<div class="of-sec"><h3 class="of-k">${name} 專屬優惠</h3><p class="of-sub">優惠內容請向${host}詢問。</p></div>`:`<div class="of-sec of-headrow">${SK_ICON.cal}<div><h3 class="of-k">${name} 訂房資訊</h3>${steps.length>1?`<p class="of-sub">選一種方式就可以</p>`:""}</div></div>`}
       ${p.code?`<div class="of-sec">
         <p class="of-code">優惠碼 <b class="nw">${p.code}</b></p>
         <div class="of-row">${p.lineUrl
           ?`<button class="copy of-copy" data-copy="${p.id}-ask" data-label="複製詢問訊息" data-done="已複製">複製詢問訊息</button><span class="of-hint">已含優惠碼 <span class="nw">${p.code}</span></span>`
           :`<button class="copy of-copy" data-code="${p.code}" data-label="複製折扣碼" data-done="已複製">複製折扣碼</button>`}</div>
       </div>`:""}
-      ${p.lineUrl?`<div class="of-sec">
-        <a class="of-line" href="${p.lineUrl}" data-go="${p.id}-line" target="_blank" rel="noopener">用 LINE 詢問空房</a>
-        ${p.code?`<p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>`:""}
-        ${p.lineId?`<p class="of-id">官方 LINE ID　<span class="nw">${p.lineId}</span></p>`:""}
-      </div>`:""}
-      ${links.length?`<div class="of-sec">${links.map((l,i)=>`<a class="of-link" href="${l.url}" data-go="${p.id}-book${i+1}" target="_blank" rel="${l.type==="聯盟行銷"?"sponsored noopener":"noopener"}">${l.label||(l.type==="官網訂房"?"官網訂房":"查看空房與價格")} ↗</a>`).join("")}
-</div>`:""}
+      ${steps.length?`<div class="of-sec of-steps">${steps.map((st,k)=>`<div class="of-step">${steps.length>1?`<span class="of-num">${k+1}</span>`:""}<div class="of-stb"><p class="of-stt">${st.t}</p><p class="of-std">${st.d}</p>${st.html}</div></div>`).join("")}</div>`:""}
     </section>`:""}
 
     <div class="kicker">${p.region} · ${p.type}</div>
