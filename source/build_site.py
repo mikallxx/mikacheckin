@@ -104,7 +104,7 @@ POSTS = [
         "id": "hakuna",
         "title": "哈庫納馬塔塔｜宜蘭市包棟民宿，全台唯一非洲風格",
         "desc": "宜蘭市包棟民宿哈庫納馬塔塔，全台唯一非洲風格，附 Mika 開箱影片與專屬折扣碼。",
-        "image": "img/site/cover.jpg",
+        "image": "img/hakuna/01.jpg",
         "draft": True,
     },
     {

@@ -122,6 +122,12 @@ def post_entry(pid, s, old_tags):
         if l: x[str(b)] = l
     if x: p["x"] = x
     if s.get("naBlocks"): p["na"] = sorted(set(int(n) for n in s["naBlocks"]))
+    # 照片：source/img/<id>/01.jpg（4:3）＋01_s.jpg（卡片用）放了就自動當封面
+    if (ROOT / "img" / pid / "01.jpg").exists():
+        p["coverImg"] = f"img/{pid}/01.jpg"
+        p["cover"] = f"img/{pid}/01_s.jpg" if (ROOT / "img" / pid / "01_s.jpg").exists() else p["coverImg"]
+        cr = re.sub(r"^照片提供[:：]\s*", "", plain(s.get("photoCredit")))
+        if cr and not re.search(r"自己|自拍|Mika", cr): p["credit"] = html.escape(cr, quote=False)
     render = HANDMADE.get(pid, "renderSimple")
     body = ", ".join(f"{k}:{js(v)}" for k, v in p.items())
     return f"  {{ {body}, render:{render} }},"
