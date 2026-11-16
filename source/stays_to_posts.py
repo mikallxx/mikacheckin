@@ -93,7 +93,8 @@ def post_entry(pid, s, old_tags):
         if ok(s.get(k)): p[k] = html.escape(s[k].strip(), quote=False)
     pk = "，".join(x for x in [s.get("parking"), s.get("parkingNote")] if ok(x))
     if pk: p["parkingText"] = md(pk)
-    bf = "，".join(x for x in [s.get("breakfast"), s.get("breakfastNote")] if ok(x))
+    bf_txt = {"可自選": "可自選（訂房時告知要不要附早餐）"}.get(s.get("breakfast"), s.get("breakfast"))
+    bf = "，".join(x for x in [bf_txt, s.get("breakfastNote")] if ok(x))
     if bf: p["breakfastInfo"] = md(bf)
     if s.get("breakfastVeg"): p["breakfastVeg"] = True
     if s.get("dinnerVeg"): p["dinnerVeg"] = True
