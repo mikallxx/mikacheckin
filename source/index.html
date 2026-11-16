@@ -1444,7 +1444,7 @@ function renderHangwang(p){
         </div>
       </div>
       <div class="of-sec">
-        <a class="of-line" href="https://lin.ee/qnUxp3X" target="_blank" rel="noopener">用 LINE 詢問空房</a>
+        <a class="of-line" href="https://lin.ee/qnUxp3X" data-go="hangwang-line" target="_blank" rel="noopener">用 LINE 詢問空房</a>
         <p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>
         <p class="of-id">官方 LINE ID　<span class="nw">@hope2795</span></p>
       </div>
@@ -1463,7 +1463,7 @@ function renderHangwang(p){
     <p>戶外有草坪步道、雲朵鞦韆和戲水池，室內也能唱 KTV、打麻將或玩街機，就算一整天都待在民宿也不會無聊。</p>
     </div>
 
-    <a class="video-card" href="${p.video||'https://www.instagram.com/mika.checkin/reels/'}" target="_blank" rel="noopener">
+    <a class="video-card" href="${p.video||'https://www.instagram.com/mika.checkin/reels/'}" data-go="hangwang-video" target="_blank" rel="noopener">
       <div class="vc-thumb"><img src="${IMG}04_s.jpg" alt="巷往 Villa 開箱影片" loading="lazy"><span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div>
       <div class="vc-txt"><small>觀看影片</small><b>巷往 Villa <span class="nw">開箱影片</span></b><span>在 Instagram 觀看 →</span></div>
     </a>
@@ -1593,7 +1593,7 @@ function renderHangwang(p){
     <!-- 8 查空房與官方資訊 -->
     <h2>查空房與官方資訊</h2>
     <a class="price-note price-btn" href="#offer" data-goto=".offer"><span class="pb-txt"><span class="nw">包棟價格</span><wbr><span class="nw">請直接向民宿詢問</span></span><span class="pb-arrow">查看優惠 ↑</span></a>
-    <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" target="_blank" rel="noopener">查看民宿官網</a></div>
+    <div class="cta"><a class="p" href="https://tw-bnb.com/web/hopeful/" data-go="hangwang-site" target="_blank" rel="noopener">查看民宿官網</a></div>
     <button type="button" class="btn-share" data-share>分享給親友</button>
     <p class="note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p>
   </div>`;
@@ -1668,11 +1668,11 @@ function renderSimple(p){
           :`<button class="copy of-copy" data-code="${p.code}" data-label="複製折扣碼" data-done="已複製">複製折扣碼</button>`}</div>
       </div>`:""}
       ${p.lineUrl?`<div class="of-sec">
-        <a class="of-line" href="${p.lineUrl}" target="_blank" rel="noopener">用 LINE 詢問空房</a>
+        <a class="of-line" href="${p.lineUrl}" data-go="${p.id}-line" target="_blank" rel="noopener">用 LINE 詢問空房</a>
         ${p.code?`<p class="of-hint">貼上訊息，填好入住日期和人數即可送出。</p>`:""}
         ${p.lineId?`<p class="of-id">官方 LINE ID　<span class="nw">${p.lineId}</span></p>`:""}
       </div>`:""}
-      ${links.length?`<div class="of-sec">${links.map(l=>`<a class="of-link" href="${l.url}" target="_blank" rel="${l.type==="聯盟行銷"?"sponsored noopener":"noopener"}">${l.label||(l.type==="官網訂房"?"官網訂房":"查看空房與價格")} ↗</a>`).join("")}
+      ${links.length?`<div class="of-sec">${links.map((l,i)=>`<a class="of-link" href="${l.url}" data-go="${p.id}-book${i+1}" target="_blank" rel="${l.type==="聯盟行銷"?"sponsored noopener":"noopener"}">${l.label||(l.type==="官網訂房"?"官網訂房":"查看空房與價格")} ↗</a>`).join("")}
 </div>`:""}
     </section>`:""}
 
@@ -1682,7 +1682,7 @@ function renderSimple(p){
 
     <!-- 2 我的入住心得 -->
     ${p.intro&&p.intro.length?`<div class="one intro">${p.intro.map(t=>`<p>${t}</p>`).join("")}</div>`:""}
-    ${p.video?`<a class="video-card" href="${p.video}" target="_blank" rel="noopener">
+    ${p.video?`<a class="video-card" href="${p.video}" data-go="${p.id}-video" target="_blank" rel="noopener">
       <div class="vc-thumb">${textCover(p)}<span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div>
       <div class="vc-txt"><small>觀看影片</small><b>${name} <span class="nw">開箱影片</span></b><span>在 Instagram 觀看 →</span></div>
     </a>`:""}
@@ -1737,7 +1737,7 @@ function renderSimple(p){
     <!-- 8 查空房與官方資訊 -->
     <h2>查空房與官方資訊</h2>
     ${hasOffer?`<a class="price-note price-btn" href="#offer" data-goto=".offer"><span class="pb-txt">${priceTxt}</span><span class="pb-arrow">${p.code?"查看優惠":"訂房方式"} ↑</span></a>`:`<p class="price-note">${priceTxt}</p>`}
-    ${p.website?`<div class="cta"><a class="p" href="${p.website}" target="_blank" rel="noopener">查看${host}官網</a></div>`:""}
+    ${p.website?`<div class="cta"><a class="p" href="${p.website}" data-go="${p.id}-site" target="_blank" rel="noopener">查看${host}官網</a></div>`:""}
     <button type="button" class="btn-share" data-share>分享給親友</button>
     ${p.soon?`<div class="soon-note">更多照片整理中，先看上面的開箱影片吧。</div>`:""}
     <p class="note-line">本頁為個人非官方住宿攻略，資訊以${host}官方公告為準。</p>
@@ -1883,6 +1883,8 @@ function route(){
   if(p){
     article.innerHTML = articleHTML(p);
     wireGalleries(article); wireFloorTabs(article); wireRails(article);
+    /* 正式網站：外連按鈕先經過 /go/<名稱>/ 轉跳頁，Cloudflare 才算得到點擊次數 */
+    if(PROD) article.querySelectorAll("a[data-go]").forEach(a=>{ if(!a.dataset.href) a.dataset.href=a.getAttribute("href"); a.setAttribute("href","/go/"+a.dataset.go+"/"); });
     placeOffer();
     if(!PROD){ article.classList.remove("edit-on"); numberize(article); addNumBtn(article); }
     document.body.classList.add("reading"); bar.classList.remove("show");

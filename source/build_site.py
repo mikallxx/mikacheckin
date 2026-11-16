@@ -150,6 +150,18 @@ def make_page(src, **kw):
     return s.replace('<meta name="viewport"', head_block(**kw) + '\n<meta name="viewport"', 1)
 
 
+GO_PAGE = """<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>前往中…｜Mika Check-in</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;color:#1A1A1A;background:#fff}a{color:#1A1A1A}</style></head>
+<body><p>正在前往… <a href="__HREF__" rel="noopener">沒有自動跳轉請點這裡</a></p>
+<script>(function(){var u=__URL__,done=false;function go(){if(done)return;done=true;location.replace(u);}
+/* 等 Cloudflare 統計程式載入後再跳轉，最多等 1.5 秒 */
+window.addEventListener("load",function(){setTimeout(go,250);});setTimeout(go,1500);})();</script>
+</body></html>
+"""
+
+
 def main():
     global POSTS
     POSTS = [p for p in POSTS if not p.get("draft")]
@@ -187,11 +199,21 @@ def main():
 const {{chromium}}=require('playwright');
 (async()=>{{const b=await chromium.launch();const r={{}};
 for(const id of {ids}){{const p=await b.newPage({{viewport:{{width:390,height:800}}}});await p.goto('http://localhost:8765/'+id+'/');await p.waitForTimeout(600);
- r[id]=await p.$eval('#article',e=>e.innerHTML);await p.close();}}
+ r[id]=await p.$eval('#article',e=>e.innerHTML);
+ r['__go_'+id]=await p.$$eval('#article a[data-go]',as=>as.map(a=>[a.dataset.go,a.dataset.href]));await p.close();}}
 console.log(JSON.stringify(r));await b.close();}})();"""], capture_output=True, text=True, check=True)
         rendered = json.loads(out.stdout)
     finally:
         srv.terminate()
+    # 點擊統計用的轉跳頁：/go/<名稱>/ → 外部網址（Cloudflare Web Analytics 會把每次經過算成一次瀏覽）
+    go = {}
+    for p in POSTS:
+        for name, href in rendered.get("__go_" + p["id"], []):
+            if name and href and href.startswith("http"):
+                go[name] = href
+    for name, href in go.items():
+        os.makedirs(f"{DIST}/go/{name}")
+        open(f"{DIST}/go/{name}/index.html", "w", encoding="utf-8").write(GO_PAGE.replace("__URL__", json.dumps(href)).replace("__HREF__", html.escape(href, quote=True)))
     for p in POSTS:
         f = f"{DIST}/{p['id']}/index.html"
         s = open(f, encoding="utf-8").read()
@@ -204,7 +226,7 @@ console.log(JSON.stringify(r));await b.close();}})();"""], capture_output=True, 
     open(f"{DIST}/sitemap.xml", "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
-    open(f"{DIST}/robots.txt", "w").write(f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n")
+    open(f"{DIST}/robots.txt", "w").write(f"User-agent: *\nAllow: /\nDisallow: /go/\nSitemap: {DOMAIN}/sitemap.xml\n")
     n = sum(len(fs) for _, _, fs in os.walk(DIST))
     print("built", DIST, "files:", n)
 
