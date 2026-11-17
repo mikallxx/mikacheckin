@@ -1062,6 +1062,87 @@
     .a-body .lx-cover .a-cover{border-radius:12px!important}
     .a-body .lx-cover figcaption{margin:8px 0 0!important}
   }
+
+  /* =====================================================================
+     2026-11 第二輪：首頁全幅封面、清掉黃色裝飾、照片角落優惠標籤、文章資訊與訂房區
+     萊姆綠只留給：選中的類型、選中的樓層、主要訂房按鈕
+     ===================================================================== */
+  .lx-vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  /* 封面：照片到手機左右邊緣，文字放在左上水面 */
+  .lx-hero{position:relative;padding:0!important;display:block!important;overflow:hidden}
+  .lx-hero-img{margin:0!important;border-radius:0!important;aspect-ratio:auto!important;height:min(calc(100svh - 60px - 52px),640px);min-height:460px;max-height:none!important}
+  .lx-hero-img img{object-position:18% 50%}
+  .lx-hero-txt{position:absolute;left:20px;right:20px;top:20px;z-index:2;pointer-events:none}
+  /* 照片左上本身有深色倒影：只在文字後面加一層淡淡的白霧，讓黑字對比夠（實測 390px 最暗處 5.7:1） */
+  .lx-hero-txt::before{content:"";position:absolute;left:-20px;top:-20px;width:390px;height:280px;background:radial-gradient(ellipse 210px 125px at 140px 100px,rgba(255,255,255,.8) 0%,rgba(255,255,255,.66) 55%,rgba(255,255,255,0) 100%);z-index:-1;pointer-events:none}.lx-hero-txt{isolation:isolate}
+  .lx-hero .lx-title{font-size:46px;line-height:1.15;letter-spacing:.03em;color:#111}
+  .lx-hero .lx-lead{font-size:21px;margin-top:8px;color:#111}
+  .lx-hero-by{margin:0;padding:14px 20px 0;font-size:14px;line-height:1.6;color:var(--lx-sub)}
+  /* 最新消息：一列文字連結 */
+  #newsSec{padding-top:28px}
+  .lx-news{display:flex!important;align-items:center;gap:12px;min-height:52px;padding:0!important;text-decoration:none!important;border-top:1px solid var(--lx-line);border-bottom:1px solid var(--lx-line)}
+  .lx-news-k{flex:none;font-size:13px;font-weight:700;color:var(--lx-mute);letter-spacing:.06em}
+  .lx-news-t{flex:1;min-width:0;font-size:15px;color:var(--lx-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lx-news .i{flex:none;width:18px;height:18px;color:var(--lx-mute)}
+  /* 標題：不再加色條，用字和留白分區 */
+  .lx-h::before,.lx-sec-a>h2::before{display:none!important}
+  .lx-sec{padding-top:56px}
+  .lx-sec-a{margin-top:60px}
+  @media (hover:hover){.lx-card:hover .lx-ct,.lx-pcard:hover .lx-ct{text-decoration-color:var(--lx-ink)}}
+  /* 卡片：照片左下角優惠標籤 */
+  .lx-cd{display:none!important}
+  .lx-ptag{position:absolute;left:12px;bottom:12px;z-index:2;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#171717;font-size:12.5px;font-weight:700;line-height:1.4;letter-spacing:.02em;box-shadow:none}
+  /* 圖片說明：深灰小字，和照片左邊對齊，拿掉黃色直線 */
+  .fig figcaption::before,.cover-fig figcaption::before,.slide .cap p::before,.rail-card figcaption span::before{display:none!important}
+  .a-body .fig figcaption,.a-body .cover-fig figcaption,.a-body .slide .cap p,.a-body .rail-card figcaption span,.a-body .lx-cover figcaption{padding-left:0!important;margin-left:0!important;border:0!important;color:#525252!important;font-size:13.5px!important;line-height:1.6!important;text-align:left!important;background:none!important}
+  .a-body .lx-cover figcaption{margin:8px 20px 0!important}
+  .a-body .vc-play{background:var(--lx-ink)!important;color:#fff!important}
+  .a-body .vc-play *{fill:#fff!important;stroke:#fff!important}
+  .a-body .fm-h::before,.a-body h3::before{background:none!important;box-shadow:none!important}
+  .a-body mark,.a-body .hl{background:none!important}
+  /* 選單抽屜：去掉黃色 */
+  .drawer .head,.quick{border-bottom-color:var(--lx-gray)!important}
+  .quick span{background:var(--lx-gray)!important}
+  .share-fab{display:none!important}
+  /* 住宿資訊展開：同一塊灰底、兩欄文字 */
+  .lx-more-b{padding:2px 0 6px}
+  .lx-detail{margin:0}
+  .lx-detail div{display:grid;grid-template-columns:100px 1fr;gap:10px;padding:7px 0;align-items:baseline}
+  .lx-detail dt{font-size:14px;color:var(--lx-mute)}
+  .lx-detail dd{margin:0;font-size:15px;line-height:1.6;color:var(--lx-ink)}
+  .lx-detail dd .cond{display:block;font-size:13.5px;color:var(--lx-sub)}
+  @media (max-width:359px){.lx-detail div{grid-template-columns:1fr;gap:2px}}
+  .a-body .lx-maplink,.a-body .lx-rate a{display:inline-flex;align-items:center;min-height:32px;margin-left:6px;font-size:14px;font-weight:700;color:var(--lx-ink)!important;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+  .a-body.post p.lx-rate{font-size:14px!important;color:var(--lx-sub);margin:8px 0 0!important;line-height:1.6!important}
+  .lx-rate b{color:var(--lx-ink);font-weight:700;background:none}
+  /* 文章目錄：灰底收合，每列整列可點 */
+  .lx-toc{background:var(--lx-gray);border:0!important;border-radius:12px;padding:2px 18px}
+  .lx-toc ol{margin:0 -18px 8px!important}
+  .a-body .lx-toc li a{display:flex;width:100%;box-sizing:border-box;min-height:48px;padding:0 18px;text-decoration:none!important;border:0!important;background:none!important;color:var(--lx-ink)!important}
+  .a-body .lx-toc li a::before{text-decoration:none}
+  @media (hover:hover){.a-body .lx-toc li a:hover{background:#EBEBE7!important}}
+  .a-body .lx-toc li a:active{background:#E4E4DF!important}
+  /* 訂房區：折扣、排除日期、優惠碼集中；LINE 詢問是唯一整寬萊姆綠 */
+  .lx-bk-big strong.off{color:#B42318!important;background:none!important}
+  .a-body .lx-code .lx-copy{min-height:40px;padding:0 14px!important;font-size:14px}
+  .lx-bk-btns .lx-btn-ghost{min-height:44px}
+  .a-body.post p.lx-bk-id{margin-top:10px!important;text-align:center}
+  .lx-acts{display:flex;flex-direction:column;align-items:flex-start;margin-top:14px;padding-top:6px;border-top:1px solid #E2E2DD}
+  .a-body .lx-act,.a-body .lx-linkbtn.lx-act{display:inline-flex!important;align-items:center;width:auto!important;min-height:44px!important;margin:0!important;padding:0!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;font:inherit;font-size:15px!important;font-weight:700!important;color:var(--lx-ink)!important;text-decoration:underline!important;text-underline-offset:4px;text-decoration-thickness:1px;cursor:pointer}
+  .a-body .lx-act.done{text-decoration:none!important}
+  .lx-acts:empty{display:none}
+  .lx-booksec .note-line{margin-top:18px!important;font-size:13.5px!important;text-align:left!important}
+  #list.lx-list{padding:0!important}
+  .lx-qx[hidden]{display:none!important}
+  @media (min-width:900px){
+    .lx-hero-img{height:min(calc(100vh - 68px - 48px),680px)}
+    .lx-hero-img img{object-position:50% 22%}
+    .lx-hero-txt{left:max(32px,calc((100vw - 1120px)/2));top:36px}
+    .lx-hero .lx-title{font-size:60px}
+    .lx-hero-txt::before{left:-120px!important;top:-60px!important;width:640px!important;height:360px!important;background:radial-gradient(ellipse 290px 150px at 320px 160px,rgba(255,255,255,.8) 0%,rgba(255,255,255,.64) 55%,rgba(255,255,255,0) 100%)!important}
+    .lx-hero .lx-lead{font-size:24px}
+    .lx-hero-by{padding:16px max(32px,calc((100vw - 1120px)/2)) 0}
+  }
 </style>
 </head>
 <body>
@@ -1074,18 +1155,17 @@
 
 <main id="home">
   <section class="lx-hero">
+    <figure class="lx-hero-img"><img class="scene" src="img/site/cover.jpg" alt="Mika 在民宿池畔拍照"></figure>
     <div class="lx-hero-txt">
-      <p class="lx-kick">台灣與海外・住宿開箱・旅遊攻略</p>
       <h1 class="lx-title">今晚住這裡</h1>
       <p class="lx-lead">住哪裡，怎麼玩</p>
-      <p class="lx-by">Mika｜住宿與旅遊內容創作者</p>
     </div>
-    <figure class="lx-hero-img"><img class="scene" src="img/site/cover.jpg" alt="Mika 在民宿庭園拍照"></figure>
   </section>
+  <p class="lx-hero-by">Mika｜台灣與海外住宿開箱・旅遊攻略</p>
 
   <section class="lx-sec" id="newsSec" aria-labelledby="newsH">
-    <h2 class="lx-h" id="newsH">最新消息</h2>
-    <a class="lx-news" id="news" href="#"></a>
+    <h2 class="lx-vh" id="newsH">最新消息</h2>
+    <a class="lx-news" id="news" href="#"><span class="lx-news-k">最新</span><span class="lx-news-t" id="newsT"></span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
   </section>
 
   <section class="lx-sec" aria-labelledby="popH">
@@ -1517,9 +1597,15 @@ function thumb(p, extraStyle=""){
   const pic = p.cover ? `<img src="${p.cover}" alt="${esc(splitTitle(p.title)[0])}" loading="lazy">` : p.textCover ? textCover(p) : art(...p.img);
   return `<div class="thumb" style="${extraStyle}">${pic}${p.real?"":'<span class="sample">範例</span>'}</div>`;
 }
+/* 卡片照片左下角標籤：團購進行中優先，其次有效優惠碼；沒有就不放 */
+function cardTag(p){
+  const st=deals.filter(d=>d.post===p.id).map(d=>status(d));
+  return st.includes("live")?"團購中":st.includes("code")?"專屬優惠":"";
+}
 function lxCard(p, cls){
-  const [h,s]=splitTitle(p.title), ds=dealState(p);
-  return `<a class="${cls}" href="${postLink(p.id)}">${thumb(p)}<h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}${ds?`<p class="lx-cd">${ds}</p>`:""}</a>`;
+  const [h,s]=splitTitle(p.title), tg=cardTag(p);
+  const th=thumb(p).replace(/<\/div>$/, tg?`<span class="lx-ptag">${tg}</span></div>`:"</div>");
+  return `<a class="${cls}" href="${postLink(p.id)}">${th}<h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}</a>`;
 }
 function renderPop(){
   pop.innerHTML = posts.slice(0,4).map(p=>lxCard(p,"lx-pcard")).join("");
@@ -1530,7 +1616,7 @@ function filtered(){
     if(want!=="全部" && catOf(p)!==want) return false;
     if(q && ![p.title,p.region,p.area,(p.tags||[]).join(" ")].some(x=>norm(x).includes(q))) return false;
     if(F.regions.length && !F.regions.includes(p.region)) return false;
-    if(F.deals.length && !F.deals.includes(dealState(p))) return false;
+    if(F.deals.length){ const st=deals.filter(d=>d.post===p.id).map(d=>status(d)); const has={"有優惠碼":st.includes("code"),"團購中":st.includes("live")}; if(!F.deals.some(k=>has[k])) return false; }
     return true;
   });
 }
@@ -1592,7 +1678,7 @@ function setCat(c){
   document.addEventListener("click",e=>{ const b=e.target.closest("[data-pop]"); if(!b) return; const c=pop.querySelector(".lx-pcard"); pop.scrollBy({left:(c?c.offsetWidth+14:300)*+b.dataset.pop,behavior:"smooth"}); });
   /* 最新消息：只顯示一則 */
   const nw=document.getElementById("news"), sec=document.getElementById("newsSec");
-  if(nw){ if(NEWS&&NEWS.text){ nw.textContent=NEWS.text; nw.href=NEWS.post?postLink(NEWS.post):(NEWS.href||"#"); } else if(sec) sec.remove(); }
+  if(nw){ if(NEWS&&NEWS.text){ (document.getElementById("newsT")||nw).textContent=NEWS.text; nw.href=NEWS.post?postLink(NEWS.post):(NEWS.href||"#"); } else if(sec) sec.remove(); }
 })();
 
 /* notice carousel */
@@ -2214,11 +2300,11 @@ function lxBooking(p){
       ${x.codeCond?`<p class="lx-bk-s">※${x.codeCond}</p>`:""}
       ${code?`<div class="lx-code"><span class="lx-code-k">優惠碼</span><b class="lx-code-v">${code}</b><button type="button" class="copy lx-copy" data-code="${code}" data-label="複製優惠碼" data-done="已複製">複製優惠碼</button></div>`:""}
       ${entry.length?`<div class="lx-bk-btns">${entry.join("")}</div>`:""}
-      ${x.lineUrl&&ask?`<button type="button" class="copy lx-linkbtn" data-copy="${p.id}-ask" data-label="複製 LINE 詢問訊息（已含優惠碼）" data-done="已複製詢問訊息">複製 LINE 詢問訊息（已含優惠碼）</button>`:""}
-      ${x.lineId?`<p class="lx-bk-s">官方 LINE ID　${x.lineId}</p>`:""}
+      ${x.lineId?`<p class="lx-bk-s lx-bk-id">官方 LINE ID　${x.lineId}</p>`:""}
+      <div class="lx-acts">${x.lineUrl&&ask?`<button type="button" class="copy lx-linkbtn lx-act" data-copy="${p.id}-ask" data-label="複製 LINE 詢問訊息（已含優惠碼）" data-done="已複製詢問訊息">複製 LINE 詢問訊息（已含優惠碼）</button>`:""}</div>
     </div>`);
   } else if(entry.length){
-    out.push(`<div class="lx-bk"><p class="lx-bk-k">查空房與訂房</p><p class="lx-bk-t">價格與空房以${host}公告為準。</p><div class="lx-bk-btns">${entry.join("")}</div>${x.lineId?`<p class="lx-bk-s">官方 LINE ID　${x.lineId}</p>`:""}</div>`);
+    out.push(`<div class="lx-bk"><p class="lx-bk-k">查空房與訂房</p><p class="lx-bk-t">價格與空房以${host}公告為準。</p><div class="lx-bk-btns">${entry.join("")}</div>${x.lineId?`<p class="lx-bk-s lx-bk-id">官方 LINE ID　${x.lineId}</p>`:""}<div class="lx-acts"></div></div>`);
   }
   return out.join("");
 }
@@ -2253,7 +2339,20 @@ function relayout(art, p){
   if(more.length||map){
     const det=mk("details","lx-more"); det.innerHTML=`<summary>查看完整住宿資訊<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="lx-more-b"></div>`;
     const mb=det.querySelector(".lx-more-b"); more.forEach(n=>mb.appendChild(n));
-    if(map&&!mb.querySelector(".lx-map")) mb.appendChild(mk("p","",`<a class="lx-btn lx-btn-ghost lx-map" href="${map}" target="_blank" rel="noopener">開啟地圖</a>`));
+    const mapA=map?` <a class="lx-maplink" href="${map}" target="_blank" rel="noopener">開啟地圖</a>`:"";
+    let mapDone=false;
+    mb.querySelectorAll("table.tbl").forEach(t=>{
+      const dl=mk("dl","lx-detail");
+      t.querySelectorAll("tr").forEach(tr=>{ const c=tr.querySelectorAll("td,th"); if(c.length<2) return;
+        const k=c[0].textContent.trim(), isAddr=/地址|位置/.test(k)&&!mapDone; if(isAddr) mapDone=true;
+        dl.insertAdjacentHTML("beforeend",`<div><dt>${esc(k)}</dt><dd>${c[1].innerHTML}${isAddr?mapA:""}</dd></div>`); });
+      t.replaceWith(dl);
+    });
+    mb.querySelectorAll(".gscore").forEach(g=>{
+      const sc=(g.querySelector("b")||{}).textContent||"", em=g.querySelector("em"), meta=em?em.textContent.replace(/\s+/g," ").trim():"";
+      g.replaceWith(mk("p","lx-rate",`<span class="nw">Google 評分 <b>${esc(sc)}</b></span>${meta?meta.split("・").map(t=>`・<span class="nw">${esc(t)}</span>`).join(""):""}`));
+    });
+    if(map&&!mapDone) mb.appendChild(mk("p","lx-rate",`<a class="lx-maplink" href="${map}" target="_blank" rel="noopener">開啟地圖</a>`));
     info.appendChild(det);
   }
   if(info.children.length) frag.appendChild(info);
@@ -2281,6 +2380,13 @@ function relayout(art, p){
   bsec.appendChild(mk("h2","","訂房與優惠"));
   if(bk) bsec.appendChild(mk("div","lx-book",bk));
   tail.forEach(n=>bsec.appendChild(n));
+  /* 官網、分享改成訂房區裡的次要文字操作 */
+  let acts=bsec.querySelector(".lx-acts");
+  if(!acts){ acts=mk("div","lx-acts"); const b2=bsec.querySelector(".lx-book"); (b2||bsec.querySelector("h2")).after(acts); }
+  bsec.querySelectorAll(":scope > .cta a").forEach(a=>{ a.className="lx-act"; if(!/↗/.test(a.textContent)) a.textContent=a.textContent.trim()+" ↗"; acts.appendChild(a); });
+  bsec.querySelectorAll(":scope > .cta").forEach(c=>{ if(!c.children.length) c.remove(); });
+  const sb=bsec.querySelector(":scope > .btn-share"); if(sb){ sb.className="btn-share lx-act"; acts.appendChild(sb); }
+  if(!acts.children.length) acts.remove();
   frag.appendChild(bsec);
   body.innerHTML=""; body.appendChild(frag);
   /* 目錄：當篇實際存在的段落 */
