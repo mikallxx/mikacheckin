@@ -1245,6 +1245,35 @@
   .a-body .ft-bar.ft-4 .ft-tab{width:100%}
   .a-body #panel-other>h3.fm-h:first-child{margin-top:18px!important}
   @media (min-width:900px){ .a-body .ft-bar.ft-4{grid-template-columns:repeat(4,1fr)} }
+
+  /* 所有開箱：上圖下文的獨立白卡＋右下「觀看更多 →」 */
+  .lx-list{gap:20px!important}
+  .lx-card{display:flex!important;flex-direction:column;background:#fff;border:1px solid #E7E7E3;border-radius:12px;overflow:hidden;color:var(--lx-ink);text-decoration:none!important}
+  .lx-card .thumb{border-radius:0!important;aspect-ratio:4/3!important}
+  .lx-cb{display:flex;flex-direction:column;flex:1;padding:14px 16px 16px}
+  .lx-card .lx-ct{margin:0!important}
+  .lx-card .lx-cs{margin:6px 0 0!important}
+  .lx-more-go{align-self:flex-end;margin-top:auto;display:inline-flex;align-items:center;gap:4px;padding:6px 10px;border-radius:6px;background:#C7F000;color:#171717;font-size:13.5px;font-weight:700;line-height:1.3}
+  .lx-cs+.lx-more-go,.lx-ct+.lx-more-go{margin-top:14px}
+  .lx-arr{display:inline-block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  @keyframes lxGlow{0%{box-shadow:0 0 0 0 rgba(199,240,0,0)}35%{box-shadow:0 0 0 5px rgba(199,240,0,.45)}100%{box-shadow:0 0 0 0 rgba(199,240,0,0)}}
+  @keyframes lxArr{0%{transform:none}45%{transform:translateX(3px)}100%{transform:none}}
+  @media (hover:hover){
+    .lx-card:hover .lx-arr{transform:translateX(3px)}
+    .lx-card:hover .lx-more-go{animation:lxGlow .5s ease-out}
+    .lx-card:hover .lx-ct{text-decoration:none!important}
+  }
+  .lx-card:focus-visible{outline:2px solid #171717;outline-offset:3px}
+  .lx-card:focus-visible .lx-arr{transform:translateX(3px)}
+  .lx-card:focus-visible .lx-more-go{animation:lxGlow .5s ease-out}
+  .lx-card.lx-nudge .lx-more-go{animation:lxGlow .5s ease-out}
+  .lx-card.lx-nudge .lx-arr{animation:lxArr .5s cubic-bezier(.2,.7,.2,1)}
+  @media (prefers-reduced-motion:reduce){
+    .lx-arr{transition:none}
+    .lx-card .lx-more-go,.lx-card .lx-arr{animation:none!important}
+    .lx-card:hover .lx-arr,.lx-card:focus-visible .lx-arr{transform:none}
+  }
+  @media (min-width:900px){ .lx-list{align-items:stretch!important} }
 </style>
 </head>
 <body>
@@ -1705,7 +1734,16 @@ function cardTag(p){
 function lxCard(p, cls){
   const [h,s]=splitTitle(p.title), tg=cardTag(p);
   const th=thumb(p).replace(/<\/div>$/, tg?`<span class="lx-ptag">${tg}</span></div>`:"</div>");
+  if(cls==="lx-card") return `<a class="lx-card" href="${postLink(p.id)}" data-id="${p.id}">${th}<div class="lx-cb"><h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}<span class="lx-more-go" aria-hidden="true">觀看更多 <span class="lx-arr">→</span></span></div></a>`;
   return `<a class="${cls}" href="${postLink(p.id)}">${th}<h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}</a>`;
+}
+/* 手機：卡片第一次進入畫面時，「觀看更多 →」播放一次提示（每張卡只播一次） */
+const LX_SEEN=new Set();
+const lxNudgeIO=("IntersectionObserver" in window)?new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return;
+  const c=e.target; lxNudgeIO.unobserve(c); if(LX_SEEN.has(c.dataset.id)) return; LX_SEEN.add(c.dataset.id); c.classList.add("lx-nudge"); }),{threshold:.6}):null;
+function lxWatchCards(){
+  if(!lxNudgeIO||!matchMedia("(hover: none)").matches||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  list.querySelectorAll(".lx-card").forEach(c=>{ if(!LX_SEEN.has(c.dataset.id)) lxNudgeIO.observe(c); });
 }
 function renderPop(){
   pop.innerHTML = posts.slice(0,4).map(p=>lxCard(p,"lx-pcard")).join("");
@@ -1725,6 +1763,7 @@ function renderList(){
   const cnt=document.getElementById("lxCount"); if(cnt) cnt.textContent = shown.length?`共 ${shown.length} 間住宿`:"";
   list.innerHTML = shown.length ? shown.map(p=>lxCard(p,"lx-card")).join("")
     : `<div class="lx-empty"><p>沒有符合的住宿</p><div class="lx-empty-btns">${(F.regions.length||F.deals.length||F.cat!=="全部")?`<button type="button" class="lx-btn lx-btn-ghost" data-lx="clearf">清除篩選</button>`:""}${F.q?`<button type="button" class="lx-btn lx-btn-ghost" data-lx="clearq">清空搜尋</button>`:""}</div></div>`;
+  lxWatchCards();
 }
 function renderFilter(){
   const cc=document.getElementById("catChips");
