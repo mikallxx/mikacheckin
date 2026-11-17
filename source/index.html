@@ -1224,6 +1224,12 @@
   .a-body.post .fig{margin-left:0!important;margin-right:0!important}
   .a-body.post .fig .ph{border-radius:10px!important;overflow:hidden}
   .a-body.post .fig figcaption{margin-left:0!important;margin-right:0!important}
+
+  /* 樓層切換四顆時：手機排成兩排兩欄 */
+  .a-body .ft-bar.ft-4{display:grid!important;grid-template-columns:1fr 1fr;gap:8px}
+  .a-body .ft-bar.ft-4 .ft-tab{width:100%}
+  .a-body #panel-other>h3.fm-h:first-child{margin-top:18px!important}
+  @media (min-width:900px){ .a-body .ft-bar.ft-4{grid-template-columns:repeat(4,1fr)} }
 </style>
 </head>
 <body>
@@ -2387,6 +2393,21 @@ function lxBooking(p){
   }
   return out.join("");
 }
+/* 樓層切換多一顆「其他空間」：樓層分頁後面的衛浴、客廳等小段落收進這一頁 */
+function lxOtherTab(sec){
+  const ft=sec&&sec.querySelector(":scope > .floor-tabs"); if(!ft) return;
+  const rest=[]; for(let n=ft.nextElementSibling;n;n=n.nextElementSibling) rest.push(n);
+  if(!rest.some(n=>n.matches("h3"))) return;
+  const bar=ft.querySelector(".ft-bar"), tabs=bar.querySelectorAll(".ft-tab"), last=tabs[tabs.length-1];
+  const t=last.cloneNode(false); t.classList.remove("on"); t.dataset.floor="other"; t.textContent="其他空間";
+  t.setAttribute("aria-selected","false"); t.tabIndex=-1; if(t.id) t.id=t.id.replace(/[^-]+$/,"other"); if(t.hasAttribute("aria-controls")) t.setAttribute("aria-controls","panel-other");
+  (bar.querySelector(".ft-ind")||null) ? bar.insertBefore(t,bar.querySelector(".ft-ind")) : bar.appendChild(t);
+  const lastPanel=[...ft.querySelectorAll(".ft-panel")].pop();
+  const pn=lastPanel.cloneNode(false); pn.id="panel-other"; pn.hidden=true; if(pn.hasAttribute("aria-labelledby")&&t.id) pn.setAttribute("aria-labelledby",t.id);
+  rest.forEach(n=>pn.appendChild(n));
+  ft.appendChild(pn);
+  bar.classList.toggle("ft-4",bar.querySelectorAll(".ft-tab").length===4);
+}
 function relayout(art, p){
   const body=art.querySelector(".a-body.post"); if(!body||body.dataset.lx) return; body.dataset.lx="1";
   const x={...p,...(LX_EXTRA[p.id]||{})};
@@ -2443,7 +2464,7 @@ function relayout(art, p){
   /* 5 入住心得 */
   if(intro.length) put("入住心得",intro);
   /* 6 房型與空間 */
-  if(rooms){ put(/營帳/.test(rooms.h.textContent)?"營帳與衛浴":"房型與空間",rooms.nodes,rooms.h); const rs=frag.lastChild; if(intro.length&&rs){ rs.classList.add("lx-after-dash"); rs.prepend(mk("div","lx-dash")); rs.firstChild.setAttribute("aria-hidden","true"); } }
+  if(rooms){ put(/營帳/.test(rooms.h.textContent)?"營帳與衛浴":"房型與空間",rooms.nodes,rooms.h); const rs=frag.lastChild; lxOtherTab(rs); if(intro.length&&rs){ rs.classList.add("lx-after-dash"); rs.prepend(mk("div","lx-dash")); rs.firstChild.setAttribute("aria-hidden","true"); } }
   /* 7 設施及餐食 */
   if(fm) put("設施與餐食",fm.nodes,fm.h);
   others.forEach(sc=>put(null,sc.nodes,sc.h));
