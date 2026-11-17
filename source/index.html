@@ -1334,6 +1334,24 @@
   .lx-foot .lx-fs{margin:20px 0 0;font-size:12.5px;color:#9a9a9a;line-height:1.6}
   @media (min-width:900px){ .lx-foot nav{max-width:560px} }
   .lx-foot nav a span{min-width:0;overflow-wrap:anywhere}
+
+  /* 11-18 Mika：分享選單、合作邀約選單改新版樣式（細灰邊、明體標題、萊姆綠圓底細線圖示 C） */
+  #mailSheet{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0);display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background .2s}
+  #mailSheet.on{background:rgba(0,0,0,.45);pointer-events:auto}
+  #mailSheet .sh-panel{transform:translateY(105%)}
+  #mailSheet.on .sh-panel{transform:none}
+  #shareSheet .sh-panel,#mailSheet .sh-panel{border:0!important;border-radius:18px 18px 0 0!important;box-shadow:none!important;padding:18px 18px calc(22px + env(safe-area-inset-bottom))!important}
+  .sh-head b{font-family:var(--lx-serif);font-weight:900!important;font-size:20px!important;color:#171717!important}
+  .sh-x{color:#171717!important}
+  .sh-row{display:flex!important;align-items:center;border:1px solid #E7E7E3!important;box-shadow:none!important;border-radius:14px!important;padding:14px!important;gap:14px!important;margin-top:10px;background:#fff;text-decoration:none!important;color:#171717!important;width:100%;box-sizing:border-box;text-align:left;font:inherit}
+  .sh-row::after{content:"›";margin-left:auto;color:#9a9a9a;font-size:22px;line-height:1}
+  .sh-txt b{font-weight:700!important;font-size:15.5px!important;color:#171717!important}
+  .sh-txt small{color:#666!important}
+  .sh-ic{width:44px!important;height:44px!important;border-radius:50%!important;background:#C7F000;color:#171717}
+  .sh-ic svg{width:22px!important;height:22px!important;overflow:visible}
+  @media (hover:hover){.sh-row:hover{background:#F5F5F3!important}}
+  @media (min-width:900px){#shareSheet .sh-panel,#mailSheet .sh-panel{border-radius:18px!important;box-shadow:0 20px 60px rgba(0,0,0,.18)!important}#mailSheet{align-items:center}#mailSheet .sh-panel{transform:translateY(20px);opacity:0;transition:transform .2s,opacity .2s}#mailSheet.on .sh-panel{transform:none;opacity:1}}
+  .lx-tb-i svg{width:18px!important;height:18px!important}
 </style>
 </head>
 <body>
@@ -1414,7 +1432,7 @@
   <nav aria-label="頁尾連結">
     <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener"><span>IG 住宿頻道 <em>@mika.checkin</em></span><i aria-hidden="true">↗</i></a>
     <a href="https://www.instagram.com/mika.travel_/" target="_blank" rel="noopener"><span>IG 旅遊頻道 <em>@mika.travel_</em></span><i aria-hidden="true">↗</i></a>
-    <a href="mailto:mikallxx0921@gmail.com"><span>合作邀約 <em>mikallxx0921@gmail.com</em></span><i aria-hidden="true">↗</i></a>
+    <a href="mailto:mikallxx0921@gmail.com" data-mail="mikallxx0921@gmail.com"><span>合作邀約 <em>mikallxx0921@gmail.com</em></span><i aria-hidden="true">↗</i></a>
   </nav>
   <p class="lx-fs">本站為個人非官方住宿攻略，資訊以各住宿官方公告為準。</p>
 </footer>
@@ -1447,7 +1465,7 @@
     <a href="#" data-cat="美食景點"><svg class="i mi" viewBox="0 0 24 24"><path d="M3.5 11.5h17a8.5 8.5 0 0 1-17 0z"/><path d="M8 20h8"/><path d="M9 3.5c-.8 1 .8 2-.1 3.2M12.5 3.5c-.8 1 .8 2-.1 3.2M16 3.5c-.8 1 .8 2-.1 3.2"/></svg>周邊美食景點</a>
     <hr>
     <a href="https://www.instagram.com/mika.checkin/reels/" target="_blank" rel="noopener"><svg class="i mi" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3.5"/><path d="m10 9 5 3-5 3z"/></svg>IG 短影音</a>
-    <a href="mailto:mikallxx0921@gmail.com"><svg class="i mi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>合作邀約</a>
+    <a href="mailto:mikallxx0921@gmail.com" data-mail="mikallxx0921@gmail.com"><svg class="i mi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>合作邀約</a>
   </nav>
 </aside>
 
@@ -1697,8 +1715,8 @@ function openShare(){
   }
   const row=(k,ic,b,sm)=>`<button type="button" class="sh-row" data-sh="${k}"><span class="sh-ic">${ic}</span><span class="sh-txt"><b>${b}</b><small>${sm}</small></span></button>`;
   sh.innerHTML=`<div class="sh-panel"><div class="sh-head"><b>分享給親友</b><button type="button" class="sh-x" data-close aria-label="關閉">✕</button></div>
-    ${row("msg",SK_ICON.chat,(t.grp||SHARE_GROUP_CATS.includes(catOf(p)))?"複製邀約訊息":"複製推薦訊息",(t.grp||SHARE_GROUP_CATS.includes(catOf(p)))?"揪親友一起去，附上介紹和網址":"附上介紹和網址，直接貼到聊天室")}
-    ${row("url",SK_ICON.link,"只複製網址","貼給一個人看最快")}</div>`;
+    ${row("msg",LX_IC.msg,(t.grp||SHARE_GROUP_CATS.includes(catOf(p)))?"複製邀約訊息":"複製推薦訊息",(t.grp||SHARE_GROUP_CATS.includes(catOf(p)))?"揪親友一起去，附上介紹和網址":"附上介紹和網址，直接貼到聊天室")}
+    ${row("url",LX_IC.link,"只複製網址","貼給一個人看最快")}</div>`;
   requestAnimationFrame(()=>sh.classList.add("on"));
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-share]"); if(!b) return; e.preventDefault(); openShare(); });
@@ -2534,8 +2552,40 @@ function lxOtherTab(sec){
   ft.appendChild(pn);
   bar.classList.toggle("ft-4",bar.querySelectorAll(".ft-tab").length===4);
 }
-/* 分享小圖示（蠟筆風，配合網站其他手繪圖示） */
-const LX_SHARE_IC=`<svg viewBox="0 0 44 44" width="20" height="20">${SK_DEFS}<g filter="url(#skW)" fill="none" stroke="#171717" stroke-width="2.6" stroke-linecap="round"><circle cx="30" cy="11" r="4.5"/><circle cx="13" cy="22" r="4.5"/><circle cx="30" cy="33" r="4.5"/><path d="M17 20l9-6M17 24l9 6"/></g></svg>`;
+/* 11-18 Mika：圖示改簡潔細線（萊姆綠圓底＋黑線），取代蠟筆風 */
+const LX_IC={
+  msg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.5a7.5 7.5 0 0 1-11.1 6.6L4 20l1-4.3A7.5 7.5 0 1 1 20 12.5Z"/><path d="M9 11h6M9 14h4"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg>',
+  share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17.5" cy="5.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="m8.7 10.8 6.6-4M8.7 13.2l6.6 4"/></svg>',
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 8.5V6.7a2.2 2.2 0 0 0-2.2-2.2H6.7a2.2 2.2 0 0 0-2.2 2.2v6.6a2.2 2.2 0 0 0 2.2 2.2h1.8"/></svg>',
+  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg>',
+  pen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5l1-4.2L15.8 5a2.1 2.1 0 0 1 3 3L8.6 18.3l-4.1 1.2Z"/><path d="M13.8 7l3 3"/></svg>'
+};
+const LX_SHARE_IC_OLD=`<svg viewBox="0 0 44 44" width="20" height="20">${SK_DEFS}<g filter="url(#skW)" fill="none" stroke="#171717" stroke-width="2.6" stroke-linecap="round"><circle cx="30" cy="11" r="4.5"/><circle cx="13" cy="22" r="4.5"/><circle cx="30" cy="33" r="4.5"/><path d="M17 20l9-6M17 24l9 6"/></g></svg>`;
+/* 合作邀約：點信箱跳出小選單（複製信箱／用 Gmail 寫信／用手機郵件 App） */
+function openMail(addr){
+  let sh=document.getElementById("mailSheet");
+  if(!sh){
+    sh=document.createElement("div"); sh.id="mailSheet"; sh.setAttribute("role","dialog"); sh.setAttribute("aria-modal","true"); sh.setAttribute("aria-label","合作邀約");
+    document.body.appendChild(sh);
+    sh.addEventListener("click",async e=>{
+      if(e.target===sh||e.target.closest("[data-close]")){ sh.classList.remove("on"); return; }
+      const b=e.target.closest("[data-m]"); if(!b) return; const a=sh.dataset.addr;
+      if(b.dataset.m==="copy"){ e.preventDefault(); sh.classList.remove("on"); if(await copyText(a)) toast("已複製信箱 ✓"); else showManualCopy(a); return; }
+      sh.classList.remove("on");
+    });
+  }
+  sh.dataset.addr=addr;
+  const subj=encodeURIComponent("合作邀約｜");
+  const row=(k,ic,b,sm,href)=>`${href?`<a class="sh-row" data-m="${k}" href="${href}" ${k==="gmail"?'target="_blank" rel="noopener"':""}>`:`<button type="button" class="sh-row" data-m="${k}">`}<span class="sh-ic">${ic}</span><span class="sh-txt"><b>${b}</b><small>${sm}</small></span>${href?"</a>":"</button>"}`;
+  sh.innerHTML=`<div class="sh-panel"><div class="sh-head"><b>合作邀約</b><button type="button" class="sh-x" data-close aria-label="關閉">✕</button></div>
+    ${row("copy",LX_IC.copy,"複製信箱",addr)}
+    ${row("gmail",LX_IC.mail,"用 Gmail 寫信","開啟 Gmail，收件人已填好",`https://mail.google.com/mail/?view=cm&fs=1&to=${addr}&su=${subj}`)}
+    ${row("app",LX_IC.pen,"用手機郵件 App 寫信","iPhone 郵件、Outlook 等",`mailto:${addr}?subject=${subj}`)}</div>`;
+  requestAnimationFrame(()=>sh.classList.add("on"));
+}
+document.addEventListener("click",e=>{ const a=e.target.closest("a[data-mail]"); if(!a) return; e.preventDefault(); try{ closeD(); }catch(_){} openMail(a.dataset.mail); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ const m=document.getElementById("mailSheet"); m&&m.classList.remove("on"); } });
 function relayout(art, p){
   const body=art.querySelector(".a-body.post"); if(!body||body.dataset.lx) return; body.dataset.lx="1";
   const x={...p,...(LX_EXTRA[p.id]||{})};
@@ -2615,7 +2665,7 @@ function relayout(art, p){
   const two=mk("div","lx-two");
   bsec.querySelectorAll(":scope > .cta a").forEach(a=>{ a.className="lx-tb"; const t=a.textContent.replace(/↗/g,"").trim().replace(/^查看/,""); a.innerHTML=`${esc(t)} <span class="lx-tb-i" aria-hidden="true">↗</span>`; two.appendChild(a); });
   bsec.querySelectorAll(":scope > .cta").forEach(c=>{ if(!c.children.length) c.remove(); });
-  const sb=bsec.querySelector(":scope > .btn-share"); if(sb){ sb.className="btn-share lx-tb"; sb.innerHTML=`分享給親友 <span class="lx-tb-i" aria-hidden="true">${LX_SHARE_IC}</span>`; two.appendChild(sb); }
+  const sb=bsec.querySelector(":scope > .btn-share"); if(sb){ sb.className="btn-share lx-tb"; sb.innerHTML=`分享給親友 <span class="lx-tb-i" aria-hidden="true">${LX_IC.share}</span>`; two.appendChild(sb); }
   if(two.children.length) acts.appendChild(two);
   if(two.children.length===1) two.classList.add("one");
   bsec.querySelectorAll(":scope > .note-line").forEach(n=>n.remove()); /* 聲明只留在頁尾 */
