@@ -1352,6 +1352,17 @@
   @media (hover:hover){.sh-row:hover{background:#F5F5F3!important}}
   @media (min-width:900px){#shareSheet .sh-panel,#mailSheet .sh-panel{border-radius:18px!important;box-shadow:0 20px 60px rgba(0,0,0,.18)!important}#mailSheet{align-items:center}#mailSheet .sh-panel{transform:translateY(20px);opacity:0;transition:transform .2s,opacity .2s}#mailSheet.on .sh-panel{transform:none;opacity:1}}
   .lx-tb-i svg{width:18px!important;height:18px!important}
+
+  /* 11-18：參考價格 */
+  .lx-pr .lx-pr-d{float:right;font-weight:400;color:#888;font-size:13px}
+  .a-body.post p.lx-pr-v{font-family:var(--lx-serif);font-weight:900;font-size:21px!important;line-height:1.45!important;margin-top:6px!important}
+  .lx-pr-v strong.off{color:#B42318!important}
+  .lx-keys .lx-key-pr dd small{display:block;font-weight:400;font-size:12.5px;color:#777;margin-top:2px}
+  .lx-cfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px}
+  .lx-cfoot .lx-more-go{margin-top:0!important;margin-left:auto}
+  .lx-cmeta{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:13.5px;color:#525252;margin:8px 0 0}
+  .lx-lv{font-weight:800;letter-spacing:.06em;color:#171717;font-size:14px}
+  .lx-lv i{font-style:normal;color:#CFCFCA}
 </style>
 </head>
 <body>
@@ -1813,7 +1824,9 @@ function cardTag(p){
 function lxCard(p, cls){
   const [h,s]=splitTitle(p.title), tg=cardTag(p);
   const th=thumb(p).replace(/<\/div>$/, tg?`<span class="lx-ptag">${tg}</span></div>`:"</div>");
-  if(cls==="lx-card") return `<a class="lx-card" href="${postLink(p.id)}" data-id="${p.id}">${th}<div class="lx-cb"><h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}<span class="lx-more-go" aria-hidden="true">觀看更多 <span class="lx-arr">→</span></span></div></a>`;
+  const prC=lxPrice(p), lv=prC&&prC.lv?String(prC.lv).replace(/[^$]/g,""):"";
+  const meta=(lv||prC)?`<p class="lx-cmeta">${lv?`<b class="lx-lv" aria-label="價位 ${lv.length} 級">${"$".repeat(lv.length)}<i>${"$".repeat(3-lv.length)}</i></b>`:""}${prC?`<span>參考價 ${prC.txt.replace(/<[^>]+>/g,"")}</span>`:""}</p>`:"";
+  if(cls==="lx-card") return `<a class="lx-card" href="${postLink(p.id)}" data-id="${p.id}">${th}<div class="lx-cb"><h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}${meta}<div class="lx-cfoot"><span class="lx-more-go" aria-hidden="true">觀看更多 <span class="lx-arr">→</span></span></div></div></a>`;
   return `<a class="${cls}" href="${postLink(p.id)}">${th}<h3 class="lx-ct">${esc(h)}</h3>${s?`<p class="lx-cs">${esc(s)}</p>`:""}</a>`;
 }
 /* 手機：卡片第一次進入畫面時，「觀看更多 →」播放一次提示（每張卡只播一次） */
@@ -2492,12 +2505,18 @@ function lxKeyFacts(p){
   };
   return (LX_KEYS[catOf(p)]||LX_KEYS["民宿"]).map(([l,k])=>[l,strip(v[k])]).filter(x=>x[1]);
 }
+/* 11-18：參考價格（後台「房價說明」＝參考價，加查詢月份與價位 $～$$$） */
+const LX_PRICE_NOTE="實際價格依日期、人數而定，以官方公告為準";
+function lxPrice(p){ const x={...p,...(LX_EXTRA[p.id]||{})}; if(!x.price) return null;
+  return {txt:x.price, date:x.priceDate||"", lv:x.priceLevel||""}; }
 function lxBooking(p){
   const x={...p,...(LX_EXTRA[p.id]||{})}, host=x.host||"民宿", d=dealOf(p.id), st=d&&status(d);
   const links=x.links||[], plat=links.map((l,i)=>[l,i]).filter(([l])=>l.type!=="官網訂房"), offi=links.map((l,i)=>[l,i]).filter(([l])=>l.type==="官網訂房");
   const lbl=(l,off)=>l.label?(/訂房|訂|購/.test(l.label)?l.label:l.label+" 訂房"):(off?"官網訂房":"查看空房與價格");
   let mainUsed=false; const cls=()=>{ if(mainUsed) return "lx-btn lx-btn-ghost"; mainUsed=true; return "lx-btn lx-btn-main"; };
   const out=[];
+  const pr=lxPrice(p);
+  if(pr) out.push(`<div class="lx-bk lx-pr"><p class="lx-bk-k">參考價格${pr.date?`<span class="lx-pr-d">${esc(pr.date)} 查詢</span>`:""}</p><p class="lx-pr-v">${pr.txt}</p><p class="lx-bk-s">${LX_PRICE_NOTE}</p></div>`);
   /* 團購：放最前面 */
   if(d&&d.type==="團購"){
     if(st==="live") out.push(`<div class="lx-bk"><p class="lx-bk-k">團購中</p><p class="lx-bk-big">${d.title||"團購方案"}</p>${d.perk?`<p class="lx-bk-t">${d.perk}</p>`:""}<p class="lx-bk-s">截止：${md(d.end)}${d.stay?`・可入住：${d.stay}`:""}</p>${d.link&&d.link!=="#"?`<a class="${cls()}" href="${d.link}" target="_blank" rel="noopener" data-go="${p.id}-group">查看團購方案</a>`:""}</div>`);
@@ -2611,7 +2630,9 @@ function relayout(art, p){
   /* 3 住宿資訊：最多三項＋展開完整資訊 */
   const keys=lxKeyFacts(p).slice(0,3);
   const info=mk("section","lx-info"); info.setAttribute("aria-label","住宿資訊");
-  info.innerHTML=(keys.length?`<dl class="lx-keys">${keys.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`:"");
+  const prI=lxPrice(p);
+  const keyRows=keys.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")+(prI?`<div class="lx-key-pr"><dt>參考價格</dt><dd>${prI.txt}<small>${prI.date?esc(prI.date)+" 查詢・":""}以官方為準</small></dd></div>`:"");
+  info.innerHTML=(keyRows?`<dl class="lx-keys">${keyRows}</dl>`:"");
   const more=[...(basic?basic.nodes:[])];
   const map=x.mapUrl||(body.querySelector(".gscore a")||{}).href;
   if(more.length||map){

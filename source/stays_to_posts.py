@@ -84,7 +84,7 @@ def post_entry(pid, s, old_tags):
     p["motif"] = s.get("motif") or "mount"
     p["host"] = host_of(s)
     if s.get("photo") in ("缺照片", "等商家授權"): p["soon"] = True
-    for k in ("code", "lineUrl", "lineId", "video", "gRating", "gCount", "gDate", "mapUrl", "website", "breakfast"):
+    for k in ("code", "lineUrl", "lineId", "video", "gRating", "gCount", "gDate", "mapUrl", "website", "breakfast", "priceDate", "priceLevel"):
         if ok(s.get(k)): p[k] = str(s[k]).strip()
     for k in ("codeNote", "price", "roomsIntro", "spaces", "facilityText", "kitchen", "breakfastText", "dinner", "nearbyIntro", "priceBtn"):
         if ok(s.get(k)): p[k] = md(s[k])
