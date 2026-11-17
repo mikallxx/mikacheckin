@@ -1303,6 +1303,18 @@
   .lx-card:focus-visible .lx-arr{animation:lxGlowC .5s ease-out}
   .lx-card.lx-nudge .lx-arr{animation:lxArr .5s cubic-bezier(.2,.7,.2,1),lxGlowC .5s ease-out}
   @media (prefers-reduced-motion:reduce){ .lx-card .lx-arr{animation:none!important;transform:none!important} }
+
+  /* 2026-11-17 Mika 選定：A6 房型與空間、A7 設施與餐食 大標＝內縮圓角黑卡（C1）＋萊姆綠編號 */
+  .a-body{counter-reset:lxsec}
+  .lx-sec-a>h2{counter-increment:lxsec}
+  .a-body .lx-sec-a>h2.lx-chap{padding:16px 18px!important;border-radius:12px;background:#171717!important;color:#fff!important;gap:10px}
+  .a-body .lx-sec-a>h2.lx-chap::before{content:counter(lxsec,decimal-leading-zero)!important;display:inline-block!important;width:auto!important;height:auto!important;background:none!important;color:#C7F000!important;font-family:var(--lx-sans);font-size:14px;font-weight:800;letter-spacing:.08em;align-self:center}
+  .lx-sec-a:has(>h2.lx-chap)>.lx-dash{display:none}
+  .lx-sec-a.lx-after-dash:has(>h2.lx-chap){margin-top:52px!important}
+  /* 這兩段裡的小標：兩側實線、文字置中 */
+  .a-body.post h3.lx-sub{display:flex!important;align-items:center;gap:14px;text-align:center;justify-content:center;margin:36px 0 16px!important;padding:0!important;border:0!important;background:none!important;font-size:19px!important;line-height:1.4!important}
+  .a-body.post h3.lx-sub::before,.a-body.post h3.lx-sub::after{content:""!important;display:block!important;flex:1;height:1px!important;width:auto!important;min-width:24px;background:#171717!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
+  .a-body.post .ft-panel>h3.lx-sub:first-child{margin-top:24px!important}
 </style>
 </head>
 <body>
@@ -2572,6 +2584,9 @@ function relayout(art, p){
   if(!acts.children.length) acts.remove();
   frag.appendChild(bsec);
   body.innerHTML=""; body.appendChild(frag);
+  /* 房型與空間、設施與餐食：大標用內縮圓角黑卡，段落裡的小標用「實線＋置中文字」 */
+  [rooms,fm].forEach(sc=>{ if(!sc) return; sc.h.classList.add("lx-chap"); const sec=sc.h.closest(".lx-sec-a");
+    if(sec) sec.querySelectorAll("h3").forEach(h=>{ if(!h.closest(".fm-card")) h.classList.add("lx-sub"); }); });
   lxPhotos(body);
   /* 目錄：當篇實際存在的段落 */
   const ol=toc.querySelector("ol"); let n=0;
