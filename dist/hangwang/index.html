@@ -1326,6 +1326,28 @@
   .a-body .ft-panel .slide .cap b{display:block;font-family:var(--lx-serif);font-weight:900;font-size:16px;color:var(--lx-ink);margin-bottom:2px}
   #panel-other .gal{margin-top:20px!important}
   .a-body .ft-panel .slide .cap{padding-left:0!important;padding-right:0!important;margin-left:0!important}
+
+  /* 11-18 Mika：訂房區底部＝複製 LINE 訊息置中＋兩顆並排按鈕；頁尾＝黑底萊姆綠、清單列 */
+  .lx-acts{border-top:0!important;padding-top:0!important;margin-top:6px!important;align-items:stretch!important}
+  .a-body .lx-acts .lx-linkbtn.lx-act{align-self:center;justify-content:center;font-size:14.5px!important;margin:0 0 10px!important}
+  .lx-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .lx-two.one{grid-template-columns:1fr}
+  .a-body .lx-tb{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;min-height:48px;margin:0!important;padding:0 10px!important;border:1px solid #D4D4D0!important;border-radius:12px!important;background:#fff!important;color:#171717!important;font:inherit;font-size:15px!important;font-weight:700!important;text-decoration:none!important;box-shadow:none!important;width:100%}
+  .lx-tb-i{display:inline-flex;align-items:center;font-size:15px;color:#171717}
+  .lx-tb-i svg{width:20px;height:20px;display:block}
+  @media (hover:hover){.a-body .lx-tb:hover{background:#EBEBE7!important}}
+  .a-body .lx-tb:active{background:#E4E4DF!important}
+  .lx-foot{background:#171717!important;color:#fff;margin-top:56px!important;padding:36px 20px calc(44px + env(safe-area-inset-bottom))!important}
+  .lx-foot .lx-fb{margin:0;font-weight:800;letter-spacing:.16em;font-size:15px;color:#fff}
+  .lx-foot .lx-ft{margin:8px 0 20px;font-size:14px;color:#bdbdbd;line-height:1.6}
+  .lx-foot nav{display:block!important;gap:0!important}
+  .lx-foot nav a{display:flex!important;align-items:center;justify-content:space-between;min-height:52px!important;border-top:1px solid #333;color:#fff!important;font-size:15px!important;text-decoration:none!important}
+  .lx-foot nav a:last-child{border-bottom:1px solid #333}
+  .lx-foot nav em{font-style:normal;color:#C7F000;font-weight:700;margin-left:4px}
+  .lx-foot nav i{font-style:normal;color:#8a8a8a;font-size:17px}
+  @media (hover:hover){.lx-foot nav a:hover{background:#222}}
+  .lx-foot .lx-fs{margin:20px 0 0;font-size:12.5px;color:#9a9a9a;line-height:1.6}
+  @media (min-width:900px){ .lx-foot nav{max-width:560px} }
 </style>
 </head>
 <body class="reading">
@@ -1534,17 +1556,18 @@
       <div class="lx-code"><span class="lx-code-k">優惠碼</span><b class="lx-code-v">MIKA888</b><button type="button" class="copy lx-copy" data-code="MIKA888" data-label="複製優惠碼" data-done="已複製">複製優惠碼</button></div>
       <div class="lx-bk-btns"><a class="lx-btn lx-btn-main" href="/go/hangwang-line/" data-go="hangwang-line" target="_blank" rel="noopener" data-href="https://lin.ee/qnUxp3X">用 LINE 詢問空房</a></div>
       <p class="lx-bk-s lx-bk-id">官方 LINE ID　@hope2795</p>
-      <div class="lx-acts"><button type="button" class="copy lx-linkbtn lx-act" data-copy="hangwang-ask" data-label="複製 LINE 詢問訊息（已含優惠碼）" data-done="已複製詢問訊息">複製 LINE 詢問訊息（已含優惠碼）</button><a class="lx-act" href="/go/hangwang-site/" data-go="hangwang-site" target="_blank" rel="noopener" data-href="https://tw-bnb.com/web/hopeful/">查看民宿官網 ↗</a><button type="button" class="btn-share lx-act" data-share="">分享給親友</button></div>
-    </div></div><p class="note-line">本頁為個人非官方住宿攻略，資訊以民宿官方公告為準。</p></section></div></article>
+      <div class="lx-acts"><button type="button" class="copy lx-linkbtn lx-act" data-copy="hangwang-ask" data-label="複製 LINE 詢問訊息（已含優惠碼）" data-done="已複製詢問訊息">複製 LINE 詢問訊息（已含優惠碼）</button><div class="lx-two"><a class="lx-tb" href="/go/hangwang-site/" data-go="hangwang-site" target="_blank" rel="noopener" data-href="https://tw-bnb.com/web/hopeful/">民宿官網 <span class="lx-tb-i" aria-hidden="true">↗</span></a><button type="button" class="btn-share lx-tb" data-share="">分享給親友 <span class="lx-tb-i" aria-hidden="true"><svg viewBox="0 0 44 44" width="20" height="20"><defs><filter id="skW" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="1.6"></feDisplacementMap></filter><filter id="skC" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="7" result="n"></feTurbulence><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.6" result="m"></feColorMatrix><feComposite in="SourceGraphic" in2="m" operator="in" result="t"></feComposite><feDisplacementMap in="t" in2="n" scale="1.4"></feDisplacementMap></filter></defs><g filter="url(#skW)" fill="none" stroke="#171717" stroke-width="2.6" stroke-linecap="round"><circle cx="30" cy="11" r="4.5"></circle><circle cx="13" cy="22" r="4.5"></circle><circle cx="30" cy="33" r="4.5"></circle><path d="M17 20l9-6M17 24l9 6"></path></g></svg></span></button></div></div>
+    </div></div></section></div></article>
 
 <footer class="lx-foot">
-  <b>今晚住這裡</b>
-  <p>Mika 的住宿開箱與旅遊攻略。<br>本站為個人非官方住宿攻略，資訊以各住宿官方公告為準。</p>
+  <p class="lx-fb">MIKA CHECK-IN</p>
+  <p class="lx-ft">今晚住這裡｜Mika 的住宿開箱與旅遊攻略</p>
   <nav aria-label="頁尾連結">
-    <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">IG 住宿頻道 @mika.checkin</a>
-    <a href="https://www.instagram.com/mika.travel_/" target="_blank" rel="noopener">IG 旅遊頻道 @mika.travel_</a>
-    <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener">合作邀約（IG 私訊）</a>
+    <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener"><span>IG 住宿頻道 <em>@mika.checkin</em></span><i aria-hidden="true">↗</i></a>
+    <a href="https://www.instagram.com/mika.travel_/" target="_blank" rel="noopener"><span>IG 旅遊頻道 <em>@mika.travel_</em></span><i aria-hidden="true">↗</i></a>
+    <a href="https://www.instagram.com/mika.checkin/" target="_blank" rel="noopener"><span>合作邀約 <em>IG 私訊</em></span><i aria-hidden="true">↗</i></a>
   </nav>
+  <p class="lx-fs">本站為個人非官方住宿攻略，資訊以各住宿官方公告為準。</p>
 </footer>
 
 <!-- search -->
@@ -2662,6 +2685,8 @@ function lxOtherTab(sec){
   ft.appendChild(pn);
   bar.classList.toggle("ft-4",bar.querySelectorAll(".ft-tab").length===4);
 }
+/* 分享小圖示（蠟筆風，配合網站其他手繪圖示） */
+const LX_SHARE_IC=`<svg viewBox="0 0 44 44" width="20" height="20">${SK_DEFS}<g filter="url(#skW)" fill="none" stroke="#171717" stroke-width="2.6" stroke-linecap="round"><circle cx="30" cy="11" r="4.5"/><circle cx="13" cy="22" r="4.5"/><circle cx="30" cy="33" r="4.5"/><path d="M17 20l9-6M17 24l9 6"/></g></svg>`;
 function relayout(art, p){
   const body=art.querySelector(".a-body.post"); if(!body||body.dataset.lx) return; body.dataset.lx="1";
   const x={...p,...(LX_EXTRA[p.id]||{})};
@@ -2737,9 +2762,14 @@ function relayout(art, p){
   /* 官網、分享改成訂房區裡的次要文字操作 */
   let acts=bsec.querySelector(".lx-acts");
   if(!acts){ acts=mk("div","lx-acts"); const b2=bsec.querySelector(".lx-book"); (b2||bsec.querySelector("h2")).after(acts); }
-  bsec.querySelectorAll(":scope > .cta a").forEach(a=>{ a.className="lx-act"; if(!/↗/.test(a.textContent)) a.textContent=a.textContent.trim()+" ↗"; acts.appendChild(a); });
+  /* 11-18 Mika：複製 LINE 訊息置中一行，下面「民宿官網 ↗」「分享給親友」兩顆並排按鈕 */
+  const two=mk("div","lx-two");
+  bsec.querySelectorAll(":scope > .cta a").forEach(a=>{ a.className="lx-tb"; const t=a.textContent.replace(/↗/g,"").trim().replace(/^查看/,""); a.innerHTML=`${esc(t)} <span class="lx-tb-i" aria-hidden="true">↗</span>`; two.appendChild(a); });
   bsec.querySelectorAll(":scope > .cta").forEach(c=>{ if(!c.children.length) c.remove(); });
-  const sb=bsec.querySelector(":scope > .btn-share"); if(sb){ sb.className="btn-share lx-act"; acts.appendChild(sb); }
+  const sb=bsec.querySelector(":scope > .btn-share"); if(sb){ sb.className="btn-share lx-tb"; sb.innerHTML=`分享給親友 <span class="lx-tb-i" aria-hidden="true">${LX_SHARE_IC}</span>`; two.appendChild(sb); }
+  if(two.children.length) acts.appendChild(two);
+  if(two.children.length===1) two.classList.add("one");
+  bsec.querySelectorAll(":scope > .note-line").forEach(n=>n.remove()); /* 聲明只留在頁尾 */
   if(!acts.children.length) acts.remove();
   frag.appendChild(bsec);
   body.innerHTML=""; body.appendChild(frag);
