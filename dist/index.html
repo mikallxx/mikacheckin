@@ -2607,7 +2607,9 @@ function relayout(art, p){
   frag.appendChild(bsec);
   body.innerHTML=""; body.appendChild(frag);
   /* 房型與空間、設施與餐食：大標用內縮圓角黑卡，段落裡的小標用「實線＋置中文字」 */
-  [rooms,fm].forEach(sc=>{ if(!sc) return; sc.h.classList.add("lx-chap"); const sec=sc.h.closest(".lx-sec-a");
+  /* 11-17 Mika：所有大標都用薄黑卡＋編號 */
+  body.querySelectorAll(".lx-sec-a > h2").forEach(h=>h.classList.add("lx-chap"));
+  [rooms,fm].forEach(sc=>{ if(!sc) return; const sec=sc.h.closest(".lx-sec-a");
     if(sec) sec.querySelectorAll("h3").forEach(h=>{ if(!h.closest(".fm-card")&&!h.closest(".ft-panel")) h.classList.add("lx-sub"); }); });
   lxPhotos(body);
   /* 目錄：當篇實際存在的段落 */
