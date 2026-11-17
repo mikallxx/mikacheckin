@@ -1259,6 +1259,23 @@
     .lx-card:hover .lx-arr,.lx-card:focus-visible .lx-arr{transform:none}
   }
   @media (min-width:900px){ .lx-list{align-items:stretch!important} }
+
+  /* 所有開箱 v2（參考 Mika 11-17 附圖）：淺灰底上的白卡，封面圖四周留白；「觀看更多 →」只用萊姆綠文字 */
+  #list.lx-list{background:#F2F2EF;margin:16px -20px 0!important;padding:16px 16px 24px!important;gap:16px!important}
+  .lx-card{border:0!important;border-radius:16px!important;padding:10px;background:#fff}
+  .lx-card .thumb{border-radius:10px!important;aspect-ratio:5/2!important}
+  .lx-card .thumb img{object-position:50% 38%}
+  .lx-card .thumb svg{width:100%;height:100%;display:block}
+  .lx-cb{padding:12px 6px 4px!important}
+  .lx-card .lx-ct{font-size:26px}
+  .lx-card .lx-cs{font-size:15.5px;color:var(--lx-ink)!important;opacity:.85}
+  .lx-more-go{background:none!important;padding:4px 0!important;border-radius:0!important;color:#C7F000!important;font-size:15px;font-weight:700}
+  .lx-cs+.lx-more-go,.lx-ct+.lx-more-go{margin-top:6px!important}
+  @keyframes lxGlowT{0%{text-shadow:none}35%{text-shadow:0 0 10px rgba(199,240,0,.9)}100%{text-shadow:none}}
+  @media (hover:hover){ .lx-card:hover .lx-more-go{animation:lxGlowT .5s ease-out!important} }
+  .lx-card:focus-visible .lx-more-go,.lx-card.lx-nudge .lx-more-go{animation:lxGlowT .5s ease-out!important}
+  @media (prefers-reduced-motion:reduce){ .lx-card .lx-more-go{animation:none!important} }
+  @media (min-width:900px){ #list.lx-list{margin:16px 0 0!important;border-radius:16px;padding:20px!important} }
 </style>
 </head>
 <body>
