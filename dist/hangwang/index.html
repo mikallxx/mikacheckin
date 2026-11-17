@@ -1158,13 +1158,94 @@
     .lx-hero .lx-lead{font-size:24px}
     .lx-hero-by{padding:16px max(32px,calc((100vw - 1120px)/2)) 0}
   }
+
+  /* =====================================================================
+     2026-11 第三輪：黑色導覽列、封面縮短＋找住宿、人氣住宿兩欄、萊姆綠短線、照片一大兩小
+     ===================================================================== */
+  .lx-head,#article .a-top{background:#171717!important;border-bottom:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .lx-head .lx-logo,#article .a-top .lx-logo{font-family:var(--lx-sans);font-weight:800;font-size:15px;letter-spacing:.16em;color:#fff!important;text-decoration:none!important}
+  .lx-head .lx-iconbtn,#article .a-top .lx-iconbtn,#article .a-top>a:first-child{color:#fff!important}
+  .lx-head .lx-iconbtn .i,#article .a-top .i{stroke:#fff!important}
+  @media (hover:hover){.lx-head .lx-iconbtn:hover,#article .a-top .lx-iconbtn:hover{background:rgba(255,255,255,.12)}}
+  #article .a-top{min-height:60px;padding:0 8px 0 4px!important;gap:4px}
+  #article .a-top>a:first-child{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center}
+  #article .a-top .t{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  #article .a-top .lx-logo{flex:1}
+  #article .a-top .numbtn{order:2;color:#fff;border-color:rgba(255,255,255,.6);background:none}
+  #article .a-top .lx-iconbtn{order:3}
+  /* 封面縮短：裁掉下方木地板，保留人物和水面 */
+  .lx-hero-img{height:500px!important;min-height:0!important}
+  .lx-hero-img img{transform:scale(1.22);transform-origin:14% 0}
+  .lx-find{position:absolute;left:20px;bottom:20px;z-index:3;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:8px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#171717!important;font-size:15px;font-weight:700;text-decoration:none!important}
+  @media (hover:hover){.lx-find:hover{background:#fff}}
+  /* 人氣住宿：固定兩欄 */
+  .lx-pop{display:grid!important;grid-template-columns:1fr 1fr;gap:28px 14px;overflow:visible!important;margin:0!important;padding:0!important;scroll-snap-type:none!important}
+  .lx-pcard{flex:none!important;min-width:0}
+  .lx-pcard .thumb{aspect-ratio:4/5!important}
+  .lx-pcard .lx-ct{font-size:19px;line-height:1.35;margin-top:10px}
+  .lx-pcard .lx-cs{font-size:14px;line-height:1.6;margin-top:4px}
+  .lx-pcard .lx-ptag{left:8px;bottom:8px;font-size:12px;padding:3px 7px}
+  .lx-arrows{display:none!important}
+  /* 萊姆綠短線 */
+  .lx-dash{width:36px;height:2px;background:#C7F000;opacity:1;margin:0 0 20px;border:0}
+  #list-anchor{padding-top:20px}
+  .lx-sec-a.lx-after-dash{margin-top:20px}
+  /* 照片：一大兩小，點擊放大 */
+  .lx-photos{display:flex;flex-direction:column;gap:16px;margin:12px 0 4px}
+  .lx-pf{margin:0;min-width:0}
+  .lx-pf .ph{border-radius:10px!important;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in}
+  .lx-pf .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .lx-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .lx-pair .ph{aspect-ratio:1}
+  .a-body .lx-pf figcaption{margin:8px 0 0!important;padding:0!important;border:0!important;background:none!important;font-size:13.5px!important;line-height:1.55!important;color:#525252!important;text-align:left!important;font-weight:400!important}
+  .a-body .lx-pair figcaption{font-size:13px!important}
+  .a-body .lx-pf figcaption b{font-weight:400}
+  .a-body .fig .ph.lx-zoom{cursor:zoom-in}
+  .lx-zoom:focus-visible{outline:2px solid #171717;outline-offset:2px}
+  .lx-lb{position:fixed;inset:0;z-index:90;background:#111!important;background-image:none!important;display:none;flex-direction:column;align-items:center;justify-content:center;padding:56px 12px 24px}
+  .lx-lb.on{display:flex}
+  .lx-lb img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;border-radius:6px}
+  .lx-lb p{color:#eee;font-size:14px;line-height:1.6;margin:12px 8px 0;text-align:center}
+  .lx-lb-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;background:none;color:#fff;display:flex;align-items:center;justify-content:center}
+  .lx-lb-x .i{width:24px;height:24px;stroke:#fff}
+  @media (min-width:900px){
+    .lx-hero-img{height:min(calc(100vh - 68px - 48px),640px)!important}
+    .lx-hero-img img{transform:none}
+    .lx-find{left:max(32px,calc((100vw - 1120px)/2));bottom:32px}
+    .lx-pop{grid-template-columns:repeat(4,1fr);gap:32px 24px}
+  }
+
+  /* 第三輪：舊元件的滑過／按下狀態不再出現黃色或萊姆綠，改淺灰；萊姆綠只留給選中分類、選中樓層、主要訂房按鈕 */
+  @media (hover:hover){
+    .ask-go:hover,.of-line:hover,.offer .of-line:hover,.rail-nav:hover,.price-btn:hover,.tag:not(.on):hover,.menu-pop button:not(.on):hover,.spot-list span:hover,
+    .follow:hover,.cta .p:hover,.deal-go:hover,.reels a:hover,.copy:not(.done):hover,.gal-nav:hover,.dlist a:hover,.quick a:hover span,.offer .of-link:hover,
+    .nearby .nb-row:hover{background:#EBEBE7!important;background-image:none!important;border-color:#D4D4D0!important;color:var(--lx-ink)!important}
+    .video-card:hover .vc-play{background:var(--lx-ink)!important}
+    .lx-btn-main:hover{background:#C7F000!important;filter:none}
+  }
+  .ask-go:active,.of-line:active,.offer .of-line:active,.price-btn:active,.tag:not(.on):active,.menu-pop button:not(.on):active,.spot-list span:active,
+  .follow:active,.cta .p:active,.deal-go:active,.reels a:active,.copy:not(.done):active,.gal-nav:active,.dlist a:active,.quick a:active span,.offer .of-link:active,
+  .nearby .nb-row:active,.sh-row:active{background:#E4E4DF!important;background-image:none!important;color:var(--lx-ink)!important}
+  .video-card:active .vc-play{background:var(--lx-ink)!important}
+  .nearby .nb-row:focus-visible{background:#EBEBE7!important;outline-color:var(--lx-ink)}
+  .chip-sel:focus-within{outline-color:var(--lx-ink)!important}
+  .copy:active,.copy.done,.a-body .lx-code .lx-copy.done,.offer .of-copy.done{background:var(--lx-ink)!important;border-color:var(--lx-ink)!important;color:#fff!important}
+  .a-body .lx-act.done,.a-body .lx-linkbtn.done{background:none!important;color:var(--lx-ink)!important}
+  /* 附近景點：列與列之間改細灰線 */
+  .nearby{--nb-line:#E7E7E3}
+  .nearby .nb-list li+li{border-top:1px solid #E7E7E3!important}
+  .nearby .nb-ext{stroke:#8a8a8a}
+  /* 單張照片（衛浴、客廳）和其他照片一樣在內文寬度內 */
+  .a-body.post .fig{margin-left:0!important;margin-right:0!important}
+  .a-body.post .fig .ph{border-radius:10px!important;overflow:hidden}
+  .a-body.post .fig figcaption{margin-left:0!important;margin-right:0!important}
 </style>
 </head>
 <body class="reading">
 
 <!-- ===== 2026-11 黑白萊姆綠版：頁首 ===== -->
 <header class="lx-head" id="bar">
-  <a class="lx-logo" href="./" data-home>今晚住這裡</a>
+  <a class="lx-logo" href="./" data-home aria-label="MIKA CHECK-IN 回首頁">MIKA CHECK-IN</a>
   <button class="lx-iconbtn" aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 </header>
 
@@ -1175,6 +1256,7 @@
       <h1 class="lx-title">今晚住這裡</h1>
       <p class="lx-lead">住哪裡，怎麼玩</p>
     </div>
+    <a class="lx-find" href="#list-anchor" data-golist>找住宿 ↓</a>
   </section>
   <p class="lx-hero-by">Mika｜台灣與海外住宿開箱・旅遊攻略</p>
 
@@ -1186,15 +1268,12 @@
   <section class="lx-sec" aria-labelledby="popH">
     <div class="lx-hrow">
       <h2 class="lx-h" id="popH">人氣住宿</h2>
-      <div class="lx-arrows">
-        <button type="button" class="lx-iconbtn" data-pop="-1" aria-label="上一張"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button type="button" class="lx-iconbtn" data-pop="1" aria-label="下一張"><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
-      </div>
     </div>
     <div class="lx-pop" id="pop"></div>
   </section>
 
   <section class="lx-sec" id="list-anchor" aria-labelledby="listH">
+    <div class="lx-dash" aria-hidden="true"></div>
     <h2 class="lx-h" id="listH">所有開箱</h2>
     <div class="lx-search">
       <label class="lx-q"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -1232,7 +1311,7 @@
 </div>
 
 
-<article id="article"><div class="a-top"><a href="./" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></a><span class="t">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房</span></div>
+<article id="article"><div class="a-top"><a href="./" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></a><a class="lx-logo" href="./" aria-label="MIKA CHECK-IN 回首頁">MIKA CHECK-IN</a><span class="t">巷往 Villa｜宜蘭冬山獨棟庭園渡假別墅，8～22 人入住，一樓孝親房、二樓檜木房</span><button class="lx-iconbtn" aria-label="選單" data-open=""><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div>
   <!-- 住宿文章固定 8 大區塊：1 首圖標題訂房入口／2 入住心得／3 基本資料／4 房間與公共空間／5 設施與餐食／6 入住須知／7 附近吃什麼去哪玩／8 查空房與官方資訊 -->
   <!-- 1 首圖、標題與訂房入口 -->
   
@@ -1245,89 +1324,35 @@
     </div><a class="video-card" href="/go/hangwang-video/" data-go="hangwang-video" target="_blank" rel="noopener" data-href="https://www.instagram.com/reel/DfnyZmLhHLV/">
       <div class="vc-thumb lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwQG/8QAJBAAAQQBBAEFAQAAAAAAAAAAAQACAxEEBRIhMRMUFUFCYaH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQMC/8QAGhEAAgMBAQAAAAAAAAAAAAAAAAECITJBEf/aAAwDAQACEQMRAD8AXadpuQ1m8UzbzdpjJBIWbvJRH9V0EkLdMcQ8WLFLLKHz45ljNMj7/UpKwg20R8kDRUmQwP8AkK3HgMjCRbr6ISMtEuQBsFkrodNzBjgxEhp6aT0pt0W8sT6ZzjuvlbmE+ilF8WhC29CjkTYpPuJW/N+qEKfB9P/Z&quot;);"><img src="img/hangwang/04_s.jpg" alt="巷往 Villa 開箱影片" loading="lazy" data-lq="1" class="lq lq-in"><span class="vc-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span></div>
       <div class="vc-txt"><small>觀看影片</small><b>巷往 Villa <span class="nw">開箱影片</span></b><span>在 Instagram 觀看 →</span></div>
-    </a></section><section class="lx-sec-a"><h2 id="s2">房型與空間</h2><p>巷往 Villa 一共三層樓、六間房，可入住 <strong class="nw">8～22 人</strong>，每間都有獨立衛浴。</p><table class="tbl rooms">
+    </a></section><section class="lx-sec-a lx-after-dash"><div class="lx-dash" aria-hidden="true"></div><h2 id="s2">房型與空間</h2><p>巷往 Villa 一共三層樓、六間房，可入住 <strong class="nw">8～22 人</strong>，每間都有獨立衛浴。</p><table class="tbl rooms">
       <tbody><tr><th>樓層</th><th>房型</th><th>適合安排</th></tr>
       <tr><td>一樓</td><td>2 間雙人房</td><td>長輩、不想爬樓梯的人</td></tr>
       <tr><td>二樓</td><td>3 間四人房</td><td>一家四口、幾組家庭各住一間</td></tr>
       <tr><td>三樓</td><td>1 間六人房</td><td>朋友同住、大家庭</td></tr>
     </tbody></table><div class="floor-tabs"><div class="ft-bar" role="tablist" aria-label="選擇樓層"><button type="button" role="tab" id="tab-f1" aria-controls="panel-f1" aria-selected="true" tabindex="0" class="ft-tab on" data-floor="f1">一樓孝親房</button><button type="button" role="tab" id="tab-f2" aria-controls="panel-f2" aria-selected="false" tabindex="-1" class="ft-tab" data-floor="f2">二樓檜木房</button><button type="button" role="tab" id="tab-f3" aria-controls="panel-f3" aria-selected="false" tabindex="-1" class="ft-tab" data-floor="f3">三樓六人房</button><span class="ft-ind" aria-hidden="true" style="width: 111px; transform: translateX(0px);"></span></div><div class="ft-panel" role="tabpanel" id="panel-f1" aria-labelledby="tab-f1">
       <h3 class="ft-title">一樓｜兩間雙人房</h3>
-      <div class="gal single">
-    <span class="gal-count">1 / 1</span>
-    <button class="gal-nav prev" disabled="" aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
-    <div class="gal-track">
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAwADAAAAAAAAAAAAAAAAAAQFAgMG/8QAIBAAAQUAAgMBAQAAAAAAAAAAAQACAwQREiEFMUETof/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8AftSM4vzCdSNWSFwl5k8/gWhj4opf0nc9w+9q3UseKewGOJurMasSBJG5xA7z2mDK0xho9I8hcqVWyCCIa/8Aq5+hdsTWjG+MtbqMOqdkAwO0fFIpuInOEjtCFQVlYJNxuklU6oHMdIQov//Z&quot;);"><img src="img/hangwang/06.jpg" alt="" loading="lazy" data-lq="1" class="lq lq-in"></div>
-        <div class="cap"><p>同行有長輩，可以安排住這層的雙人房</p></div></div>
-    </div>
-    <div class="gal-dots"><i class="on"></i></div>
-  </div>
+      <div class="lx-photos"><figure class="lx-pf lx-pf-big"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAwADAAAAAAAAAAAAAAAAAAQFAgMG/8QAIBAAAQUAAgMBAQAAAAAAAAAAAQACAwQREiEFMUETof/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8AftSM4vzCdSNWSFwl5k8/gWhj4opf0nc9w+9q3UseKewGOJurMasSBJG5xA7z2mDK0xho9I8hcqVWyCCIa/8Aq5+hdsTWjG+MtbqMOqdkAwO0fFIpuInOEjtCFQVlYJNxuklU6oHMdIQov//Z&quot;);"><img src="img/hangwang/06.jpg" alt="" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>同行有長輩，可以安排住這層的雙人房</figcaption></figure></div>
     </div><div class="ft-panel" role="tabpanel" id="panel-f2" aria-labelledby="tab-f2" hidden="">
       <h3 class="ft-title">二樓｜三間四人房</h3>
-      <div class="gal">
-    <span class="gal-count">1 / 3</span>
-    <button class="gal-nav prev" disabled="" aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
-    <div class="gal-track">
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCBAYD/8QAJxAAAgIBAgQGAwAAAAAAAAAAAQIAAwQFERMhMTIGEiI0QVFhcZH/xAAWAQEBAQAAAAAAAAAAAAAAAAACAAH/xAAXEQEBAQEAAAAAAAAAAAAAAAABABEC/9oADAMBAAIRAxEAPwCVmOvDYlwCBFGoLWEr8lhYnujNtVwLkCpXux/M7poSZ6Am1ax12HWBNJjjJNJKV5YaztEt5FteTmUqnMAx8PDVddSqjg7fJlS/RTTkJYhACnmPubzzhlPWu2HxveD9zaaYzbL6j/YQmFNpqieGOZlXM7TCERG//9k=&quot;);"><img src="img/hangwang/07.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div>
-        <div class="cap"><p>二樓房間用了台灣檜木，走進去聞得到淡淡的木頭香</p></div></div>
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUBBAYD/8QAJBAAAgIBBAEEAwAAAAAAAAAAAQIAAwQFERIhQRMxMzVRcZH/xAAVAQEBAAAAAAAAAAAAAAAAAAACAf/EABoRAAIDAQEAAAAAAAAAAAAAAAACAREhMhL/2gAMAwEAAhEDEQA/AK9NOWrLyvVh5EvVmwXbAqV38SNOzNOZC7d9fmcsnU8fkVwEIbftvEGDuZGi1eo5Vm26HtM7roanOehd3BHUdYTDIBe61ls28RLn2qdRXd+TBuyZWxbIl+jM4jMK3AJ/seYXwrCELCUaY5PE9xHf9oP3CEU8kXo//9k=&quot;);"><img src="img/hangwang/08.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div>
-        <div class="cap"><p>二樓每間房間都有陽台</p></div></div>
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAIEBQYD/8QAJBAAAgIBBAIBBQAAAAAAAAAAAQIAAwQFERJBIVETFBUjcYH/xAAXAQADAQAAAAAAAAAAAAAAAAABAgMA/8QAGREAAgMBAAAAAAAAAAAAAAAAAAEREjED/9oADAMBAAIRAxEAPwCA9a22qbH2YyTjaYt13H5Nx3ExbqLMtnuUKqnuWi5uK+UiY7BOXjfaSpLLWaH+jpwwpWoufcs8ZarauRrb9GKdPutAcZIUDo9zk+o4unt8d77n2DvDUWZMo4/Fd/IOAtNZUAHx5EITLQvDT3s32us8jvx9zJKS1r8jy89whH66T54f/9k=&quot;);"><img src="img/hangwang/09.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div>
-        <div class="cap"><p>房間寬敞，光線也很明亮</p></div></div>
-    </div>
-    <div class="gal-dots"><i class="on"></i><i class=""></i><i class=""></i></div>
-  </div>
+      <div class="lx-photos"><figure class="lx-pf lx-pf-big"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCBAYD/8QAJxAAAgIBAgQGAwAAAAAAAAAAAQIAAwQFERMhMTIGEiI0QVFhcZH/xAAWAQEBAQAAAAAAAAAAAAAAAAACAAH/xAAXEQEBAQEAAAAAAAAAAAAAAAABABEC/9oADAMBAAIRAxEAPwCVmOvDYlwCBFGoLWEr8lhYnujNtVwLkCpXux/M7poSZ6Am1ax12HWBNJjjJNJKV5YaztEt5FteTmUqnMAx8PDVddSqjg7fJlS/RTTkJYhACnmPubzzhlPWu2HxveD9zaaYzbL6j/YQmFNpqieGOZlXM7TCERG//9k=&quot;);"><img src="img/hangwang/07.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div><figcaption>二樓房間用了台灣檜木，走進去聞得到淡淡的木頭香</figcaption></figure><div class="lx-pair"><figure class="lx-pf "><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUBBAYD/8QAJBAAAgIBBAEEAwAAAAAAAAAAAQIAAwQFERIhQRMxMzVRcZH/xAAVAQEBAAAAAAAAAAAAAAAAAAACAf/EABoRAAIDAQEAAAAAAAAAAAAAAAACAREhMhL/2gAMAwEAAhEDEQA/AK9NOWrLyvVh5EvVmwXbAqV38SNOzNOZC7d9fmcsnU8fkVwEIbftvEGDuZGi1eo5Vm26HtM7roanOehd3BHUdYTDIBe61ls28RLn2qdRXd+TBuyZWxbIl+jM4jMK3AJ/seYXwrCELCUaY5PE9xHf9oP3CEU8kXo//9k=&quot;);"><img src="img/hangwang/08.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div><figcaption>二樓每間房間都有陽台</figcaption></figure><figure class="lx-pf "><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAIEBQYD/8QAJBAAAgIBBAIBBQAAAAAAAAAAAQIAAwQFERJBIVETFBUjcYH/xAAXAQADAQAAAAAAAAAAAAAAAAABAgMA/8QAGREAAgMBAAAAAAAAAAAAAAAAAAEREjED/9oADAMBAAIRAxEAPwCA9a22qbH2YyTjaYt13H5Nx3ExbqLMtnuUKqnuWi5uK+UiY7BOXjfaSpLLWaH+jpwwpWoufcs8ZarauRrb9GKdPutAcZIUDo9zk+o4unt8d77n2DvDUWZMo4/Fd/IOAtNZUAHx5EITLQvDT3s32us8jvx9zJKS1r8jy89whH66T54f/9k=&quot;);"><img src="img/hangwang/09.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div><figcaption>房間寬敞，光線也很明亮</figcaption></figure></div></div>
     </div><div class="ft-panel" role="tabpanel" id="panel-f3" aria-labelledby="tab-f3" hidden="">
       <h3 class="ft-title">三樓｜一間六人房</h3>
-      <div class="gal">
-    <span class="gal-count">1 / 2</span>
-    <button class="gal-nav prev" disabled="" aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
-    <div class="gal-track">
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUBBAYD/8QAJBAAAgIBAwMFAQAAAAAAAAAAAQIAAwQRITEFEhMiUWFxkYH/xAAXAQADAQAAAAAAAAAAAAAAAAABAgMA/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAECMQP/2gAMAwEAAhEDEQA/ALOTh5OPWzWojBedDF1+UKig8ZHdxH+X5MimxmKCth/YsfFxjo1gLADbQwUkjS2xZmtYK2YbnTiZ6y/MckCsqPqalqa8rWum3sPALSW6DeKBpYrt7gwIYvVMT0xdzxF1jHyruf2EI/TBeenPqPpsrK7H4lvAd+O5v2EJGMK1p//Z&quot;);"><img src="img/hangwang/10.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div>
-        <div class="cap"><p>三樓六人房，三張床並排在木地台上</p></div></div>
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAIDBAUB/8QAJRAAAgIBAgYCAwAAAAAAAAAAAQMAAgQSMQURFSEiURMUMkFx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAaEQEAAwADAAAAAAAAAAAAAAAAAQIRAzEy/9oADAMBAAIRAxEAPwBbY68dZbYnSB3lXG4inJzaoVS2m29iOXKTpzPmZpdQ6ANp0XQB4J5H3DpZLQZiKsarDPK3qULcNX1vHUwaqfsQRdtWi4NiRtJ8b7PURksXa9a+t4q4NolVUI52hCSWMn8pucK72P8AIQj4/Q36f//Z&quot;);"><img src="img/hangwang/11.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div>
-        <div class="cap"><p>房內有長桌、電視、掛衣架和除濕機</p></div></div>
-    </div>
-    <div class="gal-dots"><i class="on"></i><i class=""></i></div>
-  </div>
-    </div></div><h3 class="fm-h">衛浴空間</h3><figure class="fig"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwQG/8QAJhAAAQMEAQIHAQAAAAAAAAAAAQACAwQFESESMUEGFSIzNFFxcv/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEQMRAD8A0uoOIPCZ4aTkjPVJ6yYw1D2noSumge2YBrcZK5q7Qvjrnc2kDOjjRWZWrD2lJkt7HdsKy3U7GCQ/ZRSAstrcjQClQTCSJ2B3UkKH5jf1M/EbGeUuPFudbwhCMmqreAbSM79KxWv2D/RQhIf/2Q==&quot;);"><img src="img/hangwang/14.jpg" alt="每間房間都有自己的獨立衛浴" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>每間房間都有自己的獨立衛浴</figcaption></figure><h3 class="fm-h">一樓客廳</h3><figure class="fig"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQCAwUG/8QAJBAAAgIBAwQCAwAAAAAAAAAAAQIAAxEEEkEGITFRBRM0YnH/xAAVAQEBAAAAAAAAAAAAAAAAAAABAv/EABkRAAIDAQAAAAAAAAAAAAAAAAABAhFBIf/aAAwDAQACEQMRAD8A1LtUblZbHDsO3iJoUTJYZ9SvYtFTFwyN7PMTJdhvGXU+jCXXYxVKi/W3vQVKqNp5kss9Asdht/sgCbtMVKso/bzMr59nq0CCtiMHviSimdb1CANOmBzOf0JP3qOO8ISsDR63yZg9R/hiEJKE/9k=&quot;);"><img src="img/hangwang/02.jpg" alt="一樓客廳，旁邊就是上樓的樓梯" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>一樓客廳，旁邊就是上樓的樓梯</figcaption></figure></section><section class="lx-sec-a"><h2 id="s3">設施與餐食</h2><div class="fm">
+      <div class="lx-photos"><figure class="lx-pf lx-pf-big"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUBBAYD/8QAJBAAAgIBAwMFAQAAAAAAAAAAAQIAAwQRITEFEhMiUWFxkYH/xAAXAQADAQAAAAAAAAAAAAAAAAABAgMA/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAECMQP/2gAMAwEAAhEDEQA/ALOTh5OPWzWojBedDF1+UKig8ZHdxH+X5MimxmKCth/YsfFxjo1gLADbQwUkjS2xZmtYK2YbnTiZ6y/MckCsqPqalqa8rWum3sPALSW6DeKBpYrt7gwIYvVMT0xdzxF1jHyruf2EI/TBeenPqPpsrK7H4lvAd+O5v2EJGMK1p//Z&quot;);"><img src="img/hangwang/10.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div><figcaption>三樓六人房，三張床並排在木地台上</figcaption></figure><figure class="lx-pf lx-pf-big"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAIDBAUB/8QAJRAAAgIBAgYCAwAAAAAAAAAAAQMAAgQSMQURFSEiURMUMkFx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAaEQEAAwADAAAAAAAAAAAAAAAAAQIRAzEy/9oADAMBAAIRAxEAPwBbY68dZbYnSB3lXG4inJzaoVS2m29iOXKTpzPmZpdQ6ANp0XQB4J5H3DpZLQZiKsarDPK3qULcNX1vHUwaqfsQRdtWi4NiRtJ8b7PURksXa9a+t4q4NolVUI52hCSWMn8pucK72P8AIQj4/Q36f//Z&quot;);"><img src="img/hangwang/11.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div><figcaption>房內有長桌、電視、掛衣架和除濕機</figcaption></figure></div>
+    </div></div><h3 class="fm-h">衛浴空間</h3><figure class="fig"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwQG/8QAJhAAAQMEAQIHAQAAAAAAAAAAAQACAwQFESESMUEGFSIzNFFxcv/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEQMRAD8A0uoOIPCZ4aTkjPVJ6yYw1D2noSumge2YBrcZK5q7Qvjrnc2kDOjjRWZWrD2lJkt7HdsKy3U7GCQ/ZRSAstrcjQClQTCSJ2B3UkKH5jf1M/EbGeUuPFudbwhCMmqreAbSM79KxWv2D/RQhIf/2Q==&quot;);"><img src="img/hangwang/14.jpg" alt="每間房間都有自己的獨立衛浴" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>每間房間都有自己的獨立衛浴</figcaption></figure><h3 class="fm-h">一樓客廳</h3><figure class="fig"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQCAwUG/8QAJBAAAgIBAwQCAwAAAAAAAAAAAQIAAxEEEkEGITFRBRM0YnH/xAAVAQEBAAAAAAAAAAAAAAAAAAABAv/EABkRAAIDAQAAAAAAAAAAAAAAAAABAhFBIf/aAAwDAQACEQMRAD8A1LtUblZbHDsO3iJoUTJYZ9SvYtFTFwyN7PMTJdhvGXU+jCXXYxVKi/W3vQVKqNp5kss9Asdht/sgCbtMVKso/bzMr59nq0CCtiMHviSimdb1CANOmBzOf0JP3qOO8ISsDR63yZg9R/hiEJKE/9k=&quot;);"><img src="img/hangwang/02.jpg" alt="一樓客廳，旁邊就是上樓的樓梯" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>一樓客廳，旁邊就是上樓的樓梯</figcaption></figure></section><section class="lx-sec-a"><h2 id="s3">設施與餐食</h2><div class="fm">
       <h3 class="fm-h">室內外設施</h3>
       <div class="fm-tags">
         <div class="fm-row"><span class="fm-tag">室內</span><p><span class="nw">KTV、</span><span class="nw">電動麻將桌、</span><span class="nw">Switch、</span><span class="nw">雙人街機、</span><span class="nw">積木桌</span></p></div>
         <div class="fm-row"><span class="fm-tag">戶外</span><p><span class="nw">戲水池、</span><span class="nw">兒童嚕嚕車、</span><span class="nw">雲朵鞦韆</span></p></div>
       </div>
-    <div class="rail">
-    <button class="rail-nav prev" type="button" aria-label="上一張" disabled=""><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <button class="rail-nav next" type="button" aria-label="下一張" disabled=""><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
-    <div class="rail-track">
-      <figure class="rail-card"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEBQb/xAAiEAABAwMEAwEAAAAAAAAAAAABAAIDBBEhBRITMSJBUTT/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAGhEBAAIDAQAAAAAAAAAAAAAAAAERAhIyIf/aAAwDAQACEQMRAD8AqvTiuifLkA5CfVzwSzOLSLAYssJsz6mqIYNu44umzQzUxJJ6yUrmj19KqNcr4yY4jtaDYWCjl1KtlHnM9Om1Bl/KOx+p1JIydhe6NtvWFE20ik8BPOzPtW6m47W5PX1CFWPAy6c7VE83a3aD8LUIUk//2Q==&quot;);"><img src="img/hangwang/05.jpg" alt="電動麻將桌和雙人街機" loading="lazy" data-lq="1" class="lq lq-in"></div>
-        <figcaption><b>電動麻將桌和雙人街機</b></figcaption></figure>
-      <figure class="rail-card"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwYE/8QAJBAAAgIBAgUFAAAAAAAAAAAAAQIAAxEEIQUSIkFRExQyQmH/xAAYAQEAAwEAAAAAAAAAAAAAAAAEAAECA//EABwRAAICAwEBAAAAAAAAAAAAAAABAhESITETQf/aAAwDAQACEQMRAD8Abpra9RplvV1LsNxneUe9ZThRjMzfBOF6hLhZZdhV7RzdbXSpYnmx4h5p3ok87VcLL79Sw6SDmRptakg56u+Ytt4sQuy8ufEXevZdaxNjAfs15tI5Rjk9mip+TTk1H3hCX9FCkS3RAG1sgHeEIh8QeHWf/9k=&quot;);"><img src="img/hangwang/13.jpg" alt="給小朋友的積木桌" loading="lazy" data-lq="1" class="lq lq-in"></div>
-        <figcaption><b>給小朋友的積木桌</b></figcaption></figure>
-    </div></div>
+    <div class="lx-photos"><div class="lx-pair"><figure class="lx-pf "><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEBQb/xAAiEAABAwMEAwEAAAAAAAAAAAABAAIDBBEhBRITMSJBUTT/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAGhEBAAIDAQAAAAAAAAAAAAAAAAERAhIyIf/aAAwDAQACEQMRAD8AqvTiuifLkA5CfVzwSzOLSLAYssJsz6mqIYNu44umzQzUxJJ6yUrmj19KqNcr4yY4jtaDYWCjl1KtlHnM9Om1Bl/KOx+p1JIydhe6NtvWFE20ik8BPOzPtW6m47W5PX1CFWPAy6c7VE83a3aD8LUIUk//2Q==&quot;);"><img src="img/hangwang/05.jpg" alt="電動麻將桌和雙人街機" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption><b>電動麻將桌和雙人街機</b></figcaption></figure><figure class="lx-pf "><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwYE/8QAJBAAAgIBAgUFAAAAAAAAAAAAAQIAAxEEIQUSIkFRExQyQmH/xAAYAQEAAwEAAAAAAAAAAAAAAAAEAAECA//EABwRAAICAwEBAAAAAAAAAAAAAAABAhESITETQf/aAAwDAQACEQMRAD8Abpra9RplvV1LsNxneUe9ZThRjMzfBOF6hLhZZdhV7RzdbXSpYnmx4h5p3ok87VcLL79Sw6SDmRptakg56u+Ytt4sQuy8ufEXevZdaxNjAfs15tI5Rjk9mip+TTk1H3hCX9FCkS3RAG1sgHeEIh8QeHWf/9k=&quot;);"><img src="img/hangwang/13.jpg" alt="給小朋友的積木桌" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption><b>給小朋友的積木桌</b></figcaption></figure></div></div>
 
       <h3 class="fm-h">廚房與烤肉區</h3>
       <p>開放式廚房可以下廚，冰箱、微波爐、烤箱、咖啡機、洗碗機和餐具都有準備。民宿也有烤肉區，<strong>使用需另外租借</strong>。</p>
-    <div class="gal">
-    <span class="gal-count">1 / 3</span>
-    <button class="gal-nav prev" disabled="" aria-label="上一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <button class="gal-nav next" aria-label="下一張"><svg class="i" viewBox="0 0 24 24" style="width:20px"><path d="m9 18 6-6-6-6"></path></svg></button>
-    <div class="gal-track">
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGgAAAQUBAAAAAAAAAAAAAAAAAAECBAUGA//EACMQAAICAgIBBAMAAAAAAAAAAAECAAMEEQUxBhITIkEUIVH/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/AOY4eoLsbj6OIV3KnYkjDz6wfTfvvQ1NGzYtFHuWOqjXf3M61jI3+PLe3pZyFkrx/CCXWDXxT9AxMzkCuQxxmawHrcseLQ04Yd1IZjswpiPw6Ka7iVUkDvUqch2YWbYn5fZhCMFLhDd6b/om4vUfg9DqEJVR/9k=&quot;);"><img src="img/hangwang/03.jpg" alt="" loading="lazy" data-lq="1" class="lq lq-in"></div>
-        <div class="cap"><p>開放式廚房可以開火，設備和餐具都很齊全</p></div></div>
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwQG/8QAJBAAAQQBBAEFAQAAAAAAAAAAAQACAxEEBRIhMRMUFUFCYaH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQMC/8QAGhEAAgMBAQAAAAAAAAAAAAAAAAECITJBEf/aAAwDAQACEQMRAD8AXadpuQ1m8UzbzdpjJBIWbvJRH9V0EkLdMcQ8WLFLLKHz45ljNMj7/UpKwg20R8kDRUmQwP8AkK3HgMjCRbr6ISMtEuQBsFkrodNzBjgxEhp6aT0pt0W8sT6ZzjuvlbmE+ilF8WhC29CjkTYpPuJW/N+qEKfB9P/Z&quot;);"><img src="img/hangwang/04.jpg" alt="" loading="lazy" data-lq="1" class="lq lq-in"></div>
-        <div class="cap"><p>長餐桌旁就是麻將桌和街機，窗外是草坪</p></div></div>
-      <div class="slide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGgAAAgIDAAAAAAAAAAAAAAAAAAQFBgECB//EACQQAAICAQQBBAMAAAAAAAAAAAECAAQDBRExQRITFCFCIlJh/8QAFgEBAQEAAAAAAAAAAAAAAAAAAQAD/8QAGREAAwEBAQAAAAAAAAAAAAAAAAERMUFh/9oADAMBAAIRAxEAPwCSva8+m1VOPH5+Q6maetZbOEMzEMeRK3cytjsgn8gOAeI/U1Sq4CZsXpn9kmTUw1XpPi9lP2m3u8m3yYlWrY8zHJXtBx0pjC1rDLtl5H8lVZA5Sn3vrFV4hCLJYPVWZWQqxB36M6DTJaihJ3O3cIRQM//Z&quot;);"><img src="img/hangwang/12.jpg" alt="" loading="lazy" data-lq="1" class="lq lq-in"></div>
-        <div class="cap"><p>茶水區有咖啡機，也擺了泡麵和零食</p></div></div>
-    </div>
-    <div class="gal-dots"><i class="on"></i><i class=""></i><i class=""></i></div>
-  </div>
+    <div class="lx-photos"><figure class="lx-pf lx-pf-big"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGgAAAQUBAAAAAAAAAAAAAAAAAAECBAUGA//EACMQAAICAgIBBAMAAAAAAAAAAAECAAMEEQUxBhITIkEUIVH/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/AOY4eoLsbj6OIV3KnYkjDz6wfTfvvQ1NGzYtFHuWOqjXf3M61jI3+PLe3pZyFkrx/CCXWDXxT9AxMzkCuQxxmawHrcseLQ04Yd1IZjswpiPw6Ka7iVUkDvUqch2YWbYn5fZhCMFLhDd6b/om4vUfg9DqEJVR/9k=&quot;);"><img src="img/hangwang/03.jpg" alt="" loading="lazy" data-lq="1" class="lq lq-in"></div><figcaption>開放式廚房可以開火，設備和餐具都很齊全</figcaption></figure><div class="lx-pair"><figure class="lx-pf "><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAUCAwQG/8QAJBAAAQQBBAEFAQAAAAAAAAAAAQACAxEEBRIhMRMUFUFCYaH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQMC/8QAGhEAAgMBAQAAAAAAAAAAAAAAAAECITJBEf/aAAwDAQACEQMRAD8AXadpuQ1m8UzbzdpjJBIWbvJRH9V0EkLdMcQ8WLFLLKHz45ljNMj7/UpKwg20R8kDRUmQwP8AkK3HgMjCRbr6ISMtEuQBsFkrodNzBjgxEhp6aT0pt0W8sT6ZzjuvlbmE+ilF8WhC29CjkTYpPuJW/N+qEKfB9P/Z&quot;);"><img src="img/hangwang/04.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div><figcaption>長餐桌旁就是麻將桌和街機，窗外是草坪</figcaption></figure><figure class="lx-pf "><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAASACADASIAAhEBAxEB/8QAGgAAAgIDAAAAAAAAAAAAAAAAAAQFBgECB//EACQQAAICAQQBBAMAAAAAAAAAAAECAAQDBRExQRITFCFCIlJh/8QAFgEBAQEAAAAAAAAAAAAAAAAAAQAD/8QAGREAAwEBAQAAAAAAAAAAAAAAAAERMUFh/9oADAMBAAIRAxEAPwCSva8+m1VOPH5+Q6maetZbOEMzEMeRK3cytjsgn8gOAeI/U1Sq4CZsXpn9kmTUw1XpPi9lP2m3u8m3yYlWrY8zHJXtBx0pjC1rDLtl5H8lVZA5Sn3vrFV4hCLJYPVWZWQqxB36M6DTJaihJ3O3cIRQM//Z&quot;);"><img src="img/hangwang/12.jpg" alt="" loading="lazy" data-lq="1" class="lq"></div><figcaption>茶水區有咖啡機，也擺了泡麵和零食</figcaption></figure></div></div>
 
       <h3 class="fm-h">住宿附早餐</h3>
       <p>早餐有中式和西式可以選，份量蠻夠的。餐點用紙盒裝，吃不完也方便帶走。</p>
-      <figure class="fig fm-wide"><div class="ph lq-box" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAAoACADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAAQFBgMB/8QAJRAAAgEEAQMEAwAAAAAAAAAAAQIDAAQFERIhIkEUFTFRMmGB/8QAGAEAAwEBAAAAAAAAAAAAAAAAAAMEAQL/xAAbEQEBAAMAAwAAAAAAAAAAAAABAAIRISIxQf/aAAwDAQACEQMRAD8AkldEjVN2WPEi85GAHgVa9qV4C4TT0JZ6h2yEEH4qNz2eNVs3puKYeGVOx13Ua8tjbScSd1oYJhNGwSAoy+aQuMbNduZdt/RQL9i0dvmLORO0gmp+ayNwYeNrbknwakPDb4RFaQlnc9FNXLLII8aGRR3Dp06VuWSeiUoXHH3EbQaYETMOoPiqMLvCAJdcD5ApS9sgY2uFbi3jVQZ85c24MToGZfuhxS7EbTSY/H5h1eReXAfApv0sMcMcEUI7fx/VFFNO8kh3V5cXEVtA4fTBB3fVYW9Zbu5eTjrZ6CiijKfiX//Z&quot;);"><img src="img/hangwang/15.jpg" alt="巷往 Villa 早餐" loading="lazy" data-lq="1" class="lq"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
+      <figure class="fig fm-wide"><div class="ph lx-zoom lq-box" role="button" tabindex="0" aria-label="放大照片" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAAoACADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAAQFBgMB/8QAJRAAAgEEAQMEAwAAAAAAAAAAAQIDAAQFERIhIkEUFTFRMmGB/8QAGAEAAwEBAAAAAAAAAAAAAAAAAAMEAQL/xAAbEQEBAAMAAwAAAAAAAAAAAAABAAIRISIxQf/aAAwDAQACEQMRAD8AkldEjVN2WPEi85GAHgVa9qV4C4TT0JZ6h2yEEH4qNz2eNVs3puKYeGVOx13Ua8tjbScSd1oYJhNGwSAoy+aQuMbNduZdt/RQL9i0dvmLORO0gmp+ayNwYeNrbknwakPDb4RFaQlnc9FNXLLII8aGRR3Dp06VuWSeiUoXHH3EbQaYETMOoPiqMLvCAJdcD5ApS9sgY2uFbi3jVQZ85c24MToGZfuhxS7EbTSY/H5h1eReXAfApv0sMcMcEUI7fx/VFFNO8kh3V5cXEVtA4fTBB3fVYW9Zbu5eTjrZ6CiijKfiX//Z&quot;);"><img src="img/hangwang/15.jpg" alt="巷往 Villa 早餐" loading="lazy" data-lq="1" class="lq"></div><figcaption>蛋餅、蘿蔔糕、三明治和沙拉，中西式都有</figcaption></figure>
 
       <section class="fm-card" aria-label="晚餐可加購">
         <h3 class="fm-h">晚餐可加購</h3>
@@ -1892,7 +1917,7 @@ window.addEventListener("scroll",()=>{
 
 /* ---------- 單篇文章頁 ---------- */
 function articleHTML(p){
-  const back = `<div class="a-top"><a href="${homeLink}" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></a><span class="t">${p.title}</span></div>`;
+  const back = `<div class="a-top"><a href="${homeLink}" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></a><a class="lx-logo" href="${homeLink}" aria-label="MIKA CHECK-IN 回首頁">MIKA CHECK-IN</a><span class="t">${p.title}</span><button class="lx-iconbtn" aria-label="選單" data-open><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>`;
   if(p.render) return back + p.render(p);
   if(!p.real){
     return back + `<div class="a-cover">${art(...p.img)}</div><div class="a-body">
@@ -2526,7 +2551,7 @@ function relayout(art, p){
   /* 5 入住心得 */
   if(intro.length) put("入住心得",intro);
   /* 6 房型與空間 */
-  if(rooms) put(/營帳/.test(rooms.h.textContent)?"營帳與衛浴":"房型與空間",rooms.nodes,rooms.h);
+  if(rooms){ put(/營帳/.test(rooms.h.textContent)?"營帳與衛浴":"房型與空間",rooms.nodes,rooms.h); const rs=frag.lastChild; if(intro.length&&rs){ rs.classList.add("lx-after-dash"); rs.prepend(mk("div","lx-dash")); rs.firstChild.setAttribute("aria-hidden","true"); } }
   /* 7 設施及餐食 */
   if(fm) put("設施與餐食",fm.nodes,fm.h);
   others.forEach(sc=>put(null,sc.nodes,sc.h));
@@ -2551,6 +2576,7 @@ function relayout(art, p){
   if(!acts.children.length) acts.remove();
   frag.appendChild(bsec);
   body.innerHTML=""; body.appendChild(frag);
+  lxPhotos(body);
   /* 目錄：當篇實際存在的段落 */
   const ol=toc.querySelector("ol"); let n=0;
   body.querySelectorAll(".lx-sec-a > h2").forEach(h2=>{ h2.id=h2.id||("s"+(++n)); ol.insertAdjacentHTML("beforeend",`<li><a href="#${h2.id}" data-toc="${h2.id}">${esc(h2.textContent)}</a></li>`); });
@@ -2558,6 +2584,53 @@ function relayout(art, p){
   /* 首頁連結回首頁（預覽版用 #） */
   body.querySelectorAll(".lx-crumb a").forEach(a=>a.setAttribute("href",homeLink));
 }
+/* 照片排法：輪播改成「第一張大圖＋其餘兩張一排」，橫滑卡片改成兩欄；單張維持單欄。點照片可放大。 */
+function lxFig(ph,capHTML,cls){
+  const f=document.createElement("figure"); f.className="lx-pf "+(cls||"");
+  ph.classList.add("lx-zoom"); f.appendChild(ph);
+  if(capHTML&&capHTML.trim()){ const c=document.createElement("figcaption"); c.innerHTML=capHTML; f.appendChild(c); }
+  return f;
+}
+function lxPhotos(root){
+  const build=items=>{ /* items: [[ph,cap]] */
+    const box=document.createElement("div"); box.className="lx-photos";
+    const [first,...rest]=items;
+    box.appendChild(lxFig(first[0],first[1],"lx-pf-big"));
+    for(let i=0;i<rest.length;i+=2){
+      if(i+1<rest.length){ const row=document.createElement("div"); row.className="lx-pair"; row.appendChild(lxFig(rest[i][0],rest[i][1])); row.appendChild(lxFig(rest[i+1][0],rest[i+1][1])); box.appendChild(row); }
+      else box.appendChild(lxFig(rest[i][0],rest[i][1],"lx-pf-big"));
+    }
+    return box;
+  };
+  root.querySelectorAll(".gal").forEach(g=>{
+    const items=[...g.querySelectorAll(".slide")].map(sl=>[sl.querySelector(".ph"),(sl.querySelector(".cap p")||sl.querySelector(".cap")||{}).innerHTML||""]).filter(x=>x[0]);
+    if(items.length) g.replaceWith(build(items));
+  });
+  root.querySelectorAll(".rail").forEach(r=>{
+    const cards=[...r.querySelectorAll(".rail-card")]; if(!cards.length) return;
+    const items=cards.map(c=>{ const cap=c.querySelector("figcaption"); return [c.querySelector(".ph"), cap?cap.innerHTML:""]; }).filter(x=>x[0]);
+    const box=document.createElement("div"); box.className="lx-photos";
+    if(items.length===1) box.appendChild(lxFig(items[0][0],items[0][1],"lx-pf-big"));
+    for(let i=0;i+1<items.length;i+=2){ const row=document.createElement("div"); row.className="lx-pair"; row.appendChild(lxFig(items[i][0],items[i][1])); row.appendChild(lxFig(items[i+1][0],items[i+1][1])); box.appendChild(row); }
+    if(items.length>1&&items.length%2) box.appendChild(lxFig(items[items.length-1][0],items[items.length-1][1],"lx-pf-big"));
+    r.replaceWith(box);
+  });
+  root.querySelectorAll(".fig .ph").forEach(ph=>ph.classList.add("lx-zoom"));
+  root.querySelectorAll(".lx-zoom").forEach(ph=>{ ph.setAttribute("role","button"); ph.setAttribute("tabindex","0"); ph.setAttribute("aria-label","放大照片"); });
+}
+(function(){
+  const open=ph=>{ const img=ph.querySelector("img"); if(!img) return;
+    const fig=ph.closest("figure,.slide"), cap=fig&&fig.querySelector("figcaption,.cap p");
+    let lb=document.getElementById("lxLb");
+    if(!lb){ lb=document.createElement("div"); lb.id="lxLb"; lb.className="lx-lb"; lb.setAttribute("role","dialog"); lb.setAttribute("aria-modal","true"); lb.setAttribute("aria-label","放大照片"); document.body.appendChild(lb);
+      lb.addEventListener("click",()=>close()); }
+    lb.innerHTML=`<button type="button" class="lx-lb-x" aria-label="關閉"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><img class="scene lx-lb-img" src="${img.currentSrc||img.src}" alt="${(img.alt||"").replace(/"/g,"&quot;")}">${cap?`<p>${cap.textContent}</p>`:""}`;
+    lb._from=ph; lb.classList.add("on"); document.body.classList.add("lx-lock"); lb.querySelector(".lx-lb-x").focus();
+  };
+  const close=()=>{ const lb=document.getElementById("lxLb"); if(!lb||!lb.classList.contains("on")) return; lb.classList.remove("on"); document.body.classList.remove("lx-lock"); lb._from&&lb._from.focus({preventScroll:true}); };
+  document.addEventListener("click",e=>{ const ph=e.target.closest(".lx-zoom"); if(ph&&!e.target.closest(".gal-nav")){ e.preventDefault(); open(ph); } });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") close(); const ph=e.target.closest&&e.target.closest(".lx-zoom"); if(ph&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); open(ph); } });
+})();
 /* 目錄跳轉：用 JS 捲動，避免改到網址 hash（預覽版用 hash 換頁） */
 document.addEventListener("click",e=>{ const a=e.target.closest("[data-toc]"); if(!a) return; e.preventDefault();
   const t=document.getElementById(a.dataset.toc); if(!t) return; const det=a.closest("details"); if(det) det.open=false;
