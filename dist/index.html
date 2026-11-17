@@ -1315,6 +1315,17 @@
   .a-body.post h3.lx-sub{display:flex!important;align-items:center;gap:14px;text-align:center;justify-content:center;margin:36px 0 16px!important;padding:0!important;border:0!important;background:none!important;font-size:19px!important;line-height:1.4!important}
   .a-body.post h3.lx-sub::before,.a-body.post h3.lx-sub::after{content:""!important;display:block!important;flex:1;height:1px!important;width:auto!important;min-width:24px;background:#171717!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
   .a-body.post .ft-panel>h3.lx-sub:first-child{margin-top:24px!important}
+
+  /* 11-17 Mika：黑卡變薄（上下內縮、字小一點） */
+  .a-body .lx-sec-a>h2.lx-chap{padding:9px 16px!important;border-radius:10px!important;font-size:23px!important}
+  /* 樓層分頁：照片左右滑動，樓層標題不加實線 */
+  .a-body .ft-panel h3.ft-title{display:block!important;text-align:left!important;font-size:19px!important;margin:22px 0 12px!important}
+  .a-body .ft-panel h3.ft-title::before,.a-body .ft-panel h3.ft-title::after{display:none!important;content:none!important}
+  .a-body .ft-panel .gal{margin:0 0 4px!important}
+  .a-body .ft-panel .gal .ph{border-radius:10px!important;overflow:hidden;cursor:zoom-in}
+  .a-body .ft-panel .slide .cap b{display:block;font-family:var(--lx-serif);font-weight:900;font-size:16px;color:var(--lx-ink);margin-bottom:2px}
+  #panel-other .gal{margin-top:20px!important}
+  .a-body .ft-panel .slide .cap{padding-left:0!important;padding-right:0!important;margin-left:0!important}
 </style>
 </head>
 <body>
@@ -2499,7 +2510,18 @@ function lxOtherTab(sec){
   (bar.querySelector(".ft-ind")||null) ? bar.insertBefore(t,bar.querySelector(".ft-ind")) : bar.appendChild(t);
   const lastPanel=[...ft.querySelectorAll(".ft-panel")].pop();
   const pn=lastPanel.cloneNode(false); pn.id="panel-other"; pn.hidden=true; if(pn.hasAttribute("aria-labelledby")&&t.id) pn.setAttribute("aria-labelledby",t.id);
-  rest.forEach(n=>pn.appendChild(n));
+  /* 衛浴、客廳等照片合成一組可左右滑的照片，小標放進圖說 */
+  const items=[]; let label="";
+  rest.forEach(n=>{ if(n.matches("h3")){ label=n.textContent.trim(); return; }
+    const figs=n.matches(".fig")?[n]:[...n.querySelectorAll(".fig")];
+    figs.forEach(f=>{ const ph=f.querySelector(".ph"), cap=f.querySelector("figcaption"); if(ph) items.push({ph,t:label,c:cap?cap.innerHTML:""}); });
+  });
+  if(items.length){
+    const tmp=document.createElement("div"); tmp.innerHTML=gallery(items.map(it=>({src:"x",t:it.t,c:it.c})));
+    tmp.querySelectorAll(".slide .ph").forEach((ph,i)=>ph.replaceWith(items[i].ph));
+    pn.appendChild(tmp.firstElementChild);
+  } else rest.forEach(n=>pn.appendChild(n));
+  rest.forEach(n=>{ if(n.parentNode&&!pn.contains(n)) n.remove(); });
   ft.appendChild(pn);
   bar.classList.toggle("ft-4",bar.querySelectorAll(".ft-tab").length===4);
 }
@@ -2586,7 +2608,7 @@ function relayout(art, p){
   body.innerHTML=""; body.appendChild(frag);
   /* 房型與空間、設施與餐食：大標用內縮圓角黑卡，段落裡的小標用「實線＋置中文字」 */
   [rooms,fm].forEach(sc=>{ if(!sc) return; sc.h.classList.add("lx-chap"); const sec=sc.h.closest(".lx-sec-a");
-    if(sec) sec.querySelectorAll("h3").forEach(h=>{ if(!h.closest(".fm-card")) h.classList.add("lx-sub"); }); });
+    if(sec) sec.querySelectorAll("h3").forEach(h=>{ if(!h.closest(".fm-card")&&!h.closest(".ft-panel")) h.classList.add("lx-sub"); }); });
   lxPhotos(body);
   /* 目錄：當篇實際存在的段落 */
   const ol=toc.querySelector("ol"); let n=0;
@@ -2614,6 +2636,7 @@ function lxPhotos(root){
     return box;
   };
   root.querySelectorAll(".gal").forEach(g=>{
+    if(g.closest(".ft-panel")) return; /* 樓層分頁裡的照片維持左右滑動 */
     const items=[...g.querySelectorAll(".slide")].map(sl=>[sl.querySelector(".ph"),(sl.querySelector(".cap p")||sl.querySelector(".cap")||{}).innerHTML||""]).filter(x=>x[0]);
     if(items.length) g.replaceWith(build(items));
   });
@@ -2626,7 +2649,7 @@ function lxPhotos(root){
     if(items.length>1&&items.length%2) box.appendChild(lxFig(items[items.length-1][0],items[items.length-1][1],"lx-pf-big"));
     r.replaceWith(box);
   });
-  root.querySelectorAll(".fig .ph").forEach(ph=>ph.classList.add("lx-zoom"));
+  root.querySelectorAll(".fig .ph, .ft-panel .slide .ph").forEach(ph=>ph.classList.add("lx-zoom"));
   root.querySelectorAll(".lx-zoom").forEach(ph=>{ ph.setAttribute("role","button"); ph.setAttribute("tabindex","0"); ph.setAttribute("aria-label","放大照片"); });
 }
 (function(){
